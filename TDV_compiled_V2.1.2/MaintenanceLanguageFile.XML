@@ -1,0 +1,2029 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LANGUAGETABLE>
+   <LANGUAGES>
+      <ENTRY>
+         <ID>DE</ID>
+         <SELECTED/>
+      </ENTRY>
+      <ENTRY>
+         <ID>EN</ID>
+         <SELECTED>TRUE</SELECTED>
+      </ENTRY>
+      <ENTRY>
+         <ID>HU</ID>
+         <SELECTED/>
+      </ENTRY>
+      <ENTRY>
+         <ID>IT</ID>
+         <SELECTED/>
+      </ENTRY>
+      <ENTRY>
+         <ID>ES</ID>
+         <SELECTED/>
+      </ENTRY>
+      <ENTRY>
+         <ID>PL</ID>
+         <SELECTED/>
+      </ENTRY>
+      <ENTRY>
+         <ID>FR</ID>
+         <SELECTED/>
+      </ENTRY>
+      <ENTRY>
+         <ID>RU</ID>
+         <SELECTED/>
+      </ENTRY>
+   </LANGUAGES>
+   <SQLSERVER>
+      <ENTRY>
+         <ID>Not Used Anymore: see connectionStrings in .config</ID>
+         <VALUE>1</VALUE>
+      </ENTRY>
+   </SQLSERVER>
+   <BUTTONS>
+      <ENTRY>
+         <ID>IDOK</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>OK</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>OK</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>OK</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>OK</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>OK</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>OK</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>OK.</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>OK</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>ОК</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+      <ENTRY>
+         <ID>IDYES</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Yes</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Ja</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Ja</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Igen</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Sì</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>Sí</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Tak</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>Oui</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Да</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+      <ENTRY>
+         <ID>IDNO</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>No</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Nein</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Nee</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Nem</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>No</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>No</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Nie</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>Non</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Нет</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+      <ENTRY>
+         <ID>IDBUTBATCHCOMPRESS</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Compress data</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Komprimiere Daten</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Gecomprimeerde gegevens</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Adatok tömörítése</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Comprimi dati</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>Comprimir datos</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Skompresowane dane</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>Comprimer données en cours</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Сжать данные</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+
+      <ENTRY>
+         <ID>IDBUTBATCHDELETE</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Delete results</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Ergebnisse löschen</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Resultaten verwijderen</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Találatok törlése</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Cancella risultati</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>Borrar resultados</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Usuń wyniki</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>Supprimer résultats</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Удалить результаты</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+
+      <ENTRY>
+         <ID>IDBUTBATCHEXPORT</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Export results</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Ergebnisse exportieren</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Resultaten exporteren</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Találatok exportálása</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Esporta risultati</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>Exportar resultados</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Eksportuj wyniki</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>Exporter résultats</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Экспортировать результаты</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+
+      <ENTRY>
+         <ID>IDBUTBATCHIMPORT</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Import results</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Ergebnisse importieren</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Import results</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Import results</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Import results</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>Import results</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Import results</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>Import results</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Import results</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+
+      <ENTRY>
+         <ID>IDBUTBATCHSTOPCOMPRESS</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Stop compression</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Kompression abbrechen</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Compressie annuleren</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Tömörítés leállítása</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Annulla compressione</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>Cancelar compresión</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Anuluj kompresowanie</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>Annuler compression</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Отменить сжатие</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+
+
+
+      <ENTRY>
+         <ID>IDBUTBATCHSTOPEXPORT</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Stop export</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Export abbrechen</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Export annuleren</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Exportálás leállítása</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Annulla esportazione</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>Cancelar exportación</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Anuluj eksport</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>Annuler export</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Отменить экспорт</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+
+      <ENTRY>
+         <ID>IDBUTBATCHSTOPIMPORT</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Stop import</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Importieren abbrechen</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Stop import</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Stop import</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Stop import</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>Stop import</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Stop import</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>Stop import</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Stop import</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+
+      <ENTRY>
+         <ID>IDBUTEVALUATION</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Evaluation</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Bewertung</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Beoordeling</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Értékelés</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Valutazione</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>Evaluación</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Ocena</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>Évaluation</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Оценка</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+
+      <ENTRY>
+         <ID>IDBUTFROMDATE</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>From date</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Von Datum</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Van datum</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Kezdő dátum</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Dalla data</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>Desde la fecha</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Od daty</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>À partir de la date</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Дата с</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+
+      <ENTRY>
+         <ID>IDBUTSEARCH</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Search</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Suchen</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Zoeken</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Keresés</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Trova</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>Buscar</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Szukaj</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>Rechercher</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Поиск</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+
+      <ENTRY>
+         <ID>IDBUTSTATES</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>States</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Zustände</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Status</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Állapotok</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Stati</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>Estados</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Stany</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>États</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Состояния</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+
+      <ENTRY>
+         <ID>IDBUTTODATE</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>To date</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Bis Datum</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Tot datum</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Befejező dátum</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Alla data</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>Hasta fecha</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Do daty</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>Jusqu'à la date</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Дата по</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+   </BUTTONS>
+   <MENUES>
+   </MENUES>
+   <LABELS>
+      <ENTRY>
+         <ID>IDCLASSIFYGOOD</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Good</LABEL>
+               <TOOLTIP>Classification as good</TOOLTIP>
+            </EN>
+            <DE>
+               <LABEL>Gut</LABEL>
+               <TOOLTIP>Bewertung als gut</TOOLTIP>
+            </DE>
+            <NL>
+               <LABEL>Goed</LABEL>
+               <TOOLTIP>Beoordeling als goed</TOOLTIP>
+            </NL>
+            <HU>
+               <LABEL>Jó</LABEL>
+               <TOOLTIP>Értékelés jóként</TOOLTIP>
+            </HU>
+            <IT>
+               <LABEL>Positivo</LABEL>
+               <TOOLTIP>Valutare positivamente</TOOLTIP>
+            </IT>
+            <ES>
+               <LABEL>Bueno</LABEL>
+               <TOOLTIP>Valoración como bueno</TOOLTIP>
+            </ES>
+            <PL>
+               <LABEL>dobrze</LABEL>
+               <TOOLTIP>Ocena jako dobre</TOOLTIP>
+            </PL>
+            <FR>
+               <LABEL>Bien</LABEL>
+               <TOOLTIP>Évaluation comme bien</TOOLTIP>
+            </FR>
+            <RU>
+               <LABEL>Хорошо</LABEL>
+               <TOOLTIP>Оценка "хорошо"</TOOLTIP>
+            </RU>
+         </UI>
+      </ENTRY>
+      <ENTRY>
+         <ID>IDCLASSIFYBAD</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Bad</LABEL>
+               <TOOLTIP>Classification as bad</TOOLTIP>
+            </EN>
+            <DE>
+               <LABEL>Schlecht</LABEL>
+               <TOOLTIP>Bewerten als schlecht</TOOLTIP>
+            </DE>
+            <NL>
+               <LABEL>Slecht</LABEL>
+               <TOOLTIP>Als slecht beoordelen</TOOLTIP>
+            </NL>
+            <HU>
+               <LABEL>Rossz</LABEL>
+               <TOOLTIP>Értékelés rosszként</TOOLTIP>
+            </HU>
+            <IT>
+               <LABEL>Negativo</LABEL>
+               <TOOLTIP>Valutare negativamente</TOOLTIP>
+            </IT>
+            <ES>
+               <LABEL>Malo</LABEL>
+               <TOOLTIP>Evaluar como malo</TOOLTIP>
+            </ES>
+            <PL>
+               <LABEL>źle</LABEL>
+               <TOOLTIP>Oceń jako złe</TOOLTIP>
+            </PL>
+            <FR>
+               <LABEL>Mauvais</LABEL>
+               <TOOLTIP>Évaluer comme mauvais</TOOLTIP>
+            </FR>
+            <RU>
+               <LABEL>Плохо</LABEL>
+               <TOOLTIP>Оценка "плохо"</TOOLTIP>
+            </RU>
+         </UI>
+      </ENTRY>
+      <ENTRY>
+         <ID>IDCLASSIFYDOUBT</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Doubtful</LABEL>
+               <TOOLTIP>Classification as doubtful</TOOLTIP>
+            </EN>
+            <DE>
+               <LABEL>Zweifelhaft</LABEL>
+               <TOOLTIP>Bewertung als zweifelhaft</TOOLTIP>
+            </DE>
+            <NL>
+               <LABEL>Twijfelachtig</LABEL>
+               <TOOLTIP>Beoordeling als twijfelachtig</TOOLTIP>
+            </NL>
+            <HU>
+               <LABEL>Kétséges</LABEL>
+               <TOOLTIP>Értékelés kétségesként</TOOLTIP>
+            </HU>
+            <IT>
+               <LABEL>Incerto</LABEL>
+               <TOOLTIP>Valutare come incerto</TOOLTIP>
+            </IT>
+            <ES>
+               <LABEL>Dudoso</LABEL>
+               <TOOLTIP>Valoración como dudoso</TOOLTIP>
+            </ES>
+            <PL>
+               <LABEL>wątpliwe</LABEL>
+               <TOOLTIP>Ocena jako wątpliwe</TOOLTIP>
+            </PL>
+            <FR>
+               <LABEL>Douteux</LABEL>
+               <TOOLTIP>Évaluation comme douteux</TOOLTIP>
+            </FR>
+            <RU>
+               <LABEL>Сомнительно</LABEL>
+               <TOOLTIP>Оценка "сомнительно"</TOOLTIP>
+            </RU>
+         </UI>
+      </ENTRY>
+      <ENTRY>
+         <ID>IDLABELDATASTATS</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Statistics</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Statistik</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Statistiek</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Statisztika</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Statistica</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>Estadística</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Statystyka</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>Statistique</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Статистика</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+
+      <ENTRY>
+         <ID>IDLABELDATEMRRESULT</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Most recent result date</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Datum neuestes Ergebnis</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Datum nieuwste resultaat</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Legújabb találat dátuma</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Data risultato più recente</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>Fecha del resultado más reciente</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Data najnowszego wyniku</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>Date du résultat le plus récent</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Дата самого нового результата</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+
+      <ENTRY>
+         <ID>IDLABELDATEOLDESTRESULT</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Oldest result date</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Datum ältestes Ergebnis</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Datum oudste resultaat</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Legrégebbi találat dátuma</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Data risultato meno recente</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>Fecha del resultado menos reciente</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Data nastarszego wyniku</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>Date du résultat le plus ancien</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Дата самого старого результата</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+
+      <ENTRY>
+         <ID>IDLABELNRALLRESULTS</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Total dataset count</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Gesamtanzahl Datensätze</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Totaal aantal gegevensrecords</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Adatrekordok összesített száma</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Numero totale di record di dati</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>Nombre total de juegos de datos</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Łączna liczba rekordów</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>Nombre total de jeux de données</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Общее количество блоков данных</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+      <ENTRY>
+         <ID>IDLABELNRCOMPRIMGS</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Compressed images count</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Anzahl komprimierter Bilder</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Aantal gecomprimeerde afbeeldingen</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Tömörített képek száma</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Numero di immagini compresse</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>Número de imágenes comprimidos</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Liczba skompresowanych obrazów</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>Nombre d'images comprimées</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Количество сжатых изображений</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+
+      <ENTRY>
+         <ID>IDLABELNRINVALIDRESULTS</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Nr of invalid datasets</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Anzahl ungültige Datensätze</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Aantal ongeldige gegevensrecords</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Érvényetelen adatrekordok száma</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Numero di record di dati non validi</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>Nombre de juegos de datos inválidos</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Liczba nieprawidłowych rekordów</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>Nombre de jeux de données non valables</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Количество недействительных блоков данных</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+
+      <ENTRY>
+         <ID>IDLABELNRSEARCHRESULTS</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Search result count</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Anzahl Suchergebnisse</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Aantal zoekresultaten</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Keresési találatok száma</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Numero dei risultati di ricerca</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>Número de resultados de la búsqueda</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Liczba wyników wyszukiwania</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>Nombre de résultats de la recherche</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Количество результатов поиска</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+
+      <ENTRY>
+         <ID>IDLABELNRUNCOMPRIMGS</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Uncompressed images count</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Anzahl unkomprimierter Bilder</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Aantal ongecomprimeerde afbeeldingen</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Nem tömörített képek száma</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Numero di immagini non compresse</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>Número de imágenes no comprimidos</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Liczba nieskompresowanych obrazów</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>Nombre d'images non comprimées</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Количество несжатых изображений</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+
+      <ENTRY>
+         <ID>IDLABELNRVALIDRESULTS</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Nr of valid results</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Anzahl gültiger Datensätze</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Aantal ongeldige gegevensrecords</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Érvényes adatrekordok száma</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Numero di record di dati validi</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>Número de juegos de datos válidos</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Liczba prawidłowych rekordów</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>Nombre de jeux de données valables</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Количество действительных блоков данных</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+
+      <ENTRY>
+         <ID>IDLABELSEARCHRESULT</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Search result</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Suchergebnis</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Zoekresultaat</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Keresési találat</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Risultato di ricerca</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>Resultado de la búsqueda</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Wynik wyszukiwania</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>Résultat de la recherche</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Результат поиска</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+
+
+      <ENTRY>
+         <ID>IDLABELSTATECOMPLETE</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Complete</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Vollständig</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Volledig</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Teljes</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Completo</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>Completo</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Kompletnie</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>Complet</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Полный</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+
+      <ENTRY>
+         <ID>IDLABELSTATECREATED</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Created</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Erstellt</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Aangemaakt</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Létrehozva</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Creato</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>Creado</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Sporządzono</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>Créé</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Создано</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+
+
+      <ENTRY>
+         <ID>IDLABELSTATEEVALUATED</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Evaluated</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Bewertet</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Beoordeeld</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Értékelve</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Valutato</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>Evaluado</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Oceniono</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>Évalué</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Оценено</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+
+      <ENTRY>
+         <ID>IDLABELSTATEILLEGAL</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Illegal</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Illegal</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Onrechtmatig</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Nem legális</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Illegale</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>Ilegal</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Nielegalnie</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>Illégal</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Незаконный</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+
+      <ENTRY>
+         <ID>IDLABELSTATEINCOMPLETE</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Incomplete</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Unvollständig</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Onvolledig</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Hiányos</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Incompleto</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>Incompleto</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Niekompletnie</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>Incomplet</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Неполный</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+
+      <ENTRY>
+         <ID>IDLABELSTATEPENDING</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Pending</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Zurückgestellt</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Opgeschort</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Visszaállítva</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Rimandato</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>Aplazado</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Odstawiono</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>Ajourné</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Отложено</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+
+      <ENTRY>
+         <ID>IDLABELUPDATE</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Update</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Aktualisieren</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Bijwerken</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Frissítés</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Aggiorna</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>Actualizar</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Odśwież</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>Mettre à jour</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Обновить</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+      <ENTRY>
+         <ID>IDTITLEMAINWINDOW</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Database Maintenance</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Datenbank Wartung</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Database onderhoud</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Adatbázis karbantartás</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Banca dati manutenzione</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>Base de datos mantenimiento</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Serwisowanie bazy danych</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>Base de données maintenance</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>База данных технического обслуживания</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+      <ENTRY>
+         <ID>IDTITLETABBATCHEXPDEL</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Batch export/delete</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Batch Exportierung/Löschung</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Batch exporteren/verwijderen</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Csomag exportálása/törlése</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Esportazione/eliminazione di batch</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>Exportación/borrado de lote</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Eksport/usuwanie wsadu</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>Exportation/suppression de lot</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Пакетный экспорт/удаление</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+      <ENTRY>
+         <ID>IDTITLETABDATASTATE</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Data state</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Daten Status</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Gegevensstatus</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Adatok állapota</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Stato dei dati</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>Estado de datos</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Stan danych</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>État de données</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Статус данных</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+      <ENTRY>
+         <ID>IDUNEVALUATED</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Unevaluated</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Unbewertet</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Niet-beoordeeld</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Nem értékelt</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Non valutato</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>no evaluado</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Nieoceniona</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>Non évalué</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Неоцененный</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+   </LABELS>
+   <USERINFOTABLE>
+   </USERINFOTABLE>
+   <QUERYTABLE>
+   </QUERYTABLE>
+   <MESSAGES>
+      <ENTRY>
+         <ACCESS>ReadOnly</ACCESS>
+         <ID>IDMSGDELETEALLSEARCHRESULTS</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Do you really want to delete all search results permanently?</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Wollen sie wirklich alle Ergebnisse der Suche dauerhaft löschen?</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Weet u zeker dat u alle resultaten van de zoekopdracht definitief wilt vewijderen?</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Valóban tartósan törli a keresés minden találatát?</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Sei sicuro di voler cancellare in modo permanente tutti i risultati di ricerca?</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>¿Desea realmente borrar permanentemente todos los resultados de la búsqueda?</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Czy na pewno chcesz trwale usunąć wszystkie wyniki wyszukiwania?</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>Voulez-vous vraiment supprimer définitivement tous les résultats de la recherche?</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Вы действительно хотите окончательно удалить все результаты поиска?</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+
+      <ENTRY>
+         <ACCESS>ReadOnly</ACCESS>
+         <ID>IDMSGEXPORTSEARCHRESULTS</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Do you really want to export all search results?</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Wollen sie wirklich alle Ergebnisse der Suche exportieren?</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Weet u zeker dat u alle resultaten van de zoekopdracht wilt exporteren?</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Valóban exportálja a keresés minden találatát?</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Sei sicuro di voler esportare tutti i risultati di ricerca?</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>¿Desea realmente exportar todos los resultados de la búsqueda?</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Czy na pewno chcesz eksportować wszystkie wyniki wyszukiwania?</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>Voulez-vous vraiment exporter tous les résultats de la recherche ?</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Вы действительно хотите экспортировать все результаты поиска?</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+
+      <ENTRY>
+         <ACCESS>ReadOnly</ACCESS>
+         <ID>IDMSGIMPORT</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Do you really want to whole content of this directory?</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Wollen sie wirklich den gesamten Inhalt dieses Verzeichnisses importieren?</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Do you really want to whole content of this directory?</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Do you really want to whole content of this directory?</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Do you really want to whole content of this directory?</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>Do you really want to whole content of this directory?</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Do you really want to whole content of this directory?</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>Do you really want to whole content of this directory?</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Do you really want to whole content of this directory?</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+
+      <ENTRY>
+         <ACCESS>ReadOnly</ACCESS>
+         <ID>IDMSGCOMPRESSIMAGES</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Do you really want to compress all images?</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Wollen sie wirklich alle Bilder komprimieren?</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Weet u zeker dat u alle afbeeldingen wilt comprimeren?</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Valóban minden képet tömöríteni akar?</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Sei sicuro di voler comprimere tutte le immagini?</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>¿Desea realmente comprimir todas las imágenes?</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Czy na pewno chcesz skompresować wszystkie obrazy?</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>Voulez-vous vraiment comprimer toutes les images ?</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Вы действительно хотите сжать все изображения?</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+
+      <ENTRY>
+         <ID>IDMSGREALLYCANCEL</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Do you really want to cancel the process?</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Wollen sie den Prozess wirklich abbrechen?</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Weet u zeker dat u het proces wilt annuleren?</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Valóban leállítja a folyamatot?</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Sei sicuro di voler annullare il processo?</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>¿Desea realmente cancelar el proceso?</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Czy na pewno chcesz anulować ten proces?</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>Voulez-vous vraiment annuler ce processus ?</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Вы действительно хотите прервать процесс?</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+
+      <ENTRY>
+         <ACCESS>ReadOnly</ACCESS>
+         <ID>IDMSGSELECTEXPORTDIR</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Please select a directory where to export the results</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Bitte wählen sie ein Verzeichnis in das die Ergebnisse exportiert werden sollen</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Kies een map waarnaar u de resultaten wilt exporteren</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Kérjük, válasszon ki egy könyvtárat, ahová a találatokat exportálja</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Selezionare una cartella nella quale deve essere esportato il risultato</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>Seleccione un directorio al que deben exportarse los resultados</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Wybierz katalog, do którego mają być eksportowane wyniki</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>Veuillez sélectionner un répertoire dans lequel les images doivent être exportées</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Выберите директорию для экспорта результатов</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+
+      <ENTRY>
+         <ACCESS>ReadOnly</ACCESS>
+         <ID>IDMSGSELECTIMPORTDIR</ID>
+         <DT>String</DT>
+         <UI>
+            <EN>
+               <LABEL>Please select a directory with exported results</LABEL>
+               <TOOLTIP/>
+            </EN>
+            <DE>
+               <LABEL>Bitte wählen sie ein Verzeichnis mit exportierten Ergebnissen aus</LABEL>
+               <TOOLTIP/>
+            </DE>
+            <NL>
+               <LABEL>Please select a directory with exported results</LABEL>
+               <TOOLTIP/>
+            </NL>
+            <HU>
+               <LABEL>Please select a directory with exported results</LABEL>
+               <TOOLTIP/>
+            </HU>
+            <IT>
+               <LABEL>Please select a directory with exported results</LABEL>
+               <TOOLTIP/>
+            </IT>
+            <ES>
+               <LABEL>Please select a directory with exported results</LABEL>
+               <TOOLTIP/>
+            </ES>
+            <PL>
+               <LABEL>Please select a directory with exported results</LABEL>
+               <TOOLTIP/>
+            </PL>
+            <FR>
+               <LABEL>Please select a directory with exported results</LABEL>
+               <TOOLTIP/>
+            </FR>
+            <RU>
+               <LABEL>Please select a directory with exported results</LABEL>
+               <TOOLTIP/>
+            </RU>
+         </UI>
+      </ENTRY>
+   </MESSAGES>
+</LANGUAGETABLE>

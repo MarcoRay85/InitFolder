@@ -1,0 +1,125 @@
+"testdocviewer";Information;0;"New Session";;2152;;;"2024-09-12T12:14:33.5486510Z";;
+"testdocviewer";Information;0;"DEBUG: isSendingEnabled is: 1";;2152;;;"2024-09-12T12:14:47.1895222Z";;
+"testdocviewer";Information;0;"DEBUG: OnResultChange. Creo La Connection String";;2152;;;"2024-09-12T12:14:50.3205386Z";;
+"testdocviewer";Information;0;"DEBUG: returned[Evaluation] Bad";;2152;;;"2024-09-12T12:14:50.3205386Z";;
+"testdocviewer";Information;0;"DEBUG: Connetion string=> Server=192.168.62.230;Database=PCS_CAR;User Id=SendTyreResult;Password=Pirelli2024!;";;2152;;;"2024-09-12T12:14:50.3205386Z";;
+"testdocviewer";Information;0;"DEBUG: Parametri passati =>  Barcode: Test TimeStamp: 9/12/2024 12:14:50 PM pp_code: IO1 mch_code: XRAY1 Result: Bad ResultDetails: Bad. Non ci sono info aggiuntive al momento";;2152;;;"2024-09-12T12:14:50.3205386Z";;
+"testdocviewer";Information;0;"OnEvaluationChangedExportTest enter";;2152;;;"2024-09-12T12:15:18.1006955Z";;
+"testdocviewer";Information;0;"OnEvaluationChangedExportTest is exportParameters.BmpCompleteView null ? - False";;2152;;;"2024-09-12T12:15:18.5073313Z";;
+"testdocviewer";Information;0;"OnEvaluationChangedExportTest is exportParameters.BmpFaultDiagram null ? - True";;2152;;;"2024-09-12T12:15:18.5073313Z";;
+"testdocviewer";Information;0;"OnEvaluationChangedExportTest is exportParameters.BmpUserInfoData null ? - True";;2152;;;"2024-09-12T12:15:18.5073313Z";;
+"testdocviewer";Information;0;"OnEvaluationChangedExportTest is exportParameters.FaultTable null ? - True";;2152;;;"2024-09-12T12:15:18.5073313Z";;
+"testdocviewer";Information;0;"OnEvaluationChangedExportTest Subscribe";;2152;;;"2024-09-12T12:15:18.5073313Z";;
+"testdocviewer";Information;0;"OnEvaluationChangedExportTest ExportTest";;2152;;;"2024-09-12T12:15:18.5229067Z";;
+"testdocviewer";Information;0;"OnTestExportedSaveImages enter";;2152;;;"2024-09-12T12:15:18.6042244Z";;
+"testdocviewer";Information;0;"OnTestExportedSaveImages etd.ExportPath: E:\Results\Reject\test3_good_2024-09-11_12-20-55";;2152;;;"2024-09-12T12:15:18.6042244Z";;
+"testdocviewer";Information;0;"OnTestExportedSaveImages path for BmCompleteView: E:\Results\Reject\test3_good_2024-09-11_12-20-55\CompleteView.jpg";;2152;;;"2024-09-12T12:15:18.6042244Z";;
+"testdocviewer";Information;0;"OnTestExportedSaveImages leave";;2152;;;"2024-09-12T12:15:18.6323135Z";;
+"testdocviewer";Information;0;"OnEvaluationChangedExportTest leave";;2152;;;"2024-09-12T12:15:18.6323135Z";;
+"testdocviewer";Critical;0;"Application_UnhandledException";;2152;;;"2024-09-12T12:15:27.0477533Z";;
+"testdocviewer";Critical;0;"System.Collections.Generic.KeyNotFoundException: Software\Steinbichler\TestdocViewer2 not found in Registry. Please check registry entries.
+   at TestdocViewer.Views.ViewerStoreParameters.OpenSubKey(Boolean forWriting) in C:\Work\Appoggio\TestdocViewer-2.1\Source\TestdocViewer2\Views\ViewerStoreParameters.cs:line 75
+   at TestdocViewer.Views.ViewerStoreParameters.StoreParameters(Double rightPanelRatio, Double leftPanelRatio, Boolean rightPanelCollapsed, Boolean leftPanelCollapsed) in C:\Work\Appoggio\TestdocViewer-2.1\Source\TestdocViewer2\Views\ViewerStoreParameters.cs:line 51
+   at TestdocViewer.Views.ViewerWindow.OnClose() in C:\Work\Appoggio\TestdocViewer-2.1\Source\TestdocViewer2\Views\ViewerWindow.cs:line 473
+   at System.Windows.Forms.Control.OnClick(EventArgs e)
+   at System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
+   at System.Windows.Forms.Control.WndProc(Message& m)
+   at System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)";;2152;;;"2024-09-12T12:15:27.0542199Z";;
+"testdocviewer";Information;0;"New Session";;4412;;;"2024-09-13T14:16:26.3825969Z";;
+"testdocviewer";Information;0;"DEBUG: isSendingEnabled is: 1";;4412;;;"2024-09-13T14:16:38.2733281Z";;
+"testdocviewer";Information;0;"DEBUG: OnResultChange. Creo La Connection String";;4412;;;"2024-09-13T14:16:41.2886560Z";;
+"testdocviewer";Information;0;"DEBUG: returned[Evaluation] Good";;4412;;;"2024-09-13T14:16:41.2886560Z";;
+"testdocviewer";Information;0;"DEBUG: Connetion string=> Server=192.168.62.230;Database=PCS_CAR;User Id=SendTyreResult;Password=Pirelli2024!;";;4412;;;"2024-09-13T14:16:41.2886560Z";;
+"testdocviewer";Information;0;"DEBUG: Parametri passati =>  Barcode: Test2 TimeStamp: 9/13/2024 2:16:41 PM pp_code: IO1 mch_code: XRAY1 Result: Good ResultDetails: Good. Non ci sono info aggiuntive al momento";;4412;;;"2024-09-13T14:16:41.2886560Z";;
+"testdocviewer";Information;0;"OnEvaluationChangedExportTest enter";;4412;;;"2024-09-13T14:17:10.9161187Z";;
+"testdocviewer";Information;0;"OnEvaluationChangedExportTest is exportParameters.BmpCompleteView null ? - False";;4412;;;"2024-09-13T14:17:11.2129321Z";;
+"testdocviewer";Information;0;"OnEvaluationChangedExportTest is exportParameters.BmpFaultDiagram null ? - True";;4412;;;"2024-09-13T14:17:11.2129321Z";;
+"testdocviewer";Information;0;"OnEvaluationChangedExportTest is exportParameters.BmpUserInfoData null ? - True";;4412;;;"2024-09-13T14:17:11.2129321Z";;
+"testdocviewer";Information;0;"OnEvaluationChangedExportTest is exportParameters.FaultTable null ? - True";;4412;;;"2024-09-13T14:17:11.2129321Z";;
+"testdocviewer";Information;0;"OnEvaluationChangedExportTest Subscribe";;4412;;;"2024-09-13T14:17:11.2129321Z";;
+"testdocviewer";Information;0;"OnEvaluationChangedExportTest ExportTest";;4412;;;"2024-09-13T14:17:11.2129321Z";;
+"testdocviewer";Information;0;"OnTestExportedSaveImages enter";;4412;;;"2024-09-13T14:17:11.3690482Z";;
+"testdocviewer";Information;0;"OnTestExportedSaveImages etd.ExportPath: E:\Results\Accept\Test2_2024-09-11_12-02-49";;4412;;;"2024-09-13T14:17:11.3690482Z";;
+"testdocviewer";Information;0;"OnTestExportedSaveImages path for BmCompleteView: E:\Results\Accept\Test2_2024-09-11_12-02-49\CompleteView.jpg";;4412;;;"2024-09-13T14:17:11.3690482Z";;
+"testdocviewer";Information;0;"OnTestExportedSaveImages leave";;4412;;;"2024-09-13T14:17:11.3690482Z";;
+"testdocviewer";Information;0;"OnEvaluationChangedExportTest leave";;4412;;;"2024-09-13T14:17:11.3690482Z";;
+"testdocviewer";Critical;0;"Application_UnhandledException";;4412;;;"2024-09-13T14:17:18.7444204Z";;
+"testdocviewer";Critical;0;"System.Collections.Generic.KeyNotFoundException: Software\Steinbichler\TestdocViewer2 not found in Registry. Please check registry entries.
+   at TestdocViewer.Views.ViewerStoreParameters.OpenSubKey(Boolean forWriting) in C:\Work\Appoggio\TestdocViewer-2.1\Source\TestdocViewer2\Views\ViewerStoreParameters.cs:line 75
+   at TestdocViewer.Views.ViewerStoreParameters.StoreParameters(Double rightPanelRatio, Double leftPanelRatio, Boolean rightPanelCollapsed, Boolean leftPanelCollapsed) in C:\Work\Appoggio\TestdocViewer-2.1\Source\TestdocViewer2\Views\ViewerStoreParameters.cs:line 51
+   at TestdocViewer.Views.ViewerWindow.OnClose() in C:\Work\Appoggio\TestdocViewer-2.1\Source\TestdocViewer2\Views\ViewerWindow.cs:line 473
+   at System.Windows.Forms.Control.OnClick(EventArgs e)
+   at System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
+   at System.Windows.Forms.Control.WndProc(Message& m)
+   at System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)";;4412;;;"2024-09-13T14:17:18.7906762Z";;
+"testdocviewer";Information;0;"New Session";;3904;;;"2024-09-13T14:18:55.7182751Z";;
+"testdocviewer";Information;0;"DEBUG: isSendingEnabled is: 1";;3904;;;"2024-09-13T14:19:33.2932277Z";;
+"testdocviewer";Information;0;"DEBUG: OnResultChange. Creo La Connection String";;3904;;;"2024-09-13T14:19:36.3092390Z";;
+"testdocviewer";Information;0;"DEBUG: returned[Evaluation] Good";;3904;;;"2024-09-13T14:19:36.3092390Z";;
+"testdocviewer";Information;0;"DEBUG: Connetion string=> Server=192.168.62.230;Database=PCS_CAR;User Id=SendTyreResult;Password=Pirelli2024!;";;3904;;;"2024-09-13T14:19:36.3092390Z";;
+"testdocviewer";Information;0;"DEBUG: Parametri passati =>  Barcode: 9/13/2024 4:19:12 PM TimeStamp: 9/13/2024 2:19:36 PM pp_code: IO1 mch_code: XRAY1 Result: Good ResultDetails: Good. Non ci sono info aggiuntive al momento";;3904;;;"2024-09-13T14:19:36.3092390Z";;
+"testdocviewer";Information;0;"OnEvaluationChangedExportTest enter";;3904;;;"2024-09-13T14:20:11.0765544Z";;
+"testdocviewer";Information;0;"OnEvaluationChangedExportTest is exportParameters.BmpCompleteView null ? - False";;3904;;;"2024-09-13T14:20:11.4390611Z";;
+"testdocviewer";Information;0;"OnEvaluationChangedExportTest is exportParameters.BmpFaultDiagram null ? - True";;3904;;;"2024-09-13T14:20:11.4390611Z";;
+"testdocviewer";Information;0;"OnEvaluationChangedExportTest is exportParameters.BmpUserInfoData null ? - True";;3904;;;"2024-09-13T14:20:11.4390611Z";;
+"testdocviewer";Information;0;"OnEvaluationChangedExportTest is exportParameters.FaultTable null ? - True";;3904;;;"2024-09-13T14:20:11.4390611Z";;
+"testdocviewer";Information;0;"OnEvaluationChangedExportTest Subscribe";;3904;;;"2024-09-13T14:20:11.4390611Z";;
+"testdocviewer";Information;0;"OnEvaluationChangedExportTest ExportTest";;3904;;;"2024-09-13T14:20:11.4390611Z";;
+"testdocviewer";Information;0;"OnTestExportedSaveImages enter";;3904;;;"2024-09-13T14:20:11.7479789Z";;
+"testdocviewer";Information;0;"OnTestExportedSaveImages etd.ExportPath: E:\Results\Accept\Barcode_2024-09-13_16-19-12";;3904;;;"2024-09-13T14:20:11.7479789Z";;
+"testdocviewer";Information;0;"OnTestExportedSaveImages path for BmCompleteView: E:\Results\Accept\Barcode_2024-09-13_16-19-12\CompleteView.jpg";;3904;;;"2024-09-13T14:20:11.7479789Z";;
+"testdocviewer";Information;0;"OnTestExportedSaveImages leave";;3904;;;"2024-09-13T14:20:11.7640452Z";;
+"testdocviewer";Information;0;"OnEvaluationChangedExportTest leave";;3904;;;"2024-09-13T14:20:11.7640452Z";;
+"testdocviewer";Critical;0;"Application_UnhandledException";;3904;;;"2024-09-13T14:20:16.0446622Z";;
+"testdocviewer";Critical;0;"System.Collections.Generic.KeyNotFoundException: Software\Steinbichler\TestdocViewer2 not found in Registry. Please check registry entries.
+   at TestdocViewer.Views.ViewerStoreParameters.OpenSubKey(Boolean forWriting) in C:\Work\Appoggio\TestdocViewer-2.1\Source\TestdocViewer2\Views\ViewerStoreParameters.cs:line 75
+   at TestdocViewer.Views.ViewerStoreParameters.StoreParameters(Double rightPanelRatio, Double leftPanelRatio, Boolean rightPanelCollapsed, Boolean leftPanelCollapsed) in C:\Work\Appoggio\TestdocViewer-2.1\Source\TestdocViewer2\Views\ViewerStoreParameters.cs:line 51
+   at TestdocViewer.Views.ViewerWindow.OnClose() in C:\Work\Appoggio\TestdocViewer-2.1\Source\TestdocViewer2\Views\ViewerWindow.cs:line 473
+   at System.Windows.Forms.Control.OnClick(EventArgs e)
+   at System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
+   at System.Windows.Forms.Control.WndProc(Message& m)
+   at System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)";;3904;;;"2024-09-13T14:20:16.0446622Z";;
+"testdocviewer";Information;0;"New Session";;9372;;;"2024-09-25T10:27:20.5044073Z";;
+"testdocviewer";Information;0;"DEBUG: isSendingEnabled is: 1";;9372;;;"2024-09-25T10:29:48.9546254Z";;
+"testdocviewer";Information;0;"DEBUG: OnResultChange. Creo La Connection String";;9372;;;"2024-09-25T10:29:51.9730758Z";;
+"testdocviewer";Information;0;"DEBUG: returned[Evaluation] Bad";;9372;;;"2024-09-25T10:29:51.9744939Z";;
+"testdocviewer";Information;0;"DEBUG: Connetion string=> Server=192.168.62.230;Database=PCS_CAR;User Id=SendTyreResult;Password=Pirelli2024!;";;9372;;;"2024-09-25T10:29:51.9744939Z";;
+"testdocviewer";Information;0;"DEBUG: Parametri passati =>  Barcode: test4_bad TimeStamp: 9/25/2024 10:29:51 AM pp_code: IO1 mch_code: XRAY1 Result: Bad ResultDetails: Bad. Non ci sono info aggiuntive al momento";;9372;;;"2024-09-25T10:29:51.9744939Z";;
+"testdocviewer";Information;0;"OnEvaluationChangedExportTest enter";;9372;;;"2024-09-25T10:30:19.3840519Z";;
+"testdocviewer";Information;0;"OnEvaluationChangedExportTest is exportParameters.BmpCompleteView null ? - False";;9372;;;"2024-09-25T10:30:19.7850967Z";;
+"testdocviewer";Information;0;"OnEvaluationChangedExportTest is exportParameters.BmpFaultDiagram null ? - True";;9372;;;"2024-09-25T10:30:19.7850967Z";;
+"testdocviewer";Information;0;"OnEvaluationChangedExportTest is exportParameters.BmpUserInfoData null ? - True";;9372;;;"2024-09-25T10:30:19.7880658Z";;
+"testdocviewer";Information;0;"OnEvaluationChangedExportTest is exportParameters.FaultTable null ? - True";;9372;;;"2024-09-25T10:30:19.7880658Z";;
+"testdocviewer";Information;0;"OnEvaluationChangedExportTest Subscribe";;9372;;;"2024-09-25T10:30:19.7880658Z";;
+"testdocviewer";Information;0;"OnEvaluationChangedExportTest ExportTest";;9372;;;"2024-09-25T10:30:19.7880658Z";;
+"testdocviewer";Information;0;"OnTestExportedSaveImages enter";;9372;;;"2024-09-25T10:30:19.9078369Z";;
+"testdocviewer";Information;0;"OnTestExportedSaveImages etd.ExportPath: E:\Results\Reject\test4_bad_2024-09-11_12-21-20";;9372;;;"2024-09-25T10:30:19.9090102Z";;
+"testdocviewer";Information;0;"OnTestExportedSaveImages path for BmCompleteView: E:\Results\Reject\test4_bad_2024-09-11_12-21-20\CompleteView.jpg";;9372;;;"2024-09-25T10:30:19.9090102Z";;
+"testdocviewer";Information;0;"OnTestExportedSaveImages leave";;9372;;;"2024-09-25T10:30:19.9471964Z";;
+"testdocviewer";Information;0;"OnEvaluationChangedExportTest leave";;9372;;;"2024-09-25T10:30:19.9471964Z";;
+"testdocviewer";Information;0;"DEBUG: isSendingEnabled is: 1";;9372;;;"2024-09-25T10:30:22.9853985Z";;
+"testdocviewer";Information;0;"DEBUG: OnResultChange. Creo La Connection String";;9372;;;"2024-09-25T10:30:25.9942874Z";;
+"testdocviewer";Information;0;"DEBUG: returned[Evaluation] Bad";;9372;;;"2024-09-25T10:30:25.9942874Z";;
+"testdocviewer";Information;0;"DEBUG: Connetion string=> Server=192.168.62.230;Database=PCS_CAR;User Id=SendTyreResult;Password=Pirelli2024!;";;9372;;;"2024-09-25T10:30:25.9942874Z";;
+"testdocviewer";Information;0;"DEBUG: Parametri passati =>  Barcode: Test2 TimeStamp: 9/25/2024 10:30:25 AM pp_code: IO1 mch_code: XRAY1 Result: Bad ResultDetails: Bad. Non ci sono info aggiuntive al momento";;9372;;;"2024-09-25T10:30:25.9942874Z";;
+"testdocviewer";Information;0;"OnEvaluationChangedExportTest enter";;9372;;;"2024-09-25T10:30:46.9283461Z";;
+"testdocviewer";Information;0;"OnEvaluationChangedExportTest is exportParameters.BmpCompleteView null ? - False";;9372;;;"2024-09-25T10:30:47.3870522Z";;
+"testdocviewer";Information;0;"OnEvaluationChangedExportTest is exportParameters.BmpFaultDiagram null ? - True";;9372;;;"2024-09-25T10:30:47.3870522Z";;
+"testdocviewer";Information;0;"OnEvaluationChangedExportTest is exportParameters.BmpUserInfoData null ? - True";;9372;;;"2024-09-25T10:30:47.3870522Z";;
+"testdocviewer";Information;0;"OnEvaluationChangedExportTest is exportParameters.FaultTable null ? - True";;9372;;;"2024-09-25T10:30:47.3870522Z";;
+"testdocviewer";Information;0;"OnEvaluationChangedExportTest Subscribe";;9372;;;"2024-09-25T10:30:47.3901637Z";;
+"testdocviewer";Information;0;"OnEvaluationChangedExportTest ExportTest";;9372;;;"2024-09-25T10:30:47.3912992Z";;
+"testdocviewer";Information;0;"OnTestExportedSaveImages enter";;9372;;;"2024-09-25T10:30:47.4465296Z";;
+"testdocviewer";Information;0;"OnTestExportedSaveImages etd.ExportPath: E:\Results\Reject\Test2_2024-09-11_12-02-49";;9372;;;"2024-09-25T10:30:47.4465296Z";;
+"testdocviewer";Information;0;"OnTestExportedSaveImages path for BmCompleteView: E:\Results\Reject\Test2_2024-09-11_12-02-49\CompleteView.jpg";;9372;;;"2024-09-25T10:30:47.4465296Z";;
+"testdocviewer";Information;0;"OnTestExportedSaveImages leave";;9372;;;"2024-09-25T10:30:47.4807555Z";;
+"testdocviewer";Information;0;"OnEvaluationChangedExportTest leave";;9372;;;"2024-09-25T10:30:47.4807555Z";;
+"testdocviewer";Critical;0;"Application_UnhandledException";;9372;;;"2024-09-25T10:30:59.1016138Z";;
+"testdocviewer";Critical;0;"System.Collections.Generic.KeyNotFoundException: Software\Steinbichler\TestdocViewer2 not found in Registry. Please check registry entries.
+   at TestdocViewer.Views.ViewerStoreParameters.OpenSubKey(Boolean forWriting) in C:\Work\Appoggio\TestdocViewer-2.1\Source\TestdocViewer2\Views\ViewerStoreParameters.cs:line 75
+   at TestdocViewer.Views.ViewerStoreParameters.StoreParameters(Double rightPanelRatio, Double leftPanelRatio, Boolean rightPanelCollapsed, Boolean leftPanelCollapsed) in C:\Work\Appoggio\TestdocViewer-2.1\Source\TestdocViewer2\Views\ViewerStoreParameters.cs:line 51
+   at TestdocViewer.Views.ViewerWindow.OnClose() in C:\Work\Appoggio\TestdocViewer-2.1\Source\TestdocViewer2\Views\ViewerWindow.cs:line 473
+   at System.Windows.Forms.Control.OnClick(EventArgs e)
+   at System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
+   at System.Windows.Forms.Control.WndProc(Message& m)
+   at System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)";;9372;;;"2024-09-25T10:30:59.1535165Z";;

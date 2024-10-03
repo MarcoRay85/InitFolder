@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<PROFIL>
+  <LANGUAGE>
+    <ENTRY>EN</ENTRY>
+  </LANGUAGE>
+  <ANCHOR>
+    <ENTRY>LEFT</ENTRY>
+  </ANCHOR>
+  <PRINT />
+  <IDCUSTOMER>
+    <ENTRY>Unknown</ENTRY>
+  </IDCUSTOMER>
+  <IDTIREBRAND>
+    <ENTRY>Unknown</ENTRY>
+  </IDTIREBRAND>
+  <IDTIRESERIES>
+    <ENTRY>Unknown</ENTRY>
+  </IDTIRESERIES>
+  <IDTIRESIZE>
+    <ENTRY>Unknown</ENTRY>
+    <ENTRY>155/65 R13</ENTRY>
+    <ENTRY>165/65 R13</ENTRY>
+    <ENTRY>175/65 R13</ENTRY>
+    <ENTRY>175/65 R14</ENTRY>
+    <ENTRY>185/65 R13</ENTRY>
+    <ENTRY>185/65 R14</ENTRY>
+    <ENTRY>185/65 R15</ENTRY>
+    <ENTRY>185/60 R14</ENTRY>
+  </IDTIRESIZE>
+</PROFIL>
