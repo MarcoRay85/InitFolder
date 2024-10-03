@@ -1,6 +1,7 @@
 PROCEDURA PER AGGIORNARE LE ISTALLAZIONI
 
 1) Copiare il File INTACT.exe nella cartella D:/Intact
+	1A) Copiare la cartella HTML in D:/Intact e sovrascrivere
 
 2) Se il progetto richiede TDV:
 	2A) Copiare il contenuto della cartella "TDV_compiled_V2.1.2" nella cartella D:/Tools/TestdocViewer2

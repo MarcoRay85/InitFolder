@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html ID="THIS">
+<head>
+  <title>Flipper recovery</title>
+    <META content="text/html; charset=iso-8859-2" http-equiv="Content-Type">
+    <META NAME="Description" CONTENT="Intact Flipper Recover Dialog (EN)">
+    <LINK REL="STYLESHEET" HREF="DlgStyle_EN.css">
+    <LINK REL="STYLESHEET" HREF="FlipperRecoverDlg.css">
+</head>
+
+<XML ID="xmlResource">
+  <Resources>
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonRetOpen"
+            ApplyTo     = "title"
+    >Retainer will keep on opening as long as this button gets pressed</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonRetClose"
+            ApplyTo     = "title"
+    >Retainer will keep on closing as long as this button gets pressed</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonRotLeft"
+            ApplyTo     = "title"
+    >Rotational axis will keep on traveling counter-clockwise as long as this button gets pressed</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonRotRight"
+            ApplyTo     = "title"
+    >Rotational axis will keep on traveling clockwise as long as this button gets pressed</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonConveyLeft"
+            ApplyTo     = "title"
+    >Conveyor will keep on feeding to the left as long as this button gets pressed</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonConveyRight"
+            ApplyTo     = "title"
+    >Conveyor will keep on feeding to the right as long as this button gets pressed</Res>
+
+  </Resources>
+</XML>
+
+
+
+<body style = "width:35.5em;height:25.5em" align="center" Invisible="INIT" ResourceXML="xmlResource" lang="de" >
+
+  <div style="font-size: larger;color:red;padding-top:1em" align="center">
+      Flipper is not ready for conveying!
+  </div>
+  <div style="padding:1em 1em 0 1em" align="left">
+      It has to be rotated to convey position first.
+      This will be done automatically after confirmed by pressing
+      <span class="classButtonSpan">OK</span>; 
+      <span class="classButtonSpan">Cancel</span> 
+      stops further conveying actions keeping flipper out of motion.
+  </div>
+  <div style="padding:1em 1em 0 1em" align="left">
+      Retaining has to be ensured during rotation,
+      if there is still a tire inside.
+      <br>
+      Therefore retainer, rotational axis and conveyor may be adjusted manually.
+  </div>
+
+
+  <table>
+    <tbody>
+        <tr>
+          <td>
+            <fieldset CLASS="classJogPane">
+              <legend>&nbsp;Retainer:&nbsp;</legend>
+              <button id="buttonRetOpen" class="classButtonCtrl">+</button>
+              <button id="buttonRetClose" class="classButtonCtrl">&ndash;</button>
+            </fieldset>
+          </td>
+          <td>
+            <fieldset CLASS="classJogPane">
+              <legend>&nbsp;Rotational axis:&nbsp;</legend>
+              <button id="buttonRotLeft"  ><span class="classMirrorSpan">&#x71;</span></button>
+              <button id="buttonRotRight" >&#x71;</button>
+            </fieldset>
+          </td>
+          <td>
+            <fieldset CLASS="classJogPane">
+              <legend>&nbsp;Transport:&nbsp;</legend>
+              <button id="buttonConveyLeft"  >&larr;</button>
+              <button id="buttonConveyRight" >&rarr;</button>
+            </fieldset>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+  <div class="DLGBUTTONS" kind="1" align="CENTER" size="6em" ></div>
+
+
+</body>
+
+<script class="DLGSCRIPT" language="vbscript" src="FlipperRecoverDlg.vbs" defer>
+</script>
+
+</html>

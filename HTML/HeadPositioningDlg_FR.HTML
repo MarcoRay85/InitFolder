@@ -1,0 +1,291 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML ID="THIS" XMLNS:v  XMLNS:CX  XMLNS:t ="urn:schemas-microsoft-com:time">
+<HEAD>
+  <TITLE>Position de la tкte de mesure</title>
+    <META content="text/html; charset=1251" http-equiv="Content-Type">
+    <META NAME="Description" CONTENT="Intact MeЯkopfpositionierung(FR)">
+    <LINK ID="linkedstyleDefault" REL="STYLESHEET" HREF="DlgStyle_FR.css">
+    <LINK ID="linkedstyleCustom"  REL="STYLESHEET" HREF="HeadPositioningDlg.css">
+    <?IMPORT namespace="CX" implementation="SpinEdit.htc">
+</HEAD>
+
+<XML ID="xmlResource">
+  <Resources>
+    <Res    AddressBy   = "_RESNAME"
+            MatchValue  = "REStiredata"
+            ApplyTo     = "title"
+    >Rйsultats de la derniиre mesure</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "trExcentricity"
+            ApplyTo     = "title"
+    >Dйplacement total en relation d'un centrage idйal</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "trLiftInput"
+            ApplyTo     = "title"
+    >
+    Veuillez entrer la position verticale de la tкte de mesure.&#13;
+    Les rйfйrences suivantes peuvent кtre utilisйes&#13;
+    C: La tкte de mesure sera positionnйe а une distance donnйe par rapport au centre du pneu (pour valeurs positives le positionnement est au-dessus du centre).&#13;
+    A: La tкte de mesure sera positionnйe а une distance absolue.&#13;
+    R: La tкte de mesure sera positionnйe а une distance donnйe au-dessus du bord supйrieur du pneu.&#13;
+    D: La tкte de mesure sera positionnйe а une distance donnйe au-dessous du bord supйrieur du pneu.&#13;&#13;
+    Une de ces rйfйrences peut aussi кtre sйlectionnйe en tapant 'Ctrl' et le caractиre correspondant au clavier.
+    </Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "trDiamInput"
+            ApplyTo     = "title"
+    >    Veuillez entrer le diamиtre optimal de la tкte de mesure</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "trTiltInput"
+            ApplyTo     = "title"
+    >
+    Veuillez entrer le pivotement de la tкte de mesure dйsirй
+       (0° donne un positionnement horizontal;
+       valeurs nйgatives donnent un pivotement vers le haut;
+    valeurs positives donnent un pivotement vers le bas
+    </Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "trRotInput"
+            ApplyTo     = "title"
+    >Veuillez entrer le numйro du secteur а mesurer</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonUpdatePos"
+            ApplyTo     = "title"
+    >Dйplacer la tкte de mesure vers la position indiquйe ci-dessus (F5)</Res>
+
+    <Res   AddressBy   = "ID"
+            MatchValue  = "buttonHomePos"
+            ApplyTo     = "title"
+    >Dйplacer le capteur vers l'origine (F6)</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonStopPos"
+            ApplyTo     = "title"
+    >Arrкte le positionnement (F7)</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonVideo"
+            ApplyTo     = "title"
+    >Montre image(s) de la camйra (des camйras) de la tкte de mesure (F8)</Res>
+
+  </Resources>
+</XML>
+
+
+<XML ID="xmlLiftMenu">
+  <LiftMenu Types="C|A|R|D">
+    <Item>Sйlection du point de rйfйrence</Item>
+    <Item>C: centre du pneu&#9;Ctrl+C</Item>
+    <Item>A: absolue&#9;Ctrl+A</Item>
+    <Item>R: au-dessus du bord supйrieur du pneu&#9;Ctrl+R</Item>
+    <Item>D: au-dessous du bord supйrieur du pneu&#9;Ctrl+D</Item>
+  </LiftMenu>
+</XML>
+
+
+<BODY style="font-family: Arial;" Align="Left" ResourceXML="xmlResource" lang="fr">
+
+  <DIV  ID            = "divTireDataPane"
+        style         = "behavior:url(ToolPane.WSC);Margin-Top:1ex;" 
+        HeaderText    = "Donnйes du pneu" 
+        HeaderClass   = "classTableHeader"
+        Minimized     = "0" >
+    <TABLE cellspacing=0 cellpadding=0  class="classTireDataTable" >
+      <COLGROUP class="classTireDataNameCol">
+      </COLGROUP>
+      <COLGROUP class="classTireDataNumCol">
+      </COLGROUP>
+      <COLGROUP>
+      </COLGROUP>
+      <COLGROUP class="classTireDataNumCol">
+      </COLGROUP>
+      <COLGROUP>
+      </COLGROUP>
+      <TBODY>
+        <TR CLASS="classTireDataTableHead" >
+          <TD align=left _RESNAME="REStiredata">
+          </TD>
+          <TD _RESNAME="REStiredata" class="classTireDataNumCell">
+            [mm]
+          </TD>
+          <TD>
+            &nbsp;
+          </TD>
+          <TD _RESNAME="REStiredata" class="classTireDataNumCell">
+            [inch]
+          </TD>
+          <TD>
+            &nbsp;
+          </TD>
+        </TR>
+
+        <TR _RESNAME="REStiredata">
+          <TD>
+            Diamиtre externe
+          </TD>
+          <TD ID="tdOuterDiamMM" class="classTireDataNumCell">
+          </TD>
+          <TD>
+          </TD>
+          <TD ID="tdOuterDiamInch" class="classTireDataNumCell">
+          </TD>
+        </TR>
+        <TR _RESNAME="REStiredata">
+          <TD>
+            Diamиtre interne
+          </TD>
+          <TD ID="tdInnerDiamMM" class="classTireDataNumCell">
+          </TD>
+          <TD>
+          </TD>
+          <TD ID="tdInnerDiamInch" class="classTireDataNumCell">
+          </TD>
+        </TR>
+        <TR _RESNAME="REStiredata">
+          <TD>
+            Largeur
+          </TD>
+          <TD ID="tdTireWidthMM" class="classTireDataNumCell">
+          </TD>
+          <TD>
+          </TD>
+          <TD ID="tdTireWidthInch" class="classTireDataNumCell">
+          </TD>
+        </TR>
+        <TR ID="trExcentricity">
+          <TD>
+            Excentricitй
+          </TD>
+          <TD ID="tdExcentricityMM" class="classTireDataNumCell">
+          </TD>
+        </TR>
+      </TBODY>
+    </TABLE>
+  </DIV>
+
+  <DIV  ID            = "divHeadPosPane"   
+        style         = "behavior:url(ToolPane.WSC);Margin-Top:1ex;" 
+        HeaderText    = "Position de la tкte de mesure" 
+        HeaderClass   = "classTableHeader"
+        Minimized     = "0" >
+    <TABLE ID="tableHeadPosPane" cellspacing=2 cellpadding=0  class="classTable">
+      <TBODY>
+        <TR>
+          <TD colspan=4 class="classHeadPosRowSep">
+          </TD>
+        </TR>
+        <TR ID="trLiftInput" RESLiftInput>
+          <TD ID="tdLift" >
+            <LABEL class="DLGAUTOLABEL" FOR="spineditLift">
+              Hauteur:
+            </LABEL>
+          </TD>
+          <TD class="classLiftTypeCell">
+            <SPAN ID="spanLiftType" class="classLiftTypeSpan" _BLOCKINPUT_="TRUE" >M</SPAN>
+          </TD>
+          <TD valign=center class="classSpinEditCell">
+            <CX:SpinEdit   ID="spineditLift" class="classSpinEdit" _BLOCKINPUT_="TRUE"/>
+            <SPAN ID="spanLiftPos" class="classPosData">0</SPAN>
+          </TD>
+          <TD>
+              mm
+          </TD>
+        </TR>
+        <TR>
+          <TD colspan=4 class="classHeadPosRowSep">
+          </TD>
+        </TR>
+        <TR ID="trDiamInput">
+          <TD ID="tdDiam"  colspan=2>
+            <LABEL class="DLGAUTOLABEL" FOR="spineditDiam">
+              Diamиtre:
+            </LABEL>
+          </TD>
+          <TD valign=center class="classSpinEditCell">
+            <CX:SpinEdit   ID="spineditDiam" class="classSpinEdit" _BLOCKINPUT_="TRUE"/>
+            <SPAN ID="spanDiamPos" class="classPosData">0</SPAN>
+          </TD>
+          <TD>
+              mm
+          </TD>
+        </TR>
+        <TR>
+          <TD colspan=4 class="classHeadPosRowSep">
+          </TD>
+        </TR>
+        <TR ID="trTiltInput" >
+          <TD ID="tdTilt"  colspan=2>
+            <LABEL class="DLGAUTOLABEL" FOR="spineditTilt">
+              Pivotement:
+            </LABEL>
+          </TD>
+          <TD valign=center class="classSpinEditCell">
+              <CX:SpinEdit   ID="spineditTilt" class="classSpinEdit" _BLOCKINPUT_="TRUE"/>
+              <SPAN ID="spanTiltPos" class="classPosData">0</SPAN>
+          </TD>
+          <TD>
+              <SPAN STYLE="font-size:150%;font-weight:800">°</SPAN>
+          </TD>
+        </TR>
+        <TR>
+          <TD colspan=4 class="classHeadPosRowSep">
+          </TD>
+        </TR>
+        <TR ID="trRotInput" >
+          <TD ID="tdRot"  colspan=2>
+            <LABEL class="DLGAUTOLABEL" FOR="spineditRot">
+              Rotation:
+            </LABEL>
+          </TD>
+          <TD valign=center class="classSpinEditCell">
+            <CX:SpinEdit   ID="spineditRot" class="classSpinEdit" _BLOCKINPUT_="TRUE" />
+            <SPAN ID="spanRotPos" class="classPosData">0</SPAN>
+          </TD>
+          <TD>
+              <SPAN STYLE="font-size:150%;font-weight:800">°</SPAN>
+          </TD>
+        </TR>
+      </TBODY>
+    </TABLE>
+    <DIV CLASS="classToolButtonDiv">
+        <BUTTON ID="buttonUpdatePos"  CLASS="classButtons" _BLOCKINPUT_="TRUE">
+            <SPAN CLASS="classUpdateSpan">4</SPAN>
+        </BUTTON>
+        <BUTTON ID="buttonHomePos" CLASS="classButtons" _BLOCKINPUT_="TRUE">
+            <SPAN CLASS="classHomeSpan">H</SPAN>
+        </BUTTON>
+        <BUTTON ID="buttonStopPos" CLASS="classStopButton">
+            <IMG ID="imgStopPos" SRC="Stop.gif" CLASS="classStopImage">
+        </BUTTON>
+    </DIV>
+  </DIV>
+
+  <DIV  ID            = "divToolPane"
+        style         = "behavior:url(ToolPane.WSC);Margin-Top:1ex;" 
+        HeaderText    = "Outil" 
+        HeaderClass   = "classTableHeader"
+        Minimized     = "0" >
+    <BUTTON ID="buttonVideo"  CLASS="classButtons">
+      <SPAN ID="spanVideoBtnPane" CLASS="classVideoSpan">µ
+      </SPAN>
+    </BUTTON>
+  </DIV>
+  <SPAN class="classShadow">
+  </SPAN>
+
+
+  <DIV class="DLGBUTTONS" kind="12" align="CENTER"  _BLOCKINPUT_="TRUE"></DIV>
+</BODY>
+
+
+<SCRIPT class="DLGSCRIPT" language="vbscript" src="HeadPositioningDlg.vbs" defer>
+</SCRIPT>
+
+</HTML>

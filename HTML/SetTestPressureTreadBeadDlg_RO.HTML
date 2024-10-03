@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html ID="THIS" XMLNS:CX>
+<head>
+<!-- Inserted by TRADOS: --><META HTTP-EQUIV="content-type" CONTENT="text/html; charset=windows-1250">
+
+  <title>Parametrul de testare</title>
+    <META NAME="Description" CONTENT="Parametrul de testare Intact1200 (GE)">
+    <LINK REL="STYLESHEET" HREF="DlgStyle_DE.css">
+    <?IMPORT namespace="CX" implementation="SpinEdit.htc">
+</head>
+
+<XML ID="xmlResource">
+   <Resources>
+      <Res  AddressBy   = "TAG"
+            MatchValue  = "body"
+            ApplyTo     = "title"
+      >Vă rugăm să indica&#539;i presiunea negativă care să se aplice anvelopelor &#238;n timpul testării</Res>
+   </Resources>
+</XML>
+
+<body style = "width:31.5em;height:12em" Invisible="INIT" ResourceXML="xmlResource" lang="ro">
+
+  <br>
+  <!-- <p align="center"> -->
+    <!-- <label class="DLGAUTOLABEL" FOR="InputVacuumStart"> -->
+      <!-- Start Vacuum: -->
+    <!-- </label> -->
+    <!-- <CX:SpinEdit   ID        ="InputVacuumStart" -->
+                   <!-- style     ="position:relative;width:4em;height:2.5ex;top:0.5ex;border:1px inset" /> -->
+    <!-- &nbsp;mbar -->
+  <!-- </p> -->
+  
+  <p align="center">
+    <label class="DLGAUTOLABEL" FOR="InputVacuumTread">
+      Presiune negativă bandă de rulare:
+    </label>
+    <CX:SpinEdit   ID        ="InputVacuumTread"                    style     ="position:right;width:4em;height:2.5ex;top:0.5ex;border:1px inset" />&nbsp;mbar
+  </p>
+
+  <p align="center">
+    <label class="DLGAUTOLABEL" FOR="InputVacuumBead">
+      Presiune negativă flanc: 
+    </label>
+    <CX:SpinEdit   ID        ="InputVacuumBead"                    style     ="position:right;width:4em;height:2.5ex;top:0.5ex;border:1px inset" />&nbsp;mbar
+  </p>
+  
+  
+  
+  
+  
+  
+  <div class="DLGBUTTONS" kind="1" align="CENTER"  ></div>
+
+</body>
+
+<script class="DLGSCRIPT" language="vbscript" src="SetTestPressureTreadBeadDlg.vbs" defer>
+</script>
+
+</html>

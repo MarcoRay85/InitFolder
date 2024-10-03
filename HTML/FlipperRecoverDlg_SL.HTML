@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html ID="THIS">
+<head>
+  <title>Povrnitev obračalnika</title>
+<META content="text/html; charset=iso-8859-2" http-equiv="Content-Type"> 
+    <META NAME="Description" CONTENT="Intact Flipper Recover Dialog (SL)">
+    <LINK REL="STYLESHEET" HREF="DlgStyle_SL.css">
+    <LINK REL="STYLESHEET" HREF="FlipperRecoverDlg.css">
+</head>
+
+<XML ID="xmlResource">
+  <Resources>
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonRetOpen"
+            ApplyTo     = "title"
+    >Zadrevalna naprava se bo odpirala dokler boste pritiskali na ta gumb</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonRetClose"
+            ApplyTo     = "title"
+    >Zadrevalna naprava se bo zapirala dokler boste pritiskali na ta gumb</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonRotLeft"
+            ApplyTo     = "title"
+    >Rotacijska os se bo premikala v nasprotni smeri urinega kazalca dokler boste pritiskali na ta gumb</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonRotRight"
+            ApplyTo     = "title"
+    >Rotacijska os se bo premikala v smeri urinega kazalca dokler boste pritiskali na ta gumb</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonConveyLeft"
+            ApplyTo     = "title"
+    >Transporter bo dovajal v levo dokler boste pritiskali na ta gumb</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonConveyRight"
+            ApplyTo     = "title"
+    >Transporter bo dovajal v desno dokler boste pritiskali na ta gumb</Res>
+
+  </Resources>
+</XML>
+
+
+
+<body style = "width:35.5em;height:25.5em" align="center" Invisible="INIT" ResourceXML="xmlResource" lang="sl" >
+
+  <div style="font-size: larger;color:red;padding-top:1em" align="center">Obračalnik ni pripravljen na transport!</div>
+  <div style="padding:1em 1em 0 1em" align="left">Najprej ga je treba obrniti v poloaj za transport. To bo izvedeno samodejno, ko potrdite s pritiskom na gumb <span class="classButtonSpan">V redu</span>; <span class="classButtonSpan">Prekliči</span> zaustavi nadaljnja dejanja transporta in ohrani obračalnik pri miru.</div>
+  <div style="padding:1em 1em 0 1em" align="left">Če je pnevmatika &scaron;e prisotna, je treba med rotacijo zagotoviti zadrevanje. <br> Zato je mogoče zadrevalno napravo, rotacijsko os in transporter prilagajati ročno.</div>
+
+
+  <table>
+    <tbody>
+        <tr>
+          <td>
+            <fieldset CLASS="classJogPane">
+              <legend>&nbsp;Zadrevalna naprava:&nbsp;</legend>
+              <button id="buttonRetOpen" class="classButtonCtrl">+</button>
+              <button id="buttonRetClose" class="classButtonCtrl">&ndash;</button>
+            </fieldset>
+          </td>
+          <td>
+            <fieldset CLASS="classJogPane">
+              <legend>&nbsp;Rotacijska os:&nbsp;</legend>
+              <button id="buttonRotLeft"  ><span class="classMirrorSpan">q</span></button>
+              <button id="buttonRotRight" >q</button>
+            </fieldset>
+          </td>
+          <td>
+            <fieldset CLASS="classJogPane">
+              <legend>&nbsp;Transport:&nbsp;</legend>
+              <button id="buttonConveyLeft"  >&larr;</button>
+              <button id="buttonConveyRight" >&rarr;</button>
+            </fieldset>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+  <div class="DLGBUTTONS" kind="1" align="CENTER" size="6em" ></div>
+
+
+</body>
+
+<script class="DLGSCRIPT" language="vbscript" src="FlipperRecoverDlg.vbs" defer>
+</script>
+
+</html>

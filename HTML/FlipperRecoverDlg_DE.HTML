@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html ID="THIS">
+<head>
+  <title>Bereitschaft der Wendeeinrichtung wiederherstellen</title>
+    <META content="text/html; charset=iso-8859-2" http-equiv="Content-Type">
+    <META NAME="Description" CONTENT="Intact Flipper Recover Dialog (DE)">
+    <LINK REL="STYLESHEET" HREF="DlgStyle_DE.css">
+    <LINK REL="STYLESHEET" HREF="FlipperRecoverDlg.css">
+</head>
+
+<XML ID="xmlResource">
+  <Resources>
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonRetOpen"
+            ApplyTo     = "title"
+    >Die Haltevorrichtung fährt solange auf, wie diese Taste gedrückt wird</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonRetClose"
+            ApplyTo     = "title"
+    >Die Haltevorrichtung fährt solange zu, wie diese Taste gedrückt wird</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonRotLeft"
+            ApplyTo     = "title"
+    >Die Drehachse rotiert solange gegen den Uhrzeigersinn, wie diese Taste gedrückt wird</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonRotRight"
+            ApplyTo     = "title"
+    >Die Drehachse rotiert solange im Uhrzeigersinn, wie diese Taste gedrückt wird</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonConveyLeft"
+            ApplyTo     = "title"
+    >Die Rollenbahn transportiert solange nach links, wie diese Taste gedrückt wird</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonConveyRight"
+            ApplyTo     = "title"
+    >Die Rollenbahn transportiert solange nach rechts, wie diese Taste gedrückt wird</Res>
+
+  </Resources>
+</XML>
+
+
+
+<body style = "width:42.5em;height:24.5em" align="center" Invisible="INIT" ResourceXML="xmlResource" lang="de" >
+
+  <div style="font-size: larger;color:red;padding-top:1em" align="center">
+      Die Wendeeinrichtung ist nicht bereit zum Reifentransport!
+  </div>
+  <div style="padding:1em 1em 0 1em" align="left">
+      Hierzu muß sie zuerst in die Transportstellung gedreht werden.
+      Dies wird nach Bestätigung mit 
+      <span class="classButtonSpan">OK</span> ausgeführt; 
+      <span class="classButtonSpan">Abbrechen</span> 
+      beendet die Fortsetzung
+      des Transportvorgangs, ohne die Wende&shy;einrichtung zu bewegen.
+  </div>
+  <div style="padding:1em 1em 0 1em" align="left">
+      Falls sich noch ein Reifen in der Wendeeinrichtung befinden sollte,
+      muss sichergestellt sein, dass er während der Drehung sicher gehalten wird.
+      <br>
+      Hierfür können die Haltevorrichtung, die Drehachse und der Transport manuell verfahren werden.
+  </div>
+
+
+  <table>
+    <tbody>
+        <tr>
+          <td>
+            <fieldset CLASS="classJogPane">
+              <legend>&nbsp;Haltevorrichtung:&nbsp;</legend>
+              <button id="buttonRetOpen"  >+</button>
+              <button id="buttonRetClose" >&ndash;</button>
+            </fieldset>
+          </td>
+          <td>
+            <fieldset CLASS="classJogPane">
+              <legend>&nbsp;Drehachse:&nbsp;</legend>
+              <button id="buttonRotLeft"  ><span class="classMirrorSpan">&#x71;</span></button>
+              <button id="buttonRotRight" >&#x71;</button>
+            </fieldset>
+          </td>
+          <td>
+            <fieldset CLASS="classJogPane">
+              <legend>&nbsp;Transport:&nbsp;</legend>
+              <button id="buttonConveyLeft"  >&larr;</button>
+              <button id="buttonConveyRight" >&rarr;</button>
+            </fieldset>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+  <div class="DLGBUTTONS" kind="1" align="CENTER" size="6em" ></div>
+
+
+</body>
+
+<script class="DLGSCRIPT" language="vbscript" src="FlipperRecoverDlg.vbs" defer>
+</script>
+
+</html>

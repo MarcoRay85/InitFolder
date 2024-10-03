@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html ID="THIS">
+<head >
+  <title>退出 Intact (Exit Intact)</title>
+  <META content="text/html; charset=gb2312" http-equiv="Content-Type">
+  <META NAME="Description" CONTENT="Intact1200 Quit & Storing (ZH)" >
+  <LINK REL="STYLESHEET" HREF="DlgStyle_ZH.css">
+</head>
+
+<body style="width:16em; height:8.5em" align="center" Invisible="INIT" lang="ZH">
+
+  <div align="center"
+       style="position:absolute;zIndex:-1;zoom:2.5;"
+       style="Filter:progid:DXImageTransform.Microsoft.alpha( opacity=10 )">
+    <img src="AnimHourglass.gif">
+    &nbsp;
+    <img src="AnimHourglass.gif">
+    &nbsp;
+    <img src="AnimHourglass.gif">
+    &nbsp;
+    <img src="AnimHourglass.gif">
+    &#32;
+    <img src="AnimHourglass.gif">
+    &nbsp;
+    <img src="AnimHourglass.gif">
+    &nbsp;
+    <img src="AnimHourglass.gif">
+    &nbsp;
+    <img src="AnimHourglass.gif">
+  </div>
+
+  <div ID="divText" align="left" style="line-height:180%; width:26em;position:relative">
+     一些测试结果还没有完全保存。<br>
+     关闭
+     <span class="classIntact">Intact</span>
+     尚需一段时间。<br>
+     使用
+     <span class="classButton"> 取消(<U>C</U>)</span>
+     可以中止关闭过程。
+  </div>
+
+  <div class="DLGBUTTONS" kind="11" align="CENTER"  ></div>
+
+</body>
+
+<script language="vbscript" >
+
+    Option Explicit
+
+    Sub SetTaskKind( nKind )
+
+        If nKind = 1  Then
+
+            divText.InnerHTML = Replace( divText.InnerHTML, "保存", "打印" )
+
+        End If
+
+    End Sub
+
+</script>
+
+<script class="DLGSCRIPT" language="vbscript" src="TestDocTaskRunningDlg.vbs" defer>
+</script>
+
+</html>

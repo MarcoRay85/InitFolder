@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML ID="THIS" XMLNS:v XMLNS:CX  XMLNS:t ="urn:schemas-microsoft-com:time">
+<HEAD>
+  <TITLE>Check all axis</TITLE>
+    <META NAME="Description" CONTENT="Intact1200 CheckAchsdialog (EN)">
+    <LINK ID="linkedstyleDefault" REL="STYLESHEET" HREF="DlgStyle_EN.css">
+    <LINK ID="linkedstyleCustom"  REL="STYLESHEET" HREF="HeadPositioningDlg.css">
+    <LINK ID="linkedstyleCustom"  REL="STYLESHEET" HREF="BaseStyles.css">
+    <?IMPORT namespace="CX" implementation="SpinEdit.htc">    
+</HEAD>
+
+<!--************************************ DISPLAYED ******************************-->
+
+<BODY ID                = "bodyThis"
+      SCROLL            = "no"          >
+
+ <DIV CLASS="classDivInfo">
+        <STRONG>Caution:</STRONG>
+        <SPAN>
+              Checking axes is permissible only for machines completely setup!
+          <BR>Please doublecheck, that axes may travel without collisions over whole distance!
+          <BR>Please supervise all travels strictly to be able to activate emergency device immediately
+          (e. g. if axis will travel at high speed while checking home position or axis length)!
+          <BR>Please follow all safety precautions by all means!
+          <BR>
+        </SPAN>
+
+ </DIV>
+  
+     <DIV class="DLGBUTTONS" kind="1" align="CENTER"></DIV>
+     
+</BODY>
+
+<SCRIPT language="VBScript"         src="BaseScripts.VBS"></SCRIPT>
+<script class="DLGSCRIPT" language="vbscript" src="AxisCautionDlg.vbs" defer>
+</script>
+
+</html>

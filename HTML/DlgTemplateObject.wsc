@@ -1,0 +1,1187 @@
+<?xml version="1.0"?>
+<component>
+<?component error="true" debug="true"?>
+
+<comment>
+<![CDATA[
+********************************************************************************
+*                                                                              *
+*                             D E S C R I P T I O N                            *
+*                                                                              *
+*   Author:    VR                                                              *
+*   Date:      24.03.2000                                                      *
+*   Versions:  V1.0          24.03.2000                                        *
+*              V1.1          25.11.2002     IE6 compatible                     *
+*              V1.2          21.06.2010     IE8 compatible                     *
+*                                                                              *
+*   About:     Component implements standard dialog layout to <BODY>           *
+*                                                                              *
+********************************************************************************
+
+********************************************************************************
+*                                                                              *
+*                              I N T E R F A C E                               *
+*                                                                              *
+*  This scripting component applies an ID of "bodyDialog" to the hosting       *
+*  body object. Thus all of the elements may access the component using        *
+*  this ID.                                                                    *
+*                                                                              *
+*                                                                              *
+*  Properties: Align            (r/w)   Align property of main hosting DIV     *
+*              Invisible        (r/w)   If defined, dialog will be shifted     *
+*                                       outside desktop area at startup.       *
+*                                       If set to INIT, dialog will be         *
+*                                       centered within visible area after     *
+*                                       completely initialized                 *
+*              ResourceXML      (r/w)   ID of XML island element to be used    *
+*                                       for resource handling (see below)      *
+*              DesignMode       (r/w)   If set to TRUE, table borders          *
+*                                       are visible                            *
+*              CallOnInitialize (r/w)   If set to TRUE (default), the          *
+*                                       'onInitialize' function will be called *
+*                                       instead of firing the                  *
+*                                       'onInitialized' event.                 *
+*              IsDialog         (r)     Returns TRUE, if HTML page is viewed   *
+*                                       as dialog window                       *
+*              UsedAccessKeys   (r)     String containing all of the access    *
+*                                       keys in use currently                  *
+*              ClientTop        (r)     Overridden                             *
+*              ClientLeft       (r)     Overridden                             *
+*              ClientWidth      (r)     Overridden                             *
+*              ClientHeight     (r)     Overridden                             *
+*              WindowHandle     (r)     Returns a WindowHandle object for      *
+*                                       the HTML window (see ScriptingToolsSO  *
+*                                       for object's description)              *
+*              PersistContent   (r/w)   Keeps all the properties declared in   *
+*                                       attribute "_TO_STORE" of all document  *
+*                                       items having that attibute set.        *
+*                                                                              *
+*  Methods:    UseAccessKey             Adds the given access key to the list  *
+*                                       of used access keys                    *
+*              UnuseAccessKey           Removes the given access key from the  *
+*                                       list of used access keys               *
+*              IsAccessKeyInUse         Returns TRUE, if Key is in use         *
+*              StoreContent             Stores the properties declared in      *
+*                                       attribute "_TO_STORE" of all document  *
+*                                       items having that attibute set.        *
+*              RecallContent            Recalls the properties declared in     *
+*                                       attribute "_TO_STORE" of all document  *
+*                                       items having that attibute set.        *
+*                                       Returns TRUE on success                *
+*              GetPosition              Returns positional parameter object    *
+*                                       for given HTML element.                *
+*                                       Object's properties:                   *
+*                                           .Left   :  pixel offset left       *
+*                                           .Top    :  pixel offset top        *
+*                                           .Parent :  positioning parent      *
+*              onButtonPressed          Is invoked by DlgButtons.wsc to notify *
+*                                       dialog button pressed                  *
+*                                                                              *
+*                                                                              *
+*  Events:     ---                                                             *
+*                                                                              *
+********************************************************************************
+*                                                                              *
+*  Resource management:                                                        *
+*                                                                              *
+*     If the HTML attribute 'ResourceXML' is set to the ID of an XML data      *
+*     island element, each child node of that XML DOM Document element will    *
+*     be interpreted in the following way:                                     *
+*                                                                              *
+*     <XML ID="xmlIsland">                                                     *
+*       <Resource>                                                             *
+*         <Res AddressBy = "ID"                                                *
+*              MatchValue= "objDummy"                                          *
+*              ApplyTo   = "Title"     >Resource text</Res>                    *
+*       </Resource>                                                            *
+*     </XML>                                                                   *
+*                                                                              *
+********************************************************************************
+]]>
+</comment>
+
+<public>
+    <property name = "CallOnInitialize"/>
+    <property name = "Align"           />
+    <property name = "Invisible"       />
+    <property name = "ResourceXML"     />
+    <property name = "DesignMode"      />
+    <property name = "IsDialog"         >
+        <get/>
+    </property>
+    <property name = "UsedAccessKeys"   >
+        <get/>
+    </property>
+    <property name = "ClientTop"        >
+        <get/>
+    </property>
+    <property name = "ClientLeft"       >
+        <get/>
+    </property>
+    <property name = "ClientWidth"      >
+        <get/>
+    </property>
+    <property name = "ClientHeight"     >
+        <get/>
+    </property>
+    <property name = "WindowHandle"     >
+        <get/>
+    </property>
+    <property name = "PersistContent"  />
+
+    <method name="UseAccessKey" >
+        <parameter name="Key"  />
+    </method>
+    <method name="UnuseAccessKey" >
+        <parameter name="Key"  />
+    </method>
+    <method name="IsAccessKeyInUse" >
+        <parameter name="Key"      />
+    </method>
+    <method name="StoreContent" >
+        <parameter name="StorageName" />
+    </method>
+    <method name="RecallContent" >
+        <parameter name="StorageName" />
+    </method>
+    <method name="GetPosition" >
+        <parameter name="objChild" />
+    </method>
+    <method name="onButtonPressed" >
+        <parameter name="ButtonCode" />
+    </method>
+
+    <event    name = "onInitialized"   />
+
+</public>
+
+<implements type="Behavior">
+
+    <attach   event ="oncontentready"       handler="onInitElem1"                           />
+    <attach   event ="ondocumentready"      handler="onInitElem2"                           />
+    <attach   event ="oncontextmenu"        handler="onContextMenuElem"                     />
+    <attach   event ="onselectstart"        handler="onBlockDefault"                        />
+    <attach   event ="onreadystatechange"   handler="onDocuReadyStateChange"  for="document"/>
+
+</implements>
+
+
+<comment>
+********************************************************************************
+*                                                                              *
+*                                  M A I N                                     *
+*                                                                              *
+********************************************************************************
+</comment>
+
+<script language="vbscript">
+<![CDATA[
+
+Option Explicit
+
+Const cIniState_Uninitialized  = 0
+Const cIniState_DocumentReady  = 1
+Const cIniState_ElementReady   = 2
+Const cIniState_Initialized    = 3
+
+Class CPosition
+
+    Public Left
+    Public Top
+    Public Parent
+
+End Class
+
+'********************************************************************************
+'*                                                                              *
+'*                                  G L O B A L   D A T A                       *
+'*                                                                              *
+'********************************************************************************
+
+Dim g_bIsDialog
+Dim g_bHasEditMode
+Dim g_nInitState
+Dim g_strUsedKeys
+Dim g_strLogName
+Dim g_objMainDiv
+Dim g_objWinHandle
+
+g_bIsDialog         = NULL
+g_bHasEditMode      = FALSE
+g_nInitState        = cIniState_Uninitialized
+g_strUsedKeys       = ""
+
+Set g_objMainDiv    = Nothing
+Set g_objWinHandle  = Nothing
+
+Element.RuntimeStyle.Visibility = "hidden"
+
+With Element.Document.ParentWindow
+
+    On Error Resume Next
+
+        g_bIsDialog = .DialogWidth
+        g_bIsDialog = Err.Number
+
+    On Error Goto 0
+
+    g_bIsDialog     = Not ( g_bIsDialog <> 0 )
+
+    If Not IsNull( Element.GetAttribute( "Invisible" ))  Then
+
+        If g_bIsDialog Then
+
+            .DialogTop = .Screen.AvailHeight  & "px"
+
+        Else
+
+            .MoveTo   0, .Screen.AvailHeight
+
+        End If
+
+    End If
+
+End With
+
+' EnableLogging
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y    G E T     I S D I A L O G                            *
+'*                                                                              *
+'********************************************************************************
+
+Function get_IsDialog()
+
+    get_IsDialog = g_bIsDialog
+
+End Function
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y    G E T     U S E D A C C E S S K E Y S                *
+'*                                                                              *
+'********************************************************************************
+
+Function get_UsedAccessKeys()
+
+    get_UsedAccessKeys = g_strUsedKeys
+
+End Function
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y    G E T     C L I E N T T O P                          *
+'*                                                                              *
+'********************************************************************************
+
+Function get_ClientTop()
+
+    If Not g_objMainDiv Is Nothing Then get_ClientTop = g_objMainDiv.ClientTop
+
+End Function
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y    G E T     C L I E N T L E F T                        *
+'*                                                                              *
+'********************************************************************************
+
+Function get_ClientLeft()
+
+    If Not g_objMainDiv Is Nothing Then get_ClientLeft = g_objMainDiv.ClientLeft
+
+End Function
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y    G E T     C L I E N T W I D T H                      *
+'*                                                                              *
+'********************************************************************************
+
+Function get_ClientWidth()
+
+    If Not g_objMainDiv Is Nothing Then get_ClientWidth = g_objMainDiv.ClientWidth
+
+End Function
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y    G E T     C L I E N T H E I G H T                    *
+'*                                                                              *
+'********************************************************************************
+
+Function get_ClientHeight()
+
+    If Not g_objMainDiv Is Nothing Then get_ClientHeight = g_objMainDiv.ClientHeight
+
+End Function
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y    G E T     W I N D O W H A N D L E                    *
+'*                                                                              *
+'********************************************************************************
+
+Function get_WindowHandle()
+
+    Dim  objVBX
+
+    If g_objWinHandle Is Nothing Then
+
+        Set g_objWinHandle  = CreateObject( "ScriptingToolsSO.WindowHandle" )
+        g_objWinHandle.ID   = Element.Document
+
+        Do While g_objWinHandle.ID = 0
+
+            If  IsEmpty(  objVBX  )  Then
+
+                Set objVBX = CreateObject( "ScriptingToolsSO.VBSXtensions" )
+
+            End If
+
+            objVBX.Sleep
+            g_objWinHandle.ID  =  Element.Document
+
+        Loop
+
+        Set g_objWinHandle  =  g_objWinHandle.Parent
+
+        If Not g_bIsDialog Then Set g_objWinHandle  = g_objWinHandle.Parent
+
+    End If
+
+    Set get_WindowHandle = g_objWinHandle
+
+    If  Not IsEmpty( g_strLogName )  Then  WriteLogLine  "WindowHandle queried: 0x"  &  Hex(  g_objWinHandle.ID  )
+
+End Function
+
+'********************************************************************************
+'*                                                                              *
+'*      M E T H O D   U S E A C C E S S K E Y                                   *
+'*                                                                              *
+'********************************************************************************
+
+Sub UseAccessKey( Key )
+
+    Dim i
+    Dim k
+
+    For i = 1 To Len( Key )
+
+        k = UCase( Mid( Key, i, 1 ))
+
+        If InStr( g_strUsedKeys, k ) = 0 Then g_strUsedKeys = g_strUsedKeys & k
+
+    Next
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      M E T H O D   U N U S E A C C E S S K E Y                               *
+'*                                                                              *
+'********************************************************************************
+
+Sub UnuseAccessKey( Key )
+
+    Dim i
+    Dim k
+
+    For i = 1 To Len( Key )
+
+        k = UCase( Mid( Key, i, 1 ))
+
+        g_strUsedKeys = Replace( g_strUsedKeys, k, "" )
+
+    Next
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      M E T H O D   I S A C C E S S K E Y I N U S E                           *
+'*                                                                              *
+'********************************************************************************
+
+Function IsAccessKeyInUse( Key )
+
+    Dim i
+    Dim k
+
+    IsAccessKeyInUse = FALSE
+
+    For i = 1 To Len( Key )
+
+        k = UCase( Mid( Key, i, 1 ))
+
+        If InStr( g_strUsedKeys, k ) <> 0 Then
+
+            IsAccessKeyInUse = TRUE
+            Exit For
+
+        End If
+
+    Next
+
+End Function
+
+'********************************************************************************
+'*                                                                              *
+'*      M E T H O D   S T O R E C O N T E N T                                   *
+'*                                                                              *
+'********************************************************************************
+
+Sub StoreContent( StorageName )
+
+    With Element.Document
+
+        Dim objPersistent
+        Set objPersistent = .CreateElement( "SPAN" )
+        Element.AppendChild objPersistent
+        objPersistent.AddBehavior( "#default#userData" )
+
+        Do While objPersistent.readyState <> "complete"
+
+            Element.Document.Recalc             ' Do something
+
+        Loop
+
+        Dim i
+        Dim str
+        For Each i In .All
+
+            str = i.GetAttribute( "_TO_STORE" )
+            If Len( str ) > 0 Then
+
+                str = "i." & str
+                objPersistent.SetAttribute i.ID , eval( str )
+
+            End If
+
+        Next
+
+        objPersistent.Save  StorageName
+
+    End With
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      M E T H O D   R E C A L L C O N T E N T                                 *
+'*                                                                              *
+'********************************************************************************
+
+Function RecallContent( StorageName )
+
+    With Element.Document
+
+        Dim objPersistent
+        Set objPersistent = .CreateElement( "SPAN" )
+        Element.AppendChild objPersistent
+        objPersistent.AddBehavior( "#default#userData" )
+
+        Do While objPersistent.readyState <> "complete"
+
+            Element.Document.Recalc             ' Do something
+
+        Loop
+
+        On Error Resume Next
+
+            objPersistent.Load  StorageName
+            If Err.Number > 0 Then
+                RecallContent = FALSE
+                Exit Function
+            End If
+
+        On Error GoTo 0
+
+        Dim colItems
+        Set colItems = .all
+
+        Dim i
+        Dim str
+        For Each i In .All
+
+            str = i.GetAttribute( "_TO_STORE" )
+            If Len( str ) > 0 Then
+
+                str = "i." & str & " = objPersistent.GetAttribute( i.id )"
+                Execute Str
+
+            End If
+
+        Next
+
+        RecallContent = TRUE
+
+    End With
+
+End Function
+
+'********************************************************************************
+'*                                                                              *
+'*      M E T H O D   G E T P O S I T I O N                                     *
+'*                                                                              *
+'********************************************************************************
+
+Function GetPosition( objChild )
+
+    If Not Element.Contains( objChild ) Then
+
+        Set GetPosition = Nothing
+        Exit Function
+
+    End If
+
+    Dim vTmp
+    Dim nLeft
+    Dim nTop
+    Dim objParent
+
+    Set objParent   = objChild.OffsetParent
+    nLeft           = objChild.OffsetLeft
+    nTop            = objChild.OffsetTop
+
+    Do Until objParent Is Nothing
+
+        If objParent Is g_objMainDiv Then Exit Do
+
+        vTmp = objParent.CurrentStyle.Position
+        If ( UCase( vTmp ) = "RELATIVE" ) Or ( UCase( vTmp ) = "ABSOLUTE" ) Then Exit Do
+
+        nLeft = nLeft + objParent.OffsetLeft
+        nTop  = nTop  + objParent.OffsetTop
+
+        Set objParent  = objParent.OffsetParent
+
+    Loop
+
+    Set GetPosition        = New CPosition
+    Set GetPosition.Parent = objParent
+    GetPosition.Left       = nLeft
+    GetPosition.Top        = nTop
+
+End Function
+
+'********************************************************************************
+'*                                                                              *
+'*      M E T H O D   B U T T O N P R E S S E D                                 *
+'*                                                                              *
+'********************************************************************************
+
+Function onButtonPressed( ButtonCode )
+
+  If Not IsEmpty( PersistContent ) _
+     AND (    ( ButtonCode = 1 )   _
+           OR ( ButtonCode = 6 )   _
+           OR ( ButtonCode = 7 ))  Then StoreContent PersistContent
+
+End Function
+
+'********************************************************************************
+'*                                                                              *
+'*      H A N D L E R   F O R   E L E M E N T    R E A D Y    E V E N T         *
+'*                                                                              *
+'********************************************************************************
+
+Sub onInitElem1()
+
+    With Element.Document
+
+        If Not ( Element Is .Body )Then
+
+            Alert .Url & ": behavior 'DlgTemplateObject' has to be attached to <BODY> only!"
+            .ParentWindow.Close
+            Exit Sub
+
+        End If
+
+        Element.ID             = "bodyDialog"
+        Element.Style.Overflow = "hidden"
+
+        If Len( Element.Lang ) < 1 Then Element.Lang = .ParentWindow.Navigator.UserLanguage
+
+    End With
+
+    If  Not IsEmpty( g_strLogName )  Then
+
+        WriteLogLine   "onInitElem1 invoked"
+        WriteLogLine   "Align: "      &  vbTab  &  Element.Align
+        WriteLogLine   "Invisible: "  &  vbTab  &  Element.Invisible
+        WriteLogLine   "Width: "      &  vbTab  &  Element.Style.Width
+        WriteLogLine   "Height: "     &  vbTab  &  Element.Style.Height
+
+    End If
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      H A N D L E R   F O R   D O C U M E N T    R E A D Y    E V E N T       *
+'*                                                                              *
+'********************************************************************************
+
+Sub onInitElem2()
+
+    Dim  vTmp
+
+    If  Not SetupMainDiv()  Then    '*** If failed, retry later again ***
+
+        If  Not IsEmpty( g_strLogName )  Then  WriteLogLine  "onInitElem2: sizing failed, retry"
+
+        Element.Document.ParentWindow.SetTimeout  GetRef(  "onInitElem2"  ),  10
+        Exit Sub
+
+    End If
+
+    If  Not IsEmpty( g_strLogName )  Then  WriteLogLine  "onInitElem2 invoked"
+
+    If CBool( DesignMode ) Then
+
+        Element.Style.border      = "1px inset"
+        g_objMainDiv.Style.border = "1px inset"
+
+    End If
+
+
+    If Len( ResourceXML ) > 0  Then  HandleResources  Element.Document.All( ResourceXML, 0 )
+
+    Element.RuntimeStyle.Visibility = Element.Style.Visibility
+
+    vTmp          =  g_nInitState
+    g_nInitState  =  cIniState_ElementReady
+
+    If vTmp       =  cIniState_DocumentReady  Then  onDocuReadyStateChange Nothing
+
+End Sub
+
+'********************************************************************************
+
+Sub onContextMenuElem( objEvent )
+
+    If g_bIsDialog Then Exit Sub
+
+    If  Not g_bHasEditMode      _
+        And objEvent.ShiftKey   _
+        And objEvent.CtrlKey    _
+        And objEvent.AltKey     Then
+
+        Element.AttachEvent          "onmoveend",   GetRef( "onHTMLElementEdited" )
+        Element.AttachEvent          "onresizeend", GetRef( "onHTMLElementEdited" )
+        Element.ContentEditable    = "true"
+        Element.Document.ExecCommand "2D-position", FALSE, TRUE
+        Element.Document.ExecCommand "LiveResize",  FALSE, TRUE
+
+        g_bHasEditMode       = TRUE
+        objEvent.ReturnValue = FALSE
+
+    End If
+
+End Sub
+
+'********************************************************************************
+
+Sub onBlockDefault( objEvent )
+
+    If g_bIsDialog Then
+
+        objEvent.CancelBubble = TRUE
+        objEvent.ReturnValue  = FALSE
+
+    End If
+
+End Sub
+
+'********************************************************************************
+
+Sub onHTMLElementEdited( objEvent )
+
+    With objEvent.SrcElement
+
+        Element.Document.ParentWindow.Status =    "X: " & .OffsetLeft       _
+                                             &  "; Y: " & .OffsetTop        _
+                                             &  "; W: " & .OffsetWidth      _
+                                             &  "; H: " & .OffsetHeight
+
+    End With
+
+End Sub
+
+'********************************************************************************
+
+Sub onDocuReadyStateChange( objEvent )
+
+    If Document.ReadyState = "complete" Then
+
+        Dim objElem
+        For Each objElem In Element.Document.GetElementsByTagName( "SCRIPT" )
+
+            If objElem.ReadyState <> "complete" Then Exit Sub
+
+        Next
+
+        For Each objElem In Element.Document.Body.All
+
+            If objElem.ReadyState <> "complete" Then Exit Sub
+
+        Next
+
+        If g_nInitState < cIniState_ElementReady Then
+
+            g_nInitState = cIniState_DocumentReady
+            Exit Sub
+
+        ElseIf g_nInitState > cIniState_ElementReady Then
+
+            Exit Sub
+
+        End If
+
+        g_nInitState = cIniState_Initialized
+
+        RunINIScript
+
+    End If
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      S U P P O R T I N G    F U N C T I O N A L I T Y    ( P R I V A T E )   *
+'*                                                                              *
+'********************************************************************************
+
+Function  SetSize( objMaster, bHasToAdjust )
+
+    SetSize  =  FALSE
+
+    With objMaster.Document
+
+        Dim nWidth
+        Dim nHeight
+        Dim vTmp
+
+        If Not bHasToAdjust Then
+
+            With .ParentWindow.Screen
+
+                vTmp = CStr( objMaster.Style.Width )
+
+                If InStr( vTmp, "%" ) > 0 Then
+
+                    nWidth = Int( .AvailWidth * CDbl( Left( vTmp, Instr( vTmp, "%") - 1 )) / 100.0 )
+
+                Else
+
+                    nWidth = objMaster.ClientWidth
+
+                End If
+
+                vTmp = CStr( objMaster.Style.Height )
+                If InStr( vTmp, "%" ) > 0 Then
+
+                    nHeight = Int( .AvailHeight * CDbl( Left( vTmp, Instr( vTmp, "%") - 1 )) / 100.0 )
+
+                Else
+
+                    nHeight = objMaster.ClientHeight
+
+                End If
+
+            End With
+
+        Else
+
+            If  InStr( objMaster.Style.Width, "%" ) = 0  Then
+
+                If  objMaster.ClientWidth  > g_objMainDiv.ClientWidth  Then
+
+                    nWidth  = 2 * objMaster.ClientWidth  - g_objMainDiv.ClientWidth
+
+                End If
+
+            End If
+
+            If  InStr( objMaster.Style.Height, "%" ) = 0  Then
+
+                If  objMaster.ClientHeight > g_objMainDiv.ClientHeight  Then
+
+                    nHeight = 2 * objMaster.ClientHeight - g_objMainDiv.ClientHeight
+
+                End If
+
+            End If
+
+        End If
+
+
+        If  Not IsEmpty( g_strLogName )  Then
+
+            WriteLogLine  "SetSize( " & bHasToAdjust & " ):  Width: " & nWidth & ";  Height: " & nHeight
+
+        End If
+
+
+
+        With .ParentWindow
+
+            If g_bIsDialog Then
+
+                If Not IsEmpty( nWidth ) Then
+
+                    If IsNumeric( nWidth ) Then
+
+                        If  nWidth <= 10  Then  Exit Function
+
+                        .DialogWidth = nWidth & "px"
+
+                    Else
+
+                        .DialogWidth = nWidth
+
+                    End If
+
+                End If
+
+
+                If Not IsEmpty( nHeight ) Then
+
+                    If IsNumeric( nHeight ) Then
+
+                        If  nHeight <= 10  Then  Exit Function
+
+                        .DialogHeight = nHeight & "px"
+
+                    Else
+
+                        .DialogHeight = nHeight
+
+                    End If
+
+                End If
+
+            Else
+
+                If Not ( IsEmpty( nWidth ) Or IsEmpty( nHeight )) Then .ResizeTo nWidth, nHeight
+
+            End If
+
+        End With
+
+    End With
+
+    SetSize  =  TRUE
+
+End Function
+
+'********************************************************************************
+
+Function  SetupMainDiv()
+
+    Dim  bHasToAdjust
+    Dim  objDummy
+
+    If  Not ( g_objMainDiv Is Nothing )  Then
+
+        SetupMainDiv  =  TRUE
+        Exit Function
+
+    End If
+
+
+    SetupMainDiv  =  TRUE
+
+    With Element.Document
+
+        bHasToAdjust =   ( Len( Element.Style.Width  ) > 0 )    _
+                     And ( Len( Element.Style.Height ) > 0 )
+
+        If bHasToAdjust Then
+
+            Set objDummy      = .CreateElement( "DIV" )
+            With objDummy.style
+
+                .Position = "absolute"
+                .Left     = 0
+                .Top      = 0
+                .Width    = Element.Style.Width
+                .Height   = Element.Style.Height
+
+            End With
+
+            Element.AppendChild  objDummy
+            SetupMainDiv  =  SetSize(  objDummy,  FALSE  )
+
+            If  Not SetupMainDiv  Then
+
+'                Element.Style.BackgroundColor  =  "yellow"     ' De-Comment for debugging purpose
+                objDummy.ParentElement.RemoveChild  objDummy
+                Exit Function
+
+            End If
+
+        End If
+
+        With  Element.Style
+
+            .Width    = "100%"
+            .Height   = "100%"
+
+        End With
+
+        Set g_objMainDiv  = .CreateElement( "DIV" )
+
+        g_objMainDiv.ID  =  "__MainDiv__"
+
+        If Len( Element.Align ) > 0 Then
+
+            g_objMainDiv.align  = Element.Align
+
+        Else
+
+            g_objMainDiv.align  = "left"
+
+        End If
+
+        With g_objMainDiv.Style
+
+            .Position = "relative"
+            .Width    = "100%"
+            .Height   = "100%"
+            .Overflow = "hidden"
+
+        End With
+
+        Element.ApplyElement  g_objMainDiv, "inside"
+
+        If bHasToAdjust Then
+
+            SetupMainDiv  =  SetupMainDiv  And  SetSize(  objDummy,  TRUE  )
+            objDummy.ParentElement.RemoveChild  objDummy
+
+            If  Not SetupMainDiv  Then
+
+'                Element.Style.BackgroundColor  =  "red"     ' De-Comment for debugging purpose
+                g_objMainDiv.RemoveNode
+                Set g_objMainDiv  =  Nothing
+                Exit Function
+
+            End If
+
+        End If
+
+        If CBool( DesignMode ) Then
+
+            Element.Style.border      = "1px inset"
+            g_objMainDiv.Style.border = "1px inset"
+
+        End If
+
+    End With
+
+    Element.RuntimeStyle.Visibility = Element.Style.Visibility
+
+End Function
+
+'********************************************************************************
+
+Sub HandleResources( objXMLDOM )
+
+    If objXMLDOM Is Nothing  Then Exit Sub
+
+    With objXMLDOM.ParseError
+
+        If .ErrorCode <> 0  Then
+
+            Alert   "Illegal XML structure used for resource in line "  _
+                  & .line                                               _
+                  & vbNewLine                                           _
+                  & Hex( .ErrorCode )                                   _
+                  & ": "                                                _
+                  & .reason
+
+            Exit Sub
+
+        End If
+
+    End With
+
+    Dim objChild
+    Dim strAddressBy
+    Dim strMatchValue
+    Dim strApplyTo
+    Dim vTmp
+
+    For Each objChild In objXMLDOM.DocumentElement.ChildNodes
+
+        strAddressBy  = objChild.GetAttribute( "AddressBy"  )
+        strMatchValue = objChild.GetAttribute( "MatchValue" )
+        strApplyTo    = objChild.GetAttribute( "ApplyTo"    )
+
+        If IsNull( strAddressBy ) Or IsNull( strMatchValue ) Or IsNull( strApplyTo )  Then
+
+            vTmp = "Missing '__$$__' attribute in resource definition: " & vbNewLine & objChild.XML
+
+            If     IsNull( strAddressBy  )  Then
+
+                vTmp = Replace( vTmp, "__$$__", "AddressBy"  )
+
+            ElseIf IsNull( strMatchValue )  Then
+
+                vTmp = Replace( vTmp, "__$$__", "MatchValue" )
+
+            Else
+
+                vTmp = Replace( vTmp, "__$$__", "ApplyTo"    )
+
+            End If
+
+            Alert vTmp
+            Exit Sub
+
+        End If
+
+        Select Case UCase( strAddressBy )
+
+            Case "TAG"      For Each vTmp In Element.Document.GetElementsByTagName( strMatchValue )
+
+                                vTmp.SetAttribute  strApplyTo, objChild.Text
+
+                            Next
+
+            Case "NAME"     For Each vTmp In Element.Document.GetElementsByName(    strMatchValue )
+
+                                vTmp.SetAttribute  strApplyTo, objChild.Text
+
+                            Next
+
+            Case "ID"      Set vTmp = Element.Document.GetElementByID(    strMatchValue )
+
+                            If Not ( vTmp Is Nothing ) Then vTmp.SetAttribute  strApplyTo, objChild.Text
+
+            Case Else       For Each vTmp In Element.Document.All
+
+                                If vTmp.GetAttribute( strAddressBy ) = strMatchValue Then
+
+                                    vTmp.SetAttribute  strApplyTo, objChild.Text
+
+                                End If
+
+                            Next
+
+        End Select
+
+    Next
+
+End Sub
+
+'********************************************************************************
+
+Sub  RunINIScript
+
+    Dim objHdl
+
+    If  UCase( Invisible ) = "INIT"  Then
+
+        With Element.Document.ParentWindow
+
+            If g_bIsDialog Then
+
+                .DialogLeft = (( .Screen.AvailWidth  - g_objMainDiv.OffsetWidth  ) \ 2 ) & "px"
+                .DialogTop  = (( .Screen.AvailHeight - g_objMainDiv.OffsetHeight ) \ 2 ) & "px"
+
+            Else
+
+                .MoveTo ( .Screen.AvailWidth  - g_objMainDiv.OffsetWidth  ) \ 2,    _
+                        ( .Screen.AvailHeight - g_objMainDiv.OffsetHeight ) \ 2
+
+            End If
+
+        End With
+
+    End If
+
+    If  IsEmpty( CallOnInitialize )  Then  CallOnInitialize = TRUE
+
+    If  CallOnInitialize  Then
+
+        Element.Document.ParentWindow.ExecScript    "On Error Resume Next"                           _
+                                                 &  vbNewLine                                        _
+                                                 &  "Document.Body.SetAttribute ""__ScriptRef__"", " _
+                                                 &  "GetRef( ""onInitialize"" ) "                    _
+                                                 &  vbNewLine                                        _
+                                                 &  "On Error Goto 0",                               _
+                                                    "VBScript"
+
+        If  IsObject( Element.GetAttribute( "__ScriptRef__" ))  Then
+
+            Set objHdl = Element.GetAttribute( "__ScriptRef__" )
+
+            If Not ( objHdl Is Nothing ) Then  objHdl
+
+        End If
+
+
+        Element.RemoveAttribute  "__ScriptRef__"
+
+    End If
+
+    FireEvent "onInitialized"
+
+End Sub
+
+'********************************************************************************
+
+Sub  EnableLogging()
+
+    With  CreateObject(  "Scripting.FileSystemObject"  )
+
+        g_strLogName  =  Replace(  Element.document.URLUnencoded,  "/",  "\"  )
+        g_strLogName  =  .GetFileName(  g_strLogName  )
+
+        With  .OpenTextFile(  "DlgTemplateWSC.LOG",  8,  TRUE  )
+
+            .WriteLine     vbNewLine                _
+                        &  "*******  logging of '"  _
+                        &  g_strLogName             _
+                        &  "' started ("            _
+                        &  Now()                    _
+                        &  ") ***********"
+
+        End With
+
+        WriteLogLine     "Is dialog: "  &  vbTab  &  g_bIsDialog
+
+    End With
+
+End Sub
+
+'********************************************************************************
+
+Sub  WriteLogLine(  strLine  )
+
+    With  CreateObject(  "Scripting.FileSystemObject"  )
+
+        With  .OpenTextFile(  "DlgTemplateWSC.LOG",  8,  TRUE  )
+
+            .WriteLine  "["  &  g_strLogName  &  "]"  &  vbTab  &  strLine
+
+        End With
+
+    End With
+
+End Sub
+
+'********************************************************************************
+'********************************************************************************
+
+]]>
+</script>
+
+</component>
+
+

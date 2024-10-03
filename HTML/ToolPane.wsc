@@ -1,0 +1,873 @@
+<?xml version="1.0"?>
+<component>
+<?component error="true" debug="true"?>
+
+<comment>
+<![CDATA[
+********************************************************************************
+*                                                                              *
+*                             D E S C R I P T I O N                            *
+*                                                                              *
+*   Author:    VR                                                              *
+*   Date:      09.02.2004                                                      *
+*   Versions:  V1.0                                                            *
+*                                                                              *
+*   About:     Component implements a tool pane featuring minimizing etc       *
+*              HTML child elements of applied element will be treated as       *
+*              tool pane's content                                             *
+*                                                                              *
+********************************************************************************
+
+********************************************************************************
+*                                                                              *
+*                              I N T E R F A C E                               *
+*                                                                              *
+*  Properties: HeaderText        (r/w)   Displayed text on title bar. If empty * 
+*                                           no bar will be displayed           *
+*                                                                              *
+*              HeaderStyle       (r/w)   CSS inline styles used for title bar  *
+*                                                                              *
+*              HeaderClass       (r/w)   CSS style class used for title bar    *
+*                                                                              *
+*              HeaderActiveColor (r/w)   Background color of title bar, if     *
+*                                           tool pane has focus                *
+*                                                                              *
+*              PaneStyle         (r/w)   CSS inline styles used for tool pane  *
+*                                                                              *
+*              PaneClass         (r/w)   CSS style class used for tool pane    *
+*                                                                              *
+*              Minimized         (r/w)   If TRUE or FALSE a small minimize     *
+*                                           button will be displayed and pane  *
+*                                           may be reduced to title bar size   *
+*                                                                              *
+*              ShadowSize        (r/w)   If numerical value is greater than    *
+*                                           zero, a shadow of that size will   *
+*                                           be drawn                           *
+*                                                                              *
+*              Header            (r)     HTML <DIV>  element that acts as an   *
+*                                           header for tool pane               *
+*                                                                              *
+*              Pane              (r)     HTML <SPAN> element that acts as an   *
+*                                           host for certain tool pane elements*
+*                                                                              *
+*              InitialAdjust     (r/w)   Adjustments done at initialisation    *
+*                                           See SizeToContent & CenterContent  *
+*                                                                              *
+*  Methods:    SizeToContent             Adjust size to fit to tool pane's     *
+*                                           content:  "W"  adjust width        *
+*                                                     "H"  adjust height       *
+*                                                     "HW" adjust both         *
+*                                                                              *
+*              CenterContent             Centers content within tool pane:     *
+*                                                     "X"  center horizontally *
+*                                                     "Y"  adjust vertically   *
+*                                                     "XY" adjust both         *
+*                                                                              *
+*  Events:     onSizeToggled             Fired after button for tool pane      *
+*                                           minimize / fullsize clicked        *
+*                                                                              *
+********************************************************************************
+]]>
+</comment>
+
+<public>
+
+    <property name = "HeaderText"        >
+        <get/>
+        <put/>
+    </property>
+
+    <property name = "HeaderStyle"       >
+        <get/>
+        <put/>
+    </property>
+
+    <property name = "HeaderClass"       >
+        <get/>
+        <put/>
+    </property>
+
+    <property name = "HeaderActiveColor" >
+        <get/>
+        <put/>
+    </property>
+
+    <property name = "PaneStyle"         >
+        <get/>
+        <put/>
+    </property>
+
+    <property name = "PaneClass"         >
+        <get/>
+        <put/>
+    </property>
+
+    <property name = "Minimized"         >
+        <get/>
+        <put/>
+    </property>
+
+    <property name = "ShadowSize"        >
+        <get/>
+        <put/>
+    </property>
+
+    <property name = "Header"            >
+        <get/>
+    </property>
+
+    <property name = "Pane"              >
+        <get/>
+    </property>
+
+    <property name = "InitialAdjust"    />
+
+    <method   name = "SizeToContent"     >
+        <parameter name="strWhat"       />
+    </method>
+
+    <method   name = "CenterContent"     >
+        <parameter name="strWhat"       />
+    </method>
+
+</public>
+
+<implements type="Behavior">
+    <attach   event = "oncontentready"     handler="onInitElem"        />
+    <attach   event = "onresize"            handler="onResizeElem"      />
+
+    <event    name  = "onSizeToggled"                                   />
+
+</implements>
+
+<comment>
+********************************************************************************
+*                                                                              *
+*                            H T M L   R E S O U R C E S                       *
+*                                                                              *
+********************************************************************************
+</comment>
+
+<resource id="HTMLHost" >
+  <![CDATA[
+    <SPAN style="Position:Relative;Left:0;Top:0;Width:100%;Height:100%;Overflow:hidden;Cursor:default;Margin:0;Pading:0;Border:0" >
+    </SPAN>
+  ]]>
+</resource>
+
+<resource id="HTMLContent" >
+  <![CDATA[
+    <SPAN style="Overflow:Hidden;Position:Relative;Top:0;Left:0;Width:100%;Height:100%;Background-Color:ThreeDFace;
+                Border:1px solid;Border-Color:ThreeDHighlight ThreeDShadow ThreeDShadow ThreeDHighlight" >
+      <DIV nowrap align="center" style="Overflow:Hidden;Position:Relative;Top:0;Left:0;Height:1.5em;Line-Height:1.5em;
+                                       Padding:0 2.5em ;Font-Family:Arial;Font-Weight:Bold;Background-Color:inactiveCaption" >
+      </DIV>
+      <SPAN style="Position:Absolute;Right:1;Top:1;Font-Family:WebDings;Background-Color:ThreeDFace;Line-Height:80%;
+                   border:1px solid;Border-Color:ThreeDHighlight ThreeDShadow ThreeDShadow ThreeDHighlight">0</SPAN>
+      <DIV  style="overflow:hidden;Position:Relative;Left:0;Top:0;">
+      </DIV>
+    </SPAN>
+    <SPAN  style="position:absolute;Left:0;Top:0;Background-Color:ThreeDShadow;z-Index:-1;
+                  Filter:progid:DXImageTransform.Microsoft.Blur( pixelradius=3)">
+    </SPAN>
+  ]]>
+</resource>
+
+<comment>
+********************************************************************************
+*                                                                              *
+*                                  M A I N                                     *
+*                                                                              *
+********************************************************************************
+</comment>
+
+<script language="vbscript">
+<![CDATA[
+
+Option Explicit
+
+'********************************************************************************
+'*                                                                              *
+'*                                  G L O B A L   D A T A                       *
+'*                                                                              *
+'********************************************************************************
+
+Dim g_strHeaderText
+Dim g_strHeaderStyle
+Dim g_strHeaderStyleOrg
+Dim g_strHeaderClass
+Dim g_strHeaderColor
+Dim g_strHeaderActiveColor
+Dim g_strPaneStyle
+Dim g_strPaneStyleOrg
+Dim g_strPaneClass
+Dim g_bIsActive
+Dim g_bIsMinimized
+Dim g_nShadowSize
+
+
+Dim g_objHost
+Dim g_objFrame
+Dim g_objHeader
+Dim g_objMinBtn
+Dim g_objPane
+Dim g_objShadow
+
+Set g_objHost    = Nothing
+Set g_objFrame   = Nothing
+Set g_objHeader  = Nothing
+Set g_objMinBtn  = Nothing
+Set g_objPane    = Nothing
+Set g_objShadow  = Nothing
+
+'********************************************************************************
+'*                                                                              *
+'*                                P U B L I C S                                 *
+'*                                                                              *
+'********************************************************************************
+
+'********************************************************************************
+'*   PROPERTY HEADERTEXT                                                        *
+'********************************************************************************
+
+Function get_HeaderText()
+
+    get_HeaderText = g_strHeaderText
+
+End Function
+
+Sub put_HeaderText( strText )
+
+    Dim objAttrib
+    Dim nOldText
+    nOldText        = g_strHeaderText
+    g_strHeaderText = CStr( strText )
+
+    If Not ( g_objHeader Is Nothing ) Then 
+
+        g_objHeader.InnerText = g_strHeaderText
+
+        Set objAttrib   = Element.Document.CreateAttribute( "HeaderText" )
+        objAttrib.Value = g_strHeaderText
+        Element.Attributes.SetNamedItem  objAttrib
+
+        If ( Len( nOldText ) < 1 ) <> ( Len( g_strHeaderText ) < 1 )  Then  FitElements
+
+    End If
+
+End Sub
+
+'********************************************************************************
+'*   PROPERTY HEADERSTYLE                                                       *
+'********************************************************************************
+
+Function get_HeaderStyle()
+
+    If IsEmpty( g_strHeaderStyle )  Then  g_strHeaderStyle = g_strHeaderStyleOrg
+
+    get_HeaderStyle = g_strHeaderStyle
+
+End Function
+
+Sub put_HeaderStyle( strStyle )
+
+    g_strHeaderStyle = CStr( strStyle )
+    WriteAttribute  "HeaderStyle", g_strHeaderStyle
+
+    If Not ( g_objHeader Is Nothing ) Then 
+
+        g_objHeader.Style.CSSText = g_strHeaderStyleOrg & ";" & g_strHeaderStyle
+
+        FitElements
+
+    End If
+
+End Sub
+
+'********************************************************************************
+'*   PROPERTY HEADERCLASS                                                       *
+'********************************************************************************
+
+Function get_HeaderClass()
+
+    get_HeaderClass = g_strHeaderClass
+
+End Function
+
+Sub put_HeaderClass( strClassName )
+
+    g_strHeaderClass = CStr( strClassName )
+    WriteAttribute  "HeaderClass", strClassName
+
+    If Not ( g_objHeader Is Nothing ) Then 
+
+        g_objHeader.ClassName = g_strHeaderClass
+        FitElements
+
+    End If
+
+End Sub
+
+'********************************************************************************
+'*   PROPERTY HEADERACTIVECOLOR                                                 *
+'********************************************************************************
+
+Function get_HeaderActiveColor()
+
+    If IsEmpty( g_strHeaderActiveColor )  Then  g_strHeaderActiveColor = "activecaption"
+
+    get_HeaderActiveColor = g_strHeaderActiveColor
+
+End Function
+
+Sub put_HeaderActiveColor( strColor )
+
+    g_strHeaderActiveColor = CStr( strColor )
+    WriteAttribute  "HeaderActiveColor", strColor
+
+    If Not ( g_objHeader Is Nothing ) And g_bIsActive Then 
+
+        g_objHeader.RuntimeStyle.BackgroundColor = g_strHeaderActiveColor
+
+    End If
+
+End Sub
+
+'********************************************************************************
+'*   PROPERTY PANESTYLE                                                         *
+'********************************************************************************
+
+Function get_PaneStyle()
+
+    If IsEmpty( g_strPaneStyle )  Then  g_strPaneStyle = g_strPaneStyleOrg
+
+    get_PaneStyle = g_strPaneStyle
+
+End Function
+
+Sub put_PaneStyle( strStyle )
+
+    g_strPaneStyle = CStr( strStyle )
+    WriteAttribute  "PaneStyle", strStyle
+
+    If Not ( g_objFrame Is Nothing ) Then 
+
+        g_objFrame.Style.CSSText = g_strPaneStyleOrg & ";" & g_strPaneStyle
+
+        FitElements
+
+    End If
+
+End Sub
+
+'********************************************************************************
+'*   PROPERTY PANECLASS                                                       *
+'********************************************************************************
+
+Function get_PaneClass()
+
+    get_PaneClass = g_strPaneClass
+
+End Function
+
+Sub put_PaneClass( strClassName )
+
+    g_strPaneClass = CStr( strClassName )
+    WriteAttribute  "PaneClass", strClassName
+
+    If Not ( g_objPane Is Nothing ) Then 
+
+        g_objFrame.ClassName = g_strPaneClass
+        FitElements
+
+    End If
+
+End Sub
+
+'********************************************************************************
+'*   PROPERTY MINIMIZED                                                         *
+'********************************************************************************
+
+Function get_Minimized()
+
+    get_Minimized = g_bIsMinimized
+
+End Function
+
+Sub put_Minimized( bIs )
+    
+    If Len( bIs ) < 1 Then
+    
+        g_bIsMinimized = Empty
+
+    Else
+
+        g_bIsMinimized = CBool( bIs )
+
+    End If
+
+    WriteAttribute  "Minimized", bIs
+
+    FitElements
+
+End Sub
+
+'********************************************************************************
+'*   PROPERTY SHADOWSIZE                                                        *
+'********************************************************************************
+
+Function get_ShadowSize()
+
+    If IsEmpty( g_nShadowSize )  Then  g_nShadowSize = 3
+
+    get_ShadowSize = g_nShadowSize
+
+End Function
+
+Sub put_ShadowSize( nSize )
+
+    Dim nOldSize
+
+    WriteAttribute  "ShadowSize", nSize 
+
+    nOldSize      = g_nShadowSize
+    g_nShadowSize = CInt( nSize )
+
+    If  g_nShadowSize < 0  Then  g_nShadowSize = nOldSize
+
+    If  nOldSize  <>  g_nShadowSize  Then  FitElements
+
+End Sub
+
+'********************************************************************************
+'*   PROPERTY HEADER                                                            *
+'********************************************************************************
+
+Function get_Header()
+
+    Set get_Header = g_objHeader
+
+End Function
+
+'********************************************************************************
+'*   PROPERTY PANE                                                              *
+'********************************************************************************
+
+Function get_Pane()
+
+    Set get_Pane = g_objPane
+
+End Function
+
+'********************************************************************************
+'*   METHOD SIZETOCONTENT                                                       *
+'********************************************************************************
+
+Sub SizeToContent( strWhat )
+
+    Dim bIsX
+    Dim bIsY
+
+    bIsX = InStr( 1, strWhat, "W", vbTextCompare ) > 0 
+    bIsY = InStr( 1, strWhat, "H", vbTextCompare ) > 0 
+
+    If  Not ( bIsX Or bIsY )  Then  Exit Sub
+
+    With  g_objPane.RuntimeStyle
+
+        If  bIsX  Then  .PixelWidth  = 0
+        If  bIsY  Then  .PixelHeight = 0
+
+        If  bIsX  Then  .PixelWidth  = g_objPane.ScrollWidth
+        If  bIsY  Then  .PixelHeight = g_objPane.ScrollHeight
+
+    End With
+
+    FitHost      strWhat
+    FitElements
+
+End Sub
+
+'********************************************************************************
+'*   METHOD CENTERCONTENT                                                       *
+'********************************************************************************
+
+Sub CenterContent( strWhat )
+
+    Dim bIsX
+    Dim bIsY
+    Dim nHeight
+    Dim objChild
+
+    bIsX = InStr( 1, strWhat, "X", vbTextCompare ) > 0 
+    bIsY = InStr( 1, strWhat, "Y", vbTextCompare ) > 0 
+
+    If  Not ( bIsX Or bIsY )  Then  Exit Sub
+
+    If  bIsX  Then
+
+        g_objPane.Style.TextAlign = "center"
+
+    Else
+
+        g_objPane.Style.TextAlign = "left"
+
+    End If
+
+    If  bIsY  Then
+
+        nHeight  = g_objPane.ClientHeight
+
+        For Each objChild In g_objPane.Children
+
+            objChild.RuntimeStyle.PixelTop  = 0.5 * ( nHeight - objChild.OffsetHeight )
+
+        Next
+
+    End If
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*                                L O C A L S                                   *
+'*                                                                              *
+'********************************************************************************
+
+Sub onInitElem
+
+    Dim vTmp
+    Dim objChild
+
+    If Not ( g_objHost Is Nothing )  Then Exit Sub
+
+    Element.InsertAdjacentHTML "AfterBegin", GetResource( "HTMLHost" )
+
+    Set g_objHost       = Element.FirstChild
+
+    g_objHost.InnerHTML = GetResource( "HTMLContent" )
+
+    Set g_objFrame      = g_objHost.Children(  0 )
+    Set g_objHeader     = g_objFrame.Children( 0 )
+    Set g_objMinBtn     = g_objFrame.Children( 1 )
+    Set g_objPane       = g_objFrame.Children( 2 )
+    Set g_objShadow     = g_objHost.Children(  1 )
+
+    g_strHeaderStyleOrg = g_objHeader.Style.CSSText
+    g_strPaneStyleOrg   = g_objFrame.Style.CSSText
+    
+    g_objMinBtn.AttachEvent "onclick",     GetRef( "Minimize_onClick"     )
+    g_objMinBtn.AttachEvent "onmouseup",   GetRef( "Minimize_onMouseUp"   )
+    g_objMinBtn.AttachEvent "onmouseout",  GetRef( "Minimize_onMouseUp"   )
+    g_objMinBtn.AttachEvent "onmousedown", GetRef( "Minimize_onMouseDown" )
+
+
+
+    For Each  objChild  In  Element.Children
+
+        If  Not ( objChild Is g_objHost )  Then
+
+            g_objPane.InsertAdjacentHTML "BeforeEnd", "<BR style=""display:none"">"     ' Dummy for SwapNode
+            Set vTmp = g_objPane.LastChild
+            vTmp.SwapNode objChild
+            vTmp.ParentElement.RemoveChild vTmp
+
+        End If
+
+    Next
+
+    Set vTmp      = g_objHost
+    Set g_objHost = Nothing                 ' Inhibit resizing temporary
+
+    put_HeaderText  get_HeaderText()
+    put_Minimized   get_Minimized()
+    put_HeaderStyle get_HeaderStyle()
+    put_HeaderClass get_HeaderClass()
+    put_PaneStyle   get_PaneStyle()
+    put_PaneClass   get_PaneClass()
+    put_ShadowSize  get_ShadowSize()
+
+    Set g_objHost = vTmp
+
+    SizeToContent   InitialAdjust
+    CenterContent   InitialAdjust
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*     H A N D L E R   F O R   R E S I Z I N G   E L E M E N T   E V E N T      *
+'*                                                                              *
+'********************************************************************************
+
+Sub onResizeElem( objEvt )
+
+    If  g_objHost Is Nothing  Then Exit Sub
+
+    With g_objHost.RuntimeStyle
+
+        .PixelLeft   = 0
+        .PixelTop    = 0
+        .PixelWidth  = Element.ClientWidth 
+        .PixelHeight = Element.ClientHeight
+
+    End With
+
+    FitElements
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*            H A N D L E R   F O R   M O U S E   E V E N T S                   *
+'*                                                                              *
+'********************************************************************************
+
+Sub Minimize_onClick( objEvt )
+
+    If Not ( objEvt Is Nothing )  Then  objEvt.CancelBubble = TRUE
+
+    g_bIsMinimized  = Not g_bIsMinimized
+
+    If g_bIsMinimized  Then
+
+        g_objMinBtn.InnerText            = "1"
+        g_objPane.RuntimeStyle.Display   = "none"
+
+    Else
+
+        g_objMinBtn.InnerText            = "0"
+        g_objPane.RuntimeStyle.Display   = ""
+
+    End If
+
+    FitHost "H"
+    FitElements
+
+'    FireEvent "onSizeToggled", objEvt
+
+End Sub
+
+'********************************************************************************
+
+Sub Minimize_onMouseUp( objEvt )
+
+    objEvt.CancelBubble  = TRUE
+    With g_objMinBtn.RuntimeStyle
+    
+        .PaddingLeft  = ""
+        .PaddingTop   = ""
+        .BorderColor = ""
+
+    End With
+
+End Sub
+
+'********************************************************************************
+
+Sub Minimize_onMouseDown( objEvt )
+
+    objEvt.CancelBubble  = TRUE
+    With g_objMinBtn.RuntimeStyle
+    
+        .PaddingLeft  = "1px"
+        .PaddingTop   = "1px"
+        .BorderColor = "ThreeDShadow ThreeDHighlight ThreeDHighlight ThreeDShadow"
+
+    End With
+
+End Sub
+
+'************************************************************************
+'*                                                                      *
+'*  TASK:       Propagated given attribute & value to HTML source text  *
+'*                                                                      *
+'*  NEED:       Name  of attribute                                      *
+'*              Value of attribute                                      *
+'*                                                                      *
+'*  RETURN:     ---                                                     *
+'*                                                                      *
+'*  EFFECTS:    Changed attribute is visible in HTML text               *
+'*                                                                      *
+'************************************************************************
+
+Sub WriteAttribute( strName, vValue )
+
+    If  IsEmpty( vValue ) Or IsNull( vValue )  Then
+
+        On Error Resume Next 
+            
+            Element.Attributes.RemoveNamedItem  strName
+
+        On Error Goto 0
+
+        Exit Sub
+
+    End If
+
+    Dim objAttrib
+    Set objAttrib   = Element.Document.CreateAttribute( strName )
+    objAttrib.Value = vValue
+    Element.Attributes.SetNamedItem  objAttrib
+
+End Sub
+
+'************************************************************************
+'*                                                                      *
+'*  TASK:       Fits children of hosting element to its size            *
+'*                                                                      *
+'*  NEED:       String with fit commands: "H"eight "W"idth              *
+'*                                                                      *
+'*  RETURN:     ---                                                     *
+'*                                                                      *
+'*  EFFECTS:    ---                                                     *
+'*                                                                      *
+'************************************************************************
+
+Sub FitHost( strWhat )
+
+    Dim vTmp
+    Dim bIsX
+    Dim bIsY
+
+    bIsX = InStr( 1, strWhat, "W", vbTextCompare ) > 0 
+    bIsY = InStr( 1, strWhat, "H", vbTextCompare ) > 0 
+
+    If  Not ( bIsX Or bIsY )  Then  Exit Sub
+
+    With  g_objFrame.RuntimeStyle
+
+        If  bIsX  Then  .PixelWidth  =  0
+        If  bIsY  Then  .PixelHeight =  0
+        
+        If  bIsX  Then  .PixelWidth  =  g_objFrame.ScrollWidth
+        If  bIsY  Then  .PixelHeight =  g_objFrame.ScrollHeight
+
+    End With
+
+    With  g_objShadow.RuntimeStyle
+
+        vTmp     = .Display
+        .Display = "none"
+
+        With  g_objHost.RuntimeStyle
+
+            If  bIsX  Then  .PixelWidth  =  0
+            If  bIsY  Then  .PixelHeight =  0
+
+            If  bIsX  Then  .PixelWidth  =  g_objHost.ScrollWidth   +  2 * g_nShadowSize
+            If  bIsY  Then  .PixelHeight =  g_objHost.ScrollHeight  +  2 * g_nShadowSize
+
+        End With
+
+        .Display = vTmp
+
+    End With
+
+End Sub
+
+'************************************************************************
+'*                                                                      *
+'*  TASK:       Fits children of hosting element to its size            *
+'*                                                                      *
+'*  NEED:       ----                                                    *
+'*                                                                      *
+'*  RETURN:     ---                                                     *
+'*                                                                      *
+'*  EFFECTS:    ---                                                     *
+'*                                                                      *
+'************************************************************************
+
+Sub FitElements
+
+    Dim vTmp
+    Dim nHeight
+    Dim nWidth
+    Dim bHasHeader
+
+    If  g_objHost Is Nothing  Then Exit Sub
+
+    nWidth  = g_objHost.ClientWidth 
+    nHeight = g_objHost.ClientHeight
+
+    If  g_nShadowSize  Then
+
+        nWidth  = nWidth  - 2 * g_nShadowSize
+        nHeight = nHeight - 2 * g_nShadowSize
+
+        If  ( nWidth < 1 )  Or  ( nHeight < 1 )  Then
+
+            g_nShadowSize   = 0
+            nWidth          = Element.OffsetWidth 
+            nHeight         = Element.OffsetHeight
+
+        End If
+
+        With g_objShadow.RuntimeStyle
+        
+            .PixelWidth  = nWidth
+            .PixelHeight = nHeight
+            .Display     = ""
+
+        End With
+
+        g_objShadow.Filters( 0 ).PixelRadius = g_nShadowSize
+
+    Else
+
+        g_objShadow.RuntimeStyle.Display = "none"
+
+    End If
+
+    With g_objFrame.RuntimeStyle
+
+        .PixelWidth  = nWidth
+        .PixelHeight = nHeight
+
+    End With
+
+    bHasHeader = Len( g_strHeaderText ) > 0
+
+    With g_objHeader.RuntimeStyle
+
+        If  bHasHeader  Then
+
+            .Display    = ""
+
+            With g_objMinBtn.RuntimeStyle
+
+                If  Not IsEmpty( g_bIsMinimized ) Then
+
+                    vTmp         = g_objHeader.ClientHeight - 4
+
+                    .Display     = ""
+                    .PixelWidth  = vTmp
+                    .PixelHeight = vTmp
+
+                Else
+
+                    .Display = "None"
+
+                End If
+
+            End With
+
+        Else
+
+            .Display = "None"
+
+        End If
+
+    End With
+
+End Sub
+
+'********************************************************************************
+'********************************************************************************
+
+
+]]>
+</script>
+
+</component>
+

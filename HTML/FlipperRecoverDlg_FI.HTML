@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html ID="THIS">
+<head>
+  <title>Kääntäjän palautus</title>
+    <META content="text/html; charset=windows-1252" http-equiv="Content-Type">
+    <META NAME="Description" CONTENT="Intact Flipper Recover Dialog (FI)">
+    <LINK REL="STYLESHEET" HREF="DlgStyle_FI.css">
+    <LINK REL="STYLESHEET" HREF="FlipperRecoverDlg.css">
+</head>
+
+<XML ID="xmlResource">
+  <Resources>
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonRetOpen"
+            ApplyTo     = "title"
+    >Pidike pysyy auki niin kauan kuin tätä nappia painetaan</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonRetClose"
+            ApplyTo     = "title"
+    >Pidike sulkeutuu niin kauan kuin tätä nappia painetaan</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonRotLeft"
+            ApplyTo     = "title"
+    >Pyöritys akseli liikkuu vastapäivään niin kauan kuin nappia painetaan</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonRotRight"
+            ApplyTo     = "title"
+    >Pyöritys akseli liikkuu myötäpäivään niin kauan kuin nappia painetaan</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonConveyLeft"
+            ApplyTo     = "title"
+    >Kuljetin liikkuu vasemmalle niin kauan kuin nappia painetaan</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonConveyRight"
+            ApplyTo     = "title"
+    >Kuljetin liikkuu oikealle niin kauan kuin nappia painetaan</Res>
+
+  </Resources>
+</XML>
+
+
+
+<body style = "width:35.5em;height:25.5em" align="center" Invisible="INIT" ResourceXML="xmlResource" lang="fi" >
+
+  <div style="font-size: larger;color:red;padding-top:1em" align="center">
+      Kääntäjä ei ole valmiina kuljettamiseen!
+  </div>
+  <div style="padding:1em 1em 0 1em" align="left">
+      Ensin sen pitää kääntyä kuljetus asentoon.
+      Tämä tapahtuu automaattisesti hyväksymällä!
+      <span class="classButtonSpan">OK</span>; 
+      <span class="classButtonSpan">Peruuta</span> 
+      pysäyttää kuljettimen pitämällä kääntäjän pois liikkeestä.
+  </div>
+  <div style="padding:1em 1em 0 1em" align="left">
+      Säilytys on varmistettava pyörimisen aikana,
+      jos rengas edelleen sisällä.
+      <br>
+      Siksi pyöritin kuljetin ja pidin voidaan säätää manuaalisesti.
+  </div>
+
+
+  <table>
+    <tbody>
+        <tr>
+          <td>
+            <fieldset CLASS="classJogPane">
+              <legend>&nbsp;Varaus:&nbsp;</legend>
+              <button id="buttonRetOpen" class="classButtonCtrl">+</button>
+              <button id="buttonRetClose" class="classButtonCtrl">&ndash;</button>
+            </fieldset>
+          </td>
+          <td>
+            <fieldset CLASS="classJogPane">
+              <legend>&nbsp;pyörimis akseli:&nbsp;</legend>
+              <button id="buttonRotLeft"  ><span class="classMirrorSpan">&#x71;</span></button>
+              <button id="buttonRotRight" >&#x71;</button>
+            </fieldset>
+          </td>
+          <td>
+            <fieldset CLASS="classJogPane">
+              <legend>&nbsp;Kuljetin:&nbsp;</legend>
+              <button id="buttonConveyLeft"  >&larr;</button>
+              <button id="buttonConveyRight" >&rarr;</button>
+            </fieldset>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+  <div class="DLGBUTTONS" kind="1" align="CENTER" size="6em" ></div>
+
+
+</body>
+
+<script class="DLGSCRIPT" language="vbscript" src="FlipperRecoverDlg.vbs" defer>
+</script>
+
+</html>

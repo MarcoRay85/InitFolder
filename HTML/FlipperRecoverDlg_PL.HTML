@@ -1,0 +1,107 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html ID="THIS">
+<head>
+  <title>Wznowić gotowość flippera </title>
+    <meta name="language" content="pl">
+    <META content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <META NAME="Description" CONTENT="Intact Flipper Recover Dialog (PL)">
+    <LINK REL="STYLESHEET" HREF="DlgStyle_PL.css">
+    <LINK REL="STYLESHEET" HREF="FlipperRecoverDlg.css">
+</head>
+
+<XML ID="xmlResource">
+  <Resources>
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonRetOpen"
+            ApplyTo     = "title"
+    >Tak długo jak ten przycisk bądzie trzymany, urzązenie trzymające otwarta się </Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonRetClose"
+            ApplyTo     = "title"
+    >Tak długo jak ten przycisk bądzie trzymany, urządzenie trzymające zamyka się</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonRotLeft"
+            ApplyTo     = "title"
+    >Tak długo jak ten przycisk bądzie trzymany, oś obrotowa obraca sie  w kieruku przeciwnym do ruchu wskazówek zegara</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonRotRight"
+            ApplyTo     = "title"
+    >Tak długo jak ten przycisk bądzie trzymany,oś obrotowa obraca sie  w kieruku zgodnym z ruchem wskazówek zegara</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonConveyLeft"
+            ApplyTo     = "title"
+    >Tak długo jak ten przycisk bądzie trzymany, rolki transporują w kierunku na lewo </Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonConveyRight"
+            ApplyTo     = "title"
+    >Tak długo jak ten przycisk bądzie trzymany, rolki transporują w kierunku na prawo</Res>
+
+  </Resources>
+</XML>
+
+
+
+<body style = "width:42.5em;height:24.5em" align="center" Invisible="INIT" ResourceXML="xmlResource" >
+
+  <div style="font-size: larger;color:red;padding-top:1em" align="center">
+      Flipper nie jest gotowy do transportu opon!
+  </div>
+  <div style="padding:1em 1em 0 1em" align="left">
+      Do tego celu musi być odwrócony do pozycji transportu.
+      To zostanie po potwierdzeniu przez 
+      <span class="classButtonSpan">OK</span> przeprowadzone; 
+      <span class="classButtonSpan">Anulować</span> 
+      zakończy kontynuację procesu transportu, bez poruszenia flippera.
+  </div>
+  <div style="padding:1em 1em 0 1em" align="left">
+      Jeśli znajduje się jeszcze jedna opona w flipperze,
+      musi byc zagwarantowane, że podczas obrotu opona będzie dobrze zabezpieczona.
+      <br>
+       Do tego manualnie może  zostać ustawione urządzenie trzymające, oś obrotu i transport. 
+  </div>
+
+
+  <table>
+    <tbody>
+        <tr>
+          <td>
+            <fieldset CLASS="classJogPane">
+              <legend>&nbsp;Urządzenie trzymające:&nbsp;</legend>
+              <button id="buttonRetOpen"  >+</button>
+              <button id="buttonRetClose" >&ndash;</button>
+            </fieldset>
+          </td>
+          <td>
+            <fieldset CLASS="classJogPane">
+              <legend>&nbsp;Oś obrotu:&nbsp;</legend>
+              <button id="buttonRotLeft"  ><span class="classMirrorSpan">&#x71;</span></button>
+              <button id="buttonRotRight" >&#x71;</button>
+            </fieldset>
+          </td>
+          <td>
+            <fieldset CLASS="classJogPane">
+              <legend>&nbsp;Transport:&nbsp;</legend>
+              <button id="buttonConveyLeft"  >&larr;</button>
+              <button id="buttonConveyRight" >&rarr;</button>
+            </fieldset>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+  <div class="DLGBUTTONS" kind="1" align="CENTER" size="6em" ></div>
+
+
+</body>
+
+<script class="DLGSCRIPT" language="vbscript" src="FlipperRecoverDlg.vbs" defer>
+</script>
+
+</html>

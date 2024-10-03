@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html ID="THIS">
+  <head >
+  <title>Intact zakoñczyæ</title>
+    <META NAME="Description" CONTENT="Intact1200 Quit & Storing (PL)">
+    <LINK REL="STYLESHEET" HREF="DlgStyle_PL.css">
+  </head>
+
+<body style="width:28em; height:12em" align="center" Invisible="INIT" lang="pl">
+
+  <div align="center"
+       style="position:absolute;zIndex:-1;zoom:2.5;"
+       style="Filter:progid:DXImageTransform.Microsoft.alpha( opacity=10 )">
+    <img src="AnimHourglass.gif">
+    &nbsp;
+    <img src="AnimHourglass.gif">
+    &nbsp;
+    <img src="AnimHourglass.gif">
+    &nbsp;
+    <img src="AnimHourglass.gif">
+    &#32;
+    <img src="AnimHourglass.gif">
+    &nbsp;
+    <img src="AnimHourglass.gif">
+    &nbsp;
+    <img src="AnimHourglass.gif">
+    &nbsp;
+    <img src="AnimHourglass.gif">
+  </div>
+
+  <div ID="divText" align="left" style="line-height:180%; width:26em;position:relative">
+     Zakoñczenie 
+     <span class="classIntact">Intact</span>
+     opóŸnia siê, poniewa¿ aktualnie trwa proces zapisywania wyników testu.
+     <br>
+     Przy pomocy przycisku
+     <span class="classButton">Anulowanie</span>
+     mo¿na zakoñczenie
+     <span class="classIntact">Intact</span> kompletnie odwo³aæ.
+  </div>
+
+  <div class="DLGBUTTONS" kind="11" align="CENTER"  ></div>
+
+</body>
+
+<script language="vbscript" >
+
+    Option Explicit
+
+    Sub SetTaskKind( nKind )
+
+        If nKind = 1  Then
+
+            divText.InnerHTML = Replace( divText.InnerHTML, "Speicher", "Druck" )
+
+        End If
+
+    End Sub
+
+</script>
+
+<script class="DLGSCRIPT" language="vbscript" src="TestDocTaskRunningDlg.vbs" defer>
+</script>
+
+</html>

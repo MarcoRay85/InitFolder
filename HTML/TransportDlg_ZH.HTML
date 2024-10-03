@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html ID="THIS" XMLNS:CX>
+<head>
+  <title>输送 (Transport)</title>
+  <META content="text/html; charset=gb2312" http-equiv="Content-Type">
+  <META NAME="Description" CONTENT="Intact1200 Transport (ZH)">
+  <LINK REL="STYLESHEET" HREF="DlgStyle_ZH.css">
+  <?IMPORT namespace="CX" implementation="SpinEdit.htc">
+</head>
+
+<XML ID="xmlResource">
+  <Resources>
+    <Res    AddressBy   = "ID"
+            MatchValue  = "trDistance"
+            ApplyTo     = "title"
+    >轮胎输送距离 (Distance)</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "trDirection"
+            ApplyTo     = "title"
+    >轮胎输送方向 (Direction: Forward/Reversed)</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "trSpeed"
+            ApplyTo     = "title"
+    >轮胎输送速度 (Speed: Slow/fAst)</Res>
+
+  </Resources>
+</XML>
+
+<body style = "width:17.5em;height:12em" Invisible="INIT" ResourceXML="xmlResource" lang="ZH" >
+
+  <p align=center style="position:relative; top: 0.5em">
+    <table cellspacing="0" cellpadding="3" style="font-weight:bold" >
+      <colgroup>
+      </colgroup>
+      <colgroup align   = "right">
+      </colgroup>
+      <colgroup>
+      </colgroup>
+      <tbody>
+      <tr ID="trDistance" >
+        <td>
+          <label class="DLGAUTOLABEL" accessKey="D" FOR="InputDistance">
+            距离(D)：
+          </label>
+        </td>
+        <td>
+          <CX:SpinEdit   ID        ="InputDistance"
+                         style     ="border:1px inset" />
+        </td>
+        <td>
+          mm
+        </td>
+      </tr>
+      <tr ID="trDirection" >
+        <td valign=top>
+          方向：
+        </td>
+        <td>
+          <INPUT id   ="inputDirForward"
+                 type ="radio"
+                 name ="DirRadioBtn"
+                 CHECKED
+          >
+          <br>
+          <INPUT id   ="inputDirReverse"
+                 type ="radio"
+                 name ="DirRadioBtn"
+          >
+        </td>
+        <td>
+          <label class="DLGAUTOLABEL" accesskey="F" FOR="inputDirForward" >
+            向前(F)
+          </label>
+          <br>
+          <label class="DLGAUTOLABEL"  accesskey="R" FOR="inputDirReverse">
+            向后(R)
+          </label>
+        </td>
+      </tr>
+      <tr ID="trSpeed" >
+        <td valign=top>
+          速度
+        </td>
+        <td>
+          <INPUT id   ="inputSpeedSlow"
+                 type ="radio"
+                 name ="SpeedRadioBtn"
+                 CHECKED
+          >
+          <br>
+          <INPUT id   ="inputSpeedFast"
+                 type ="radio"
+                 name ="SpeedRadioBtn"
+          >
+        </td>
+        <td>
+          <label class="DLGAUTOLABEL" accesskey="S"  FOR="inputSpeedSlow" >
+            慢(S)
+          </label>
+          <br>
+          <label class="DLGAUTOLABEL" accesskey="A"  FOR="inputSpeedFast" >
+            快(A)
+          </label>
+        </td>
+      </tr>
+    </tbody>
+    </table>
+  </p>
+  <div class="DLGBUTTONS" kind="1" align="CENTER"  ></div>
+</body>
+
+
+
+<script class="DLGSCRIPT" language="vbscript" src="TransportDlg.vbs" defer>
+</script>
+
+</html>

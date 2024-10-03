@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html ID="THIS" XMLNS:CX>
+<head>
+  <title>Transport</title>
+    <META NAME="Description" CONTENT="Intact1200 Transport (SL)">
+    <LINK REL="STYLESHEET" HREF="DlgStyle_SL.css"><?IMPORT namespace="CX" implementation="SpinEdit.htc"></head>
+
+<XML ID="xmlResource">
+  <Resources>
+    <Res    AddressBy   = "ID"
+            MatchValue  = "trDistance"
+            ApplyTo     = "title"
+    >Prosimo vnesite razdaljo, ki jo mora pnevmatika opraviti</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "trDirection"
+            ApplyTo     = "title"
+    >Prosimo vnesite smer, v kateri se bo pnevmatika premikala</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "trSpeed"
+            ApplyTo     = "title"
+    >Prosimo vnesite hitrost, s katero se bo pnevmatika premikala</Res>
+
+  </Resources>
+</XML>
+
+<body style = "width:17.5em;height:12em" Invisible="INIT" ResourceXML="xmlResource" lang="sl" >
+
+  <p align=center style="position:relative; top: 0.5em">
+    <table cellspacing="0" cellpadding="3" style="font-weight:bold" >
+      <colgroup>
+      </colgroup>
+      <colgroup align   = "right">
+      </colgroup>
+      <colgroup>
+      </colgroup>
+      <tbody>
+      <tr ID="trDistance" >
+        <td>
+          <label class="DLGAUTOLABEL" FOR="InputDistance" >Razdalja</label>
+        </td>
+        <td>
+          <CX:SpinEdit   ID        ="InputDistance"
+                         style     ="border:1px inset" />
+        </td>
+        <td>mm</td>
+      </tr>
+      <tr ID="trDirection" >
+        <td valign=top>Smer</td>
+        <td>
+          <INPUT id   ="inputDirForward"
+                 type ="radio"
+                 name ="DirRadioBtn"
+                 CHECKED
+          ><br><INPUT id   ="inputDirReverse"
+                 type ="radio"
+                 name ="DirRadioBtn"
+          >
+        </td>
+        <td>
+          <label class="DLGAUTOLABEL" FOR="inputDirForward" >Naprej</label><br><label class="DLGAUTOLABEL" FOR="inputDirReverse">Nazaj</label>
+        </td>
+      </tr>
+      <tr ID="trSpeed" >
+        <td valign=top>Hitrost</td>
+        <td>
+          <INPUT id   ="inputSpeedSlow"
+                 type ="radio"
+                 name ="SpeedRadioBtn"
+                 CHECKED
+          ><br><INPUT id   ="inputSpeedFast"
+                 type ="radio"
+                 name ="SpeedRadioBtn"
+          >
+        </td>
+        <td>
+          <label class="DLGAUTOLABEL" FOR="inputSpeedSlow" >Počasi</label><br><label class="DLGAUTOLABEL" FOR="inputSpeedFast" >Hitro</label>
+        </td>
+      </tr>
+    </tbody>
+    </table>
+  </p>
+  <div class="DLGBUTTONS" kind="1" align="CENTER"  ></div>
+</body>
+
+
+
+<script class="DLGSCRIPT" language="vbscript" src="TransportDlg.vbs" defer>
+</script>
+
+</html>

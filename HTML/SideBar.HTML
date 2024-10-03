@@ -1,0 +1,869 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html ID="THIS" xmlns:v="urn:schemas-microsoft-com:vml" XMLNS:t ="urn:schemas-microsoft-com:time">
+<head>
+    <META NAME="Description" CONTENT="Intact Seitenleiste (GE)">
+    <STYLE>
+
+        v\:*        {
+                        behavior: url( #default#VML   );
+                    }
+
+       .VGROUP      {   position        : absolute;
+                        width           : 100%;
+                        height          : 100%;
+                        antialias       : true;
+                        overflow        : hidden;
+                    }
+
+       .VELEM       {   position        : absolute;
+                        width           : 100%;
+                        height          : 100%;
+                        antialias       : true;
+                        overflow        : hidden;
+                    }
+
+       .classTime   {
+                        behavior: url( #default#time2 );
+                    }
+
+       .classVMLHost
+                    {
+                        position        : Relative;
+                        Overflow        : hidden;
+                    }
+
+       .classFader  {
+                        position            : absolute;
+                        top                 : 0;
+                        left                : 0;
+                        width               : 100%;
+                        height              : 100%;
+                        z-Index             : 10;
+                        background-color    : threedface;
+                        Filter              : progid:DXImageTransform.Microsoft.RandomDissolve(duration=2);
+                    }
+
+    </STYLE>
+</head>
+
+<body   ID            = "bodyMain"
+        scroll        = "no"
+        style         = "background-color:buttonface;
+                         Overflow:Hidden;
+                         padding:0;margin:0;border:0;
+                         border-left:   2 groove;"
+        oncontextmenu = "return false"
+        onselectstart = "return false" >
+
+
+    <DIV    ID    = "divFreeSpace"
+            Style = "position:absolute;left:0;Top:0;width:100%;Overflow:Hidden;text-align:center;">
+    </DIV>
+
+    <DIV    ID    = "divMainBase"
+            align = "center"
+            Style = "position:absolute;left:0;bottom:0;width:200;height:380;Overflow:Hidden;">
+
+      <DIV  ID    = "divButton"
+            CLASS = "classVMLHost"
+            STYLE = "position:relative;left:10;top:2;width:200;height:180;
+                     margin-bottom:15px;
+                     visibility:hidden;
+                     Overflow:Hidden;
+                     Background-Color:ThreeDFace;
+                     Behavior:URL( ZoomTransition.WSC );">
+
+        <v:shape    ID="shapeBtnExtr"
+                    tabindex="1"
+                    hidefocus="TRUE"
+                    coordorigin="75 75" CoordSize="160 160"
+                    Style="position:absolute;
+                           left:90;top:90;width:180px; height:180px;;Border:0px solid;"
+                    stroked="FALSE"
+                    path =" M80  0
+                            L90 0
+                            C 108 0  108 0 126 18
+                            L132 24
+                            C 150 42 150 42 150 60
+                            L150 90
+                            C 150 108 150 108 132 126
+                            L126 132
+                            C108 150 108 150  90 150
+                            L60  150
+                            C42  150  42  150  24  132
+                            L18  126
+                            C0   108  0   108  0   90
+                            L0   60
+                            C0   42  0   42  18  24
+                            L24  18
+                            C42  0   42  0  60  0
+                            x e" >
+                       <v:fill on="True" color="threedface" />
+                       <v:extrusion on         ="true"
+                                    backdepth  ="0"
+                                    Facet      ="0.01"
+                                    Edge       ="4px"
+                                    lightlevel ="0.75"
+                                    lightlevel2="0.2"
+                                    lightposition="-10000,-10000,10000"
+                                    lightposition2="10000,10000,20000"/>
+        </v:shape>
+
+        <v:shape    ID="shapeBtnBack"
+                    tabindex="1"
+                    hidefocus="TRUE"
+                    coordorigin="75 75" CoordSize="160 160"
+                    Style="position:absolute;
+                           left:90;top:90;width:166px; height:166px;;Border:0px solid;"
+                    stroked="FALSE"
+                    path =" M42  0
+                            L108 0
+                            L150 42
+                            L150 108
+                            L108 150
+                            L43  150
+                            L0   108
+                            L0   42 x e" >
+                <v:fill on="True" color="threedface" />
+                       <v:extrusion on         ="true"
+                                    backdepth  ="0"
+                                    Facet      ="0.01"
+                                    Edge       ="4px"
+                                    lightlevel ="0.75"
+                                    lightlevel2="0.2"
+                                    lightposition="10000,10000,10000"
+                                    lightposition2="-10000,-10000,20000"/>
+        </v:shape>
+
+        <v:group   ID="groupButton"
+                    coordorigin="75 75" CoordSize="160 160"
+                   Style="position:absolute;left:80;Top:80;width:160px; height:160px"
+                        onmousedown="Stop_OnMouseDown()"
+                        onmouseup="Stop_OnMouseOut()"
+                        onmouseout="Stop_OnMouseOut()"
+                   >
+
+            <v:shape    ID="shapeBtnBorder1"
+                        coordorigin="75 75" CoordSize="160 160"
+                        Style="position:absolute;left:85;Top:85;width:170px; height:170px"
+                        stroked="FALSE"
+                        path =" M105 0
+                                L108 0
+                                L150 42
+                                L150 108
+                                L108 150
+                                L42  150
+                                L0   108
+                                L0   108
+                                x e" >
+                <v:fill on="True" color="#C0C000" color2="#E0E000" FocusPosition="0.03,0.03" FocusSize="0.95,0.95"  type="GradientTitle"/>
+            </v:shape>
+
+            <v:shape    ID="shapeBtnBorder2"
+                        coordorigin="75 75" CoordSize="160 160"
+                        Style="position:absolute;left:85;Top:85;width:170px; height:170px"
+                        stroked="FALSE"
+                        path =" M42  0
+                                L108 0
+                                L110 2
+                                L2   110
+                                L0   108
+                                L0   42 x e" >
+                <v:fill on="True" color="#FFFF00" color2="#E0E000" FocusPosition="0.04,0.04" FocusSize="0.95,0.95"  type="GradientTitle"/>
+            </v:shape>
+
+
+
+            <v:shape    ID="shapeBtnFace1"
+                        coordorigin="75 75" CoordSize="160 160"
+                        Style="position:absolute;left:85;Top:85;width:140px; height:140px"
+                        stroked="FALSE"
+                        path =" M105 0
+                                L108 0
+                                L150 42
+                                L150 108
+                                L108 150
+                                L42  150
+                                L0   108
+                                L0   108
+                                x e" >
+                <v:fill on="True" color="#A80000" color2="#C80000"  FocusPosition="0.05,0.05" FocusSize="0.9,0.9"  type="GradientTitle"/>
+           </v:shape>
+
+            <v:shape    ID="shapeBtnFace2"
+                        coordorigin="75 75" CoordSize="160 160"
+                        Style="position:absolute;left:85;Top:85;width:140px; height:140px"
+                        stroked="FALSE"
+                        path =" M42  0
+                                L108 0
+                                L110 2
+                                L2   110
+                                L0   108
+                                L0   42 x e" >
+                <v:fill on="True" color="#FF6000" color2="#C80000"  FocusPosition="9%,9%" FocusSize="0.9,0.9"  type="GradientTitle"/>
+           </v:shape>
+
+
+           <v:shape    ID="shapeBtnText"
+                        coordorigin="75 75" CoordSize="160 160"
+                        Style="position:absolute;left:80;Top:85;width:130px; height:130px"
+                        Style="font-family:Arial;font-size:32pt;font-weight:bold;antialias: true;"
+                        path =" M10  80 L150 80 e" >
+                <v:path textpathok="True" />
+                <v:stroke weight="1" color="#C0C000"  filltype="solid"/>
+                <v:fill on="True" color="yellow" />
+                <v:extrusion on="true" backdepth="0" foredepth="3pt" Edge="1.5pt" SkewAngle="135" lightlevel="0.9" lightlevel2="0.05" lightposition="10000,10000,10000" lightposition2="5000,5000,20000"/>
+                <v:textpath  on   ="true"
+                             FitPath="true"
+                             string="Stop"
+                             style="text-align:center;color:yellow;"/>
+           </v:shape>
+
+        </v:group>
+
+      </DIV>
+
+
+       <DIV style   ="position:relative;width:200;height:200;" >
+
+         <DIV  ID      ="divIntact"
+               CLASS = "classVMLHost"
+               STYLE   ="position:relative;width:200;height:65;" >
+
+           <v:shape    Style="position:absolute;Top:1;Left:2;Width:95%;Height:98%;antialias:true;;"
+                       coordorigin="0,0" CoordSize="100,100"
+                       path="M0 50 L95 50 e"
+                       stroked="false" >
+               <v:path textpathok="True" />
+               <v:fill on="True"  color="silver" />
+               <v:extrusion on         ="true"
+                            backdepth  ="0"
+                            Edge       ="2.5px"
+                            lightlevel ="0.75"
+                            lightlevel2="0.2"
+                            lightposition="-10000,-10000,10000"
+                            lightposition2="10000,10000,20000"/>
+               <v:textpath  on     ="true"
+                            FitPath ="true"
+                            string="Intact"
+                            style="font-family:Arial Bold;
+                                   text-align:center;
+                                  "/>
+           </v:shape>
+
+           <v:shape    Style="position:absolute;Top:1;Left:2;Width:95%;Height:98%;antialias:true;;"
+                       coordorigin="0,0" CoordSize="100,100"
+                       path="M93 10 L100 10 e"
+                       stroked="false" >
+               <v:path textpathok="True" />
+               <v:fill on="True"  color="silver" />
+               <v:extrusion on         ="true"
+                            backdepth  ="0"
+                            Edge       ="2.5px"
+                            lightlevel ="0.75"
+                            lightlevel2="0.2"
+                            lightposition="-10000,-10000,10000"
+                            lightposition2="10000,10000,20000"/>
+               <v:textpath  on     ="true"
+                            FitPath ="true"
+                            string="&reg;"
+                            style="font-family:Arial;
+                                   font-weight:bold;
+                                   text-align:center;
+                                  "/>
+           </v:shape>
+
+           <v:shape    Style="position:absolute;Top:1;Left:2;Width:95%;Height:98%;antialias:true;z-Index:1"
+                       coordorigin="0,0" CoordSize="100,100"
+                       path="M0 50 L95 50 e"
+                       stroked="false" >
+               <v:path textpathok="True" />
+               <v:fill     ID     ="vfillIntact"
+                           on     ="True"
+                           color  ="#909090"
+                           color2 ="#909090"
+                           colors ="20% #909090, 50% #F0F0F0, 60% #F0F0F0"
+                           angle="170"
+                           opacity="0.25"
+                           opacity2="0.25"
+                           focus="0"
+                           type="Gradient"/>
+               <v:textpath     on      ="true"
+                               FitPath ="true"
+                               string  ="Intact"
+                               style   ="font-family:Arial Bold;
+                                         text-align:center;
+                                  "/>
+
+           </v:shape>
+
+           <v:shape    Style="position:absolute;Top:1;Left:2;Width:95%;Height:98%;antialias:true;z-Index:1"
+                       coordorigin="0,0" CoordSize="100,100"
+                       path="M93 10 L100 10 e"
+                       stroked="false" >
+               <v:path textpathok="True" />
+               <v:fill     ID     ="vfillIntact"
+                           on     ="True"
+                           color  ="#909090"
+                           color2 ="#909090"
+                           colors ="20% #909090, 50% #F0F0F0, 60% #F0F0F0"
+                           angle="170"
+                           opacity="0.25"
+                           opacity2="0.25"
+                           focus="0"
+                           type="Gradient"/>
+               <v:textpath     on      ="true"
+                               FitPath ="true"
+                               string  ="&reg;"
+                               style   ="font-family:Arial;
+                                         font-weight:bold;
+                                         text-align:center;
+                                  "/>
+
+           </v:shape>
+
+           <v:shape    STYLE="position:absolute;Top:1;Left:2;Width:95%;Height:98%;antialias:true;z-Index:-1"
+                       STYLE="Filter:progid:DXImageTransform.Microsoft.Blur( pixelradius=4, makeshadow=true);"
+                       coordorigin="0,0" CoordSize="100,100"
+                       path="M0 50 L95 50 e"
+                       stroked="false" >
+               <v:path textpathok="True" />
+               <v:fill     ID     ="vfillIntact"
+                           on     ="True"
+                           color  ="#909090"
+                           type   ="solid"/>
+               <v:textpath     on      ="true"
+                               FitPath ="true"
+                               string  ="Intact"
+                               style   ="font-family:Arial Bold;
+                                         text-align:center;
+                                  "/>
+
+           </v:shape>
+
+           <v:shape    STYLE="position:absolute;Top:1;Left:2;Width:95%;Height:98%;antialias:true;z-Index:-1"
+                       STYLE="Filter:progid:DXImageTransform.Microsoft.Blur( pixelradius=4, makeshadow=true);"
+                       coordorigin="0,0" CoordSize="100,100"
+                       path="M93 10 L100 10 e"
+                       stroked="false" >
+               <v:path textpathok="True" />
+               <v:fill     ID     ="vfillIntact"
+                           on     ="True"
+                           color  ="#909090"
+                           type   ="solid"/>
+               <v:textpath     on      ="true"
+                               FitPath ="true"
+                               string  ="&reg;"
+                               style   ="font-family:Arial;
+                                         font-weight:bold;
+                                         text-align:center;
+                                  "/>
+
+           </v:shape>
+
+           <DIV ID="divIntactFader" CLASS="classFader" ></DIV>
+
+
+         </DIV>
+
+
+         <DIV ID    ="divVersion"
+              CLASS = "classVMLHost"
+              STYLE ="font-family:arial; font-weight:bold"
+              STYLE ="position:relative;width:40;height:20;">
+           <v:group   coordorigin="0,0" CoordSize="100,100"
+                      Style="position:relative;width:100%;height:100%">
+               <v:shape    ID="lineVersion"
+                           Style="position:relative;;width:100%;height:100%;antialias"
+                           path="M0 50 L100 50 e"
+                           stroked="false" >
+                   <v:path textpathok="True" />
+                   <v:fill on="True" color="threedface" />
+                       <v:extrusion on         ="true"
+                                    backdepth  ="0"
+                                    Edge       ="1.5px"
+                                    lightlevel ="0.75"
+                                    lightlevel2="0.2"
+                                    lightposition="-10000,-10000,10000"
+                                    lightposition2="10000,10000,20000"/>
+                   <v:textpath  on     ="true"
+                                FitPath ="true"
+                                string="V6.0"
+                                style="font-family:Arial;
+                                       font-weight:bold;
+                                       text-align:center;
+                                      "/>
+               </v:shape>
+           </v:group>
+
+            <DIV ID="divVersionFader" CLASS="classFader" ></DIV>
+         </DIV>
+         
+
+         <img src="ItalmaticGroup.png" style="position:absolute; align:center; top:35;left:52;width:150px;height:100px;" alt="Italmatic Logo">
+
+<!--
+         <DIV  ID    ="divSteinbichler"
+               CLASS = "classVMLHost"
+               STYLE ="position:relative;width:200px;height:90px;Visibility:hidden">
+
+           <SPAN ID="spanSteinbichler" _FillColor="#212125" style="position:absolute;left:10;width:180px; height:86px;overflow:hidden">
+             <v:group class="VGROUP" coordorigin="5000 0" coordsize="10000 10000" >
+               <v:PolyLine            Stroked="0" _FillColor="#7DAE35" Filled="1" Points="5011 4002 4766 5010 4907 3886 4273 4921 4840 3728 4070 4174 4817 3544 3501 3402 4817 3327 4070 2629 4830 3145 3955 1317 4903 3056 4645 1536 4998 2967 5045 0 5115 2968 5458 1536 5199 3056 6148 1317 5273 3145 6032 2629 5286 3327 6602 3402 5286 3544 6032 4174 5261 3728 5968 5028 5209 3886 5370 5010 5105 4002 5011 4002 " />
+               <v:Shape class="VELEM" Stroked="0" _FillColor="#7DAE35" Filled="1" Path="M 6422 3548 R 132 0 R 0 1116 V 53 -146 112 -203 176 -275 V 64 -73 133 -75 208 -75 V 76 0 160 40 219 121 V 59 81 103 189 132 326 V 28 135 42 348 42 638 R 0 1093 R -132 0 R 0 -979 V 0 -245 -5 -408 -14 -490 V -16 -141 -46 -246 -89 -316 V -43 -72 -115 -107 -184 -107 V -80 0 -151 21 -214 130 V -63 109 -104 245 -124 406 V -13 104 -19 297 -19 578 R 0 779 R -132 0 L 6423 3548 L 6422 3548 X M 3554 5181 V -10 -341 -147 -612 -314 -612 V -167 0 -304 271 -313 612 V -3 88 2 207 2 357 R 0 954 R -139 0 R -1 -1311 V 0 -1 -1 -4 0 -8 V 12 -497 209 -893 451 -893 V 243 0 442 400 452 900 R -1 1311 R -139 0 R 0 -954 C 3552 5388 3557 5269 3554 5181 L 3554 5181 X " />
+               <v:Shape class="VELEM" Stroked="0" _FillColor="#212125" Filled="1" Path="M 7330 6298 R 0 194 R -54 0 C 7290 6446 7318 6344 7330 6298 L 7330 6298 X M 7330 6118 R 0 180 V -17 66 -35 130 -54 194 R -48 0 C 7265 6370 7299 6246 7330 6118 L 7330 6118 X M 7330 5849 R 0 177 V -38 160 -80 316 -125 466 R -7 0 R 0 -122 C 7247 6202 7291 6028 7330 5849 L 7330 5849 X M 7330 5526 R 0 184 V -39 189 -83 373 -132 550 R 0 -141 C 7248 5928 7292 5730 7330 5526 L 7330 5526 X M 7326 5145 V 2 54 3 112 4 174 V -37 223 -80 438 -131 645 R 0 -139 C 7249 5608 7291 5380 7326 5145 L 7326 5145 X M 7299 4820 V 5 32 9 68 13 107 V -30 237 -68 467 -113 688 R 0 -102 R 0 -35 C 7239 5265 7273 5046 7299 4820 L 7299 4820 X M 7248 4613 V 6 16 11 34 16 51 V -18 182 -41 359 -69 533 V -1 -43 -3 -79 -5 -110 C 7213 4932 7232 4774 7248 4613 L 7248 4613 X M 7184 4476 V 5 8 10 17 15 25 V -11 126 -24 250 -40 372 V -4 -15 -7 -30 -12 -44 C 7162 4713 7174 4595 7184 4476 L 7184 4476 X M 7112 4384 V 4 3 7 7 11 11 V -8 104 -18 207 -29 308 V -3 -5 -7 -11 -10 -15 C 7094 4588 7104 4487 7112 4384 L 7112 4384 X M 2832 6492 R -42 0 R 0 -143 C 2798 6377 2824 6463 2832 6492 L 2832 6492 X M 2877 6492 R -48 0 V -13 -46 -27 -93 -39 -140 R 0 -177 C 2817 6283 2846 6389 2877 6492 L 2877 6492 X M 2929 6444 R 0 48 R -29 0 V -40 -132 -76 -267 -110 -407 R 0 -173 C 2831 6096 2877 6273 2929 6444 L 2929 6444 X M 2929 6200 R 0 137 V -52 -180 -98 -366 -139 -559 R 0 -178 C 2829 5807 2876 6007 2929 6200 L 2929 6200 X M 2929 5918 R 0 133 V -54 -209 -100 -427 -139 -653 R 0 -191 C 2827 5454 2874 5691 2929 5918 L 2929 5918 X M 2929 5587 R 0 130 V -51 -232 -94 -475 -127 -725 V 4 -32 9 -64 14 -95 C 2845 5134 2883 5365 2929 5587 L 2929 5587 X M 2927 5164 R -1 17 V -1 32 -1 68 -1 108 V -30 -176 -56 -357 -76 -542 V 5 -18 10 -35 16 -52 C 2882 4854 2903 5011 2927 5164 L 2927 5164 X M 2967 4899 V -4 14 -8 29 -11 45 V -17 -122 -31 -246 -43 -372 V 5 -10 9 -20 14 -29 C 2938 4663 2951 4782 2967 4899 L 2967 4899 X M 3028 4740 V -3 6 -7 13 -10 19 V -12 -104 -23 -210 -32 -317 V 4 -5 7 -10 11 -15 C 3006 4533 3016 4637 3028 4740 L 3028 4740 X " />
+               <v:Shape class="VELEM" Stroked="0" _FillColor="#7DAE35" Filled="1" Path="M 6203 4949 V -79 -218 -183 -340 -313 -367 V -6 0 -82 -10 -111 5 R -2 -5 V -100 22 -185 103 -255 244 V -82 167 -123 369 -123 607 V 0 155 19 301 56 437 V 38 137 90 243 156 318 V 66 76 141 113 223 113 V 150 0 273 -124 368 -373 R 104 143 V -49 152 -115 271 -197 355 V -82 83 -176 125 -281 125 V -162 0 -296 -107 -402 -320 V -106 -213 -160 -473 -160 -779 V 0 -206 25 -396 74 -572 V 50 -177 119 -315 206 -414 V 87 -99 184 -148 292 -148 V 39 0 76 7 113 21 V 56 16 108 50 157 103 R 12 14 V 27 28 52 60 74 94 V 20 32 39 68 56 108 V 6 14 13 28 16 35 V 23 47 44 104 63 168 R -108 144 C 6219 4985 6203 4949 6203 4949 L 6203 4949 X " />
+               <v:Shape class="VELEM" Stroked="0" _FillColor="#212125" Filled="1" Path="M 8071 5471 V 5 235 43 429 114 582 V 74 158 165 236 274 236 V 52 0 103 -19 152 -57 V 50 -38 92 -88 127 -150 V 35 -62 72 -163 113 -303 R 112 121 V -37 148 -79 268 -127 359 V -48 91 -102 161 -162 209 V -60 47 -128 70 -204 70 V -168 0 -299 -113 -394 -340 V -95 -228 -142 -485 -142 -771 V 0 -269 40 -510 120 -720 V 102 -268 238 -402 408 -402 V 175 0 316 137 420 412 V 74 194 112 463 114 753 L 8071 5470 L 8071 5471 X M 8849 5199 V -18 -138 -43 -249 -76 -333 V -33 -87 -78 -157 -134 -211 V -56 -53 -114 -80 -175 -80 V -101 0 -188 67 -260 201 V -51 95 -91 236 -118 422 L 8849 5198 L 8849 5199 X " />
+               <v:Shape class="VELEM" Stroked="0" _FillColor="#212125" Filled="1" Path="M 947 3724 R 143 0 R 0 585 R 286 0 R 0 284 L 1090 4593 R 0 1066 V -1 265 60 545 283 545 R 0 288 V -259 0 -425 -270 -425 -839 L 948 3724 L 947 3724 L 947 3724 X " />
+               <v:PolyLine            Stroked="0" _FillColor="#7DAE35" Filled="1" Points="4990 4311 5131 4311 5131 6492 4990 6492 4990 4311 " />
+               <v:Shape class="VELEM" Stroked="0" _FillColor="#7DAE35" Filled="1" Path="M 3940 5386 V 14 276 38 463 117 631 V 80 169 178 253 294 253 V 75 0 136 -38 199 -114 V 63 -77 113 -185 150 -323 V 38 -138 57 -284 57 -438 V 0 -154 -19 -301 -57 -440 V -38 -139 -88 -248 -152 -325 V -63 -78 -131 -117 -203 -118 V -73 0 -143 39 -210 118 V -42 49 -87 108 -116 179 R 0 -319 V 30 -49 69 -89 101 -122 V 70 -72 154 -108 237 -108 V 148 0 273 112 378 335 V 105 222 157 491 157 809 V 0 313 -53 581 -158 803 V -105 222 -240 332 -389 333 V -85 0 -162 -38 -231 -114 V -43 -48 -92 -110 -129 -188 V -6 -12 -24 -50 -30 -62 V -84 -174 -149 -475 -149 -793 R 0 -87 R 0 -1747 R 133 0 L 3939 5386 L 3940 5386 X " />
+               <v:Shape class="VELEM" Stroked="0" _FillColor="#212125" Filled="1" Path="M 2667 3742 V 0 -111 -43 -201 -96 -201 V -53 0 -96 90 -96 201 V 0 110 43 200 96 200 C 2624 3942 2667 3852 2667 3742 L 2667 3742 X M 2498 4311 R 147 0 R 0 2181 R -147 0 L 2498 4311 L 2498 4311 X " />
+               <v:Shape class="VELEM" Stroked="0" _FillColor="#212125" Filled="1" Path="M 1492 5471 V 4 235 42 429 111 582 V 72 158 160 236 266 236 V 51 0 100 -19 148 -57 V 48 -38 90 -88 123 -150 V 34 -62 70 -163 109 -303 R 109 121 V -36 148 -77 268 -123 359 V -47 91 -99 161 -157 209 V -58 47 -124 70 -198 70 V -163 0 -291 -113 -383 -340 V -92 -228 -138 -485 -138 -771 V 0 -269 39 -510 117 -720 V 99 -268 231 -402 396 -402 V 170 0 307 137 408 412 V 72 194 109 463 110 753 L 1492 5470 L 1492 5471 X M 2248 5199 V -17 -138 -42 -249 -74 -333 V -33 -87 -76 -157 -130 -211 V -54 -53 -111 -80 -170 -80 V -98 0 -182 67 -253 201 V -50 95 -88 236 -114 422 L 2248 5198 L 2248 5199 X " />
+               <v:Shape class="VELEM" Stroked="0" _FillColor="#212125" Filled="1" Path="M 446 4358 V 187 0 334 185 368 556 R -134 55 V -33 -272 -124 -361 -251 -361 V -105 0 -228 85 -228 328 V 0 200 110 276 194 321 R 158 74 V 137 44 285 213 285 581 V 0 458 -235 628 -417 628 V -225 0 -386 -207 -422 -662 R 135 -59 V 17 320 141 472 292 472 V 112 0 272 -102 272 -363 V 0 -217 -96 -292 -205 -348 R -153 -71 V -155 -86 -279 -200 -279 -561 C 62 4516 274 4358 446 4358 L 446 4358 X " />
+               <v:Shape class="VELEM" Stroked="0" _FillColor="#212125" Filled="1" Path="M 9881 4917 V -65 -219 -160 -330 -282 -330 V -172 0 -311 275 -311 615 R 0 26 R 0 1263 R -146 0 R 0 -1290 V 0 -499 205 -903 457 -903 V 173 0 322 189 401 469 L 9881 4917 L 9881 4917 X " />
+               <v:Shape class="VELEM" Stroked="0" _FillColor="#212125" Filled="1" Path="M 7506 3724 R 143 0 R 0 1935 V -1 265 60 545 283 545 R 0 288 V -259 0 -425 -270 -425 -839 L 7507 3724 L 7506 3724 L 7506 3724 X " />
+               <v:PolyLine            Stroked="0" _FillColor="#7DAE35" Filled="1" Points="4990 6641 5131 6641 5131 10000 4990 10000 4990 6641 " />
+             </v:group>
+           </SPAN>
+
+         </DIV>
+-->
+
+      <DIV  ID    ="divCopyRight"
+            CLASS = "classVMLHost"
+            STYLE ="position:absolute;Left:32px;bottom:8;width:120;height:30;">
+        <v:shape    ID   ="vShapeCopyRight"
+                    Style="position:relative;;width:99%;height:99%;antialias:true"
+                    coordorigin="0,0" CoordSize="100,100"
+                    path="M0 50 L100 50 e"
+                    stroked="false" >
+            <v:path textpathok="True" />
+            <v:fill     ID   ="vfillCopyRight"
+                        on   ="True" color="threedface" />
+                <v:extrusion on         ="true"
+                             backdepth  ="0"
+                             Edge       ="1.5px"
+                             lightlevel ="0.75"
+                             lightlevel2="0.2"
+                             lightposition="-10000,-10000,10000"
+                             lightposition2="10000,10000,20000"/>
+            <v:textpath  ID     ="textpathCopyRight"
+                         on     ="true"
+                         FitPath ="true"
+                         string="&copy;&nbsp;1996&nbsp;&minus;&nbsp;2003"
+                         style="font-family:Arial;
+                                font-weight:bold;
+                                text-align:center;
+                               "/>
+        </v:shape>
+
+        <DIV ID="divCopyRightFader" CLASS="classFader" ></DIV>
+
+      </DIV>
+    </DIV>
+
+
+  </body>
+  <script language="VBScript" defer>
+
+'********************************************************************************
+'*                                                                              *
+'*                                  G L O B A L S                               *
+'*                                                                              *
+'********************************************************************************
+
+Option Explicit
+
+Const c_AttribAction = "_FilterAction"
+Const c_AnimInc      = 1
+Const c_strBKColor   = "ThreeDFace"
+Const c_strFillColor = "_FillColor"
+
+Dim g_nAnimState
+Dim g_strStartColor
+Dim g_objStopHdl
+Dim g_objHTMLHelper
+Set g_objStopHdl    = Nothing
+Set g_objHTMLHelper = CreateObject( "IEHTMLToolsSO.HTMLHelper" )
+
+
+Document.body.SetAttribute "_ScriptRef_", Me
+
+textpathCopyRight.string = Replace( textpathCopyRight.string, "2003", Year( Now()))
+
+window_onresize
+
+g_nAnimState    = 0
+'g_strStartColor = spanSteinbichler.GetAttribute( c_strFillColor )
+
+
+'SetSteinbichlerFill  c_strBKColor
+'divSteinbichler.Style.Visibility = "Visible"
+
+'AnimSeq1
+
+
+'********************************************************************************
+'*                                                                              *
+'*   R O U T I N E   T O   E N A B L E   U S E   O F   S T O P   B U T T O N    *
+'*                                                                              *
+'********************************************************************************
+
+Sub ShowStopButton( objStopHdl )
+
+    If IsObject( objStopHdl ) Then Set g_objStopHdl = objStopHdl
+
+    If UCase( divButton.CurrentStyle.Visibility ) = "HIDDEN" Then
+
+        divButton.ZoomIn
+
+    End If
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*  R O U T I N E   T O   D I S A B L E   U S E   O F   S T O P   B U T T O N   *
+'*                                                                              *
+'********************************************************************************
+
+Sub HideStopButton
+
+    Set g_objStopHdl = Nothing
+
+    If UCase( divButton.CurrentStyle.Visibility ) = "VISIBLE" Then
+
+        divButton.ZoomOut
+
+    End If
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*  R O U T I N E  T O  R E T R I E V E  S T A T E  O F  S T O P  B U T T O N   *
+'*                                                                              *
+'********************************************************************************
+
+Function IsShowingStopButton
+
+    IsShowingStopButton = FALSE
+
+    If UCase( divButton.CurrentStyle.Visibility ) = "VISIBLE" Then IsShowingStopButton = TRUE
+
+End Function
+
+'********************************************************************************
+'********************************************************************************
+
+'********************************************************************************
+'*                                                                              *
+'*     H A N D L E R   F O R   r e s i z i n g                                  *
+'*                                                                              *
+'********************************************************************************
+
+Sub window_onresize
+
+    With divMainBase.Style
+
+        If document.Body.ClientWidth < 200 Then
+
+            .Width = document.Body.ClientWidth
+            .Left  = 0
+
+        Else
+
+            .Width = 200
+            .Left  = ( document.Body.ClientWidth - 200 ) / 2
+
+        End If
+
+    End With
+
+    Dim nHeight
+    nHeight = document.Body.ClientHeight - divMainBase.OffsetHeight
+
+    If  nHeight > 0  Then  divFreeSpace.Style.Height = nHeight
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*     H A N D L E R   F O R   S T O P   B U T T O N    C L I C K S             *
+'*                                                                              *
+'********************************************************************************
+
+Sub Stop_OnMouseDown
+
+    With groupButton.Style
+
+        .PixelWidth  = 158
+        .PixelHeight = 158
+
+    End With
+
+    If IsObject( g_objStopHdl ) Then If Not ( g_objStopHdl Is Nothing ) Then g_objStopHdl
+
+End Sub
+
+Sub Stop_OnMouseOut
+
+    With groupButton.Style
+
+        .PixelLeft   = 80
+        .PixelBottom = 80
+        .PixelWidth  = 160
+        .PixelHeight = 160
+
+    End With
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*     H A N D L E R   F O R   K E Y S    N O T   P R O C E S S E D   Y E T     *
+'*                                                                              *
+'********************************************************************************
+
+Sub divButton_onkeydown
+                                            ' If SPACE is pressed, check for visible stop button
+    If          Window.Event.KeyCode = 32   _
+        And Not Window.Event.Repeat         Then
+
+        If UCase( divButton.CurrentStyle.Visibility ) = "VISIBLE" Then
+
+            Stop_OnMouseDown
+            Window.Event.KeyCode     = 0
+            Window.Event.ReturnValue = FALSE
+
+        End If
+
+        Window.Event.CancelBubble = TRUE
+
+    End If
+
+End Sub
+
+Sub divButton_onkeyup
+
+    If  Window.Event.KeyCode = 32  Then             ' If SPACE is released, check for
+                                                    ' visible stop button
+        If UCase( divButton.CurrentStyle.Visibility ) = "VISIBLE" Then
+
+            Stop_OnMouseOut
+            Window.Event.KeyCode     = 0
+            Window.Event.ReturnValue = FALSE
+
+        End If
+
+        Window.Event.CancelBubble = TRUE
+
+    End If
+
+End Sub
+
+'********************************************************************************
+
+Sub divButton_onfilterchange
+
+    If UCase( divButton.CurrentStyle.Visibility ) = "VISIBLE" Then divButton.Focus
+
+End Sub
+
+'********************************************************************************
+
+Sub DissolveFader( strID, strEndAction, nDuration )
+
+    Dim i
+    Dim objElem
+    Set objElem = Document.All( strID )
+
+    If Not ( objElem Is Nothing ) Then
+
+        objElem.SetAttribute  c_AttribAction, strEndAction
+        Set objElem.onFilterChange = GetRef( "DissolveFader_onfilterchange" )
+
+        With objElem.Filters
+
+            For i = 0 To .Length -1
+
+                With .Item( i )
+
+                    .Apply
+                    .Duration = nDuration
+
+                End With
+
+            Next
+
+            objElem.Style.Visibility = "hidden"
+
+            For i = 0 To .Length -1
+
+                .Item( i ).Play
+
+            Next
+
+        End With
+
+    End If
+
+End Sub
+
+'********************************************************************************
+
+Sub DissolveFader_onfilterchange
+
+    With Window.Event.SrcElement
+
+        Dim i
+
+        With .Filters
+
+            For i = 0 To .Length -1
+
+                If .Item( i ).status = 2 Then Exit Sub
+
+            Next
+
+        End With
+
+        Dim strAction
+        strAction = .GetAttribute( c_AttribAction )
+
+        If Not IsNull( strAction ) Then Execute strAction
+
+        .ParentElement.RemoveChild  Window.Event.SrcElement
+
+    End With
+
+End Sub
+
+'********************************************************************************
+
+Sub KillAnimation
+
+    spanAnimHost.ParentElement.RemoveChild  spanAnimHost
+
+End Sub
+
+'********************************************************************************
+
+Sub SetSteinbichlerFill( strColor )
+
+    Dim objElem
+
+    For Each objElem In spanSteinbichler.Children( 0 ).Children
+
+        objElem.FillColor = strColor
+
+    Next
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*                              A N I M A T I O N S                             *
+'*                                                                              *
+'********************************************************************************
+
+Sub AnimSeq1
+
+    Dim vTmp
+
+    If  g_nAnimState < 256  Then
+
+        vTmp = g_nAnimState * g_nAnimState * 1.5378700499807766243752402921953e-5
+
+        SetSteinbichlerFill  g_objHTMLHelper.MixColor( g_strStartColor, c_strBKColor, vTmp )
+
+    Else
+
+        g_nAnimState                  = 0
+
+        SetTimeout  GetRef( "AnimSeq2" ), 50
+        Exit Sub
+
+    End If
+
+    g_nAnimState = g_nAnimState + c_AnimInc
+
+    SetTimeout  GetRef( "AnimSeq1" ), 100
+
+End Sub
+
+'********************************************************************************
+
+Sub AnimSeq2
+
+    Dim vTmp
+    Dim objElem
+
+    If  g_nAnimState < 256  Then
+
+        vTmp = g_nAnimState * g_nAnimState * 1.5378700499807766243752402921953e-5
+
+        For Each objElem In spanSteinbichler.Children( 0 ).Children
+
+            objElem.FillColor = g_objHTMLHelper.MixColor( objElem.GetAttribute( c_strFillColor ), g_strStartColor, vTmp )
+
+        Next
+
+    Else
+
+        For Each objElem In spanSteinbichler.Children( 0 ).Children
+
+            objElem.FillColor = objElem.GetAttribute( c_strFillColor )
+
+        Next
+
+        g_nAnimState = 0
+
+        SetTimeout  GetRef( "AnimSeq3" ), 100
+        Exit Sub
+
+    End If
+
+    g_nAnimState = g_nAnimState + c_AnimInc
+    SetTimeout  GetRef( "AnimSeq2" ), 50
+
+End Sub
+
+'********************************************************************************
+
+Sub AnimSeq3
+
+    DissolveFader  "divCopyRightFader", "AnimSeq4", 2
+
+End Sub
+
+'********************************************************************************
+
+Sub AnimSeq4
+
+    DissolveFader  "divIntactFader", "AnimSeq5", 4
+
+End Sub
+
+'********************************************************************************
+
+Sub AnimSeq5
+
+    DissolveFader  "divVersionFader", "AnimSeq6", 2
+
+End Sub
+
+'********************************************************************************
+
+Sub AnimSeq6
+
+
+
+End Sub
+
+'********************************************************************************
+'********************************************************************************
+
+  </script>
+</html>

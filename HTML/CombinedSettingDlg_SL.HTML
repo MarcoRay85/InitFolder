@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML ID="THIS">
+<HEAD>
+  <TITLE>Kombinirana nastavitev</title>
+    <META content="text/html; charset=1251" http-equiv="Content-Type">
+    <META NAME="Description" CONTENT="Intact CombinedSetting(SL)">
+    <LINK ID="linkedstyleDefault" REL="STYLESHEET" HREF="DlgStyle_SL.css">
+    <LINK ID="linkedstyleCustom"  REL="STYLESHEET" HREF="HeadPositioningDlg.css">
+</HEAD>
+
+<XML ID="xmlResource">
+  <Resources>
+  </Resources>
+</XML>
+
+
+<BODY style="font-family: Arial;" Align="Left" ResourceXML="xmlResource" lang="sl">
+
+  <DIV ID="divCombinedSettingPane"
+        style         = "behavior:url(ToolPane.WSC);Margin-Top:1ex;"
+        HeaderText    = "Combined Setting"
+        HeaderClass   = "classTableHeader"
+        Minimized     = "0" >
+
+     <TABLE cellspacing=0 cellpadding=0  class="classTireDataTable" >
+     <TBODY>
+        <TR >
+          <TD  >Nastavitev:</TD>
+		  <TD>
+		  </TD>
+          <TD  class="classTireDataNumCell">
+			<Select ID="SelectSetting" Style="width:11em" ></Select>
+          </TD>
+         </TR>
+      </TBODY>
+    </TABLE>
+
+    <TABLE cellspacing=0 cellpadding=0  class="classTireDataTable" >
+     <TBODY>
+        <TR >
+          <TD>Plast</TD>
+          <TD>
+         </TD>
+           <TD>
+          </TD>
+        </TR>
+        <TR >
+          <TD>1</TD>
+          <TD>
+			<Select ID="TypeSelectLayer1"></Select>
+          </TD>
+           <TD>
+			<Select ID="NameSelectLayer1" Style="width:7em"></Select>
+          </TD>
+        </TR>
+        <TR >
+          <TD>2</TD>
+          <TD>
+			<Select ID="TypeSelectLayer2"></Select>
+          </TD>
+          <TD>
+			<Select ID="NameSelectLayer2" Style="width:7em"></Select>
+          </TD>
+        </TR>
+        <TR >
+          <TD>3</TD>
+          <TD>
+			<Select ID="TypeSelectLayer3"></Select>
+          </TD>
+          <TD>
+			<Select ID="NameSelectLayer3" Style="width:7em"></Select>
+          </TD>
+        </TR>
+        <TR>
+          <TD>4</TD>
+          <TD>
+			<Select ID="TypeSelectLayer4"></Select>
+          </TD>
+          <TD>
+			<Select ID="NameSelectLayer4" Style="width:7em"></Select>
+          </TD>
+        </TR>
+        <TR>
+          <TD>5</TD>
+          <TD>
+			<Select ID="TypeSelectLayer5"></Select>
+          </TD>
+          <TD>
+			<Select ID="NameSelectLayer5" Style="width:7em"></Select>
+          </TD>
+        </TR>
+        <TR>
+          <TD>6</TD>
+          <TD>
+			<Select ID="TypeSelectLayer6"></Select>
+          </TD>
+          <TD>
+			<Select ID="NameSelectLayer6" Style="width:7em"></Select>
+          </TD>
+        </TR>
+      </TBODY>
+    </TABLE>
+  </DIV><SPAN class="classShadow"></SPAN><DIV  ID            = "divToolPane"
+        style         = "behavior:url(ToolPane.WSC);Margin-Top:1ex;"
+        HeaderText    = "Tools"
+        HeaderClass   = "classTableHeader"
+        Minimized     = "0" >
+
+    <BUTTON ID="buttonSave"  CLASS="classButtons" style="behavior:url(PushButtons.WSC)" ToggleMode="FALSE"><SPAN Style="Font-Family:WingDings" ID="spanSaveBtnPane" CLASS="classVideoSpan">&amp;lt</SPAN></BUTTON>
+
+    <BUTTON ID="buttonDelete"  CLASS="classButtons" style="behavior:url(PushButtons.WSC)" ToggleMode="FALSE"><SPAN Style="Font-Family:WingDings" ID="spanSaveBtnPane" CLASS="classVideoSpan"><IMG SRC="TRASH.ICO" CLASS="classStopImage"></Img></SPAN></BUTTON>
+
+  </DIV><SPAN class="classShadow"></SPAN><DIV class="DLGBUTTONS" kind="12" align="CENTER"></DIV>
+</BODY>
+
+
+<SCRIPT class="DLGSCRIPT" language="vbscript" src="CombinedSettingDlg.vbs" defer>
+</SCRIPT>
+
+</HTML>

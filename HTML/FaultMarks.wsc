@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<component>
+<?component error="true" debug="true"?>
+
+<comment>
+<![CDATA[
+********************************************************************************
+*                                                                              *
+*                             D E S C R I P T I O N                            *
+*                                                                              *
+*   Author:    VR                                                              *
+*   Date:      11.03.2002                                                      *
+*   Versions:  V1.0                                                            *
+*              V1.1          25.11.2002     IE6 compatible                     *
+*                                                                              *
+*   About:     Component implements functionality for displaying fault marks   *
+*              within an inspection result image                               *
+*                                                                              *
+********************************************************************************
+
+********************************************************************************
+*                                                                              *
+*                              I N T E R F A C E                               *
+*                                                                              *
+*  Properties: MarkColor         (r/w)   Color of fault marks (valid HTML      *
+*                                           color value)                       *
+*                                                                              *
+*              MarkOpacity       (r/w)   Opacity of fault mark (100% = will    *
+*                                           completely overwrite image)        *
+*                                                                              *
+*              MarkBorder        (r/w)   Frame size of mark. If not empty,     *
+*                                           marks are shown as unfilled boxes  *
+*                                                                              *
+*              MarkPixelPerMM    (r/w)   Scaling of mark (in pixel per mm )    *
+*                                                                              *
+*              MarkPosAngle      (r/w)   Sector's position (in degree)         *
+*                                                                              *
+*              MarkViewAngle     (r/w)   Sector's horizontal angle of view (°) *
+*                                                                              *
+*              VMLGroup          (r)     Returns VML group object hosting      *
+*                                           the fault mark objects.            *
+*                                           Nothing if not initialized         *
+*                                                                              *
+*  Methods:    InitMarking               Initializes behavior, define scale    *
+*                                                                              *
+*              AddMark                   Adds fault mark of given size at      *
+*                                        start point to attached image         *
+*                                                                              *
+********************************************************************************
+]]>
+</comment>
+
+<public>
+    <property name = "MarkColor"        />
+    <property name = "MarkOpacity"      />
+    <property name = "MarkBorder"       />
+    <property name = "MarkPixelPerMM"   />
+    <property name = "MarkPosAngle"     />
+    <property name = "MarkViewAngle"    />
+    <property name = "VMLGroup"          >
+        <get/>
+    </property                           >
+
+    <method   name = "InitMarking"       >
+        <parameter name="OutputLeft"    />
+        <parameter name="OutputTop"     />
+        <parameter name="OutputWidth"   />
+        <parameter name="OutputHeight"  />
+        <parameter name="CoordWidth"    />
+        <parameter name="CoordHeight"   />
+    </method>
+
+    <method   name = "AddMark"           >
+        <parameter name="Left"          />
+        <parameter name="Top"           />
+        <parameter name="Width"         />
+        <parameter name="Height"        />
+    </method>
+
+
+</public>
+
+<implements type="Behavior"/>
+
+<comment>
+********************************************************************************
+*                                                                              *
+*                                  M A I N                                     *
+*                                                                              *
+********************************************************************************
+</comment>
+
+<script language="vbscript">
+<![CDATA[
+
+Option Explicit
+'********************************************************************************
+'*                                                                              *
+'*                                  G L O B A L   D A T A                       *
+'*                                                                              *
+'********************************************************************************
+
+Dim g_objVMLGroup
+Set g_objVMLGroup = Nothing
+
+Dim g_nPixelWidth
+
+'********************************************************************************
+'*                                                                              *
+'*                                P U B L I C S                                 *
+'*                                                                              *
+'********************************************************************************
+
+'********************************************************************************
+'*   PROPERTY GET_VMLGROUP                                                      *
+'********************************************************************************
+
+Function get_VMLGroup
+
+    Set get_VMLGroup = g_objVMLGroup
+
+End Function
+
+'********************************************************************************
+'*   METHOD     ADDMARK                                                         *
+'********************************************************************************
+
+Sub InitMarking( Left, Top, Width, Height, CoordWidth, CoordHeight )
+
+
+    If IsEmpty( MarkColor   ) Then MarkColor   = "#FF0040"
+    If IsEmpty( MarkOpacity ) Then MarkOpacity = "30%"
+
+    Set g_objVMLGroup = Element.GetElementsByTagName( "v:group" )
+
+    If g_objVMLGroup.Length < 1 Then
+
+        Set g_objVMLGroup = Element.Document.CreateElement( "v:group" )
+        Element.AppendChild   g_objVMLGroup
+
+        With g_objVMLGroup.Style
+
+            .Position = "absolute"
+            .zIndex   = 20
+            .Left     = Left
+            .Top      = Top
+            .Width    = Width
+            .Height   = Height
+
+        End With
+
+        With g_objVMLGroup.CoordSize
+
+            .X = CoordWidth
+            .Y = CoordHeight
+
+        End With
+
+    Else
+
+        Set g_objVMLGroup = g_objVMLGroup.Item( 0 )
+
+    End If
+
+    g_nPixelWidth = CoordWidth
+
+End Sub
+
+'********************************************************************************
+'*   METHOD     ADDMARK                                                         *
+'********************************************************************************
+
+Sub AddMark( Left, Top, Width, Height )
+
+    If g_objVMLGroup Is Nothing Then
+
+        MsgBox "FaultMarks.WSC: AddMark invoked without proper initialisation!"
+        Exit Sub
+
+    End If
+
+    Dim objVMLElem
+    Set objVMLElem = Element.Document.CreateElement( "v:Rect" )
+
+    g_objVMLGroup.AppendChild   objVMLElem
+
+    With objVMLElem.Style
+
+        .Position           = "absolute"
+        .Left               = Left
+        .Top                = Top
+        .Width              = Width
+        .Height             = Height
+        .Border             = 0
+        .Margin             = 0
+        .Padding            = 0
+
+    End With
+
+    If Len( MarkBorder ) > 0 Then
+
+        objVMLElem.Filled       = 0
+        objVMLElem.Stroked      = 1
+        objVMLElem.StrokeWeight = MarkBorder
+        objVMLElem.StrokeColor  = MarkColor
+
+    Else
+
+        objVMLElem.Stroked      = 0
+        objVMLElem.InnerHTML    = "<v:fill opacity= """            & MarkOpacity   _
+                                & """ type = ""solid"" color = """ & MarkColor     _
+                                & """ />"
+
+    End If
+
+    objVMLElem.onMouseOut   = GetRef( "onMouseAction_FaultMark_On"  )
+    objVMLElem.onMouseDown  = GetRef( "onMouseAction_FaultMark_Off" )
+
+
+
+    Dim strExtMM
+    If Not IsEmpty( MarkPixelPerMM ) Then
+        
+        MarkPixelPerMM = CDbl( MarkPixelPerMM )
+
+        If MarkPixelPerMM > 0 Then
+
+            strExtMM    =  "X: " & Round( Width  / MarkPixelPerMM ) & " mm"    _
+                        &  vbNewLine                                           _
+                        &  "Y: " & Round( Height / MarkPixelPerMM ) & " mm"    _
+                        &  strAngle
+
+        End If
+
+    End If
+
+    Dim vTmp
+    Dim nFact
+    Dim strAngle
+
+    If Not ( IsEmpty( MarkPosAngle ) Or IsEmpty( MarkViewAngle )) Then
+
+        If Len( strExtMM ) > 0 Then strAngle = vbNewLine
+
+        nFact    = MarkViewAngle / g_nPixelWidth
+        vTmp     = MarkPosAngle - MarkViewAngle * 0.5 + nFact * Left
+
+        strAngle = strAngle                         _
+                 & Round( vTmp )                    _
+                 & "°... "                          _
+                 & Round( vTmp + nFact * Width )    _
+                 & "°"
+
+    End If
+
+
+
+    objVMLElem.Title =  strExtMM & strAngle
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*                                L O C A L S                                   *
+'*                                                                              *
+'********************************************************************************
+
+Sub onMouseAction_FaultMark_On
+
+    With Element.Document.ParentWindow.Event
+
+        .CancelBubble                 = TRUE
+        .SrcElement.Style.visibility  = "visible"
+
+    End With
+
+End Sub
+
+'********************************************************************************
+
+Sub onMouseAction_FaultMark_Off
+
+    With Element.Document.ParentWindow.Event
+
+        If .Button <> 1 Then Exit Sub
+
+        .CancelBubble                 = TRUE
+        .SrcElement.Style.visibility  = "hidden"
+
+    End With
+
+End Sub
+
+'********************************************************************************
+'********************************************************************************
+
+
+]]>
+</script>
+
+</component>
+

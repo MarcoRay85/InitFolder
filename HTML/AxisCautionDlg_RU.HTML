@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML ID="THIS" XMLNS:v XMLNS:CX  XMLNS:t ="urn:schemas-microsoft-com:time">
+<HEAD>
+  <TITLE>проверить все оси</TITLE>
+    <META NAME="Description" CONTENT="Intact1200 проверка сообщения осей (RU)">
+    <LINK ID="linkedstyleDefault" REL="STYLESHEET" HREF="DlgStyle_RU.css">
+    <LINK ID="linkedstyleCustom"  REL="STYLESHEET" HREF="HeadPositioningDlg.css">
+    <LINK ID="linkedstyleCustom"  REL="STYLESHEET" HREF="BaseStyles.css">
+    <?IMPORT namespace="CX" implementation="SpinEdit.htc">    
+</HEAD>
+
+<!--************************************ DISPLAYED ******************************-->
+
+<BODY ID                = "bodyThis"
+      SCROLL            = "no"         
+      lang              = "ru"   >
+
+ <DIV CLASS="classDivInfo">
+        <STRONG>Caution:</STRONG>
+        <SPAN>
+              Проверка осей допустима только для полностью отлаженных устройств!
+             (Checking axes is permissible only for machines completely setup!
+          <BR>пожалуйста, проверьте, что оси могут двигаться без столкновений по всей дистанции!
+Please doublecheck, that axes may travel without collisions over whole distance!
+          <BR>пожалуйста, внимательно контролируйте все движения, чтобы иметь возможность немедленно активировать аварийный механизм
+Please supervise all travels strictly to be able to activate emergency device immediately
+          (e. g. if axis will travel at high speed while checking home position or axis length)!
+          (e. g. если оси будут двигаться с высокой скоростью во время проверки исходного положения или протяженности оси)!
+          <BR>пожалуйста, соблюдайте все меры предосторожности! (Please follow all safety precautions by all means!)
+Please follow all safety precautions by all means!
+          <BR>
+        </SPAN>
+
+ </DIV>
+  
+     <DIV class="DLGBUTTONS" kind="1" align="CENTER"></DIV>
+     
+</BODY>
+
+<SCRIPT language="VBScript"         src="BaseScripts.VBS"></SCRIPT>
+<script class="DLGSCRIPT" language="vbscript" src="AxisCautionDlg.vbs" defer>
+</script>
+
+</html>

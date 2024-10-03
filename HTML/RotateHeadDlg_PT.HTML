@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html ID="THIS" XMLNS:CX>
+  <head>
+    <META content="text/html; charset=1251" http-equiv="Content-Type">
+    <META NAME="Description" CONTENT="Intact1200 MeЯkopfposition - Drehwinkel (PT)">
+    <title>Posiзгo da cabeзa medidora</title>
+    <LINK REL="STYLESHEET" HREF="DlgStyle_PT.css">
+    <?IMPORT namespace="CX" implementation="SpinEdit.htc">
+  </head>
+
+<XML ID="xmlResource">
+  <Resources>
+    <Res    AddressBy   = "TAG"
+            MatchValue  = "body"
+            ApplyTo     = "title"
+    >Por favor, informe o setor do pneu que a cabeзa medidora deve inspecionar</Res>
+
+  </Resources>
+</XML>
+
+<body style = "width:18.5em;height:7em" Invisible="INIT" ResourceXML="xmlResource" lang="pt">
+
+  <br>
+  <p align="center">
+    <label class="DLGAUTOLABEL" FOR="InputRotDegree">
+      Setor:
+    </label>
+    <CX:SpinEdit   ID        ="InputRotDegree"
+                   style     ="position:relative;width:4em;height:2.5ex;top:0.5ex;border:1px inset" />
+    &nbsp;&deg;
+  </p>
+
+  <div class="DLGBUTTONS" kind="1" align="CENTER"  ></div>
+
+</body>
+
+<script class="DLGSCRIPT" language="vbscript" src="RotateHeadDlg.vbs" defer>
+</script>
+
+</html>

@@ -1,0 +1,65 @@
+v\:* {  behavior : url(#default#VML) }
+
+.classLineChecker
+    {
+        font             : 150% wingdings;
+    }
+
+.classLineTesting
+    {
+        Margin-Left      : 1em;
+        Font-Size        : smaller;
+        Line-Height      : 1em;
+        Color            : mediumblue;
+    }
+
+.classLineTested
+    {
+        Margin-Left      : 1em;
+        Font-Size        : smaller;
+        Line-Height      : 1em;
+        Color            : ButtonText;
+    }
+
+.classInfo
+    {
+        Border           : 1px solid gray;
+        Margin-Left      : 1em;
+        Padding          : 1ex;
+        Font-Size        : 80%;
+        Font-Weight      : lighter;
+        Color            : dimgray;
+        Background-Color : infobackground;
+    }
+
+.classError
+    {
+        Color            : darkred;
+        FontSize         : 80%;
+        LineHeight       : 1.5em;
+    }
+
+.classTestResultOK
+    {
+        Margin-Top       : 1em;
+        Font-Weight      : 800;
+        Font-Size        : 200%;
+        Line-Height      : 1.2em;
+        Text-Align       : Center;
+        Color            : springgreen;
+    }
+
+.classTestResultFail
+    {
+        Margin-Top       : 1em;
+        Font-Weight      : 800;
+        Font-Size        : 200%;
+        Line-Height      : 1.2em;
+        Text-Align       : Center;
+        Color            : red;
+    }
+
+
+
+
+

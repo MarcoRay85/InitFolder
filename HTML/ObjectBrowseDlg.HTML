@@ -1,0 +1,2077 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML ID="THIS" xmlns:v="urn:schemas-microsoft-com:vml">
+<HEAD>
+    <TITLE>Object browser</TITLE>
+    <META NAME="Description" CONTENT="Intact Object Browser">
+    <STYLE ID="styleMain" TYPE="text/css" TITLE="StyleDef">
+        v\:*    { behavior: url(#default#VML) }
+        BODY    { font-size        : 12pt;
+                  font-family      : ARIAL;
+                  width            : 100%;
+                  height           : 100%;
+                  border           : 0;
+                }
+
+        .classLeftPaneSpan
+                {
+                  font-size        : 11pt;
+                  font-weight      : bold;
+                  overflow         : auto;
+                  position         : absolute;
+                  border           : 1 inset;
+                  padding          : 1em 0.5ex;
+                }
+
+        .classRightPaneSpan
+                {
+                  position         : absolute;
+                  border           : 1 inset;
+                }
+
+        .classEvalPaneDiv
+                {
+                  position         : absolute;
+                  border           : 1 inset;
+                  padding          : 0.4ex;
+                  Background-Color : #F0F0F0;
+                  font-size        : 11pt;
+                }
+
+        .classCmdPaneSpan
+                {
+                  position         : absolute;
+                  border           : 1 inset;
+                  padding          : 0.4ex;
+                  overflow         : scroll;
+                  Background-Color : #F0F0F0;
+                  font-size        : 11pt;
+                }
+
+        .classOTreeNodeBoxDiv
+                {
+                  position         : relative;
+                  width            : 100%;
+                  padding          : 0.25ex;
+                  padding-left     : 0.5ex;
+                  margin           : 0.2ex;
+                  border-left      : 2 solid dimgray;
+                }
+
+        .classOTreeNodeSpan
+                {
+                  position         : relative;
+                  height           : 1em;
+                  line-height      : 1em;
+                  padding          : 0.25ex;
+                  color            : darkgray;
+                  Background-Color : dimgray;
+                  cursor           : hand;
+                }
+
+        .classOTreeCurNodeSpan
+                {
+                  position         : relative;
+                  height           : 1em;
+                  line-height      : 1em;
+                  padding          : 0.25ex;
+                  border           : 2 outset;
+                  color            : gainsboro;
+                  Background-Color : darkgray;
+                  cursor           : hand;
+                }
+
+        .classOTreeClickedNodeSpan
+                {
+                  position         : relative;
+                  height           : 1em;
+                  line-height      : 1em;
+                  padding          : 0.25ex;
+                  border           : 2 inset;
+                  color            : gainsboro;
+                  Background-Color : darkgray;
+                  cursor           : hand;
+                }
+
+        .classObjNameDiv
+                {
+                  font-weight      : bold;
+                  padding          : 1ex;
+                  margin           : 0.5ex;
+                  Color            : gainsboro;
+                  background-Color : darkgray;
+                }
+
+        .classBackButton
+                {
+                  font-family      : WebDings;
+                  font-size        : 24pt;
+                  font-weight      : bold;
+                  position         : absolute;
+                  Top              : 2px;
+                  Right            : 2px;
+                  Width            : 1.4em;
+                  Height           : 1.4em;
+                  Color            : dimgray;
+                }
+
+        .classHeadingDiv
+                {
+                  font-family      : ARIAL Black;
+                  font-weight      : bold;
+                  padding          : 0.25ex;
+                  margin-top       : 1ex;
+                  text-align       : center;
+                  Color            : gainsboro;
+                  background-Color : darkgray;
+                }
+
+        .classTHolderDiv
+                {
+                  position         : relative;
+                  overflow-Y       : hidden;
+                  width            : 100%;
+                }
+
+        .classListDiv
+                {
+                  width            : 100%;
+                  overflow-Y       : auto;
+                  border           : 1 inset;
+                }
+
+        .classListTable
+                {
+                  font-size        : 9pt;
+                  padding          : 1ex;
+                  table-layout     : fixed;
+                }
+
+        .classListHead
+                {
+                  font-size        : 11pt;
+                  font-family      : ARIAL Black;
+                  Color            : gainsboro;
+                  background-Color : darkgray;
+                  padding          : 0.5ex;
+                  margin           : 0.5ex;
+                  display          : table-header-group;
+                }
+
+        .classListBody
+                {
+                }
+
+        .classListCol
+                {
+                  background-Color : gainsboro;
+                  padding          : 0.5ex;
+                  margin           : 0.5ex;
+                  text-align       : left;
+                  vertical-align   : top;
+                  position         : relative;
+                }
+
+        .classChildNameTD
+                {
+                  border           : 1 outset;
+                  padding          : 0.3ex;
+                  background-Color : ThreeDFace;
+                  cursor           : hand;
+                }
+
+        .classPropParamSpan
+                {
+                  font-weight      : 900;
+                  color            : gainsboro;
+                  background-Color : darkgray;
+                }
+
+        .classPropValHolderSpan
+                {
+                  position         : relative;
+                  margin-left      : 3ex;
+                }
+
+        .classNoValSpan
+                {
+                  font-weight      : bold;
+                  color            : dimgray;
+                  position         : relative;
+                  left             : 4em;
+                }
+
+        .classValTypeSpan
+                {
+                  color            : blue;
+                  position         : relative;
+                  left             : 1ex;
+                }
+
+        .classValueSpan
+                {
+                  color            : #585858;
+                  background-Color : powderblue;
+                  position         : relative;
+                  left             : 1ex;
+                }
+
+        .classBrowseButton
+                {
+                  Font-weight      : bold;
+                  Font-Family      : WebDings;
+                  position         : absolute;
+                  width            : 2.2ex;
+                  height           : 2.2ex;
+                  line-height      : 2.2ex;
+                  color            : green;
+                  z-Index          : 2;
+                }
+
+        .classBrowseSpan
+                {
+                  position         : absolute;
+                  top              : -0.3ex;
+                  left             : -0.3ex;
+                  cursor           : hand;
+                }
+
+        .classParamTypeSpan
+                {
+                  color            : blue;
+                }
+
+        .classParamNameSpan
+                {
+                  font-weight      : bold;
+                  color            : #202020;
+                }
+
+        .classEvalInput
+                {
+                    width          : 90%;
+                    border         : 0;
+                }
+
+        .classCmdMsgDiv
+                {
+                }
+
+        .classCmdErrMsgDiv
+                {
+                  font-weight      : bold;
+                  color            : crimson;
+                }
+
+        .classCmdEvalExpSpan
+                {
+                  font-weight      : bold;
+                  color            : gray;
+                }
+
+        .classCmdEvalResSpan
+                {
+                  font-weight      : bold;
+                  color            : blue;
+                  background-Color : powderblue;
+                }
+
+    </STYLE>
+</HEAD>
+<BODY ID="bodyThis" bgcolor="ThreeDFace" SCROLL="no">
+
+    <SPAN ID="spanLeftPane" CLASS="classLeftPaneSpan">
+        <BUTTON ID="buttonBack" CLASS="classBackButton" TITLE="Back to parent (F12)">5</BUTTON>
+    </SPAN>
+    <SPAN ID="spanRightPane" CLASS="classRightPaneSpan">
+        <DIV ID="divObjName" CLASS="classObjNameDiv"></DIV>
+        <DIV ID="divProps" CLASS="classTHolderDiv">
+            <DIV ID="divPropHeader" CLASS="classHeadingDiv">
+                Properties
+            </DIV>
+            <TABLE ID="tablePropHeader" CLASS="classListTable">
+                <THEAD valign=bottom CLASS="classListHead">
+                    <TH CLASS="classListHead">
+                        Name
+                    </TH>
+                    <TH CLASS="classListHead">
+                        ID<SPAN STYLE="vertical-align:sub;font-size:66%;font-weight:100">h</SPAN>
+                    </TH>
+                    <TH CLASS="classListHead">
+                        Type
+                    </TH>
+                    <TH CLASS="classListHead">
+                        Kind
+                    </TH>
+                    <TH ID="thValue" CLASS="classListHead">
+                        <DIV STYLE="position:relative;width:100%;">
+                            <BUTTON ID="ButtonUpdateAll" CLASS="classBrowseButton">
+                                <SPAN CLASS="classBrowseSpan">q</SPAN>
+                            </BUTTON>
+                            <DIV align="center">
+                                Value / Parameter
+                            </DIV>
+                        </DIV>
+                    </TH>
+                    <TH CLASS="classListHead">
+                        Info
+                    </TH>
+                </THEAD>
+                <COL CLASS="classListCol" STYLE="width:14em">
+                </COL>
+                <COL CLASS="classListCol" STYLE="width:4em">
+                </COL>
+                <COL CLASS="classListCol" STYLE="width:13em">
+                </COL>
+                <COL CLASS="classListCol" STYLE="width:4em">
+                </COL>
+                <COL CLASS="classListCol" STYLE="width:20em">
+                </COL>
+                <COL CLASS="classListCol">
+                </COL>
+                <TBODY CLASS="classListBody">
+                </TBODY>
+            </TABLE>
+            <DIV ID="divListPropTable" CLASS="classListDiv">
+            </DIV>
+        </DIV>
+        <DIV ID="divMethods" CLASS="classTHolderDiv">
+            <DIV ID="divMethodHeader" CLASS="classHeadingDiv">
+                Methods
+            </DIV>
+            <TABLE ID="tableMethodHeader" CLASS="classListTable">
+                <THEAD valign=bottom CLASS="classListHead">
+                    <TH CLASS="classListHead">
+                        Name
+                    </TH>
+                    <TH CLASS="classListHead">
+                        ID<SPAN STYLE="vertical-align:sub;font-size:66%;font-weight:100">h</SPAN>
+                    </TH>
+                    <TH CLASS="classListHead">
+                        Return
+                    </TH>
+                    <TH CLASS="classListHead">
+                        Parameter
+                    </TH>
+                    <TH CLASS="classListHead">
+                        Info
+                    </TH>
+                </THEAD>
+                <COL CLASS="classListCol" STYLE="width:14em">
+                </COL>
+                <COL CLASS="classListCol" STYLE="width:4em">
+                </COL>
+                <COL CLASS="classListCol" STYLE="width:13em">
+                </COL>
+                <COL CLASS="classListCol" STYLE="width:24.2em">
+                </COL>
+                <COL CLASS="classListCol">
+                </COL>
+                <TBODY CLASS="classListBody">
+                </TBODY>
+            </TABLE>
+            <DIV ID="divListMethodTable" CLASS="classListDiv">
+            </DIV>
+        </DIV>
+    </SPAN>
+    <DIV ID    = "divEvalPane"
+         CLASS = "classEvalPaneDiv"
+         TITLE = "Enter expressions to evaluate or execute here. Starting line by a '?' will evaluate expression following, a '!' will browse it if result is an object. Writing text to the message window may be performed by invokation of the 'WriteMsg' routine passing the desired text"
+    >
+        <INPUT TYPE="text" ID="inputEVAL" CLASS="classEvalInput"></INPUT>
+    </DIV>
+    <SPAN ID="spanCmdPane" CLASS="classCmdPaneSpan">
+    </SPAN>
+</BODY>
+
+<SCRIPT defer language ="vbscript">
+
+'********************************************************************************
+'*                                                                              *
+'*                                  G L O B A L S                               *
+'*                                                                              *
+'********************************************************************************
+
+Option Explicit
+
+Class CMemberInfo
+
+    Public objInfo
+    Public strName
+    Public nID
+    Public nInvokeKind
+
+    Public Sub Init( objTypeInfo, objMember )
+
+        strName     = objMember.Name
+        nID         = objMember.MemberID
+        nInvokeKind = objMember.InvokeKinds
+
+        Set objInfo = objTypeInfo.GetMember( nID )
+
+    End Sub
+
+End Class
+
+const cAttrMemberInfo       =  "__MemberInfo"
+const cAttrNodeStyle        =  "__NodeStyle"
+
+Dim g_bIsInitialized
+Dim g_strRootName
+Dim g_strCurPath
+Dim g_strRightPaneTemplate
+Dim g_objCurBrowsed
+Dim g_objRootObject
+Dim g_objVBXens
+Dim g_objWinTools
+Dim g_objWinHandle
+
+Dim g_objTLIApp
+
+g_bIsInitialized = FALSE
+
+'********************************************************************************
+'*                                                                              *
+'*                                  M A I N                                     *
+'*                                                                              *
+'********************************************************************************
+
+Sub Document_onReadyStateChange
+
+    If g_bIsInitialized  Then Exit Sub
+
+    If UCase( Document.ReadyState ) <> "COMPLETE"  Then Exit Sub
+
+    g_bIsInitialized = TRUE
+
+    Dim vArgs
+
+    On Error Resume Next
+
+        vArgs = Window.DialogArguments
+
+        Set g_objRootObject = vArgs( 0 )
+        g_strRootName       = vArgs( 1 )
+
+        If Err.Number = 0 Then
+
+            window.DialogLeft   = "0px"
+            window.DialogTop    = "0px"
+            window.DialogWidth  = Window.screen.AvailWidth  & "px"
+            window.DialogHeight = Window.screen.AvailHeight & "px"
+            vArgs               = TRUE
+
+        Else                                ' Not started as dialog, use default value for testing
+
+            window.MoveTo   0, 0
+            window.ResizeTo Window.screen.AvailWidth, Window.screen.AvailHeight
+
+            Set g_objRootObject =  Document
+            g_strRootName       = "Document"
+            vArgs               = FALSE
+
+        End If
+
+    On Error Goto 0
+
+
+    On Error Resume Next
+
+        Set g_objVBXens = CreateObject( "ScriptingToolsSO.VBSXtensions" )
+
+    On Error Goto 0
+
+    If g_objVBXens Is Nothing Then
+
+        MsgBox "Please install & register latest version of ScriptingToolsSO.DLL library"
+        Window.Close
+        Exit Sub
+
+    End If
+
+    Set g_objWinTools  = CreateObject( "ScriptingToolsSO.Windowing" )
+    Set g_objWinHandle = CreateObject( "ScriptingToolsSO.WindowHandle" )
+
+    g_objWinHandle.ID  = Document
+    
+    '################
+ 
+        Dim  objVBX
+
+        Do While g_objWinHandle.ID = 0
+        
+            If  IsEmpty(  objVBX  )  Then  
+            
+                Set objVBX = CreateObject( "ScriptingToolsSO.VBSXtensions" )
+                
+            End If
+        
+            objVBX.Sleep
+            g_objWinHandle.ID  =  Document
+        
+        Loop
+ 
+    '################
+    
+    Set g_objWinHandle = g_objWinHandle.Parent
+    Set g_objTLIApp    = Nothing
+
+    On Error Resume Next
+
+        Set g_objTLIApp = CreateObject( "TLI.TLIApplication" )
+
+    On Error Goto 0
+
+    If g_objTLIApp Is Nothing Then
+
+        MsgBox "Please install & register TlbInf32.DLL library"
+        Window.Close
+        Exit Sub
+
+    End If
+
+    window_onResize
+
+    g_strRightPaneTemplate =  spanRightPane.InnerHTML
+
+    BrowseChild  g_objRootObject, g_strRootName
+
+End Sub
+
+'*******************************************************************************
+
+Sub BrowseChild( objBrowsed, strName )
+
+    Dim strParent
+    Dim objTreeParent
+    Dim objTreeSibling
+    Dim objTreeEntry
+    Dim objBox
+
+    strParent = g_strCurPath
+
+    If Len( g_strCurPath ) < 1 Then
+
+        g_strCurPath = strName
+
+    Else
+
+        Set objTreeEntry = Document.GetElementByID( "#" & g_strCurPath )
+        If Not ( objTreeEntry Is Nothing ) Then objTreeEntry.ClassName = "classOTreeNodeSpan"
+
+        g_strCurPath = g_strCurPath & "." & strName
+
+    End If
+
+    If Not BrowseObject( objBrowsed, g_strCurPath ) Then
+
+        g_strCurPath = strParent
+        Exit Sub
+
+    End If
+
+
+    Set objTreeEntry = Document.GetElementByID( "#" & g_strCurPath )
+
+    If objTreeEntry Is Nothing Then
+
+        Set objTreeSibling       = Nothing
+        Set objTreeEntry         = Document.CreateElement( "DIV" )
+        objTreeEntry.ClassName   = "classOTreeNodeBoxDiv"
+        objTreeEntry.InnerHTML   = "<SPAN>" & strName & "</SPAN><DIV></DIV>"
+
+        With objTreeEntry.FirstChild
+
+            .onClick     = GetRef( "onClick_BrowseTreeNode"      )
+            .onMouseDown = GetRef( "onMouseDown_BrowseTreeNode"  )
+            .onMouseOut  = GetRef( "onMouseOut_BrowseTreeNode"   )
+            .ID          = "#" & g_strCurPath
+
+        End With
+
+        If Len( strParent ) < 1 Then
+
+            Set objTreeParent                = spanLeftPane
+            objTreeEntry.RuntimeStyle.border = ""
+
+        Else
+
+            Set objTreeParent  = Document.GetElementByID( "#" & strParent )
+
+            If objTreeParent Is Nothing Then
+
+                WriteErrMsg "Illegal state in object tree representation detected!"
+                Exit Sub
+
+            End If
+
+            Set objTreeParent  = objTreeParent.NextSibling
+            strName            = UCase ( strName )
+
+            For Each objTreeSibling In objTreeParent.Children
+
+                If strName <= UCase( objTreeSibling.InnerText ) Then Exit For
+
+            Next
+
+            If IsEmpty( objTreeSibling ) Then Set objTreeSibling = Nothing
+
+        End If
+
+        If objTreeSibling Is Nothing Then
+
+            objTreeParent.AppendChild   objTreeEntry
+
+        Else
+
+            objTreeSibling.insertAdjacentElement "beforeBegin", objTreeEntry
+
+        End If
+
+        Set objTreeEntry = objTreeEntry.FirstChild
+
+    End If
+
+    objTreeEntry.ClassName = "classOTreeCurNodeSpan"
+
+
+End Sub
+
+'*******************************************************************************
+
+Function BrowseObject( objBrowsed, strPath )
+
+    BrowseObject = FALSE
+
+    Dim objTypeInfo
+    Set objTypeInfo = Nothing
+
+    On Error Resume Next
+
+        Set objTypeInfo = g_objTLIApp.InterfaceInfoFromObject( objBrowsed )
+
+    On Error Goto 0
+
+    If  objTypeInfo Is Nothing Then
+
+        WriteErrMsg "Can't retrieve 'ITypeInfo' interface"
+        Exit Function
+
+    End If
+
+    Set g_objCurBrowsed =  objBrowsed
+
+                        ' ********* Building right pane: list properties & methods
+    Dim colMembers
+    Dim objMember
+    Dim objMemberInfo
+    Dim objParam
+    Dim objTR
+    Dim objTD
+    Dim nSearchData
+    Dim vValue
+
+    spanRightPane.InnerHTML = g_strRightPaneTemplate
+    vValue                  = objTypeInfo.Name
+    Set objParam            = Nothing
+
+    On Error Resume Next
+
+        Set objParam = objTypeInfo.Parent
+
+    On Error Goto 0
+
+    If Not ( objParam Is Nothing ) Then vValue = objParam.name & ", " & vValue
+
+    divObjName.InnerText = "Path: " & strPath           _
+                         & vbNewLine                    _
+                         & "Type: " & vValue
+
+
+    Set vValue = tablePropHeader.CloneNode( TRUE )
+
+    vValue.ID  = "tablePropList"
+    vValue.RemoveChild  vValue.FirstChild
+
+    divListPropTable.AppendChild  vValue
+
+    Set vValue = tableMethodHeader.CloneNode( TRUE )
+
+    vValue.ID  = "tableMethodList"
+    vValue.RemoveChild  vValue.FirstChild
+
+    divListMethodTable.AppendChild  vValue
+
+    ButtonUpdateAll.onClick = GetRef( "onClick_UpdateAll" )
+    With ButtonUpdateAll.Style
+
+        .Position = "absolute"
+        .Left     = 0
+        .Top      = 0
+        .FontSize = "140%"
+
+    End With
+
+    window_onResize
+
+    Set colMembers = objTypeInfo.Members
+
+    colMembers.FuncFilter = 0
+    colMembers.VarFilter  = 0
+
+    Set colMembers = colMembers.GetFilteredMembers
+
+    Document.Body.RuntimeStyle.Cursor = "wait"
+    g_objWinTools.DoMessages 50
+
+    Dim nPropCount
+    Dim nMethodCount
+    nPropCount   = 0
+    nMethodCount = 0
+
+
+    For Each objMember In colMembers
+
+        If ( objMember.InvokeKinds And 49 ) = 0 Then
+
+            nPropCount = nPropCount + 1
+
+            Set objMemberInfo  =  New CMemberInfo
+            objMemberInfo.Init    objTypeInfo, objMember
+
+            Set objTR = tablePropList.InsertRow
+            objTR.SetAttribute  cAttrMemberInfo,  objMemberInfo
+
+            If objMemberInfo.objInfo.AttributeMask And 64   Then objTR.Disabled = TRUE
+
+            Set objTD          = objTR.InsertCell
+            objTD.InnerText    = objMemberInfo.strName
+
+            Set objTD          = objTR.InsertCell
+            SetID                objTD, objMemberInfo.nID
+
+            Set objTD          = objTR.InsertCell
+
+            Dim bIsObject
+            bIsObject = FALSE
+
+            With objMemberInfo.objInfo
+
+                vValue = MakeParamTypeString( .ReturnType, -1 )
+
+                If IsNull( vValue ) Then
+
+                    objTD.InnerHTML = "<SPAN CLASS=""classNoValSpan"">? ? ?</SPAN>"
+
+                Else
+
+                    objTD.InnerText = vValue
+
+                End If
+
+                With .ReturnType
+
+                    If ( .VarType And 4095 ) > 0 Then
+
+                        Select Case ( .VarType And 4095 )
+
+                            Case vbObject   bIsObject = TRUE
+                            Case 13         bIsObject = TRUE
+
+                        End Select
+
+                    Else
+
+                        If .TypeInfoNumber <> -1 Then
+
+                            If .TypeInfo.TypeKind = 4 Then bIsObject = TRUE
+
+                        End If
+
+                    End If
+
+                End With
+
+                Set objTD = objTR.InsertCell
+
+                If bIsObject Then  MakechildBrowseable  objTR, TRUE
+
+                If ( objMember.InvokeKinds And 2 ) <> 0 Then objTD.InnerText =                   "R"
+                If ( objMember.InvokeKinds And 4 ) <> 0 Then objTD.InnerText = objTD.InnerText & "W"
+                If ( objMember.InvokeKinds And 8 ) <> 0 Then objTD.InnerText = objTD.InnerText & "S"
+
+                Set objTD = objTR.InsertCell
+
+                With .Parameters
+
+                    If .Count > 0 Then
+
+                        vValue = "<SPAN CLASS=""classPropParamSpan"">&nbsp;P&nbsp;</SPAN>&nbsp;&nbsp;"
+
+                        For Each objParam In objMemberInfo.objInfo.Parameters
+
+                            vValue = vValue & ParamInfoToHTML( objParam ) & ", "
+
+                        Next
+
+                        objTD.InnerHTML = Left( vValue, Len( vValue ) - 2 )
+
+                    Else
+
+                        objTD.InnerHTML = "<BUTTON CLASS=""classBrowseButton"">"               _
+                                        & "<SPAN CLASS=""classBrowseSpan"">q</SPAN></BUTTON>"
+
+                        objTD.FirstChild.onClick = GetRef( "onClick_Update" )
+
+                    End If
+
+                End With
+
+            End With
+
+            Set objTD = objTR.InsertCell
+            objTD.InnerText = objMemberInfo.objInfo.HelpString
+
+        ElseIf objMember.InvokeKinds And 1 Then
+
+            nMethodCount = nMethodCount + 1
+
+            Set objMemberInfo  =  New CMemberInfo
+            objMemberInfo.Init    objTypeInfo, objMember
+
+            Set objTR = tableMethodList.InsertRow
+            objTR.SetAttribute  cAttrMemberInfo,  objMemberInfo
+
+            If objMemberInfo.objInfo.AttributeMask And 65  Then objTR.Disabled = TRUE
+
+            Set objTD          = objTR.InsertCell
+            objTD.InnerText    = objMemberInfo.strName
+
+            Set objTD          = objTR.InsertCell
+            SetID                objTD, objMemberInfo.nID
+
+            Set objTD          = objTR.InsertCell
+
+            With objMemberInfo.objInfo
+
+                vValue = MakeParamTypeString( .ReturnType, -1 )
+
+                If IsNull( vValue ) Then
+
+                    objTD.InnerHTML = "<SPAN CLASS=""classNoValSpan"">? ? ?</SPAN>"
+
+                Else
+
+                    objTD.InnerText = vValue
+
+                End If
+
+            End With
+
+            Set objTD = objTR.InsertCell
+            vValue    = ""
+
+            For Each objParam In objMemberInfo.objInfo.Parameters
+
+                vValue = vValue & ParamInfoToHTML( objParam ) & ", "
+
+            Next
+
+            If Len( vValue ) > 0 Then
+
+                vValue = Left( vValue, Len( vValue ) - 2 )
+
+                If objMemberInfo.objInfo.Parameters.OptionalCount < 0 Then
+
+                    vValue = vValue & "<SPAN CLASS=""classParamTypeSpan""> (variable parameter count)</SPAN>"
+
+                End If
+
+            End If
+
+            objTD.InnerHTML = vValue
+
+            Set objTD = objTR.InsertCell
+            objTD.InnerText = objMemberInfo.objInfo.HelpString
+
+        End If
+
+        g_objWinTools.DoMessages 500, , , , 11
+
+    Next
+
+    divPropHeader.InnerText   = divPropHeader.InnerText   & "(" & nPropCount   & ")"
+    divMethodHeader.InnerText = divMethodHeader.InnerText & "(" & nMethodCount & ")"
+
+    Document.Body.RuntimeStyle.Cursor = ""
+
+    BrowseObject = TRUE
+
+End Function
+
+'*******************************************************************************
+
+Function BrowsePath( strNewPath )
+
+    BrowsePath = FALSE
+
+    Dim nError
+    Dim objNew
+
+    On Error Resume Next
+
+        Execute "Set objNew = " & Replace( strNewPath, g_strRootName, "g_objRootObject" )
+
+        nError = Err.Number
+
+    On Error Goto 0
+
+    If nError <> 0 Then
+
+        WriteErrMsg "Can't browse object; error code " &  nError
+
+    Else
+
+        If Not BrowseObject(  objNew,  strNewPath ) Then Exit Function
+
+    End If
+
+
+    Dim objTreeEntry
+
+    Set objTreeEntry = Document.GetElementByID( "#" & g_strCurPath )
+    If Not ( objTreeEntry Is Nothing ) Then objTreeEntry.ClassName = "classOTreeNodeSpan"
+
+    Set objTreeEntry = Document.GetElementByID( "#" & strNewPath   )
+    If Not ( objTreeEntry Is Nothing ) Then objTreeEntry.ClassName = "classOTreeCurNodeSpan"
+
+    Set g_objCurBrowsed = objNew
+    g_strCurPath        = strNewPath
+    BrowsePath          = TRUE
+
+End Function
+
+'*******************************************************************************
+
+Sub Update( objUpdButton )
+
+    Dim bIsInitial
+    Dim bHasNewValue
+    Dim vValue
+    Dim nInvKind
+    Dim objMemberInfo
+    Dim objValHolder
+    Dim vTmp
+
+    bHasNewValue = FALSE
+
+    Set objValHolder  = objUpdButton.NextSibling
+    If  objValHolder Is Nothing  Then
+
+        objUpdButton.InsertAdjacentHTML "AfterEnd", "<SPAN CLASS=""classPropValHolderSpan""></SPAN>"
+        Set objValHolder  = objUpdButton.NextSibling
+
+    Else
+
+        For Each vTmp In objValHolder.All
+
+            vTmp.ParentElement.RemoveChild  vTmp
+
+        Next
+
+    End If
+
+    Set objMemberInfo = GetAssocMemberInfo( objUpdButton )
+
+    If objMemberInfo Is Nothing Then Exit Sub
+
+    On Error Resume Next
+
+        g_objVBXens.Move  vValue,  g_objTLIApp.InvokeHook(  g_objCurBrowsed, objMemberInfo.nID, 3 )
+
+        If err.Number = 0 Then bHasNewValue = TRUE
+
+    On Error Goto 0
+
+    If bHasNewValue Then
+
+        Select Case g_objVBXens.VT( vValue )
+
+            Case vbEmpty    objValHolder.InnerHTML = "<SPAN CLASS=""classNoValSpan"">E M P T Y</SPAN>"
+                            MakeChildBrowseable  objUpdButton, FALSE
+
+            Case vbNull     objValHolder.InnerHTML = "<SPAN CLASS=""classNoValSpan"">N U L L</SPAN>"
+                            MakechildBrowseable  objUpdButton, FALSE
+
+            Case vbObject   If vValue Is Nothing Then
+
+                                objValHolder.InnerHTML = "<SPAN CLASS=""classNoValSpan"">N O T H I N G</SPAN>"
+
+                            Else
+
+                                objValHolder.InnerHTML = "<SPAN CLASS=""classValTypeSpan"">"               _
+                                                       & typename( vValue )                                _
+                                                       & ": </SPAN><SPAN CLASS=""classValueSpan""></SPAN>"
+
+                                MakeChildBrowseable  objUpdButton, TRUE
+
+                            End If
+
+            Case Else       objValHolder.InnerHTML = "<SPAN CLASS=""classValTypeSpan"">"  _
+                                                   & typename( vValue )                  _
+                                                   & ": </SPAN><SPAN CLASS=""classValueSpan""></SPAN>"
+
+                            MakeChildBrowseable  objUpdButton, FALSE
+
+                            objValHolder.FirstChild.NextSibling.InnerText = vValue
+
+        End Select
+
+    Else
+
+        objValHolder.InnerHTML = "<SPAN CLASS=""classNoValSpan"">? ? ?</SPAN>"
+        MakeChildBrowseable  objUpdButton, FALSE
+
+    End If
+
+
+End Sub
+
+'*******************************************************************************
+
+Sub SetID( objCell, nID )
+
+    objCell.InnerText = Hex( nID )
+
+    With objCell.Style
+
+        .verticalAlign = "baseline"
+        .TextAlign     = "right"
+
+        If  objCell.ScrollWidth > objCell.ClientWidth  Then
+
+            Dim nSize
+            nSize = 100.0 * objCell.ClientWidth / objCell.ScrollWidth
+
+            Do
+
+                .FontSize = Round( nSize ) & "%"
+                nSize     = nSize * 0.9
+
+            Loop  While  objCell.ScrollWidth > objCell.ClientWidth
+
+        End If
+
+    End With
+
+End Sub
+
+'*******************************************************************************
+
+Function ParamInfoToHTML( objParamInfo )
+
+    Dim vValue
+    Dim nFlags
+
+    ParamInfoToHTML = "<SPAN CLASS=""classParamTypeSpan"">"
+
+    nFlags = objParamInfo.Flags
+
+    If nFlags Then
+
+        ParamInfoToHTML = ParamInfoToHTML & "["
+
+        If nFlags And  1 Then ParamInfoToHTML = ParamInfoToHTML & "in, "
+        If nFlags And  2 Then ParamInfoToHTML = ParamInfoToHTML & "out, "
+        If nFlags And  8 Then ParamInfoToHTML = ParamInfoToHTML & "retval, "
+        If nFlags And 16 Then ParamInfoToHTML = ParamInfoToHTML & "optional, "
+        If nFlags And 32 Then ParamInfoToHTML = ParamInfoToHTML           _
+                                              & "defaultvalue("           _
+                                              & HandleDumpedDefVars( objParamInfo.DefaultValue ) _
+                                              & "), "
+        If nFlags And 68 Then ParamInfoToHTML = ParamInfoToHTML & "???, "
+
+        ParamInfoToHTML = Left( ParamInfoToHTML, Len( ParamInfoToHTML ) - 2 )
+        ParamInfoToHTML = ParamInfoToHTML & "] "
+
+    End If
+
+    With objParamInfo
+
+        vValue = MakeParamTypeString( .VarTypeInfo, nFlags )
+
+        If IsNull( vValue ) Then
+
+            ParamInfoToHTML = ParamInfoToHTML & "? ? ?"
+
+        Else
+
+            ParamInfoToHTML = ParamInfoToHTML & vValue
+
+        End If
+
+    End With
+
+    ParamInfoToHTML = ParamInfoToHTML & "</SPAN> "
+
+
+    ParamInfoToHTML = ParamInfoToHTML                       _
+                    & "<SPAN CLASS=""classParamNameSpan"">" _
+                    & objParamInfo.Name                     _
+                    & "</SPAN>"
+
+End Function
+
+'*******************************************************************************
+
+Function GetAssocMemberInfo( objHTMLTableElem )
+
+    Set GetAssocMemberInfo = Nothing
+
+    Dim objNode
+    Set objNode = objHTMLTableElem.ParentElement
+
+    Do Until objNode Is Nothing
+
+        If UCase( objNode.TagName ) = "TR" Then Exit Do
+        Set objNode = objNode.ParentElement
+
+    Loop
+
+    If objNode Is Nothing Then Exit Function
+
+    Set GetAssocMemberInfo = objNode.GetAttribute( cAttrMemberInfo )
+    If IsNull( GetAssocMemberInfo ) Then Set GetAssocMemberInfo = Nothing
+
+End Function
+
+'*******************************************************************************
+
+Function MakeParamTypeString( objVarInfo, nFlags )
+
+    MakeParamTypeString = NULL
+
+    Dim nVarType
+    nVarType = objVarInfo.VarType And 4095
+
+    If nVarType > 0 Then
+
+        Select Case nVarType
+
+            Case 12     If nFlags <> 0 Then
+
+                            MakeParamTypeString = "Variant"
+
+                        Else
+
+                            If nVarType = objVarInfo.VarType Then
+
+                                MakeParamTypeString = "[in] Variant"
+
+                            Else
+
+                                MakeParamTypeString = "[in, out] Variant"
+
+                            End If
+
+                        End If
+
+            Case 24     MakeParamTypeString = "V O I D"
+
+            Case Else   MakeParamTypeString = TypeName( objVarInfo.TypedVariant )
+
+                        If nFlags = 0 Then
+
+                            If nVarType = objVarInfo.VarType Then
+
+                                MakeParamTypeString = "[in] "      & MakeParamTypeString
+
+                            Else
+
+                                MakeParamTypeString = "[in, out] " & MakeParamTypeString
+
+                            End If
+
+                        End If
+
+        End Select
+
+    ElseIf ( objVarInfo.VarType = 0 ) And ( objVarInfo.TypeInfoNumber = -1 ) Then
+
+        MakeParamTypeString = "V O I D"
+
+    Else
+
+        On Error Resume Next
+
+            MakeParamTypeString = objVarInfo.TypeInfo.Name
+
+        On Error Goto 0
+
+    End If
+
+End Function
+
+'*******************************************************************************
+
+Sub MakeChildBrowseable( objRow, bHasTo )
+
+    Dim objNode
+    Set objNode = objRow
+
+    Do Until objNode Is Nothing
+
+        If UCase( objNode.TagName ) = "TR" Then Exit Do
+        Set objNode = objNode.ParentElement
+
+    Loop
+
+    If objNode Is Nothing Then Exit Sub
+
+    With objNode.Cells.Item( 0 )
+
+        If bHasTo Then
+
+            .ClassName = "classChildNameTD"
+            .onClick   = GetRef( "onClick_BrowseChild" )
+
+        ElseIf .ClassName = "classChildNameTD" Then
+
+            .ClassName = ""
+            .onClick   = NULL
+
+        End If
+
+    End With
+
+End Sub
+
+'*******************************************************************************
+
+Function HandleDumpedDefVars( ByVal vDefVarVal )
+
+    Dim vTmp
+
+    If Not g_objVBXens.RestoreVariant( vDefVarVal ) Then
+
+        If IsNumeric( vDefVarVal ) Then
+
+            HandleDumpedDefVars = CStr( vDefVarVal )
+
+        Else
+
+            vTmp = g_objVBXens.SCode( vDefVarVal )
+
+            If Not IsNull( vTmp ) Then
+
+                If vTmp = &H80020004 Then
+
+                    HandleDumpedDefVars = "OPTIONAL"
+
+                Else
+
+                    HandleDumpedDefVars = "ERROR( 0x" & Hex( vTmp ) & " )"
+
+                End If
+
+            ElseIf IsObject( vDefVarVal )  Then
+
+                HandleDumpedDefVars = TypeName(    vDefVarVal )
+
+            Else
+
+                HandleDumpedDefVars = """" & CStr( vDefVarVal ) & """"
+
+            End If
+
+        End If
+
+    Else
+
+        Select Case g_objVBXens.VT( vDefVarVal )
+
+            Case vbEmpty    HandleDumpedDefVars = "EMPTY"
+
+            Case vbNull     HandleDumpedDefVars = "NULL"
+
+            Case vbError    HandleDumpedDefVars = "ERROR:" & Hex( g_objVBXens.SCode( vDefVarVal ))
+
+            Case vbObject   If vDefVarVal Is Nothing Then
+
+                                HandleDumpedDefVars = "NOTHING"
+
+                            Else
+
+                                HandleDumpedDefVars = typename( vDefVarVal )
+
+                            End If
+
+            Case Else       If IsNumeric( vDefVarVal ) Then
+
+                                HandleDumpedDefVars = CStr( vDefVarVal )
+
+                            Else
+
+                                HandleDumpedDefVars = """" & CStr( vDefVarVal ) & """"
+
+                            End If
+
+        End Select
+
+    End If
+
+End Function
+
+'*******************************************************************************
+
+Function RetrieveChild( objParent, nChildID, byRef objChild )
+
+    Dim vValue
+
+    On Error Resume Next
+
+        g_objVBXens.Move  vValue,  g_objTLIApp.InvokeHook(  objParent, nChildID, 3 )
+
+        RetrieveChild = Err.Number
+
+    On Error Goto 0
+
+    If ( RetrieveChild = 0 ) Then
+
+        If g_objVBXens.VT( vValue ) = vbObject Then
+
+            Set objChild = vValue
+
+        Else
+
+            RetrieveChild = -1
+
+        End If
+
+    End If
+
+End Function
+
+'*******************************************************************************
+
+Function RetrieveChildFromPropRowEvt( ByRef objChild, ByRef strName )
+
+    Window.Event.CancelBubble = TRUE
+
+    RetrieveChildFromPropRowEvt = -1
+
+    Dim objMemberInfo
+    Set objMemberInfo = GetAssocMemberInfo( Window.Event.SrcElement )
+
+    If objMemberInfo Is Nothing Then Exit Function
+
+    strName                     = objMemberInfo.strName
+    RetrieveChildFromPropRowEvt = RetrieveChild( g_objCurBrowsed, objMemberInfo.nID, objChild )
+
+    If RetrieveChildFromPropRowEvt <> 0 Then
+
+        WriteErrMsg "Can't retrieve object; error code " &  RetrieveChildFromPropRowEvt
+
+    End If
+
+End Function
+
+'*******************************************************************************
+
+Sub ShowSupportedInterfaces( objToInspect )
+
+    Dim objInfo
+    Set objInfo          = CreateObject( "ScriptingToolsSO.ObjectInfo" )
+
+    Set objInfo.Instance = objToInspect
+
+    Dim colInterfaces
+    Set colInterfaces    = objInfo.SupportedInterfaces
+
+    Dim i
+    Dim objRow
+    Dim objCell
+
+    spanCmdPane.InsertAdjacentHTML "beforeEnd", "<TABLE CLASS=""classIFaceListTable""></TABLE>"
+
+    With spanCmdPane.LastChild
+
+        Set objRow = .InsertRow
+
+        Set objCell = objRow.InsertCell
+
+        objCell.ColSpan = 2
+
+        objCell.Align     = "center"
+        objCell.InnerText = "Interfaces:"
+        objCell.Style.backgroundcolor = "gray"
+
+        For Each i in colInterfaces
+
+            Set objRow = .InsertRow
+
+            Set objCell = objRow.InsertCell
+
+            objCell.InnerText = i
+
+            Set objCell = objRow.InsertCell
+
+            objCell.Style.paddingLeft = "1em"
+            objCell.InnerText = objInfo.TranslateGUID( i )
+
+        Next
+
+        Set objRow = .InsertRow
+
+        Set objCell = objRow.InsertCell
+
+        objCell.ColSpan = 2
+
+        objCell.Align     = "center"
+        objCell.InnerText = "Services:"
+        objCell.Style.backgroundcolor = "gray"
+
+        Set colInterfaces = objInfo.ProvidedServices
+
+        For Each i in colInterfaces
+
+            Set objRow = .InsertRow
+
+            Set objCell = objRow.InsertCell
+
+            objCell.InnerText = i
+
+            Set objCell = objRow.InsertCell
+
+            objCell.Style.paddingLeft = "1em"
+            objCell.InnerText = objInfo.TranslateGUID( i )
+
+        Next
+
+    End With
+
+    i                    = Empty
+    Set colInterfaces    = Nothing
+    Set objInfo.Instance = Nothing
+
+End Sub
+
+'*******************************************************************************
+
+Sub WriteMsg( strMsg )
+
+    spanCmdPane.InsertAdjacentHTML "beforeEnd",                         _
+                                   "<DIV CLASS=""classCmdMsgDiv"">"     _
+                                &  strMsg                               _
+                                &  "</DIV>"
+
+    spanCmdPane.LastChild.ScrollIntoView  FALSE
+
+End Sub
+
+'*******************************************************************************
+
+Sub WriteEvalMsg( strExpression, strResult )
+
+    spanCmdPane.InsertAdjacentHTML "beforeEnd",                                     _
+                                   "<DIV>"                                          _
+                                &  "<SPAN CLASS=""classCmdEvalExpSpan""></SPAN>"    _
+                                &  ":&nbsp;"                                        _
+                                &  "<SPAN CLASS=""classCmdEvalResSpan""></SPAN>"    _
+                                &  "</DIV>"
+
+    With spanCmdPane.LastChild
+
+        .FirstChild.InnerText = strExpression
+        .LastChild.InnerText  = strResult
+        .ScrollIntoView         FALSE
+
+    End With
+
+End Sub
+
+'*******************************************************************************
+
+Sub WriteErrMsg( strMsg )
+
+    spanCmdPane.InsertAdjacentHTML "beforeEnd",                         _
+                                   "<DIV CLASS=""classCmdErrMsgDiv"">"  _
+                                &  "Error: "                            _
+                                &  strMsg                               _
+                                &  "</DIV>"
+
+
+    spanCmdPane.LastChild.ScrollIntoView  FALSE
+
+End Sub
+
+'*******************************************************************************
+'*******************************************************************************
+
+Sub onClick_UpdateAll
+
+    Window.Event.CancelBubble = TRUE
+
+    Dim objElem
+
+    For Each objElem In tablePropList.All
+
+        If objElem.ClassName = "classBrowseButton" Then  Update objElem
+
+    Next
+
+End Sub
+
+'*******************************************************************************
+
+Sub onClick_Update
+
+    With Window.Event
+
+        .CancelBubble = TRUE
+
+        Update  .SrcElement
+
+    End With
+
+End Sub
+
+'*******************************************************************************
+
+Sub onContextMenu_Member
+
+    With Window.Event
+
+        .CancelBubble   = TRUE
+        .ReturnValue    = FALSE
+
+        If .CtrlKey Then inputEVAL.Value = ""
+        If .AltKey  Then inputEVAL.Value = "?"
+
+        inputEVAL.Value = inputEVAL.Value & g_strCurPath & "." & .SrcElement.InnerText
+
+    End With
+
+End Sub
+
+'*******************************************************************************
+
+Sub onClick_BrowseChild
+
+    Window.Event.CancelBubble = TRUE
+
+    Dim strName
+    Dim objChild
+
+    If RetrieveChildFromPropRowEvt( objChild, strName ) = 0 Then  BrowseChild  objChild, strName
+
+End Sub
+
+'*******************************************************************************
+
+Sub onMouseDown_BrowseTreeNode
+
+    With Window.Event
+
+        .CancelBubble = TRUE
+
+        With .SrcElement
+
+            .SetAttribute  "cAttrNodeStyle", .ClassName
+            .ClassName    = "classOTreeClickedNodeSpan"
+
+        End With
+
+    End With
+
+End Sub
+
+'*******************************************************************************
+
+Sub onMouseOut_BrowseTreeNode
+
+    Dim strPrevClass
+
+    With Window.Event
+
+        .CancelBubble = TRUE
+
+        With .SrcElement
+
+            strPrevClass = .GetAttribute(  "cAttrNodeStyle" )
+
+            If Not IsNull( strPrevClass ) Then
+
+                .ClassName = strPrevClass
+                .RemoveAttribute  "cAttrNodeStyle"
+
+            End If
+
+        End With
+
+    End With
+
+End Sub
+
+'*******************************************************************************
+
+Sub onClick_BrowseTreeNode
+
+    Dim strNewPath
+    Dim strPrevClass
+
+    With Window.Event
+
+        .CancelBubble = TRUE
+
+        With .SrcElement
+
+            strNewPath    = Replace( .ID, "#", "" )
+
+            If Not BrowsePath( strNewPath ) Then
+
+                strPrevClass = .GetAttribute(  "cAttrNodeStyle" )
+
+                If Not IsNull( strPrevClass ) Then
+
+                    .ClassName = strPrevClass
+
+                End If
+
+            End If
+
+            .RemoveAttribute  "cAttrNodeStyle"
+
+        End With
+
+    End With
+
+End Sub
+
+'*******************************************************************************
+
+Sub buttonBack_onClick
+
+    Window.Event.CancelBubble = TRUE
+
+    If InStr( g_strCurPath, "." ) = 0 Then Exit Sub
+
+    Dim strNewPath
+    strNewPath = Left( g_strCurPath, InStrRev( g_strCurPath, "." ) - 1 )
+
+    BrowsePath( strNewPath )
+
+End Sub
+
+'*******************************************************************************
+
+Sub inputEval_onKeyDown
+
+    With Window.Event
+
+        If .KeyCode <> 13 Then Exit Sub
+
+        .CancelBubble = TRUE
+        .ReturnValue  = FALSE
+
+    End With
+
+    Dim strEval
+    Dim vRes
+    strEval = Trim( inputEVAL.Value )
+
+    If Len( strEval ) > 0 Then
+
+        vRes = Replace( strEval, g_strRootName, "g_objRootObject", 1, -1, vbTextCompare )
+
+        If Left( vRes, 1 ) = "?" Then
+
+            On Error Resume Next
+
+                vRes = Eval( Right( vRes, Len( vRes ) - 1 ))
+
+                If Err.Number <> 0 Then vRes = "[ERROR]: " & Err.Description
+
+            On Error Goto 0
+
+            WriteEvalMsg  strEval, vRes
+
+        ElseIf Left( vRes, 1 ) = "!" Then
+
+            On Error Resume Next
+
+                Execute "Set vRes = " & Right( vRes, Len( vRes ) - 1 )
+
+                If Err.Number <> 0 Then
+
+                    WriteEvalMsg  strEval, "[ERROR]: " & Err.Description
+
+                Else
+
+                    WriteEvalMsg  strEval, Typename( vRes )
+
+                End If
+
+            On Error Goto 0
+
+            If IsObject( vRes ) Then
+
+                If Not ( vRes Is Nothing ) Then
+
+                    BrowseObject vRes, Right( strEval, Len( strEval ) - 1 )
+
+                End If
+
+            End If
+
+        Else
+
+            On Error Resume Next
+
+                vRes = Execute( vRes )
+
+                If Err.Number <> 0 Then vRes = "[ERROR]: " & Err.Description
+
+            On Error Goto 0
+
+            If Len( strEval ) > 0 Then
+
+                WriteEvalMsg  strEval, vRes
+
+            End If
+
+        End If
+
+    End If
+
+End Sub
+
+'*******************************************************************************
+
+Sub document_onContextMenu
+
+    Dim vTmp
+    Dim objElem
+    Dim objMenu
+    Set objMenu = CreateObject( "ScriptingToolsSO.PopupMenu"    )
+
+    With Window.Event
+
+        If UCase( .SrcElement.ParentElement.TagName ) = "TR" Then
+
+            If .SrcElement.ParentElement.FirstChild Is .SrcElement Then
+
+                objMenu.Add "Copy to command line"
+                objMenu.Add "Copy to command line (evaluation)"
+                objMenu.Add "Append to command line"
+
+                If .SrcElement.ClassName = "classChildNameTD" Then
+
+                    objMenu.Add "Browse"
+                    objMenu.Add "Browse with OleViewer"
+                    objMenu.Add "Supported interfaces"
+
+                End If
+
+                Select Case objMenu.Show( g_objWinHandle, .ScreenX, .ScreenY )
+
+                    Case 1  inputEVAL.Value =                   g_strCurPath & "." & .SrcElement.InnerText
+                    Case 2  inputEVAL.Value = "? "            & g_strCurPath & "." & .SrcElement.InnerText
+                    Case 3  inputEVAL.Value = inputEVAL.Value & g_strCurPath & "." & .SrcElement.InnerText
+                    Case 4  onClick_BrowseChild
+                    Case 5  If RetrieveChildFromPropRowEvt( objElem, vTmp ) = 0 Then
+
+                                Dim objScriptX
+                                Set objScriptX = CreateObject( "ScriptX.Factory" )
+
+                                On Error Resume Next
+
+                                    objScriptX.BrowseObject objElem
+
+                                    If Err.Number <> 0 Then WriteMsg Err.Description
+
+                                On Error Goto 0
+
+                            End If
+
+                    Case 6  If RetrieveChildFromPropRowEvt( objElem, vTmp ) = 0 Then
+
+                                ShowSupportedInterfaces  objElem
+
+                            End If
+
+
+                End Select
+
+            End If
+
+        ElseIf .SrcElement.ID = "divObjName" Then
+
+            objMenu.Add "Minimize"
+            objMenu.Add "Copy HTML to clipboard"
+
+            Select Case objMenu.Show( g_objWinHandle, .ScreenX, .ScreenY )
+
+                Case 1  g_objWinHandle.Show 6
+
+                Case 2  Set objElem = Document.DocumentElement.CloneNode( TRUE )
+                        For Each vTmp In objElem.All.Tags( "SCRIPT" )
+
+                            vTmp.ParentElement.RemoveChild vTmp
+
+                        Next
+
+                        Set vTmp = objElem.All( "spanLeftPane" )
+                        vTmp.ParentElement.RemoveChild vTmp
+
+                        Set vTmp = objElem.All( "divEvalPane"  )
+                        vTmp.ParentElement.RemoveChild vTmp
+
+                        Set vTmp = objElem.All( "spanCmdPane"  )
+                        vTmp.ParentElement.RemoveChild vTmp
+
+                        With objElem.All( "bodyThis"  )
+
+                            .Scroll = "auto"
+
+                        End With
+
+                        With objElem.All( "spanRightPane"  )
+
+                            With .Style
+
+                                .Position = "static"
+                                .Width    = "100%"
+                                .Height   = "100%"
+
+                            End With
+
+                            For Each vTmp In .All
+
+                                Select Case vTmp.ClassName
+
+                                    Case "classBrowseButton"    vTmp.ParentElement.RemoveChild vTmp
+                                    Case "classTHolderDiv"      vTmp.ClassName = Empty
+                                    Case "classChildNameTD"     vTmp.ClassName = Empty
+
+                                End Select
+
+                            Next
+
+                            With .All( "divProps" ).Style
+
+                                .Position = "static"
+                                .Height   = "auto"
+
+                            End With
+
+                            With .All( "divListPropTable" ).Style
+
+                                .Position = "static"
+                                .Height   = "auto"
+                                .Overflow = "visible"
+
+                            End With
+
+                            With .All( "divMethods" ).Style
+
+                                .Position = "static"
+                                .Height   = "auto"
+
+                            End With
+
+                            With .All( "divListMethodTable" ).Style
+
+                                .Position = "static"
+                                .Height   = "auto"
+                                .Overflow = "visible"
+
+                            End With
+
+                            Set vTmp = .All( "tablePropHeader" )
+                             .All( "tablePropList" ).InsertAdjacentElement   "afterBegin", _
+                                                                             vTmp.RemoveChild(  vTmp.FirstChild  )
+                             vTmp.ParentElement.RemoveChild vTmp
+
+                            Set vTmp = .All( "tableMethodHeader" )
+                            .All( "tableMethodList" ).InsertAdjacentElement "afterBegin", _
+                                                                            vTmp.RemoveChild(  vTmp.FirstChild  )
+                            vTmp.ParentElement.RemoveChild vTmp
+
+
+                        End With
+
+                        With Window.ClipBoardData
+
+                            .ClearData
+                            .SetData   "Text", objElem.OuterHTML
+
+                        End With
+
+            End Select
+
+        ElseIf .SrcElement.ID = "spanCmdPane" Then
+
+            objMenu.Add "Clear"
+            objMenu.Add "Copy text to clipboard"
+            objMenu.Add "Copy HTML to clipboard"
+
+            Select Case objMenu.Show( g_objWinHandle, .ScreenX, .ScreenY )
+
+                Case 1  spanCmdPane.InnerHTML = ""
+                Case 2  With Window.ClipBoardData
+
+                            .ClearData
+                            .SetData   "Text", spanCmdPane.InnerText
+
+                        End With
+                Case 3  With Window.ClipBoardData
+
+                            .ClearData
+                            .SetData   "Text", spanCmdPane.InnerHTML
+
+                        End With
+
+            End Select
+
+        ElseIf .SrcElement.ClassName = "classCmdEvalExpSpan" Then
+
+            objMenu.Add "Recall command"
+
+            Select Case objMenu.Show( g_objWinHandle, .ScreenX, .ScreenY )
+
+                Case 1  inputEVAL.Value = .SrcElement.InnerText
+
+            End Select
+
+        End If
+
+
+
+        .CancelBubble   = TRUE
+        .ReturnValue    = FALSE
+
+    End With
+
+End Sub
+
+'*******************************************************************************
+
+Sub Document_onKeyUp
+
+    With Window.Event
+
+        Select Case .KeyCode
+
+            Case  13    inputEVAL.Focus
+                        .CancelBubble   = TRUE
+                        .ReturnValue    = FALSE
+
+            Case  27    inputEVAL.Value = ""
+                        .CancelBubble   = TRUE
+                        .ReturnValue    = FALSE
+
+            Case  46    If .AltKey Then
+
+                            .CancelBubble         = TRUE
+                            .ReturnValue          = FALSE
+                            spanCmdPane.InnerHTML = ""
+
+                        End If
+
+            Case 123    buttonBack_onClick
+                        .CancelBubble   = TRUE
+                        .ReturnValue    = FALSE
+
+        End Select
+
+    End With
+
+End Sub
+
+'*******************************************************************************
+
+Sub window_onResize
+
+    Window.Event.CancelBubble = TRUE
+
+    Dim nHFact
+    Dim nVFact
+    Dim nLimX
+    Dim nLimY
+
+    With Document.Body
+
+        nHFact = .ClientWidth
+        nVFact = .ClientHeight
+
+    End With
+
+    nLimX = nHFact * 0.2
+    nLimY = nVFact * 0.8
+
+    With spanLeftPane.Style
+
+        .PixelLeft   = 2
+        .PixelTop    = 0
+        .PixelWidth  = nLimX
+        .PixelHeight = nLimY
+
+    End With
+
+    With spanRightPane.Style
+
+        .PixelLeft   = nLimX  + 4
+        .PixelTop    = 0
+        .PixelWidth  = nHFact - nLimX - 6
+        .PixelHeight = nLimY
+
+    End With
+
+    With divEvalPane.Style
+
+        .PixelLeft   = 2
+        .PixelTop    = nLimY  + 3
+        .PixelWidth  = nHFact - 4
+        .Height      = "1.8em"
+
+    End With
+
+    With spanCmdPane.Style
+
+        .PixelLeft   = 2
+        .PixelTop    = nLimY  + 6 + divEvalPane.OffsetHeight
+        .PixelWidth  = nHFact - 4
+        .Height      = nVFact - 2 - .PixelTop
+
+    End With
+
+    nLimY = ( spanRightPane.Style.PixelHeight - tablePropHeader.OffsetTop ) * 0.5 - 15
+
+    divProps.Style.PixelHeight   = nLimY
+    divMethods.Style.PixelHeight = nLimY
+
+    divListPropTable.Style.PixelHeight   = divProps.ClientHeight            _
+                                         - divPropHeader.ClientHeight       _
+                                         - tablePropHeader.ClientHeight     _
+                                         - 10
+
+    divListMethodTable.Style.PixelHeight = divMethods.ClientHeight          _
+                                         - divMethodHeader.ClientHeight     _
+                                         - tableMethodHeader.ClientHeight   _
+                                         - 10
+
+    divListPropTable.Style.PixelHeight   = nLimY                            _
+                                         - divListPropTable.OffsetTop
+
+    divListMethodTable.Style.PixelHeight = nLimY                            _
+                                         - divListMethodTable.OffsetTop
+
+End Sub
+
+'*******************************************************************************
+'*******************************************************************************
+
+</SCRIPT>
+</html>
+
+

@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--html id="THIS" XMLNS:CX-->
+<html id"THIS">
+
+	<head>   
+		<title>Fehlfunktion (Transportssystem)</title>
+		<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+		<meta name="description" content="Fehlerdialog Transportssystem (DE)">
+		<link id="linkedstyleDefault" rel="stylesheet" href="DlgStyle_DE.css">		
+	</head>
+
+   <xml id="XMLStringTable">  
+      <StringTable>     
+         <String ID="ModuleType1">Transportmodul kurz</String>
+         <String ID="ModuleType2">Transportmodul lang</String>
+         <String ID="ModuleType3">Drehtisch</String>
+         <String ID="ModuleType4">Wippe</String>
+         
+         <String ID="ModuleLongSeg1">Segment 1</String>
+         <String ID="ModuleLongSeg2">Segment 2</String>
+         <String ID="Module">Modul</String>
+         
+         <String ID="ExtConvSysError64">Undefinierter Fehler</String>
+         <String ID="ExtConvSysError65">Zustand nicht definiert</String>
+         <String ID="ExtConvSysError66">InitKommZeiger</String>
+         <String ID="ExtConvSysError67">Reifen unbekannt</String>
+         <String ID="ExtConvSysError68">Reifendaten nicht vorhanden</String>
+         <String ID="ExtConvSysError69">Zeitueberschreitung beim Schwenken</String>
+         <String ID="ExtConvSysError70">Drehtisch-Position verloren</String>
+         <String ID="ExtConvSysError71">Drehtisch erreicht 0-Grad-Position nicht</String>
+         <String ID="ExtConvSysError72">Sensoren Drehtisch</String>
+         <String ID="ExtConvSysError73">Motorrollen nicht verbunden</String>
+         <String ID="ExtConvSysError74">Zielangabe ungueltig</String>
+         <String ID="ExtConvSysError75">PutGetFiFo ist voll</String>
+         <String ID="ExtConvSysError76">PutGetFiFo hat keine Daten</String>
+         <String ID="ExtConvSysError77">Wippe erreicht obere Position nicht</String>
+         <String ID="ExtConvSysError78">Vorgaenger hat Zustand nicht gelesen</String>
+         <String ID="ExtConvSysError254">Segment nicht vorhanden</String>
+         <String ID="ExtConvSysError255">Default</String>
+         
+         <!--String ID="ExtConvSysErrorPLC">PLC des externen Transportsystems ist tot</String-->         
+      </StringTable>      
+   </xml>
+
+   <BODY style="width:50%;height:25%;">
+   
+      <TABLE style="width:100%;height:100%;text-align:center;">
+         <TR>
+            <TD>
+               <SPAN ID="ExtConvSysErrorDialog_Output" STYLE="color:black;font-size:100%;"><b></b></SPAN>         
+            </TD>
+         </TR>
+         <TR STYLE="height:16.6%">
+            <TD Colspan="2">
+               <BUTTON ID="btOK" Style="left:10%;width:40%">OK</BUTTON>
+            </TD>
+         </TR>         
+      </TABLE>
+      
+	</BODY>
+
+	<SCRIPT class="DLGSCRIPT" language="vbscript" src="ExtConvSysErrorDialog.vbs" DEFER>
+	</SCRIPT>
+
+</html>

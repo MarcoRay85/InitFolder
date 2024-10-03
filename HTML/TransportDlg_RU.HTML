@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html ID="THIS" XMLNS:CX>
+<head>
+  <title>транспортировка (Transport)</title>
+    <META NAME="Description" CONTENT="Intact1200 транспортировка (RU)">
+    <LINK REL="STYLESHEET" HREF="DlgStyle_RU.css">
+    <?IMPORT namespace="CX" implementation="SpinEdit.htc">
+</head>
+
+<XML ID="xmlResource">
+  <Resources>
+    <Res    AddressBy   = "ID"
+            MatchValue  = "trDistance"
+            ApplyTo     = "title"
+    >пожалуйста, укажите расстояние, на которое должна транспортироваться шина
+Please enter distance the tire should be conveyed</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "trDirection"
+            ApplyTo     = "title"
+    >пожалуйста, укажите напрвление, в котором должна транспортироваться шина
+Please enter direction the tire should be conveyed in</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "trSpeed"
+            ApplyTo     = "title"
+    >пожалуйста, укажите скорость, с которой должна транспортироваться шина
+Please enter speed the tire should be conveyed with</Res>
+
+  </Resources>
+</XML>
+
+<body style = "width:20.5em;height:20em" Invisible="INIT" ResourceXML="xmlResource" lang="ru" >
+
+  <p align=center style="position:relative; top: 0.5em">
+    <table cellspacing="0" cellpadding="3" style="font-weight:bold" >
+      <colgroup>
+      </colgroup>
+      <colgroup align   = "right">
+      </colgroup>
+      <colgroup>
+      </colgroup>
+      <tbody>
+      <tr ID="trDistance" >
+        <td>
+          <label class="DLGAUTOLABEL" FOR="InputDistance" >
+            расстояние перемещения (Distance)
+          </label>
+        </td>
+        <td>
+          <CX:SpinEdit   ID        ="InputDistance"
+                         style     ="border:1px inset" />
+        </td>
+        <td>
+          mm
+        </td>
+      </tr>
+      <tr ID="trDirection" >
+        <td valign=top>
+          направление (Direction)
+        </td>
+        <td>
+          <INPUT id   ="inputDirForward"
+                 type ="radio"
+                 name ="DirRadioBtn"
+                 CHECKED
+          >
+          <br>
+          <INPUT id   ="inputDirReverse"
+                 type ="radio"
+                 name ="DirRadioBtn"
+          >
+        </td>
+        <td>
+          <label class="DLGAUTOLABEL" FOR="inputDirForward" >
+            вперед (Forward)
+          </label>
+          <br>
+          <label class="DLGAUTOLABEL" FOR="inputDirReverse">
+            назад (Reversed)
+          </label>
+        </td>
+      </tr>
+      <tr ID="trSpeed" >
+        <td valign=top>
+          скорость (Speed)
+        </td>
+        <td>
+          <INPUT id   ="inputSpeedSlow"
+                 type ="radio"
+                 name ="SpeedRadioBtn"
+                 CHECKED
+          >
+          <br>
+          <INPUT id   ="inputSpeedFast"
+                 type ="radio"
+                 name ="SpeedRadioBtn"
+          >
+        </td>
+        <td>
+          <label class="DLGAUTOLABEL" FOR="inputSpeedSlow" >
+            медленно (Slow)
+          </label>
+          <br>
+          <label class="DLGAUTOLABEL" FOR="inputSpeedFast">
+            быстро (Fast)
+          </label>
+        </td>
+      </tr>
+    </tbody>
+    </table>
+  </p>
+  <div class="DLGBUTTONS" kind="1" align="CENTER"  ></div>
+</body>
+
+
+
+<script class="DLGSCRIPT" language="vbscript" src="TransportDlg.vbs" defer>
+</script>
+
+</html>

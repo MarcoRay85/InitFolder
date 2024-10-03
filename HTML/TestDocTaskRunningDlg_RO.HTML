@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html ID="THIS">
+  <head >
+<!-- Inserted by TRADOS: --><META HTTP-EQUIV="content-type" CONTENT="text/html; charset=windows-1250">
+
+  <title>&Icirc;nchidere Intact</title>
+    <META NAME="Description" CONTENT="Abandonare &#539;i stocare Intact1200 (RO)">
+    <LINK REL="STYLESHEET" HREF="DlgStyle_DE.css">
+  </head>
+
+<body style="width:28em; height:12em" align="center" Invisible="INIT" lang="ro">
+
+  <div align="center"
+       style="position:absolute;zIndex:-1;zoom:2.5;"
+       style="Filter:progid:DXImageTransform.Microsoft.alpha( opacity=10 )">
+    <img src="AnimHourglass.gif"> &nbsp; <img src="AnimHourglass.gif"> &nbsp; <img src="AnimHourglass.gif"> &nbsp; <img src="AnimHourglass.gif">   <img src="AnimHourglass.gif"> &nbsp; <img src="AnimHourglass.gif"> &nbsp; <img src="AnimHourglass.gif"> &nbsp; <img src="AnimHourglass.gif">
+  </div>
+
+  <div ID="divText" align="left" style="line-height:180%; width:26em;position:relative">
+     &Icirc;nchiderea aplica&#539;iei <span class="classIntact">Intact</span> &icirc;nt&acirc;rzie pu&#539;in deoarece &icirc;n prezent se desfă&#539;oară opera&#539;ia de stocare a rezultatelor testării. <br> Cu <span class="classButton">Anulare</span> pute&#539;i anula complet &icirc;nchiderea aplica&#539;iei <span class="classIntact">Intact</span>.
+  </div>
+
+  <div class="DLGBUTTONS" kind="11" align="CENTER"  ></div>
+
+</body>
+
+<script language="vbscript" >
+
+    Option Explicit
+
+    Sub SetTaskKind( nKind )
+
+        If nKind = 1  Then
+
+            divText.InnerHTML = Replace( divText.InnerHTML, "Speicher", "Druck" )
+
+        End If
+
+    End Sub
+
+</script>
+
+<script class="DLGSCRIPT" language="vbscript" src="TestDocTaskRunningDlg.vbs" defer>
+</script>
+
+</html>

@@ -1,0 +1,951 @@
+<?xml version="1.0"?>
+<component>
+<?component error="true" debug="true"?>
+
+<comment>
+<![CDATA[
+********************************************************************************
+*                                                                              *
+*                             D E S C R I P T I O N                            *
+*                                                                              *
+*   Author:    VR                                                              *
+*   Date:      27.02.2001                                                      *
+*   Versions:  V1.0                                                            *
+*                                                                              *
+*   About:     Component implements a combo box as a behaviour of an text      *
+*              input. In addition to the <SELECT> this control allows the      *
+*              user to input text not contained in the drop down list          *
+*                                                                              *
+********************************************************************************
+
+********************************************************************************
+*                                                                              *
+*                              I N T E R F A C E                               *
+*                                                                              *
+*                                                                              *
+*                                                                              *
+*  Properties: AnimationDuration  (r/w)  Time duration [s] for drop down ani-  *
+*                                        mation                                *
+*              DropDownWidth      (r/w)  Height of drop down list              *
+*              DropDownHeight     (r/w)  Height of drop down list              *
+*              RelPosTop          (r/w)  Position of top of drop down list     *
+*                                        relative to hosting element           *
+*              RelPosLeft         (r/w)  Position of left side of drop down    *
+*                                        list relative to hosting element      *
+*              SelectedIndex      (r/w)  Index of selected option or -1, if    *
+*                                        nothing is selected or user entered   *
+*                                        a string not contained in option list *
+*              XMLOptionList      (r/w)  Either a XML DOM nodelist object      *
+*                                        containing selectable options:        *
+*                                           <Option Name="Option1" Value="1"/> *
+*                                           <Option Name="Option2" Value="2"/> *
+*                                        or a ID of a XML island containing    *
+*                                        options as described above.           *
+*                                                                              *
+*                                                                              *
+*  Methods:    AppendOption              Appends an option to option list      *
+*              InsertOption              Inserts an option at given index      *
+*                                        into option list                      *
+*              ClearOptions              Removes all options from list         *
+*              ShowDropDown              Initiate drop down of option list     *
+*                                        programmatically                      *
+*                                                                              *
+*                                                                              *
+*                                                                              *
+*                                                                              *
+*                                                                              *
+*                                                                              *
+*                                                                              *
+*                                                                              *
+*                                                                              *
+*                                                                              *
+*                                                                              *
+*                                                                              *
+*                                                                              *
+*                                                                              *
+*                                                                              *
+*                                                                              *
+*                                                                              *
+*                                                                              *
+********************************************************************************
+]]>
+</comment>
+
+<public>
+    <property name = "AnimationDuration"/>
+    <property name = "DropDownWidth"    />
+    <property name = "DropDownHeight"   />
+    <property name = "RelPosTop"        />
+    <property name = "RelPosLeft"       />
+    <property name = "SelectedIndex"     >
+        <get/>
+        <put/>
+    </property>
+    <property name = "XMLOptionList"     >
+        <get/>
+        <put/>
+    </property>
+
+    <method   name = "AppendOption" >
+        <parameter name="Name"  />
+        <parameter name="Value" />
+    </method>
+    <method   name = "InsertOption" >
+        <parameter name="Name"  />
+        <parameter name="Value" />
+        <parameter name="Index" />
+    </method>
+    <method   name = "ClearOptions"  />
+    <method   name = "ShowDropDown"   >
+        <parameter name="HasToShow"  />
+    </method>
+
+</public>
+
+<implements type="Behavior">
+
+    <attach   event = "ondocumentready" handler="onInitElem"       />
+    <attach   event = "oncontentready"  handler="onInitElem2"      />
+    <attach   event = "ondetach"        handler="onElemDetach"     />
+
+</implements>
+
+
+
+<comment>
+********************************************************************************
+*                                                                              *
+*                                  M A I N                                     *
+*                                                                              *
+********************************************************************************
+</comment>
+
+<script language="vbscript">
+<![CDATA[
+
+Option Explicit
+'********************************************************************************
+'*                                                                              *
+'*                           G L O B A L   D A T A                              *
+'*                                                                              *
+'********************************************************************************
+
+Dim bIsInitialized
+bIsInitialized = FALSE
+
+Dim objButton
+Set objButton = Nothing
+
+Dim objDropDown
+Set objDropDown = Nothing
+
+Dim bIsDropped
+bIsDropped = FALSE
+
+Dim nSelectedIndex
+nSelectedIndex = -1
+
+Dim objSelectedItem
+Set objSelectedItem = Nothing
+
+Dim objSelectedPrev
+Set objSelectedPrev = Nothing
+
+Dim objXMLNode
+Set objXMLNode = Nothing
+Dim objCurXMLNode
+Set objCurXMLNode = Nothing
+
+Dim strSavedVal
+strSavedVal = ""
+
+Dim objSavedKeyHdl
+Dim objSavedBlurHdl
+
+Dim strTickerCmd
+strTickerCmd = ""
+
+Dim nTimerCookie
+nTimerCookie = 0
+
+'Dim objTraceWin
+'Set objTraceWin = window.open()
+'Set objTraceWin = objTraceWin.document.open( "text/html" )
+'objTraceWin.Writeln "<pre>"
+
+'********************************************************************************
+'*                                                                              *
+'*                                P U B L I C S                                 *
+'*                                                                              *
+'********************************************************************************
+
+'********************************************************************************
+'*   PROPERTY   SELECTEDINDEX                                                   *
+'********************************************************************************
+
+Function get_SelectedIndex
+
+    get_SelectedIndex = nSelectedIndex
+
+End Function
+
+Sub put_SelectedIndex( nNewIndex )
+
+    nSelectedIndex = nNewIndex
+
+    If IsDropped = TRUE Then
+
+        Dim colItems
+        Set colItems = objDropDown.Children
+
+        If nNewIndex >= colItems.Length Then nSelectedIndex = colItems.Length - 1
+        If nNewIndex <  0               Then nSelectedIndex = 0
+
+        If colItems.length > 0 Then
+
+            element.value = colItems.Item( nSelectedIndex ).InnerText
+            FindInSelection
+            ShowSelected  TRUE
+            MakeSelectedVisible
+
+        End If
+
+    End If
+
+End Sub
+
+'********************************************************************************
+'*   PROPERTY   XMLOPTIONLIST                                                   *
+'********************************************************************************
+
+Function get_XMLOptionList
+
+    Set get_XMLOptionList = objXMLNode
+
+End Function
+
+Sub put_XMLOptionList( nNewList )
+
+    If IsObject( nNewList ) Then
+
+        Set objXMLNode = nNewList
+
+    Else
+
+        Set objXMLNode = document.GetElementByID( nNewList )
+        Set objXMLNode = objXMLNode.DocumentElement.SelectNodes( "Option" )
+
+    End If
+
+    If Not ( objDropDown Is Nothing ) Then
+
+        If objCurXMLNode Is objXMLNode then Exit Sub
+
+        ClearOptions
+
+        Set objCurXMLNode = objXMLNode
+
+        If Not ( objXMLNode Is Nothing ) Then
+
+            Dim objOption
+
+            For Each objOption In objXMLNode
+
+                AppendOption objOption.GetAttribute( "Name" ), objOption.GetAttribute( "Value" )
+
+            Next
+
+        End If
+
+    End If
+
+End Sub
+
+'********************************************************************************
+'*   METHOD     APPENDOPTION                                                    *
+'********************************************************************************
+
+Function AppendOption( Name, Value )
+
+    If Not ( objDropDown Is Nothing ) Then
+
+        Dim objOption
+        Set objOption = document.CreateElement( "DIV" )
+        objOption.SetAttribute "_VALUE", Value
+        objOption.InnerText    = Name
+        objOption.nowrap       = TRUE
+        objOption.style.cursor = "default"
+
+        objDropDown.AppendChild objOption
+
+    End If
+
+End Function
+
+'********************************************************************************
+'*   METHOD     INSERTOPTION                                                    *
+'********************************************************************************
+
+Function InsertOption( Name, Value, Index )
+
+    If Not ( objDropDown Is Nothing ) Then
+
+        Dim colItems
+        Set colItems = objDropDown.Children
+
+        If ( Index < 0 ) Or ( Index >= colItems.Length ) Then
+
+            AppendOption Name, Value
+
+        Else
+
+            Dim objOption
+            Set objOption = document.CreateElement( "DIV" )
+            objOption.SetAttribute "_VALUE", Value
+            objOption.InnerText    = Name
+            objOption.nowrap       = TRUE
+            objOption.style.cursor = "default"
+
+            objDropDown.InsertBefore objOption, colItems.Item( Index )
+
+        End If
+
+    End If
+
+End Function
+
+'********************************************************************************
+'*   METHOD     CLEAROPTIONS                                                    *
+'********************************************************************************
+
+Sub ClearOptions()
+
+    Dim objItem
+    Dim colItems
+    Set colItems = objDropDown.Children
+
+    For Each objItem In colItems
+
+        objDropDown.RemoveChild objItem
+
+    Next
+
+End Sub
+
+'********************************************************************************
+'*   METHOD     SHOWDROPDOWN                                                    *
+'********************************************************************************
+
+Sub ShowDropDown( HasToShow )
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*                                H A N D L E R                                 *
+'*                                                                              *
+'********************************************************************************
+
+
+'********************************************************************************
+'*                                INITIALISATION                                *
+'********************************************************************************
+
+Sub onInitElem2()
+                    ' Use only if behavior is attached by scripting  (no documentReady event fired)
+    If document.readyState <> "complete" Then Exit Sub
+    onInitElem
+
+End Sub
+
+Sub onInitElem()
+
+    If bIsInitialized Then Exit Sub
+
+    If UCase( element.tagname ) <> "INPUT" Then Err.Raise vbObjectError, "ComboBoxEx.wsc", "Not attached to a <INPUT>"
+    If UCase( element.type    ) <> "TEXT"  Then Err.Raise vbObjectError, "ComboBoxEx.wsc", "Not attached to a <INPUT type=text>"
+
+    If IsEmpty( DropDownWidth     ) Then DropDownWidth      = element.offsetWidth  _
+                                                            + element.offsetHeight - 3
+    If IsEmpty( DropDownHeight    ) Then DropDownHeight     = "8em"
+    If IsEmpty( RelPosTop         ) Then RelPosTop          = element.offsetHeight
+    If IsEmpty( RelPosLeft        ) Then RelPosLeft         = 0
+    If IsEmpty( AnimationDuration ) Then AnimationDuration  = "0.25"
+
+
+
+
+
+    Set objButton                = document.CreateElement( "BUTTON" )
+    objButton.tabindex           = -1
+    objButton.style.Width        = element.offsetHeight - 4
+    objButton.style.Height       = element.offsetHeight - 2
+    objButton.style.position     = "relative"
+    objButton.style.left         = "1"
+    objButton.style.top          = "-1px"
+    objButton.style.overflow     = "hidden"
+    objButton.style.fontFamily   = "WebDings"
+    objButton.InnerHTML          = "<SPAN style=""position:relative;"  _
+                                 & "top:-0.6ex"">6<SPAN>"
+    Set objButton.onClick        = GetRef( "onDropDown" )
+
+    element.ParentElement.InsertBefore objButton, element.NextSibling
+
+
+    Set objDropDown = document.CreateElement( "DIV" )
+
+    objDropDown.style.visibility      = "hidden"
+    objDropDown.style.overflow        = "auto"
+    objDropDown.style.backgroundcolor = element.currentstyle.backgroundcolor
+    objDropDown.style.fontfamily      = element.currentstyle.fontfamily
+    objDropDown.style.fontstyle       = element.currentstyle.fontstyle
+    objDropDown.style.fontsize        = element.currentstyle.fontsize
+    objDropDown.style.fontweight      = element.currentstyle.fontweight
+    objDropDown.style.border          = "1px solid windowframe"
+    objDropDown.style.padding         = "2px"
+    objDropDown.style.position        = "absolute"
+    objDropDown.style.left            = 0
+    objDropDown.style.top             = 0
+    objDropDown.style.width           = DropDownWidth
+    objDropDown.style.Height          = DropDownHeight
+    objDropDown.style.zIndex          = "100"
+    objDropDown.style.filter          = "blendTrans( duration=" & AnimationDuration & ")"
+    objDropDown.onMouseMove           = GetRef( "onMouseMoveSelect" )
+    objDropDown.onClick               = GetRef( "onSelectClick"     )
+
+    document.body.AppendChild objDropDown
+
+    If IsObject( element.onKeyDown ) Then Set objSavedKeyHdl  = element.onKeyDown
+    If IsObject( element.onBlur )    Then Set objSavedBlurHdl = element.onBlur
+
+    Set element.onKeyDown = GetRef( "onElemKeyDown" )
+    Set element.onBlur    = GetRef( "onElemBlur"    )
+
+    bIsInitialized = TRUE
+
+End Sub
+
+'********************************************************************************
+'*                                DESTRUCTION                                   *
+'********************************************************************************
+
+sub onElemDetach()
+
+    If nTimerCookie <> 0 Then window.ClearInterval nTimerCookie
+    nTimerCookie          = 0
+
+    If IsObject( objSavedKeyHdl  ) Then Set element.onKeyDown = objSavedKeyHdl
+    If IsObject( objSavedBlurHdl ) Then Set element.onBlur    = objSavedBlurHdl
+
+    element.ParentElement.RemoveChild objButton
+    document.body.RemoveChild objDropDown
+
+end sub
+
+'********************************************************************************
+'*                                KEY HANDLER                                   *
+'********************************************************************************
+
+sub onElemKeyDown()
+
+    Dim objElem
+    Set objElem   = window.Event.srcElement
+
+    If objElem Is element Then
+
+        If bIsDropped = TRUE Then
+
+            window.event.CancelBubble = TRUE
+
+            Dim objCurItem
+            Dim objNextItem
+            Set objCurItem  = Nothing
+            Set objNextItem = Nothing
+
+            If Not ( objSelectedItem Is Nothing ) Then
+
+                Select Case window.event.KeyCode
+
+                    Case  8                                         'Back key
+                              If window.event.AltKey Then
+
+                                  element.Value = strSavedVal
+
+                              Else
+
+                                  If Len( element.Value ) > 1 Then
+
+                                      element.Value = Left( element.Value, Len( element.Value ) - 1 )
+
+                                  Else
+
+                                      element.Value = ""
+
+                                  End If
+
+                              End If
+
+                              FindInSelection
+                              ShowSelected    FALSE
+                              MakeSelectedVisible
+                              window.event.returnValue = FALSE
+
+                              Exit Sub
+
+                    Case  9                                         'Tab key
+                              Exit Sub
+
+                    Case 13                                         'Enter key
+                              ShowSelected   TRUE
+                              CloseDropDown  TRUE
+                              window.event.returnValue = FALSE
+                              Exit Sub
+
+                    Case 27                                         'ESC   key
+                              element.Value = strSavedVal
+                              CloseDropDown   TRUE
+                              window.event.returnValue = FALSE
+                              Exit Sub
+
+                    Case 33                                         'PgUp  key
+
+                    Case 34                                         'PgDn  key
+
+                    Case 35                                         'End  key
+                              Set objNextItem = objDropDown.LastChild
+
+                    Case 36                                         'Home key
+                              Set objNextItem = objDropDown.FirstChild
+
+                    Case 38                                         'Up   key
+                              If window.event.AltKey Then
+
+                                  CloseDropDown  TRUE
+                                  window.event.returnValue = FALSE
+                                  Exit Sub
+
+                              Else
+
+                                  Set objNextItem = objSelectedItem.PreviousSibling
+
+                              End If
+
+                    Case 40                                         'Down key
+                              Set objNextItem = objSelectedItem.NextSibling
+
+                    Case Else                                       'Use normal keys for fast access
+                              window.event.CancelBubble = FALSE
+                              FindInSelection
+                              ShowSelected  FALSE
+                              MakeSelectedVisible
+                              Exit Sub
+
+                End Select
+
+            Else
+
+                Set objNextItem = objDropDown.FirstChild
+
+            End IF
+
+
+            If Not ( objNextItem Is Nothing ) then
+
+                Set objSelectedItem = objNextItem
+                ShowSelected  TRUE
+                MakeSelectedVisible
+
+                window.event.returnValue = FALSE
+
+            End If
+
+        Else
+
+            If ( window.event.AltKey = TRUE ) And ( window.event.KeyCode = 40 ) Then
+
+                onDropDown
+                window.event.returnValue = FALSE
+                Exit Sub
+
+            End If
+
+        End If
+
+    End If
+
+end sub
+
+'********************************************************************************
+'*  EDIT CONTROL LOOSES FOCUS                                                   *
+'********************************************************************************
+
+Sub onElemBlur()
+
+    Window.Event.CancelBubble = TRUE
+
+    If objDropDown Is document.activeElement Then Exit Sub
+
+    If bIsDropped = TRUE Then CloseDropDown  FALSE
+
+    If IsObject( objSavedBlurHdl ) Then objSavedBlurHdl
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*                        I N T E R N A L   E V E N T S                         *
+'*                                                                              *
+'********************************************************************************
+
+'********************************************************************************
+'*  DROP DOWN BUTTON CLICKED                                                    *
+'********************************************************************************
+
+Sub onDropDown
+
+    Dim nAbsX
+    Dim nAbsY
+    Dim objCur
+    Set objCur  = element.offsetParent
+    nAbsX       = element.offsetLeft
+    nAbsY       = element.offsetTop
+    strSavedVal = element.Value
+
+
+    Do
+
+        nAbsX      = nAbsX + objCur.offsetLeft
+        nAbsY      = nAbsY + objCur.offsetTop
+        Set objCur = objCur.offsetParent
+
+    Loop Until objCur Is Nothing
+
+    objDropDown.style.left        =   nAbsX + RelPosLeft
+    objDropDown.style.top         =   nAbsY + RelPosTop
+
+
+    If objDropDown.filters.blendTrans.status <> 2 Then
+
+        objDropDown.filters.blendTrans.apply
+        objDropDown.style.visibility  =   "visible"
+        objDropDown.filters.blendTrans.play
+
+    End If
+
+
+    If nTimerCookie <> 0 Then window.ClearInterval nTimerCookie
+    strTickerCmd = "Initial"
+'    nTimerCookie = window.SetInterval( GetRef( "onScrollerTics" ), 100, "VBScript" )
+
+    Set objSelectedPrev = Nothing
+
+    FindInSelection
+    ShowSelected  FALSE
+    MakeSelectedVisible
+    bIsDropped   = TRUE
+
+    If Not ( objXMLNode Is Nothing ) Then put_XMLOptionList objXMLNode
+
+    element.Focus
+
+End Sub
+
+'********************************************************************************
+'*  MOUSE MOVES OVER DROPDOWN LIST                                              *
+'********************************************************************************
+
+Sub onMouseMoveSelect()
+
+    Dim objElem
+    Set objElem   = window.Event.srcElement
+
+    If objElem.ParentElement Is objDropDown Then
+
+        If ( window.Event.Y - objDropDown.style.pixeltop ) < objElem.OffsetHeight Then
+
+            If Not ( objDropDown.FirstChild Is objElem ) then
+
+                strTickerCmd = "Up"
+
+            Else
+
+                strTickerCmd = ""
+                Set objSelectedItem = objElem
+                ShowSelected  TRUE
+
+            End If
+
+        Else
+
+            If ( objDropDown.style.pixeltop + objDropDown.offsetheight   _
+                                             - window.Event.Y  ) < objElem.OffsetHeight Then
+
+                If Not ( objDropDown.LastChild Is objElem ) then
+
+                    strTickerCmd = "Down"
+
+                Else
+
+                    strTickerCmd = ""
+                    Set objSelectedItem = objElem
+                    ShowSelected  TRUE
+
+                End If
+
+            Else
+
+                strTickerCmd = ""
+                Set objSelectedItem = objElem
+                ShowSelected  TRUE
+
+            End If
+
+        End If
+
+        Window.Event.CancelBubble = TRUE
+
+    End If
+
+End Sub
+
+'********************************************************************************
+'*  SELECT OPTION FROM DROP DOWN LIST BY CLICKING IT                            *
+'********************************************************************************
+
+Sub onSelectClick
+
+    Dim objElem
+    Set objElem   = window.Event.srcElement
+
+    If objElem.ParentElement Is objDropDown Then
+
+
+        Set objSelectedItem = objElem
+        ShowSelected  TRUE
+        CloseDropDown TRUE
+
+    End If
+
+End Sub
+
+'********************************************************************************
+'*  TIMER TIC HANDLER FOR MONITORING DROP DOWN LIST SCROLLING                   *
+'********************************************************************************
+
+Sub onScrollerTics
+
+    If strTickerCmd = "Initial" Then
+
+        MakeSelectedVisible
+        strTickerCmd = ""
+        Exit Sub
+
+    End If
+
+    If strTickerCmd = "Seek" Then
+
+        FindInSelection
+        ShowSelected  FALSE
+        MakeSelectedVisible
+        Exit Sub
+
+    End If
+
+    If ( strTickerCmd = "Up"   ) And ( objDropDown.ScrollTop  =  0 ) then strTickerCmd = ""
+    If ( strTickerCmd = "Down" ) And ( objDropDown.ScrollTop >= _
+       ( objDropDown.ScrollHeight - objDropDown.OffsetHeight )) then strTickerCmd = ""
+
+    If Len( strTickerCmd ) > 0 Then objDropDown.doScroll strTickerCmd
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*                    S U P P O R T I N G   R O U T I N E S                     *
+'*                                                                              *
+'********************************************************************************
+
+'********************************************************************************
+'*  FIND FIRST OR BEST MATCH OF ENTERED TEXT IN DROP DOWN LIST                  *
+'********************************************************************************
+
+Sub FindInSelection
+
+    Set objSelectedItem = Nothing
+
+    Dim strSearch
+    strSearch = element.Value
+
+    Dim nLen
+    Dim nIndex
+    Dim objItem
+    Dim colItems
+    Set colItems = objDropDown.Children
+    nIndex       = 0
+    nLen         = Len( strSearch )
+
+    If nLen > 0 Then
+
+        Do
+
+            For Each objItem In colItems
+
+                If Left( objItem.InnerText, nLen ) = strSearch Then
+
+                    Set objSelectedItem = objItem
+                    nSelectedIndex      = nIndex
+                    strSearch           = ""
+                    Exit For
+
+                End If
+
+                nIndex = nIndex + 1
+
+            Next
+
+            nLen = nLen - 1
+
+            If nLen > 0 Then strSearch = Left( strSearch, nLen )
+
+        Loop While nLen > 0
+
+    Else
+
+        If ( nSelectedIndex >= 0 ) And ( SelectedIndex < colItems.Length ) then
+
+            Set objSelectedItem = colItems.Item( nSelectedIndex )
+
+        Else
+
+            If colItems.Length > 0 Then
+
+                Set objSelectedItem = colItems.Item( 0 )
+                nSelectedIndex      = 0
+
+            End If
+
+        End If
+
+    End If
+
+End Sub
+
+
+'********************************************************************************
+'*  HIGHLIGHT SELECTED OPTION                                                   *
+'********************************************************************************
+
+Sub ShowSelected( bToInputToo )
+
+    If objSelectedItem Is Nothing Then Exit Sub
+
+    If Not ( objSelectedPrev Is Nothing ) Then
+
+        objSelectedPrev.style.color           = objDropDown.currentstyle.color
+        objSelectedPrev.style.backgroundcolor = objDropDown.currentstyle.backgroundcolor
+
+    End If
+
+    nSelectedIndex = -1
+
+    Dim nIndex
+    Dim objItem
+    Dim colItems
+    Set colItems = objDropDown.Children
+    nIndex       = 0
+
+    If bToInputToo = TRUE Then
+
+        element.value = objSelectedItem.InnerText
+
+        For Each objItem In colItems
+
+            If objItem Is objSelectedItem Then
+
+                nSelectedIndex   = nIndex
+                Exit For
+
+            End If
+
+            nIndex = nIndex + 1
+
+        Next
+
+    Else
+
+        For Each objItem In colItems
+
+            If objItem.InnerText = element.value Then
+
+                nSelectedIndex   = nIndex
+                Exit For
+
+            End If
+
+            nIndex = nIndex + 1
+
+        Next
+
+    End If
+
+    objSelectedItem.style.color           = "HighlightText"
+    objSelectedItem.style.backgroundcolor = "Highlight"
+    Set objSelectedPrev                   = objSelectedItem
+
+End Sub
+
+'********************************************************************************
+'*  ENSURE VISIBILITY OF SELECTED ENTRY                                         *
+'********************************************************************************
+
+Sub MakeSelectedVisible
+
+    If Not ( objSelectedItem Is Nothing ) Then
+
+        If objSelectedItem.OffsetTop <=   objDropDown.Scrolltop   Then objSelectedItem.ScrollIntoView TRUE
+        If objSelectedItem.OffsetTop >= ( objDropDown.Scrolltop +  _
+           objDropDown.ClientHeight - objSelectedItem.OffsetHeight ) Then objSelectedItem.ScrollIntoView FALSE
+
+    End If
+
+End Sub
+
+'********************************************************************************
+'*  REMOVE DROP DOWN LIST FROM DOCUMENT                                         *
+'********************************************************************************
+
+Sub CloseDropDown( bHasFocus )
+
+    If nTimerCookie <> 0 Then window.ClearInterval nTimerCookie
+    nTimerCookie = 0
+    bIsDropped   = FALSE
+
+    If objDropDown.filters.blendTrans.status <> 2 Then
+
+        objDropDown.filters.blendTrans.apply
+        objDropDown.style.visibility  =   "hidden"
+        objDropDown.filters.blendTrans.play
+
+    End If
+
+    If Not ( objSelectedPrev Is Nothing ) Then
+
+        objSelectedPrev.style.color           = objDropDown.currentstyle.color
+        objSelectedPrev.style.backgroundcolor = objDropDown.currentstyle.backgroundcolor
+
+    End If
+
+    If bHasFocus = TRUE Then element.Focus
+
+
+End Sub
+
+
+'********************************************************************************
+'********************************************************************************
+]]>
+</script>
+
+</component>
+
+

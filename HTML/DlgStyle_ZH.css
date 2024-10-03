@@ -1,0 +1,28 @@
+BODY            { font-size        : 12pt;
+                  font-family      : Verdana;
+                  font-weight      : 500;
+                  line-height      : 1.5em;
+                  border           : 0;
+                  padding          : 7;
+                  margin           : 0;
+                  width            : 100%;
+                  height           : 100%;
+                  overflow         : hidden;
+                  background-color : buttonface;
+                  behavior         : url( DlgTemplateObject.wsc ) url( ../DlgTemplateObject.wsc );
+                }
+
+TABLE           { font-size        : 12pt;
+                  font-family      : Verdana;
+                  font-weight      : bold;
+                  line-height      : 1.5em;
+                }
+
+.DLGAUTOLABEL   { behavior : url( DlgAutoLabel.wsc) url( ../DlgAutoLabel.wsc) ;
+                }
+
+.DLGBUTTONS     { behavior : url( DlgButtons.wsc  ) url( ../DlgButtons.wsc  ) ;
+                }
+
+.DLGSCRIPT      { behavior : url( DlgScript.wsc   ) url( ../DlgScript.wsc ) ;
+                }

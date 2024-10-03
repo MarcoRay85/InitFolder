@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html ID="THIS" XMLNS:CX>
+<head>
+  <title>Prüfparameter</title>
+    <META NAME="Description" CONTENT="Intact1200 Prüfparameter (GE)">
+    <LINK REL="STYLESHEET" HREF="DlgStyle_DE.css">
+    <?IMPORT namespace="CX" implementation="SpinEdit.htc">
+</head>
+
+<XML ID="xmlResource">
+  <Resources>
+    <Res    AddressBy   = "TAG"
+            MatchValue  = "body"
+            ApplyTo     = "title"
+    >Bitte geben Sie den Unterdruck an, mit dem die Reifen bei der Prüfung beaufschlagt werden sollen</Res>
+
+  </Resources>
+</XML>
+
+<body style = "width:25em;height:10em" Invisible="INIT" ResourceXML="xmlResource" lang="de">
+
+  <br>
+  <!-- <p align="center"> -->
+    <!-- <label class="DLGAUTOLABEL" FOR="InputVacuumStart"> -->
+      <!-- Start Vacuum: -->
+    <!-- </label> -->
+    <!-- <CX:SpinEdit   ID        ="InputVacuumStart" -->
+                   <!-- style     ="position:relative;width:4em;height:2.5ex;top:0.5ex;border:1px inset" /> -->
+    <!-- &nbsp;mbar -->
+  <!-- </p> -->
+  
+  <p align="center">
+    <label class="DLGAUTOLABEL" FOR="InputVacuumTread">
+      Unterdruck Lauffläche:
+    </label>
+    <CX:SpinEdit   ID        ="InputVacuumTread"
+                   style     ="position:relative;width:4em;height:2.5ex;top:0.5ex;border:1px inset" />
+    &nbsp;mbar
+  </p>
+
+  <p align="center">
+    <label class="DLGAUTOLABEL" FOR="InputVacuumBead">
+      Unterdruck Seitenwand: 
+    </label>
+    <CX:SpinEdit   ID        ="InputVacuumBead"
+                   style     ="position:relative;width:4em;height:2.5ex;top:0.5ex;border:1px inset" />
+    &nbsp;mbar
+  </p>
+  
+  
+  
+  
+  
+  
+  <div class="DLGBUTTONS" kind="1" align="CENTER"  ></div>
+
+</body>
+
+<script class="DLGSCRIPT" language="vbscript" src="SetTestPressureTreadBeadDlg.vbs" defer>
+</script>
+
+</html>

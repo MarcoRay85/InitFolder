@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html ID="THIS">
+<head >
+  <title>Exit Intact</title>
+  <META content="text/html; charset=windows-1252" http-equiv="Content-Type">
+    <META NAME="Description" CONTENT="Intact1200 Quit & Storing (FI)">
+    <LINK REL="STYLESHEET" HREF="DlgStyle_FI.css">
+</head>
+
+<body style="width:28em; height:8.5em" align="center" Invisible="INIT" lang="fi">
+
+  <div align="center"
+       style="position:absolute;zIndex:-1;zoom:2.5;"
+       style="Filter:progid:DXImageTransform.Microsoft.alpha( opacity=10 )">
+    <img src="AnimHourglass.gif">
+    &nbsp;
+    <img src="AnimHourglass.gif">
+    &nbsp;
+    <img src="AnimHourglass.gif">
+    &nbsp;
+    <img src="AnimHourglass.gif">
+    &#32;
+    <img src="AnimHourglass.gif">
+    &nbsp;
+    <img src="AnimHourglass.gif">
+    &nbsp;
+    <img src="AnimHourglass.gif">
+    &nbsp;
+    <img src="AnimHourglass.gif">
+  </div>
+
+  <div ID="divText" align="left" style="line-height:180%; width:26em;position:relative">
+     Sammutetaan
+     <span class="classIntact">Intact</span>
+     viivästyy hieman testitulosten tallennuksen takia.<br>
+     Käytä 
+     <span class="classButton">Peruuta</span>
+     sammutus toiminto.
+  </div>
+
+  <div class="DLGBUTTONS" kind="11" align="CENTER"  ></div>
+
+</body>
+
+<script language="vbscript" >
+
+    Option Explicit
+
+    Sub SetTaskKind( nKind )
+
+        If nKind = 1  Then
+
+            divText.InnerHTML = Replace( divText.InnerHTML, "stored", "printed" )
+
+        End If
+
+    End Sub
+
+</script>
+
+<script class="DLGSCRIPT" language="vbscript" src="TestDocTaskRunningDlg.vbs" defer>
+</script>
+
+</html>

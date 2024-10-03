@@ -1,0 +1,2563 @@
+<HTML SCROLL="no" xmlns:v="urn:schemas-microsoft-com:vml">
+  <HEAD>
+    <PUBLIC:COMPONENT   NAME="SpinEdit" TAGNAME="SpinEdit" >
+    <?COMPONENT error="true" debug="true"?>
+
+<!--********************************************************************************-->
+<!--*                                                                              *-->
+<!--*                             D E S C R I P T I O N                            *-->
+<!--*                                                                              *-->
+<!--*   Author:    VR                                                              *-->
+<!--*   Date:      23.03.2000                                                      *-->
+<!--*   Versions:  V1.0          23.03.2000                                        *-->
+<!--*                                                                              *-->
+<!--*   About:     Component implements a spin edit control in DHTML               *-->
+<!--*                                                                              *-->
+<!--********************************************************************************-->
+
+        <PUBLIC:DEFAULTS    canHaveHTML     = "false"
+                            tabStop         = "true"
+                            viewLinkContent = "true"  />
+
+<!--********************************************************************************-->
+<!--*                                                                              *-->
+<!--*                              I N T E R F A C E                               *-->
+<!--*                                                                              *-->
+<!--*                                                                              *-->
+<!--*  Properties: Value         (r/w)  Actual value                               *-->
+<!--*              DefaultValue  (r/w)  Initial value; value is used also if       *-->
+<!--*                                   illegal value is entered                   *-->
+<!--*              Values        (r/w)  Optional array of values to be used in     *-->
+<!--*                                   up/down sequence. If defined, Min, Max     *-->
+<!--*                                   Precision and Increment values will be     *-->
+<!--*                                   ignored.                                   *-->
+<!--*              Min           (r/w)  Lower bound of editable value range        *-->
+<!--*              Max           (r/w)  Upper bound of editable value range        *-->
+<!--*              Precision     (r/w)  Number of decimal places to the right      *-->
+<!--*              Increment     (r/w)  Added/subtraced, if up/down button pressed *-->
+<!--*              ReadOnly      (r/w)  If TRUE, values can't be entered           *-->
+<!--*              HasChanged    (r)    Returns TRUE, if value displayed in edit   *-->
+<!--*                                   pane is different to value returned        *-->
+<!--*                                   by last 'Value' access                     *-->
+<!--*              IsValid       (r)    Returns TRUE, if entered value is valid    *-->
+<!--*              GaugeColor    (r/w)  Color of drag bar                          *-->
+<!--*              FocusColored  (r/w)  Color of edit pane while focused           *-->
+<!--*              NoFocusColor  (r/w)  Color of edit pane while not focused       *-->
+<!--*              DragBarWidth  (r/w)  Width  of drag bar                         *-->
+<!--*              DragBarHeight (r/w)  Height of drag bar                         *-->
+<!--*              IncDecDelay   (r/w)  Delay [ms] till inc/dec repeat starts      *-->
+<!--*              IncDecAccel   (r/w)  Factor (0..1) for inc/dec rep. acceleration*-->
+<!--*              FontStyle     (r/w)  Font style used for edit pane              *-->
+<!--*              SelfSized     (r/w)  If set to TRUE, spin edit is positioned    *-->
+<!--*                                   and sized to baseline automatically.       *-->
+<!--*                                   Elements positioning style will be set     *-->
+<!--*                                   to 'relative'; other layout styles         *-->
+<!--*                                   will be set accordingly                    *-->
+<!--*                                                                              *-->
+<!--*  Methods:    UpdateProps          Force parameter recalculation based on     *-->
+<!--*                                   current Min Max Precision and Increment    *-->
+<!--*              UpdateLook           Force displaying change of visible state   *-->
+<!--*                                   like STYLE.VISIBILITY or STYLE.DISPLAY     *-->
+<!--*              Validate             Calls 'IsValid'; if result is FALSE,       *-->
+<!--*                                   edit pane is animated and default value    *-->
+<!--*                                   is set to edit pane. Returns value         *-->
+<!--*                                   returned by 'IsValid' invokation.          *-->
+<!--*                                                                              *-->
+<!--*  Events:     onChanged     Fired after edited value has changed              *-->
+<!--*              onIllegal     Fired if an illegal character is entered          *-->
+<!--*              onExceed      Fired if range is exceeded                        *-->
+<!--*                                                                              *-->
+<!--********************************************************************************-->
+
+<!--    ******** P R O P E R T I E S **************************************-->
+
+        <PUBLIC:PROPERTY NAME = "Value"             GET="get_Value"
+                                                    PUT="put_Value"
+                                                    ID ="propValue"         />
+        <PUBLIC:PROPERTY NAME = "DefaultValue"      GET="get_DefaultValue"
+                                                    PUT="put_DefaultValue"
+                                                    ID ="propDefaultValue"  />
+        <PUBLIC:PROPERTY NAME = "Values"            GET="get_Values"
+                                                    PUT="put_Values"
+                                                    ID ="propValues"        />
+        <PUBLIC:PROPERTY NAME = "Min"               GET="get_Min"
+                                                    PUT="put_Min"
+                                                    ID ="propMin"           />
+        <PUBLIC:PROPERTY NAME = "Max"               GET="get_Max"
+                                                    PUT="put_Max"
+                                                    ID ="propMax"           />
+        <PUBLIC:PROPERTY NAME = "Precision"         GET="get_Precision"
+                                                    PUT="put_Precision"
+                                                    ID ="propPrecision"     />
+        <PUBLIC:PROPERTY NAME = "Increment"         GET="get_Increment"
+                                                    PUT="put_Increment"
+                                                    ID ="propIncrement"     />
+        <PUBLIC:PROPERTY NAME = "ReadOnly"          GET="get_ReadOnly"
+                                                    PUT="put_ReadOnly"
+                                                    ID ="propReadOnly"      />
+        <PUBLIC:PROPERTY NAME = "HasChanged"        GET="get_HasChanged"    />
+        <PUBLIC:PROPERTY NAME = "IsValid"           GET="get_IsValid"       />
+        <PUBLIC:PROPERTY NAME = "GaugeColor"        GET="get_GaugeColor"
+                                                    PUT="put_GaugeColor"
+                                                    ID ="propGaugeColor"    />
+        <PUBLIC:PROPERTY NAME = "FocusedColor"      GET="get_FocusedColor"
+                                                    PUT="put_FocusedColor"
+                                                    ID ="propFocusedColor"  />
+        <PUBLIC:PROPERTY NAME = "NoFocusColor"      GET="get_NoFocusColor"
+                                                    PUT="put_NoFocusColor"
+                                                    ID ="propNoFocusColor"  />
+        <PUBLIC:PROPERTY NAME = "DragBarWidth"      VALUE="1em"             />
+        <PUBLIC:PROPERTY NAME = "DragBarHeight"     VALUE="5em"             />
+        <PUBLIC:PROPERTY NAME = "IncDecDelay"       GET="get_IncDecDelay"
+                                                    PUT="put_IncDecDelay"
+                                                    ID ="propIncDecDelay"   />
+        <PUBLIC:PROPERTY NAME = "IncDecAccel"       GET="get_IncDecAccel"
+                                                    PUT="put_IncDecAccel"
+                                                    ID ="propIncDecAccel"   />
+        <PUBLIC:PROPERTY NAME = "FontStyle"         GET="get_FontStyle"
+                                                    PUT="put_FontStyle"
+                                                    ID ="propFontStyle"     />
+        <PUBLIC:PROPERTY NAME = "SelfSized"                                 />
+        <PUBLIC:PROPERTY NAME = "Disabled"          GET="get_Disabled"
+                                                    PUT="put_Disabled"
+                                                    ID ="propDisabled"  />  <!-- Overloaded -->
+
+<!--    ******** M E T H O D S ********************************************-->
+
+        <PUBLIC:METHOD   NAME = "UpdateProps"  />
+        <PUBLIC:METHOD   NAME = "UpdateLook"   />
+        <PUBLIC:METHOD   NAME = "Validate"     />
+
+<!--    ******** N O T I F I C A T I O N S ********************************-->
+
+        <PUBLIC:ATTACH   EVENT = "oncontentready"      ONEVENT="onInitElem"             />
+        <PUBLIC:ATTACH   EVENT = "ondocumentready"     ONEVENT="onDocReady"             />
+
+        <PUBLIC:ATTACH   EVENT = "onblur"              ONEVENT="onBlurElem"             />
+        <PUBLIC:ATTACH   EVENT = "onfocus"             ONEVENT="onFocusElem"            />
+        <PUBLIC:ATTACH   EVENT = "onbeforeactivate"    ONEVENT="onBeforeActivateElem"   />
+        <PUBLIC:ATTACH   EVENT = "onmousewheel"        ONEVENT="OnMouseWheeling"        />
+        <PUBLIC:ATTACH   EVENT = "onpropertychange"    ONEVENT="onPropChangedElem"      />
+        <PUBLIC:ATTACH   EVENT = "onresize"            ONEVENT="onResizeElem"           />
+        <PUBLIC:ATTACH   EVENT = "onresizeend"         ONEVENT="onResizeElem"           />
+
+<!--    ******** E V E N T S **********************************************-->
+
+        <PUBLIC:EVENT    NAME  = "onChanged"    ID="eventOnChanged"     />
+        <PUBLIC:EVENT    NAME  = "onIllegal"    ID="eventOnIllegal"     />
+        <PUBLIC:EVENT    NAME  = "onExceed"     ID="eventOnExceed"      />
+
+    </PUBLIC:COMPONENT>
+
+<!--********************************************************************************-->
+<!--*                                                                              *-->
+<!--*                                  H T M L                                     *-->
+<!--*                                                                              *-->
+<!--********************************************************************************-->
+
+
+    <STYLE>
+        v\:*            {
+                            behavior: url( #default#VML   );
+                        }
+
+        .classHostSpan  {
+                            Position         : Absolute;
+                            Left             : 0px;
+                            Top              : 0px;
+                            Width            : 100%;
+                            Height           : 100%;
+                            Border           : 0px;
+                            Margin           : 0px;
+                            Padding          : 0px;
+                            Font-Size        : 1pt;
+                            Line-Height      : 1pt;
+                            Overflow         : hidden;
+                            Background-Color : buttonface;
+                            cursor           : default;
+                        }
+    </STYLE>
+
+  </HEAD>
+
+  <BODY SCROLL        = "no"
+        onselectstart = "return( false );"
+        onmousedown   = "OnMouseActions();"
+        onmouseout    = "OnMouseActions();"
+        onmouseup     = "OnMouseActions();"
+        onmousewheel  = "OnMouseWheeling();"    >
+
+
+    <SPAN   ID    = "spanMain" >
+      <INPUT  ID            = "inputMain"
+              Type          = "text"
+              TabIndex      = 1
+              MaxLength     = 6
+              Style         = "Position:Absolute;Left:2px;Top:1px;
+                               Border:0;Margin:0;Padding:0"
+              onkeydown     = "onKeyDownInput();"
+              onkeypress    = "onKeyBlockInput();"
+              ondeactivate  = "onDeactivateInput();"
+              onselectstart = "OnInputSelected();" >
+
+      <SPAN   ID    = "spanHosting"
+              Class = "classHostSpan">
+
+        <SPAN ID    = "spanHostUp"
+              Class = "classHostSpan"
+              Style = "background-Color:green;"
+              Style = "Width:50%;Height:50%;" >
+
+            <SPAN ID    = "spanButtonUp"
+                  Class = "classHostSpan"
+                  Style = "border:1px outset; border-Color:buttonhighlight buttonshadow buttonshadow buttonhighlight" >
+               <SPAN   Style   = "Position:absolute;Width:100%;Height:100%;overflow:hidden" >
+                  <v:shape    ID          = "vshapeUp"
+                              Style       = "Position:absolute;"
+                              coordsize   = "2,1"
+                              fillcolor   = "buttontext"
+                              strokecolor = "buttontext"
+                              path        = "m 0 1  l  1 0  l 2 1 xe" />
+               </SPAN>
+            </SPAN>
+        </SPAN>
+
+        <SPAN ID    = "spanHostDown"
+              Class = "classHostSpan"
+              Style = "background-Color:yellow;"
+              Style = "Top:50%;Width:50%;Height:50%;" >
+
+            <SPAN ID    = "spanButtonDown"
+                  Class = "classHostSpan"
+                  Style = "border:1px outset; border-Color:buttonhighlight buttonshadow buttonshadow buttonhighlight" >
+               <SPAN   Style   = "Position:absolute;Width:100%;Height:100%;overflow:hidden" >
+                  <v:shape    ID          = "vshapeDown"
+                              Style       = "Position:absolute;"
+                              coordsize   = "2,1"
+                              fillcolor   = "buttontext"
+                              strokecolor = "buttontext"
+                              path        = "m 0 0  l  1 1  l 2 0 xe" />
+               </SPAN>
+            </SPAN>
+        </SPAN>
+
+        <SPAN ID    = "spanHostBar"
+              Class = "classHostSpan"
+              Style = "background-Color:blue;" >
+
+            <SPAN ID    = "spanButtonBar"
+                  Class = "classHostSpan"
+                  Style = "border:1px outset; border-Color:buttonhighlight buttonshadow buttonshadow buttonhighlight" >
+                <SPAN   Style   = "Position:relative;Width:100%;Height:100%;" >
+                   <SPAN ID    = "spanValueBar"
+                         Class = "classHostSpan"
+                         Style = "Left:20%;Width:50%;Height:0;Background-Color:#1090E0;visibility:hidden" >
+                   </SPAN>
+               </SPAN>
+            </SPAN>
+        </SPAN>
+
+      </SPAN>
+
+      <SPAN   ID    = "spanDisabling"
+              Class = "classHostSpan"
+              Style = "Visibility:hidden;Cursor:not-allowed;zIndex:100;"
+              Style = "Filter:progid:DXImageTransform.Microsoft.alpha( opacity=60 )" >
+      </SPAN>
+    </SPAN>
+  </BODY>
+
+<!--********************************************************************************-->
+<!--*                                                                              *-->
+<!--*                                  S C R I P T                                 *-->
+<!--*                                                                              *-->
+<!--********************************************************************************-->
+
+  <SCRIPT language="vbscript" defer >
+
+
+Option Explicit
+'********************************************************************************
+'*                                                                              *
+'*                                  G L O B A L   D A T A                       *
+'*                                                                              *
+'********************************************************************************
+
+Const   C_MinTimeout    = 20
+
+Dim g_nState
+
+Dim g_nOrgValue
+Dim g_nCurValue
+Dim g_nLastValue
+Dim g_vValues
+Dim g_nMin
+Dim g_nMax
+Dim g_nPrecision
+Dim g_nIncrement
+
+
+Dim g_nPropLockCnt
+Dim g_nBorderWidth
+Dim g_nASCIIDecimalPoint
+Dim g_nAnimCounter
+Dim g_nAnimTimerCookie
+Dim g_nRepTimerCookie
+Dim g_nRepTimeInterval
+Dim g_nIncDecDelay
+Dim g_nIncDecAccel
+Dim g_nCurIncDecDir
+Dim g_nDragBarPopupY1
+Dim g_nDragBarPopupY2
+
+Dim g_nInternalLockCount
+Dim g_bIsSelfSized
+Dim g_bHasPropChanged
+Dim g_bHasFocus
+Dim g_bHasToBubble
+
+Dim g_strFocusedColor
+Dim g_strNoFocusColor
+
+
+Dim g_objDragBarPopup
+
+g_nState        =  0
+
+g_nOrgValue     =  NULL
+g_nCurValue     =  0
+g_nLastValue    =  NULL
+g_vValues       =  NULL
+g_nMin          = -100
+g_nMax          =  100
+g_nPrecision    =  2
+g_nIncrement    =  1
+
+g_nPropLockCnt          = 0
+g_nBorderWidth          = 1
+g_nASCIIDecimalPoint    = Asc( Mid( CStr( 0.5 ), 2, 1 ))
+g_nAnimCounter          = 0
+g_nAnimTimerCookie      = 0
+g_nRepTimerCookie       = 0
+g_nRepTimeInterval      = 0
+g_nIncDecDelay          = 333
+g_nIncDecAccel          = 0.8
+g_nCurIncDecDir         = 0
+
+g_nInternalLockCount    = 0
+g_bIsSelfSized          = FALSE
+g_bHasPropChanged       = FALSE
+g_bHasFocus             = FALSE
+g_bHasToBubble          = FALSE
+
+g_strFocusedColor       = "window"
+g_strNoFocusColor       = "gainsboro"
+
+
+Set g_objDragBarPopup   = Nothing
+
+
+Dim g_TraceMode
+Dim g_objTraceWin
+
+g_TraceMode = FALSE
+'g_TraceMode = TRUE     ' Set to true for debugging
+
+Set g_objTraceWin = Nothing
+
+If g_TraceMode Then
+
+    g_TraceMode         = FALSE
+    Set g_objTraceWin   =  Element.Document.ParentWindow.open( "about:blank", "_blank" )
+    Set g_objTraceWin   =  g_objTraceWin.document.open( "text/html" )
+    g_objTraceWin.ParentWindow.Status = "Spinedit.HTC "  &  Element.ID
+    g_objTraceWin.Writeln  "<pre ondblclick=""this.innerText=''"">"
+    g_TraceMode         = TRUE
+
+End If
+
+'********************************************************************************
+'********************************************************************************
+'**                                                                            **
+'**             E X P O S E D    F U N C T I O N A L I T Y                     **
+'**                                                                            **
+'********************************************************************************
+'********************************************************************************
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y     V A L U E                                           *
+'*                                                                              *
+'********************************************************************************
+
+Function get_Value()
+
+    If IsNull( g_vValues ) Then
+
+        If g_nPrecision = 0 Then
+
+            get_Value = CLng( GetValue())
+
+        Else
+
+            get_Value = GetValue()
+
+        End If
+
+    Else
+
+        get_Value = g_vValues( GetValue())
+
+    End If
+
+    g_nLastValue = get_Value
+
+End Function
+
+Sub put_Value( nNewValue )
+
+    Dim i
+
+    If IsNull( g_vValues ) Then
+
+        If IsNumeric( nNewValue )  Then
+
+            g_nCurValue = CheckBounds( nNewValue )
+            SetValue
+
+            If IsNull( g_nOrgValue ) Then g_nOrgValue = g_nCurValue
+
+            propValue.FireChange
+
+        End If
+
+    Else
+
+        i = GetIndex( CStr( nNewValue ))
+        If Not IsNull( i ) Then
+
+            g_nCurValue = CheckBounds( i )
+            SetValue
+            propValue.FireChange
+
+        End If
+
+    End If
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y     D E F A U L T V A L U E                             *
+'*                                                                              *
+'********************************************************************************
+
+Function get_DefaultValue()
+
+    If IsNull( g_vValues ) Then
+
+        get_DefaultValue = g_nOrgValue
+
+    Else
+
+        get_Value = g_vValues( g_nOrgValue )
+
+    End If
+
+End Function
+
+Sub put_DefaultValue( nNewValue )
+
+    If IsNull( g_vValues ) Then
+
+        If IsNumeric( nNewValue )  Then
+
+            If g_bHasPropChanged Then
+
+                g_nOrgValue = CDbl( nNewValue )
+
+            Else
+
+                g_nOrgValue = CheckBounds( nNewValue )
+
+            End If
+
+            DefaultValue.FireChange
+
+        End If
+
+    Else
+
+        i = GetIndex( CStr( nNewValue ))
+        If Not IsNull( i ) Then
+
+            g_nOrgValue = CheckBounds( i )
+            propValue.FireChange
+
+        End If
+
+    End If
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y     V A L U E S                                         *
+'*                                                                              *
+'********************************************************************************
+
+Function get_Values()
+
+    get_Values = g_vValues
+
+End Function
+
+Sub put_Values( nNewValues )
+
+    If Not IsNull( g_vValues ) Then  g_bHasPropChanged = TRUE
+    g_vValues = NULL
+
+    If IsArray( nNewValues )  Then
+
+        If UBound( nNewValues ) >= LBound( nNewValues ) Then
+
+            Dim i
+            Dim vSrc
+            Dim vElems()
+
+            ReDim vElems( UBound( nNewValues ) - LBound( nNewValues ))
+
+            i = 0
+
+            For Each vSrc In nNewValues
+
+                vElems( i ) = CStr( vSrc )
+                i           = i + 1
+
+            Next
+
+            g_vValues = vElems
+
+            UpdateProps
+            propValues.FireChange
+
+        End If
+
+    End If
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y     M I N                                               *
+'*                                                                              *
+'********************************************************************************
+
+Function get_Min()
+
+    get_Min = g_nMin
+
+End Function
+
+Sub put_Min( nMin )
+
+    If IsNumeric( nMin ) Then
+
+        Dim nOld
+        nOld = g_nMin
+
+        SetMin  nMin
+
+        If g_nMin  <>  nOld  Then
+
+            g_bHasPropChanged = TRUE
+            propMin.FireChange
+
+        End If
+
+    End If
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y     M A X                                               *
+'*                                                                              *
+'********************************************************************************
+
+Function get_Max()
+
+    get_Max = g_nMax
+
+End Function
+
+Sub put_Max( nMax )
+
+    If IsNumeric( nMax ) Then
+
+        Dim nOld
+        nOld = g_nMax
+
+        SetMax  nMax
+
+        If g_nMax  <>  nOld  Then
+
+            g_bHasPropChanged = TRUE
+            propMax.FireChange
+
+        End If
+
+    End If
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y     P R E C I S I O N                                   *
+'*                                                                              *
+'********************************************************************************
+
+Function get_Precision()
+
+    get_Precision = g_nPrecision
+
+End Function
+
+Sub put_Precision( nPrecision )
+
+    If IsNumeric( nPrecision ) Then
+
+        Dim nOld
+        nOld = g_nPrecision
+
+        g_nPrecision = Int( Abs( Round( nPrecision )))
+
+        If g_nPrecision  <>  nOld  Then
+
+            g_bHasPropChanged = TRUE
+            propPrecision.FireChange
+
+        End If
+
+    End If
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y     I N C R E M E N T                                   *
+'*                                                                              *
+'********************************************************************************
+
+Function get_Increment()
+
+    get_Increment = g_nIncrement
+
+End Function
+
+Sub put_Increment( nIncrement )
+
+    If IsNumeric( nIncrement ) Then
+
+        Dim nOld
+        nOld = g_nIncrement
+
+        g_nIncrement = Abs( CDbl( nIncrement ))
+
+        If g_nIncrement   =     0  Then g_nIncrement      = nOld
+        If g_nIncrement  <>  nOld  Then
+
+            g_bHasPropChanged = TRUE
+            propIncrement.FireChange
+
+        End If
+
+    End If
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y     R E A D O N L Y                                     *
+'*                                                                              *
+'********************************************************************************
+
+Function get_ReadOnly()
+
+    get_ReadOnly = inputMain.ReadOnly
+
+End Function
+
+Sub put_ReadOnly( bIs )
+
+    Dim nOld
+    nOld = inputMain.ReadOnly
+
+    inputMain.ReadOnly = bIs
+
+    If bIs  <>  nOld  Then  propReadOnly.FireChange
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y     H A S C H A N G E D                                 *
+'*                                                                              *
+'********************************************************************************
+
+Function get_HasChanged()
+
+    get_HasChanged = g_nLastValue = get_Value()
+
+End Function
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y     I S V A L I D                                       *
+'*                                                                              *
+'********************************************************************************
+
+Function get_IsValid()
+
+    Dim vVal
+    Dim bIs
+    bIs  = TRUE
+
+    vVal = GetValidValue( FALSE, bIs )
+
+    If bIs  Then
+
+        If IsNull( g_vValues ) Then
+
+            bIs =  CStr( vVal ) = inputMain.Value
+
+        Else
+
+            bIs =  g_vValues( vVal ) = inputMain.Value
+
+        End If
+
+    End If
+
+    get_IsValid = bIs
+
+End Function
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y     G A U G E C O L O R                                 *
+'*                                                                              *
+'********************************************************************************
+
+Function get_GaugeColor()
+
+    get_GaugeColor = spanValueBar.CurrentStyle.BackgroundColor
+
+End Function
+
+Sub put_GaugeColor( vColor )
+
+    Dim nOld
+    nOld = spanValueBar.CurrentStyle.BackgroundColor
+
+    spanValueBar.Style.BackgroundColor = vColor
+
+    If Not ( g_objDragBarPopup Is Nothing ) Then
+
+        g_objDragBarPopup.Document.Body.FirstChild.LastChild.FirstChild.Color2 = vColor
+
+    End If
+
+    If vColor <>  nOld  Then  propGaugeColor.FireChange
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y     F O C U S E D C O L O R                             *
+'*                                                                              *
+'********************************************************************************
+
+Function get_FocusedColor()
+
+    get_FocusedColor = g_strFocusedColor
+
+End Function
+
+Sub put_FocusedColor( vColor )
+
+    Dim nOld
+    nOld = g_strFocusedColor
+
+    g_strFocusedColor = vColor
+
+    If vColor <>  nOld  Then
+
+        If g_bHasFocus Then SetBackground
+        propFocusedColor.FireChange
+
+    End If
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y     N O F O C U S C O L O R                             *
+'*                                                                              *
+'********************************************************************************
+
+Function get_NoFocusColor()
+
+    get_NoFocusColor = g_strNoFocusColor
+
+End Function
+
+Sub put_NoFocusColor( vColor )
+
+    Dim nOld
+    nOld = g_strNoFocusColor
+
+    g_strNoFocusColor = vColor
+
+    If vColor <>  nOld  Then
+
+        If Not g_bHasFocus Then SetBackground
+        propNoFocusColor.FireChange
+
+    End If
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y     I N C D E C D E L A Y                               *
+'*                                                                              *
+'********************************************************************************
+
+Function get_IncDecDelay()
+
+    get_IncDecDelay = g_nIncDecDelay
+
+End Function
+
+Sub put_IncDecDelay( nIncDecDelay )
+
+    If IsNumeric( nIncDecDelay ) Then
+
+        Dim nOld
+        nOld = g_nIncDecDelay
+
+        g_nIncDecDelay = Abs( Round( nIncDecDelay ))
+
+        If g_nIncDecDelay <>  nOld  Then  propIncDecDelay.FireChange
+
+    End If
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y     I N C D E C A C C E L                               *
+'*                                                                              *
+'********************************************************************************
+
+Function get_IncDecAccel()
+
+    get_IncDecAccel = g_nIncDecAccel
+
+End Function
+
+Sub put_IncDecAccel( nIncDecAccel )
+
+    If IsNumeric( nIncDecAccel )  Then
+
+        Dim nOld
+        nOld = g_nIncDecAccel
+
+        g_nIncDecAccel  = Abs( CDbl( nIncDecAccel ))
+
+        If g_nIncDecAccel > 1 Then
+
+            g_nIncDecAccel = 1
+
+        ElseIf IncDecAccel <= 0 Then
+
+            g_nIncDecAccel = 0
+
+        End If
+
+        If g_nIncDecAccel <>  nOld  Then  propIncIncDecAccel.FireChange
+
+    End If
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y     F O N T S T Y L E                                   *
+'*                                                                              *
+'********************************************************************************
+
+Function get_FontStyle()
+
+    With inputMain.CurrentStyle
+
+        get_FontStyle = .FontStyle      & " " _
+                      & .FontVariant    & " " _
+                      & .FontWeight     & " " _
+                      & .FontSize       & " " _
+                      & .LineHeight           _
+                      & " """                 _
+                      & .FontFamily           _
+                      & """"
+
+    End With
+
+End Function
+
+Sub put_FontStyle( strNewStyle )
+
+    If Len( strNewStyle ) > 0 Then
+
+        inputMain.RuntimeStyle.Font = strNewStyle
+
+    Else
+
+        inputMain.RuntimeStyle.CSSText = ""
+
+    End If
+
+    propFontStyle.FireChange
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y     D I S A B L E D                                     *
+'*                                                                              *
+'********************************************************************************
+
+Function get_Disabled()
+
+    get_Disabled = Element.IsDisabled
+
+End Function
+
+Sub put_Disabled( ByVal bIs )
+
+    bIs = CBool( bIs )
+
+    If bIs Then
+
+        spanDisabling.Style.Visibility = "Visible"
+
+    Else
+
+        spanDisabling.Style.Visibility = "hidden"
+
+    End If
+
+    Element.Attributes.Item( "disabled" ).NodeValue = bIs       ' Special access to attribute avoids recursion....
+                                                                ' Top secret (not documented by M$)
+    propDisabled.FireChange
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      M E T H O D   U P D A T E P R O P S                                     *
+'*                                                                              *
+'********************************************************************************
+
+Function UpdateProps()
+
+    UpdateProps          = TRUE
+    g_bHasPropChanged    = FALSE
+
+    Dim vVal
+    Dim nDigits
+
+    If IsNull( g_vValues ) Then
+
+        If Round( g_nIncrement, g_nPrecision ) <= 0 Then
+
+            g_nIncrement = 1
+            UpdateProps  = FALSE
+
+        Else
+
+            g_nIncrement  =  Round( g_nIncrement, g_nPrecision )
+
+        End If
+
+        SetMin  g_nMin
+        SetMax  g_nMax
+
+        If g_nMin  >  g_nMax Then
+
+            g_nMin      = g_nMax
+            UpdateProps = FALSE
+
+        End If
+
+        g_nCurValue = CheckBounds(  g_nCurValue  )
+        If Not IsNull( g_nOrgValue ) Then  g_nOrgValue = CheckBounds(  g_nOrgValue  )
+
+        nDigits    = Abs( g_nMax )
+        If nDigits < Abs( g_nMin )  Then  nDigits = Abs( g_nMin )
+
+        If nDigits > 0 Then
+
+            nDigits = Log( nDigits ) / Log( 10 )  + 1
+
+        Else
+
+            nDigits = 1
+
+        End If
+
+        If g_nMin       <  0  Then  nDigits = nDigits + 1
+        If g_nPrecision >  0  Then  nDigits = nDigits + 1 + g_nPrecision
+
+    Else
+
+        nDigits      = 1
+
+        g_nPrecision = 0
+        g_nIncrement = 1
+
+        g_nMin       = LBound(       g_vValues    )
+        g_nMax       = UBound(       g_vValues    )
+        g_nCurValue  = CheckBounds(  g_nCurValue  )
+
+        If Not IsNull( g_nOrgValue ) Then  g_nOrgValue = CheckBounds(  g_nOrgValue  )
+
+
+        For Each vVal In g_vValues
+
+            If nDigits < Len( vVal )  Then  nDigits = Len( vVal )
+
+        Next
+
+    End If
+
+    inputMain.MaxLength  = nDigits
+
+End Function
+
+'********************************************************************************
+'*                                                                              *
+'*      M E T H O D   U P D A T E L O O K                                       *
+'*                                                                              *
+'********************************************************************************
+
+Sub UpdateLook()
+
+    Dim  bHasFocus
+
+    If g_bHasPropChanged Then UpdateProps
+    onResizeElem
+
+    bHasFocus  =  Not  get_Disabled
+
+    If  bHasFocus  Then
+
+        With  Element.Document
+
+            bHasFocus  =  .HasFocus
+
+            If  bHasFocus  Then
+
+                bHasFocus  =  FALSE
+
+                On Error Resume Next
+
+                    bHasFocus  =  CBool( .ActiveElement Is Element )
+
+                On Error Goto 0
+
+            End If
+
+        End With
+
+    End If
+
+    If  bHasFocus  Then
+
+        onFocusElem
+
+    Else
+
+        onBlurElem
+
+    End If
+
+    put_Disabled  get_Disabled
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      M E T H O D   V A L I D A T E                                           *
+'*                                                                              *
+'********************************************************************************
+
+Function Validate()
+
+    Validate = get_IsValid
+
+    If Not Validate Then
+
+        If g_nAnimTimerCookie <> 0 Then Window.ClearInterval  g_nAnimTimerCookie
+
+        g_nAnimCounter     = 0
+        g_nAnimTimerCookie = Window.SetInterval( GetRef( "AnimateIllegal" ), 20, "VBScript" )
+
+    End If
+
+End Function
+
+'********************************************************************************
+'********************************************************************************
+'**                                                                            **
+'**                     E V E N T     H A N D L E R S    ( A T T A C H E D )   **
+'**                                                                            **
+'********************************************************************************
+'********************************************************************************
+
+'********************************************************************************
+'*                                                                              *
+'*       H A N D L E R   F O R   E L E M E N T    R E A D Y    E V E N T        *
+'*                                                                              *
+'********************************************************************************
+
+Sub onInitElem
+
+    With spanMain.Style
+
+        .Overflow    = "hidden"
+        .Position    = "relative"
+        .PixelLeft   = 0
+        .Pixeltop    = 0
+        .Border      = 0
+        .Margin      = 0
+        .Padding     = 0
+
+    End With
+
+    Element.HideFocus       = TRUE
+
+    Dim vTmp
+
+    vTmp = GetAttribVal( "Values" )
+    If Not IsNull( vTmp ) Then
+
+        If InStr( vTmp, ";" ) > 0 Then  put_Values  Split( vTmp, ";" )
+
+    End If
+
+    g_nPropLockCnt = g_nPropLockCnt + 1
+
+    SetHTMLAttribs  "Value",            "put_Value"
+    SetHTMLAttribs  "DefaultValue",     "put_DefaultValue"
+    SetHTMLAttribs  "Min",              "put_Min"
+    SetHTMLAttribs  "Max",              "put_Max"
+    SetHTMLAttribs  "Increment",        "put_Increment"
+    SetHTMLAttribs  "Precision",        "put_Precision"
+    SetHTMLAttribs  "ReadOnly",         "put_ReadOnly"
+    SetHTMLAttribs  "GaugeColor",       "put_GaugeColor"
+    SetHTMLAttribs  "FocusedColor",     "put_FocusedColor"
+    SetHTMLAttribs  "NoFocusColor",     "put_NoFocusColor"
+    SetHTMLAttribs  "DragBarWidth",     "DragBarWidth  = "
+    SetHTMLAttribs  "DragBarHeight",    "DragBarHeight = "
+    SetHTMLAttribs  "IncDecDelay",      "put_IncDecDelay"
+    SetHTMLAttribs  "IncDecAccel",      "put_IncDecAccel"
+    SetHTMLAttribs  "FontStyle",        "put_FontStyle"
+    SetHTMLAttribs  "SelfSized",        "SelfSized = "
+
+    g_nPropLockCnt = g_nPropLockCnt - 1
+
+    UpdateLook
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      H A N D L E R   F O R   D O C U M E N T    R E A D Y    E V E N T       *
+'*                                                                              *
+'********************************************************************************
+
+Sub onDocReady
+
+    If g_nState < 1 Then UpdateLook
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*              H A N D L E R     R E S I Z I N G     I N P U T                 *
+'*                                                                              *
+'********************************************************************************
+
+Sub onResizeElem
+
+    Dim nWidth
+    Dim nWidth2
+    Dim nHeight
+    Dim nHeightEdit
+    Dim nRemain
+
+    If g_bIsSelfSized Then
+
+        g_nPropLockCnt = g_nPropLockCnt + 1
+        With Element.Style
+
+            .Left    = "auto"
+            .Right   = "auto"
+            .Top     = "auto"
+            .Bottom  = "auto"
+            .Width   = "auto"
+            .Height  = "auto"
+
+        End With
+        g_nPropLockCnt = g_nPropLockCnt - 1
+
+    End If
+
+    With inputMain.Style
+
+        .Width      = "1ex"
+        .Height     = "auto"
+
+        nWidth      = inputMain.ScrollWidth
+        nHeight     = inputMain.ScrollHeight
+        nHeightEdit = nHeight
+
+        .Width      = "auto"
+
+    End With
+
+    If ( nWidth = 0 ) Or ( nHeight = 0 ) Then Exit Sub
+
+    g_nState = 1
+
+    With spanMain.Style
+
+        If UCase( Element.CurrentStyle.Width  ) = "AUTO" Then
+
+            .PixelWidth = nHeight + nWidth * ( inputMain.MaxLength ) + 4
+
+        Else
+
+            .PixelWidth = Element.ClientWidth
+
+        End If
+
+        If UCase( Element.CurrentStyle.Height ) = "AUTO" Then
+
+            .PixelHeight = nHeight + 2
+
+        Else
+
+            .PixelHeight = Element.ClientHeight
+
+        End If
+
+        nWidth   = .PixelWidth
+        nHeight  = .PixelHeight
+
+    End With
+
+    nWidth2      = nHeight \   2
+    nRemain      = nHeight Mod 2
+
+    With spanDisabling.Style
+
+        .PixelLeft   = 0
+        .PixelTop    = 0
+        .PixelWidth  = nWidth
+        .PixelHeight = nHeight
+
+    End With
+
+    With spanHosting.Style
+
+        .PixelLeft   = nWidth - nHeight
+        .PixelTop    = 0
+        .PixelWidth  = nHeight
+        .PixelHeight = nHeight
+
+    End With
+
+    With inputMain.Style
+
+        If nWidth  > ( nHeight + 3 ) Then  .PixelWidth  = nWidth  - nHeight - 3
+        If nHeight > 0               Then  .PixelHeight = nHeight - 1
+
+    End With
+
+    g_nBorderWidth = (   Element.OffsetWidth  - Element.ClientWidth          _
+                       + Element.OffsetHeight - Element.ClientHeight )  \ 4
+
+    If  g_nBorderWidth < 0  Then  g_nBorderWidth = 0
+
+    With spanHostUp.Style
+
+        .PixelLeft   = 0
+        .PixelTop    = 0
+        .PixelWidth  = nWidth2 + nRemain + 1
+        .PixelHeight = nWidth2
+
+    End With
+
+    With spanHostDown.Style
+
+        .PixelLeft   = 0
+        .Top         = "auto"
+        .PixelBottom = -nRemain
+        .PixelWidth  = nWidth2 + nRemain + 1
+        .PixelHeight = nWidth2
+
+    End With
+
+    With spanHostBar.Style
+
+        .Left        = "auto"
+        .PixelRight  = 1 - nRemain
+        .PixelTop    = 0
+        .PixelWidth  = nWidth2 - 2
+        .PixelHeight = nHeight
+
+    End With
+
+    SetBtnStyle  spanButtonUp,    FALSE
+    SetBtnStyle  spanButtonDown,  FALSE
+    SetBtnStyle  spanButtonBar,   FALSE
+
+
+    If Not IsNull( SelfSized ) Then
+
+        If SelfSized Then
+
+            g_bIsSelfSized = TRUE
+
+            g_nPropLockCnt = g_nPropLockCnt + 1
+            With Element.Style
+
+                .Position    = "relative"
+                .PixelWidth  = Element.OffsetWidth
+                .PixelHeight = Element.OffsetHeight
+                .Right       = "auto"
+                .Bottom      = "auto"
+                .Top         = .PixelHeight - nHeightEdit
+                .Bottom      = "auto"
+
+            End With
+            g_nPropLockCnt = g_nPropLockCnt - 1
+
+        End If
+
+    End If
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*            H A N D L E R     I N P U T    G A I N S    F O C U S             *
+'*                                                                              *
+'********************************************************************************
+
+Sub onFocusElem
+
+    If g_TraceMode Then
+
+        g_objTraceWin.Writeln    "onFocusElem, source: "   _
+                              &  Window.Event.SrcElement.ID
+
+    End If
+
+
+
+    g_bHasFocus           =  TRUE
+    g_nInternalLockCount  =  g_nInternalLockCount + 1
+    inputMain.Focus
+    inputMain.Select
+    g_nInternalLockCount  =  g_nInternalLockCount - 1
+    SetBackground
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*            H A N D L E R     I N P U T    L O O S E S     F O C U S          *
+'*                                                                              *
+'********************************************************************************
+
+Sub onBlurElem
+
+    If g_TraceMode Then
+
+        g_objTraceWin.Writeln    "onBlurElem, source: "   _
+                              &  Window.Event.SrcElement.ID
+
+    End If
+
+
+    g_bHasFocus   = FALSE
+    SetBackground
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*            H A N D L E R     I N P U T    B E C O M E S    A C T I V E       *
+'*                                                                              *
+'********************************************************************************
+
+Sub onBeforeActivateElem
+
+    If g_TraceMode Then
+
+        g_objTraceWin.Writeln    "onBeforeActivateElem, source: "   _
+                              &  Window.Event.SrcElement.ID
+
+    End If
+
+    With Window.Event
+
+        .CancelBubble = TRUE
+        .ReturnValue  = NULL
+
+    End With
+
+    g_nInternalLockCount  =  g_nInternalLockCount + 1
+
+    If  g_nInternalLockCount  =  1  Then  Element.Focus
+
+    g_nInternalLockCount  =  g_nInternalLockCount - 1
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*            H A N D L E R     F O R    C H A N G E D    P R O P E R T I E S   *
+'*                                                                              *
+'********************************************************************************
+
+Sub onPropChangedElem
+
+    If g_nPropLockCnt > 0  Then  Exit Sub
+
+    Dim strPropName
+
+    strPropName = UCase( Window.Event.PropertyName )
+
+    If InStr( strPropName, "STYLE" )  Then
+
+        UpdateLook
+
+    Else
+
+        Select Case strPropName
+
+            Case "SELFSIZED"  UpdateLook
+
+            Case "TITLE"      spanMain.Title = Element.Title
+
+        End Select
+
+    End If
+
+End Sub
+
+'********************************************************************************
+'********************************************************************************
+'**                                                                            **
+'**                 P R I V A T E    F U N C T I O N A L I T Y                 **
+'**                                                                            **
+'********************************************************************************
+'********************************************************************************
+
+Sub  SetMin(  ByVal  nNewMin  )
+
+    g_nMin  =  CDbl(  Fix(  nNewMin / g_nIncrement )  *  g_nIncrement  )
+
+    Do While  g_nMin < nNewMin
+
+        g_nMin = g_nMin  +  g_nIncrement
+
+    Loop
+
+End Sub
+
+'********************************************************************************
+
+Sub  SetMax(  ByVal  nNewMax )
+
+    g_nMax  =  CDbl(  Int(  nNewMax / g_nIncrement )  *  g_nIncrement  )
+
+    Do While  g_nMax > nNewMax
+
+        g_nMax = g_nMax  -  g_nIncrement
+
+    Loop
+
+End Sub
+
+'********************************************************************************
+
+Function CheckBounds( nValue )
+
+    CheckBounds = Round( nValue,  g_nPrecision )
+
+    If CheckBounds > g_nMax Then
+
+        CheckBounds = g_nMax
+
+    ElseIf CheckBounds < g_nMin Then
+
+        CheckBounds = g_nMin
+
+    End If
+
+End Function
+
+'********************************************************************************
+
+Function GetAttribVal( strAttribName )
+
+    GetAttribVal = Null
+
+    Dim objAttrib
+    Set objAttrib = Nothing
+
+    On Error Resume Next
+
+        Set objAttrib = Element.Attributes.GetNamedItem( strAttribName )
+
+    On Error Goto 0
+
+    If Not ( objAttrib Is Nothing ) Then GetAttribVal = objAttrib.NodeValue
+
+End Function
+
+'********************************************************************************
+
+Sub SetHTMLAttribs( strAttribName, strPutFctName )
+
+    Dim vAttribVal
+    vAttribVal      = GetAttribVal( strAttribName )
+
+    If Not IsNull( vAttribVal ) Then
+
+        Execute strPutFctName & " " & vAttribVal
+
+    End If
+
+End Sub
+
+'********************************************************************************
+
+Sub SetBtnStyle( objSpanButton, bIsPressed )
+
+    With objSpanButton.Style
+
+        If bIsPressed Then
+
+            .BorderStyle    = "inset"
+            .BorderColor    = ""
+            .BorderWidth    = 1
+
+            If g_nBorderWidth > 1 Then .Padding = g_nBorderWidth - 1
+
+        Else
+
+            If g_nBorderWidth = 1 Then
+
+                .BorderStyle  = "solid"
+                .BorderColor  = "buttonhighlight buttonshadow buttonshadow buttonhighlight"
+
+            Else
+
+                .BorderStyle  = "outset"
+                .BorderColor  = ""
+
+            End If
+
+            .BorderWidth = g_nBorderWidth
+            .Padding     = 0
+
+        End If
+
+    End With
+
+    Dim nLeft
+    Dim nTop
+    Dim nWidth
+    Dim nHeight
+    Dim objChild
+    Set objChild = objSpanButton.FirstChild
+
+    nWidth       = objSpanButton.ClientWidth
+    nHeight      = objSpanButton.ClientHeight
+
+
+    If Not ( objChild Is Nothing ) Then
+
+        With objChild.Style
+
+            If bIsPressed Then
+
+                .PixelLeft = 1
+                .PixelTop  = 1
+
+            Else
+
+                .PixelLeft = 0
+                .PixelTop  = 0
+
+            End If
+
+            .PixelWidth  = nWidth
+            .PixelHeight = nHeight
+
+            Set objChild = objChild.FirstChild
+
+            With objChild.Style
+
+                If Not ( objChild Is spanValueBar ) Then
+
+                    nLeft = Int( nWidth  * 0.2 )
+                    nTop  = Int( nHeight * 0.2 )
+
+                    If objChild Is vshapeUp Then
+
+                        .PixelLeft   = nLeft
+                        .PixelBottom = nTop
+
+                    Else
+
+                        .PixelLeft   = nLeft
+                        .PixelTop    = nTop
+
+                    End If
+
+
+                    .PixelWidth  = nWidth  - 4 * Sqr( nLeft )
+                    .PixelHeight = nHeight - 4 * Sqr( nTop  )
+
+                End If
+
+            End With
+
+        End With
+
+    End If
+
+End Sub
+
+'********************************************************************************
+
+Sub SetBackground()
+
+    If  get_Disabled  Then  Exit Sub
+
+    If  g_bHasFocus   Then
+
+        Document.Body.Style.BackgroundColor = g_strFocusedColor
+        inputMain.Style.BackgroundColor     = g_strFocusedColor
+
+    Else
+
+        Document.Body.Style.BackgroundColor = g_strNoFocusColor
+        inputMain.Style.BackgroundColor     = g_strNoFocusColor
+
+    End If
+
+End Sub
+
+'********************************************************************************
+
+Sub ShowDragBar( nPosX, nPosY )
+
+    Element.Document.Selection.Empty
+
+    Dim nRatio
+    Dim strCommon
+
+    If  Not g_bHasFocus  Then  Element.Focus
+
+    If  g_nMax > g_nMin  Then
+
+        nRatio = Round( 100 * ( GetValue() - g_nMin ) / ( g_nMax - g_nMin ))
+
+    Else
+
+        nRatio = 50
+
+    End If
+
+    strCommon = "<v:rect STYLE=""behavior:url(#default#VML);"                   _
+              &                 "Position:absolute;Width:100%;Height:100%;"     _
+              &                 "top:0px;left:0px"" stroked=""false""> "        _
+              &     "<v:fill STYLE=""behavior:url(#default#VML);"" "            _
+              &             "color=""buttonshadow"" color2=""buttonface"" "     _
+              &             "type=""gradient"" angle=""90"" focus=""0.5"" />"   _
+              & "</v:rect>"
+
+    Set g_objDragBarPopup = Window.CreatePopUp
+
+
+    With g_objDragBarPopup.Document
+
+        With .Body
+
+            .InnerHTML = "<SPAN STYLE=""Position:absolute;Width:100%;Height:100%;"  _
+                       &              "Top:0;Left:0;font-size:1pt;line-height:1pt;" _
+                       &              "padding:0;margin:0;border:0;"">"             _
+                       & strCommon & strCommon                                      _
+                       & "</SPAN>"
+
+            With .FirstChild.LastChild
+
+                With .Style
+
+                    .Top    = "auto"
+                    .Bottom = "0px"
+                    .Height = nRatio & "%"
+
+                End With
+
+                With .FirstChild
+
+                    .Color2 = spanValueBar.CurrentStyle.BackgroundColor
+
+                End With
+
+            End With
+
+        End With
+
+    End With
+
+    Dim  objDummy
+    Dim  nWidth
+    Dim  nHeight
+
+    nWidth  = DragBarWidth
+    nHeight = DragBarHeight
+
+    If Not ( IsNumeric( nWidth ) And IsNumeric( nHeight )) Then
+
+        Set objDummy = Document.CreateElement( "SPAN" )
+
+        With objDummy.Style
+
+            .Visibility = "hidden"
+            .Position   = "absolute"
+            .Left       = 0
+            .Top        = 0
+            .Width      = DragBarWidth
+            .Height     = DragBarHeight
+
+        End With
+
+        spanMain.AppendChild objDummy
+
+        With objDummy.Style
+
+            nWidth  = .PixelWidth
+            nHeight = .PixelHeight
+
+        End With
+
+        objDummy.ParentElement.RemoveChild  objDummy
+
+    End If
+
+    g_nDragBarPopupY1 = nPosY  - Round( nHeight * ( 100 - nRatio ) / 100.0 )
+    g_nDragBarPopupY2 = nHeight
+
+    g_objDragBarPopup.Show  nPosX - nWidth \ 2, _
+                            g_nDragBarPopupY1,  _
+                            nWidth,             _
+                            g_nDragBarPopupY2
+
+    Element.onLoseCapture  = GetRef( "onCloseDragBar"     )
+    Element.onMouseUp      = GetRef( "onCloseDragBar"    )
+    Element.onMouseMove    = GetRef( "onMouseMoveDragBar" )
+    Element.SetCapture
+
+End Sub
+
+'********************************************************************************
+
+Sub AnimateIllegal
+
+    Dim i
+    i = g_nAnimCounter Mod 5
+
+
+    If ( g_nAnimCounter Mod 10 ) < 5 Then
+
+        i = "#" & Hex(  40 * i + 55 ) & "0000"
+
+    Else
+
+        i = "#" & Hex( 255 - 40 * i ) & "0000"
+
+    End If
+
+    Document.Body.Style.BackgroundColor = i
+    inputMain.Style.BackgroundColor     = i
+
+
+    If g_nAnimCounter > 40 Then
+
+        If g_nAnimTimerCookie <> 0 Then Window.ClearInterval  g_nAnimTimerCookie
+        g_nAnimTimerCookie     = 0
+
+        If Not IsNull( g_nOrgValue ) Then
+
+            g_nCurValue = g_nOrgValue
+            SetValue
+
+        End If
+
+        SetBackground
+
+    Else
+
+        g_nAnimCounter = g_nAnimCounter + 1
+
+    End If
+
+End Sub
+
+'********************************************************************************
+
+Sub IncDecCount
+
+    If      ( g_nRepTimerCookie <> 0 ) _
+        Or  ( g_nCurIncDecDir    = 0 ) Then
+
+        Err.Raise vbObjectError, "SpinEdit.HTC", "Illegal call to 'IncDecCount'"
+
+    End If
+
+    g_nRepTimeInterval = g_nIncDecDelay
+    g_nRepTimerCookie  = Window.SetTimeout( GetRef( "TimedIncDec" ), g_nRepTimeInterval )
+
+    ChangeValueBy    g_nCurIncDecDir * g_nIncrement
+
+    If  Not g_bHasFocus  Then  Element.Focus
+
+End Sub
+
+'********************************************************************************
+
+Sub StopIncDec
+
+    If g_nRepTimerCookie <> 0  Then
+
+        If g_nRepTimeInterval > C_MinTimeout  Then
+
+            Window.ClearTimeout  g_nRepTimerCookie
+
+        Else
+
+            Window.ClearInterval g_nRepTimerCookie
+
+        End If
+
+        If g_TraceMode Then
+
+            g_objTraceWin.Writeln    "StopIncDec"
+
+        End If
+
+
+
+        inputMain.Focus
+
+    End If
+
+    g_nRepTimeInterval = 0
+    g_nRepTimerCookie  = 0
+
+End Sub
+
+'********************************************************************************
+
+Sub TimedIncDec
+
+    If g_nRepTimeInterval > C_MinTimeout  Then
+
+        g_nRepTimeInterval = Round( g_nRepTimeInterval * g_nIncDecAccel ) + 1
+
+        If g_nRepTimeInterval > C_MinTimeout  Then
+
+            g_nRepTimerCookie  = Window.SetTimeout( GetRef( "TimedIncDec" ), g_nRepTimeInterval )
+
+        Else
+
+            g_nRepTimerCookie  = Window.SetInterval( GetRef( "TimedIncDec" ), 1, "VBScript" )
+
+        End If
+
+    End If
+
+    ChangeValueBy    g_nCurIncDecDir * g_nIncrement
+
+End Sub
+
+'********************************************************************************
+
+Sub ChangeValueBy( nOffset )
+
+    Dim  vTmp
+    Dim  nOldVal
+
+    nOldVal  = GetValue
+
+    If Not IsNumeric( nOffset ) Then
+
+        Select Case UCase( nOffset )
+
+            Case "MIN"  g_nCurValue = g_nMin
+            Case "MAX"  g_nCurValue = g_nMax
+
+            Case Else   If InStr( nOffset, "%" ) > 0 Then
+
+                            vTmp      =  CDbl(  Left( nOffset, InStr( nOffset, "%" ) - 1 ))     _
+                                      *  (  g_nMax - g_nMin  )                                  _
+                                      /  100.0
+
+                            If  g_nIncrement = 1  Then
+
+                                vTmp  =  Round(  vTmp,  g_nPrecision )
+
+                            Else
+
+                                vTmp  =  Int(    vTmp  /  g_nIncrement                )
+                                vTmp  =  Round(  vTmp  *  g_nIncrement,  g_nPrecision )
+
+                            End If
+
+                            g_nCurValue  =  g_nMin  +  vTmp
+
+                        Else
+
+                            Err.Raise   vbObjectError,                                  _
+                                       "SpinEdit.HTC",                                  _
+                                       "Illegal usage ChangeValueBy( " & nOffset & ")"
+
+                        End If
+
+        End Select
+
+    Else
+
+        g_nCurValue = CheckBounds( g_nCurValue + nOffset )
+
+    End If
+
+    SetValue
+
+    If ( nOldVal <> g_nCurValue ) Then  eventOnChanged.Fire  CreateEventObject
+
+End Sub
+
+'********************************************************************************
+
+Function GetIndex( vValue )
+
+    Dim i
+    Dim vVal
+
+    GetIndex = NULL
+
+    For i = g_nMin To g_nMax
+
+        If vValue = g_vValues( i )  Then
+
+            GetIndex = i
+            Exit Function
+
+        End If
+
+    Next
+
+End Function
+
+'********************************************************************************
+
+Function GetValidValue( bHasToUseEvents, ByRef bIsValid )
+
+    Dim i
+    Dim vVal
+
+    bIsValid = TRUE
+
+    If g_bHasPropChanged Then UpdateProps
+
+    If IsNull( g_vValues ) Then
+
+        GetValidValue  = inputMain.Value
+
+    Else
+
+        GetValidValue  = g_nCurValue
+        vVal           = inputMain.Value
+
+        If vVal <> g_vValues( GetValidValue )  Then  GetValidValue  = GetIndex( vVal )
+
+    End If
+
+    If Not IsNumeric( GetValidValue ) Then
+
+        bIsValid =  FALSE
+
+        If Not IsNull( g_nOrgValue ) Then
+
+            GetValidValue  =  g_nOrgValue
+
+        Else
+
+            GetValidValue  =  g_nCurValue
+
+        End If
+
+
+        If bHasToUseEvents  Then  eventOnIllegal.Fire  CreateEventObject()
+
+    End If
+
+    GetValidValue = Round( GetValidValue, g_nPrecision )
+
+    If GetValidValue > g_nMax Then
+
+        GetValidValue  =  g_nMax
+        bIsValid       =  FALSE
+        If bHasToUseEvents  Then  EventOnExceed.Fire  CreateEventObject()
+
+    ElseIf GetValidValue < g_nMin Then
+
+        GetValidValue  =  g_nMin
+        bIsValid       =  FALSE
+        If bHasToUseEvents  Then  EventOnExceed.Fire  CreateEventObject()
+
+    End If
+
+End Function
+
+'********************************************************************************
+
+Function GetValue()
+
+    Dim bIs
+    Dim vVal
+    vVal = g_nCurValue
+    bIs  = TRUE
+
+    g_nCurValue = GetValidValue( TRUE, bIs )
+
+    If Not bIs Or ( vVal <> g_nCurValue )  Then  SetValue
+
+    GetValue = g_nCurValue
+
+End Function
+
+'********************************************************************************
+
+Sub SetValue
+
+    If g_nPrecision = 0 Then
+
+        If IsNull( g_vValues ) Then
+
+            inputMain.Value = g_nCurValue
+
+        Else
+
+            inputMain.Value = g_vValues(  g_nCurValue  )
+
+        End If
+
+    Else
+
+        inputMain.Value = FormatNumber( g_nCurValue, g_nPrecision, TRUE )
+
+    End If
+
+    Dim vTmp
+
+    If  g_nMax > g_nMin  Then
+
+        vTmp  =  Round( 100 * ( g_nCurValue - g_nMin ) / ( g_nMax - g_nMin ))
+
+    Else
+
+        vTmp = 0
+
+    End If
+
+    With spanValueBar.Style
+
+        If vTmp = 0 Then
+
+            .Visibility = "hidden"
+
+        Else
+
+            .Visibility = ""
+
+        End If
+
+        .Height          = vTmp & "%"
+        .Top             = "auto"
+        .PixelBottom     = 0
+
+    End With
+
+End Sub
+
+'********************************************************************************
+'********************************************************************************
+'**                                                                            **
+'**                     E V E N T     H A N D L E R S    ( P R I V A T E )     **
+'**                                                                            **
+'********************************************************************************
+'********************************************************************************
+
+'********************************************************************************
+'*                                                                              *
+'*     H A N D L E R     F O R     M O U S E     A C T I O N S                  *
+'*                                                                              *
+'********************************************************************************
+
+Sub OnMouseActions
+
+    With Window.Event
+
+        .CancelBubble = TRUE
+        .ReturnValue  = FALSE
+
+        Dim bIsPressed
+        bIsPressed = UCase( .Type ) = "MOUSEDOWN"
+
+        Dim objParent
+        Set objParent = .SrcElement
+
+        Do Until objParent Is Nothing
+
+            If UCase( objParent.TagName ) = "SPAN" Then
+
+                If      objParent Is spanHostUp    Then
+
+                    SetBtnStyle   spanButtonUp,   bIsPressed
+
+                    StopIncDec
+
+                    If bIsPressed Then
+
+                        g_nCurIncDecDir = 1
+                        If .ShiftKey Then g_nCurIncDecDir = g_nCurIncDecDir * 10
+                        IncDecCount
+
+                    End If
+
+                    Exit Sub
+
+                ElseIf  objParent Is spanHostDown  Then
+
+                    SetBtnStyle   spanButtonDown, bIsPressed
+
+                    StopIncDec
+
+                    If bIsPressed Then
+
+                        g_nCurIncDecDir = -1
+                        If .ShiftKey Then g_nCurIncDecDir = g_nCurIncDecDir * 10
+                        IncDecCount
+
+                    End If
+
+                    Exit Sub
+
+                ElseIf  objParent Is spanHostBar   Then
+
+                    SetBtnStyle   spanButtonBar, bIsPressed
+
+                    StopIncDec
+
+                    Select Case UCase( .Type )
+
+                        Case "MOUSEDOWN"    ShowDragBar .ScreenX, .ScreenY
+
+                        Case "MOUSEUP"      onCloseDragBar
+
+                    End Select
+
+                    Exit Sub
+
+                End If
+
+            End If
+
+            Set objParent = objParent.ParentElement
+
+        Loop
+
+    End With
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*         H A N D L E R     F O R     K E Y B O A R D    I N P U T S           *
+'*                                                                              *
+'********************************************************************************
+
+Sub onKeyDownInput
+
+    g_bHasToBubble = FALSE
+
+    With Window.Event
+
+        Select Case .KeyCode
+
+            Case 33     .CancelBubble = TRUE                    'PgUp  key
+                        .ReturnValue  = FALSE
+                        ChangeValueBy  ( g_nMax - g_nMin ) / 10
+
+            Case 34     .CancelBubble = TRUE                    'PgDn  key
+                        .ReturnValue  = FALSE
+                        ChangeValueBy  ( g_nMin - g_nMax ) / 10
+
+            Case 35     If .ctrlKey = TRUE Then                 'End  key  (only if Ctrl+End)
+
+                            .CancelBubble = TRUE
+                            .ReturnValue  = FALSE
+                            ChangeValueBy  "MIN"
+
+                        End If
+
+            Case 36     If .ctrlKey = TRUE Then                 'Home key  (only if Ctrl+End)
+
+                            .CancelBubble = TRUE
+                            .ReturnValue  = FALSE
+                            ChangeValueBy  "MAX"
+
+                        End If
+
+            Case 38     .CancelBubble = TRUE                    'Up  key
+                        .ReturnValue  = FALSE
+
+                        If .ctrlKey = TRUE Then
+
+                            ChangeValueBy  g_nIncrement * 10
+
+                        Else
+
+                            ChangeValueBy  g_nIncrement
+
+                        End If
+
+            Case 40     .CancelBubble = TRUE                    'Down  key
+                        .ReturnValue  = FALSE
+
+                        If .ctrlKey = TRUE Then
+
+                            ChangeValueBy  -g_nIncrement * 10
+
+                        Else
+
+                            ChangeValueBy  -g_nIncrement
+
+                        End If
+
+            Case Else   If ( .KeyCode < 32 ) Or .CtrlKey Or .AltKey  Then
+
+                            g_bHasToBubble = TRUE
+
+                        End If
+
+        End Select
+
+       .CancelBubble = TRUE
+
+    End With
+
+End Sub
+
+'********************************************************************************
+
+Sub onKeyBlockInput
+
+    With Window.Event
+
+        If g_bHasFocus  Then
+
+            If Not g_bHasToBubble  Then .CancelBubble = TRUE
+
+            If IsNull( g_vValues ) Then
+
+                If  Not (     (  .KeyCode <  32  )                           _
+                          Or  (  .KeyCode =  43  )                           _
+                          Or  (  .KeyCode =  45  )                           _
+                          Or  (( .KeyCode =  g_nASCIIDecimalPoint )          _
+                           And (        0 <  g_nPrecision         ))         _
+                          Or  (( .KeyCode >  47  ) And ( .KeyCode < 58  )))  Then
+
+                    .KeyCode = 0
+
+                End If
+
+            End If
+
+        End If
+
+    End With
+
+    g_bHasToBubble = FALSE
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*     H A N D L E R     F O R     C L O S I N G    D R A G    B A R            *
+'*                                                                              *
+'********************************************************************************
+
+Sub onCloseDragBar
+
+    If Not ( g_objDragBarPopup Is Nothing ) Then
+
+        Set  g_objDragBarPopup  = Nothing
+        Element.ReleaseCapture
+        Set  Element.onLoseCapture  =  Nothing
+        Set  Element.onMouseUp      =  Nothing
+        Set  Element.onMouseMove    =  Nothing
+        SetBtnStyle  spanButtonBar,  FALSE
+
+        onFocusElem
+
+    End If
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*     H A N D L E R     F O R     M A N I P U L A T E    D R A G    B A R      *
+'*                                                                              *
+'********************************************************************************
+
+Sub onMouseMoveDragBar
+
+    If Not ( g_objDragBarPopup Is Nothing ) Then
+
+        With Window.Event
+
+            .CancelBubble = TRUE
+            .ReturnValue  = FALSE
+
+            If .Button = 0 Then
+
+                onCloseDragBar
+
+            Else
+
+                Dim vTmp
+                vTmp = 100 - Round( 100.0 * ( .ScreenY - g_nDragBarPopupY1 ) / g_nDragBarPopupY2 )
+
+                If vTmp < 0 Then
+
+                    vTmp = 0
+
+                ElseIf vTmp > 100 Then
+
+                    vTmp = 100
+
+                End If
+
+                ChangeValueBy vTmp & "%"
+
+                With g_objDragBarPopup.Document.Body.FirstChild.LastChild
+
+                   With .Style
+
+                       .Top    = "auto"
+                       .Bottom = "0px"
+                       .Height = vTmp & "%"
+
+                   End With
+
+               End With
+
+            End If
+
+        End With
+
+    End If
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*     H A N D L E R     F O R     M O U S E     W H E E L    A C T I O N S     *
+'*                                                                              *
+'********************************************************************************
+
+Sub onMouseWheeling
+
+    With Window.Event
+
+        .CancelBubble = TRUE
+        .ReturnValue  = FALSE
+
+        If Not Element.IsDisabled  Then
+
+            If .ShiftKey Then
+
+                ChangeValueBy    g_nIncrement * .WheelDelta / 12
+
+            Else
+
+                ChangeValueBy    g_nIncrement * .WheelDelta / 120
+
+            End If
+
+            If Not g_bHasFocus  Then  onFocusElem
+
+        End If
+
+    End With
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*     H A N D L E R     F O R     I N P U T    L O O S I N G    F O C U S      *
+'*                                                                              *
+'********************************************************************************
+
+Sub onDeactivateInput
+
+    With Window.Event
+
+        .CancelBubble = TRUE
+
+        If  .ToElement Is Nothing   Then  Element.Blur
+
+
+        If g_TraceMode Then
+
+            If  .ToElement Is Nothing   Then
+
+                g_objTraceWin.Writeln    "onDeactivateInput (blur)"
+
+            Else
+
+                g_objTraceWin.Writeln    "onDeactivateInput --> "  &  .ToElement.ID
+
+            End If
+
+        End If
+
+
+    End With
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*     H A N D L E R     F O R     I N P U T    S E L E C T I O N S             *
+'*                                                                              *
+'********************************************************************************
+
+Sub OnInputSelected
+
+    With Window.Event
+
+        .CancelBubble = TRUE
+        .ReturnValue  = CBool(  g_nInternalLockCount  =  0 )
+
+    End With
+
+    If g_TraceMode Then
+
+        g_objTraceWin.Writeln    "OnInputSelected "  &  g_nInternalLockCount
+
+    End If
+
+
+End Sub
+
+'********************************************************************************
+'********************************************************************************
+
+Sub  Document_onactivate
+
+    Dim  vTmp
+
+    If Not g_TraceMode Then  Exit Sub
+
+    With  Window.Event
+
+        If  Not ( .FromElement Is Nothing )  Then
+
+            vTmp  =  "  <--  "               _
+                  &  .FromElement.TagName    _
+                  &  " ( "                   _
+                  &  .FromElement.ID         _
+                  &  ")"
+
+        End If
+
+        g_objTraceWin.Writeln       Time                    _
+                                 &  " Activated: "          _
+                                 &  .SrcElement.TagName     _
+                                 &  " ( "                   _
+                                 &  .SrcElement.ID          _
+                                 &  ")"                     _
+                                 &  vTmp
+
+    End With
+
+End Sub
+
+Sub  Document_onbeforedeactivate
+
+    Dim  vTmp
+
+    If Not g_TraceMode Then  Exit Sub
+
+    With  Window.Event
+
+        If  Not ( .ToElement Is Nothing )  Then
+
+            vTmp  =  "  -->  "             _
+                  &  .ToElement.TagName    _
+                  &  " ( "                 _
+                  &  .ToElement.ID         _
+                  &  ")"
+
+        End If
+
+        g_objTraceWin.Writeln       Time                    _
+                                 &  " Deactivated: "        _
+                                 &  .SrcElement.TagName     _
+                                 &  " ( "                   _
+                                 &  .SrcElement.ID          _
+                                 &  ")"                     _
+                                 &  vTmp
+
+    End With
+
+End Sub
+
+
+
+  </SCRIPT>
+</HTML>

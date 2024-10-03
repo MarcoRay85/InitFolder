@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html ID="THIS">
+<head >
+  <title>Terminar Intact</title>
+    <META NAME="Description" CONTENT="Intact1200 Quit & Storing (ES)">
+    <LINK REL="STYLESHEET" HREF="DlgStyle_ES.css">
+</head>
+
+<body style="width:23em; height:12em" align="center" Invisible="INIT" lang="es">
+
+  <div align="center"
+       style="position:absolute;zIndex:-1;zoom:2.5;"
+       style="Filter:progid:DXImageTransform.Microsoft.alpha( opacity=10 )">
+    &nbsp;
+    <img src="AnimHourglass.gif">
+    &nbsp;
+    <img src="AnimHourglass.gif">
+    &nbsp;
+    <img src="AnimHourglass.gif">
+    &nbsp;
+    &#32;
+    &nbsp;
+    <img src="AnimHourglass.gif">
+    &nbsp;
+    <img src="AnimHourglass.gif">
+    &nbsp;
+    <img src="AnimHourglass.gif">
+    &nbsp;
+  </div>
+
+  <div ID="divText" align="left" style="line-height:180%; width:21.5em;position:relative">
+     La finalización del programa
+     <span class="classIntact">Intact</span>
+     se retrasa debido a la grabación actual
+     de los resultados de la inspección.
+     <br>
+     Con
+     <span class="classButton">Cancelar</span>
+     se puede anular totalmente el proceso de finalización.
+  </div>
+
+  <div class="DLGBUTTONS" kind="11" align="CENTER"  ></div>
+
+</body>
+
+<script language="vbscript" >
+
+    Option Explicit
+
+    Sub SetTaskKind( nKind )
+
+        If nKind = 1  Then
+
+'            divText.InnerHTML = Replace( divText.InnerHTML, "Speicher", "Druck" )
+
+        End If
+
+    End Sub
+
+</script>
+
+<script class="DLGSCRIPT" language="vbscript" src="TestDocTaskRunningDlg.vbs" defer>
+</script>
+
+</html>

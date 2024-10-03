@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<TroubleShooting>
+<Error Msg="Interrotto da operatore" Page="60" />
+<Error Msg="Interruzione da operatore" Page="60" />
+<Error Msg="Hardlock" Page="119"  />
+<Error Msg="La porta di servizio non è bloccata" Page="123"  />
+<Error Msg="Eliminare l'oggetto che sta bloccando la porta della camera" Page="123"  />
+<Error Msg="Nessun pneumatico rilevato" Page="156"  />
+<Error Msg="Camera di carico non pronta a ricevere pneumatico" Page="157 "  />
+<Error Msg="Scaricatore occupato" Page="158"  />
+<Error Msg="Impossibile portare la sonda di misurazione in posizione iniziale" Page="163"  />
+<Error Msg="Destinazione non raggiunta" Page="163"  />
+<Error Msg="Disgiuntore di emergenza attivato" Page="165"  />
+<Error Msg="Sessione scaduta" Page="166"  />
+<Error Msg="IntactService" Page="167"  />
+<Error Msg="Default" Page="117"  />
+</TroubleShooting>

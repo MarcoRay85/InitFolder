@@ -1,0 +1,201 @@
+BODY    { 
+            font-size           : 12pt;
+            font-family         : ARIAL;
+            line-height         : 1.5em;
+            border              : 0;
+            Padding             : 0;
+            Margin              : 7px 10px 15px 10px;
+            Overflow            : auto;
+            Color               : ButtonText;
+            Background-Color    : ThreeDFace;
+        }
+
+.classFrameHostDiv   
+        {
+            Position            : relative;
+            Width               : 100%;
+            Margin-Bottom       : 10px;
+            Overflow            : hidden;
+        }
+
+.classViewFrame
+        {
+            Position            : Absolute;
+            Left                : 0;
+            Top                 : 0;
+            Width               : 100%;
+            Height              : 100%;
+            border              : 1px inset;
+        }
+
+.classDlgButtonHolder
+        {
+            Position            : Absolute;
+            Text-Align          : Center;
+            Bottom              : 10px;
+            Width               : 100%;
+            Clear               : Both;
+        }
+
+.classDlgButton
+        {
+            Font-Size           : 12pt;
+            Font-Family         : Arial;
+            Font-Weight         : 600;
+            Margin              : 0 0.5ex;
+            Width               : 150px;
+        }
+
+.classToolButton
+        {
+            Font-Size           : 12pt;
+            Font-Family         : Arial;
+            Font-Weight         : 800;
+            Text-Align          : Center;
+            Position            : relative;
+            Top                 : 0.6em;
+            Height              : 1em;
+            Line-Height         : 1.1em;
+            Border              : 2 outset;
+            Border-Bottom       : 0;
+            Padding             : 5px;
+            Cursor              : Hand;
+        }
+
+.classFieldSet
+        {
+            Width               : 14em;
+            Text-Align          : center;
+        }
+
+.classLegend
+        {
+            Font-Size           : 80%;
+        }
+
+.classERROR
+        {
+            Color               : crimson;
+            Font-Weight         : 600;
+        }
+
+.classWARNING
+        {
+            Color               : orange;
+            Font-Weight         : 600;
+        }
+
+.classALERT 
+        {
+            Color               : crimson;
+            Font-Weight         : 800;
+            Line-Height         : 1.3em;
+        }
+
+.classPASSED
+        {
+            Color               : green;
+            Font-Weight         : 800;
+            Line-Height         : 1.3em;
+        }
+
+.classRESULT, .classRESULTOK
+        {
+            Font-Size           : 112%;
+            Font-Weight         : 800;
+            Line-Height         : 1.3em;
+        }
+
+.classRESULTOK
+        {
+            Color               : green;
+        }
+
+.classSTRONGER
+        {
+            Font-Weight         : 800;
+        }
+
+.classSEPARATE
+        {
+            Font-Weight         : 800;
+            Padding             : 1ex 5em;
+            Text-Align          : center; 
+            Background-Color    : #B8B8B8;
+        }
+
+.classINDENT
+        {
+            Position            : Relative;
+            Left                : 3em;
+        }
+
+.classPLCINFO
+        {
+            Position            : Relative;
+            Left                : 5em;
+            Font-Size           : 7.9pt;
+        }
+
+.classDivSeparator
+        { 
+            Position            : Relative;
+            Text-ALIGN          : CENTER;
+            Font-Size           : 12pt;
+            Font-Weight         : 600;
+            Line-Height         : 3ex;
+            Height              : 3ex;
+            Overflow            : hidden;
+            Padding-Top         : 0.5ex;
+            Overflow            : hidden;
+        }
+
+.classSpanSeparator
+        { 
+            Position            : Relative;
+            Top                 : -2.6ex;
+            Background-Color    : ThreeDFace;
+            Padding             : 0 1ex;
+        }
+
+.classPLCListHeader
+        {
+            Font-Size           : 112%;
+            Border              : 1px outset;
+            Text-Align          : center;
+        }
+
+.classPLCListItem
+        {
+            Font-Size           : 10pt;
+            Font-Weight         : 600;
+            Background-Color    : #E8E8E8;
+            Text-Align          : Left;
+            Padding             : 2px 1ex;
+        }
+
+.classPLCListCheck
+        {
+            Font-Size           : 10pt;
+            Font-Weight         : 600;
+            Background-Color    : lightblue;
+            Text-Align          : Center;
+        }
+
+.classPLCListCheckBox
+        {
+            Width               : 1em;
+            Height              : 1em;
+            Font-Size           : 150%;
+            Font-Weight         : 100;
+            Cursor              : Hand;
+        }
+
+.classDivInfo
+    {
+        Width               : 100%;
+        Text-Align          : Left;
+        Font-Weight         : 600;
+        Padding             : 1em;
+        Background-Color    : InfoBackground;
+    }

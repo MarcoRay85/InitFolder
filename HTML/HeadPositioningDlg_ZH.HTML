@@ -1,0 +1,314 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML ID="THIS" XMLNS:v  XMLNS:CX  XMLNS:t ="urn:schemas-microsoft-com:time">
+<HEAD>
+  <TITLE>配置探头...</title>
+    <META content="text/html; charset=gb2312" http-equiv="Content-Type">
+    <META NAME="Description" CONTENT="Intact Me遦opfpositionierung(ZH)" >
+    <LINK ID="linkedstyleDefault" REL="STYLESHEET" HREF="DlgStyle_ZH.css">
+    <LINK ID="linkedstyleCustom"  REL="STYLESHEET" HREF="HeadPositioningDlg.css">
+    <?IMPORT namespace="CX" implementation="SpinEdit.htc">
+</HEAD>
+
+<XML ID="xmlResource">
+  <Resources>
+    <Res    AddressBy   = "_RESNAME"
+            MatchValue  = "REStiredata"
+            ApplyTo     = "title"
+    >获取的当前轮胎结果
+    (Results of current tyre acquisition)</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "trExcentricity"
+            ApplyTo     = "title"
+    >据理想定位中心总距离
+    (Total displacement to ideal centering)</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "trLiftInput"
+            ApplyTo     = "title"
+    >
+    请输入探头的垂直位置。&#13;
+    以下的参考点可能被用到&#13;
+    C: 意味着探头将会定位到所给出的距离胎面中心的距离(正值将移动到更高的位置)。&#13;
+    A: 意味着探头将会定位到所给出的绝对高度。&#13;
+    R: 意味着探头将会定位到所给出的距离轮胎上部边界的距离。&#13;
+    D: 意味着探头将会定位到所给出的深入轮胎的距离。&#13;
+    每一个参照点都可以通过以下方式使用键盘上的快捷键来选择：按下 'Ctrl' 键及相关联的按键
+    &#13;Please enter measure head's vertical position.&#13;
+    Following reference points may be used&#13;
+    C: measure head is positioned to given distance to the center of tyre's tread (positive values will yield a higher position).&#13;
+    A: measure head is positioned to the given absolute height.&#13;
+    R: measure head is positioned to given distance to the upper bound of tyre.&#13;
+    D: measure head dives into tyre for given distance.&#13;
+    A particular reference point may be selected by keyboard shortcuts also: just press 'Ctrl' together with associated key
+    </Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "trDiamInput"
+            ApplyTo     = "title"
+    >请输入最适宜当前轮胎的探头的直径
+    &#13;
+    (Please enter measure head's diameter matching to this tire optimally)</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "trTiltInput"
+            ApplyTo     = "title"
+    >
+    请输入最适宜当前轮胎的探头的倾角值
+        (0°意味着水平；
+         小于零的倾角值向上抬起；
+         大于零的倾角值向下倾斜)
+    &#13;
+    (Please enter measure head's tilting matching to this tire optimally
+        (0&#186; means horizontal;
+        values less than zero will tilt upwards;
+    values bigger than zero will tilt downwards))
+    </Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "trRotInput"
+            ApplyTo     = "title"
+    >请输入检查的轮胎的扇区
+    &#13;(Please enter tyre sector to be inspected)
+    </Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonUpdatePos"
+            ApplyTo     = "title"
+    >探头移动到给出的位置 (F5)
+    &#13;(Drives measure head to given position (F5))
+    </Res>
+
+    <Res   AddressBy   = "ID"
+            MatchValue  = "buttonHomePos"
+            ApplyTo     = "title"
+    >探头移动到初始位置 (F6)
+    &#13;(Drives measure head home (F6))
+    </Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonStopPos"
+            ApplyTo     = "title"
+    >中止配置任务 (F7)
+    &#13;(Aborts positioning task (F7)))
+    </Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonVideo"
+            ApplyTo     = "title"
+    >显示探头相机的动态图像 (F8)
+    &#13;(Shows live video image(s) of measure head's camera(s) (F8)))
+    </Res>
+
+  </Resources>
+</XML>
+
+
+<XML ID="xmlLiftMenu">
+  <LiftMenu Types="C|A|R|D">
+    <Item>选择参照点</Item>
+    <Item>C: 胎面中心&#9;Ctrl+C</Item>
+    <Item>A: 绝对值&#9;Ctrl+A</Item>
+    <Item>R: 相对于轮胎上边界&#9;Ctrl+R</Item>
+    <Item>D: 潜入轮胎&#9;Ctrl+D</Item>
+  </LiftMenu>
+</XML>
+
+
+<BODY style="font-family: Arial;" Align="Left" ResourceXML="xmlResource" lang="ZH">
+
+  <DIV  ID            = "divTireDataPane"
+        style         = "behavior:url(ToolPane.WSC);Margin-Top:1ex;" 
+        HeaderText    = "轮胎数据：" 
+        HeaderClass   = "classTableHeader"
+        Minimized     = "0" >
+    <TABLE cellspacing=0 cellpadding=0  class="classTireDataTable" >
+      <COLGROUP class="classTireDataNameCol">
+      </COLGROUP>
+      <COLGROUP class="classTireDataNumCol">
+      </COLGROUP>
+      <COLGROUP>
+      </COLGROUP>
+      <COLGROUP class="classTireDataNumCol">
+      </COLGROUP>
+      <COLGROUP>
+      </COLGROUP>
+      <TBODY>
+        <TR CLASS="classTireDataTableHead" >
+          <TD align=left _RESNAME="REStiredata">
+          </TD>
+          <TD _RESNAME="REStiredata" class="classTireDataNumCell">
+            [mm]
+          </TD>
+          <TD>
+            &nbsp;
+          </TD>
+          <TD _RESNAME="REStiredata" class="classTireDataNumCell">
+            [inch]
+          </TD>
+          <TD>
+            &nbsp;
+          </TD>
+        </TR>
+
+        <TR _RESNAME="REStiredata">
+          <TD>
+            外径
+          </TD>
+          <TD ID="tdOuterDiamMM" class="classTireDataNumCell">
+          </TD>
+          <TD>
+          </TD>
+          <TD ID="tdOuterDiamInch" class="classTireDataNumCell">
+          </TD>
+        </TR>
+        <TR _RESNAME="REStiredata">
+          <TD>
+            内径
+          </TD>
+          <TD ID="tdInnerDiamMM" class="classTireDataNumCell">
+          </TD>
+          <TD>
+          </TD>
+          <TD ID="tdInnerDiamInch" class="classTireDataNumCell">
+          </TD>
+        </TR>
+        <TR _RESNAME="REStiredata">
+          <TD>
+            宽度
+          </TD>
+          <TD ID="tdTireWidthMM" class="classTireDataNumCell">
+          </TD>
+          <TD>
+          </TD>
+          <TD ID="tdTireWidthInch" class="classTireDataNumCell">
+          </TD>
+        </TR>
+        <TR ID="trExcentricity">
+          <TD>
+            偏离值
+          </TD>
+          <TD ID="tdExcentricityMM" class="classTireDataNumCell">
+          </TD>
+        </TR>
+      </TBODY>
+    </TABLE>
+  </DIV>
+
+  <DIV  ID            = "divHeadPosPane"   
+        style         = "behavior:url(ToolPane.WSC);Margin-Top:1ex;" 
+        HeaderText    = "探头位置：" 
+        HeaderClass   = "classTableHeader"
+        Minimized     = "0" >
+    <TABLE ID="tableHeadPosPane" cellspacing=2 cellpadding=0  class="classTable">
+      <TBODY>
+        <TR>
+          <TD colspan=4 class="classHeadPosRowSep">
+          </TD>
+        </TR>
+        <TR ID="trLiftInput" RESLiftInput>
+          <TD ID="tdLift" >
+            <LABEL class="DLGAUTOLABEL" accesskey="H" FOR="spineditLift">
+              高度(H)：
+            </LABEL>
+          </TD>
+          <TD class="classLiftTypeCell">
+            <SPAN ID="spanLiftType" class="classLiftTypeSpan" _BLOCKINPUT_="TRUE" >M</SPAN>
+          </TD>
+          <TD valign=center class="classSpinEditCell">
+            <CX:SpinEdit   ID="spineditLift" class="classSpinEdit" _BLOCKINPUT_="TRUE"/>
+            <SPAN ID="spanLiftPos" class="classPosData">0</SPAN>
+          </TD>
+          <TD>
+              mm
+          </TD>
+        </TR>
+        <TR>
+          <TD colspan=4 class="classHeadPosRowSep">
+          </TD>
+        </TR>
+        <TR ID="trDiamInput">
+          <TD ID="tdDiam"  colspan=2>
+            <LABEL class="DLGAUTOLABEL" accesskey="D"  FOR="spineditDiam">
+              直径(D)：
+            </LABEL>
+          </TD>
+          <TD valign=center class="classSpinEditCell">
+            <CX:SpinEdit   ID="spineditDiam" class="classSpinEdit" _BLOCKINPUT_="TRUE"/>
+            <SPAN ID="spanDiamPos" class="classPosData">0</SPAN>
+          </TD>
+          <TD>
+              mm
+          </TD>
+        </TR>
+        <TR>
+          <TD colspan=4 class="classHeadPosRowSep">
+          </TD>
+        </TR>
+        <TR ID="trTiltInput" >
+          <TD ID="tdTilt"  colspan=2>
+            <LABEL class="DLGAUTOLABEL" accesskey="T"  FOR="spineditTilt">
+              倾角(T)：
+            </LABEL>
+          </TD>
+          <TD valign=center class="classSpinEditCell">
+              <CX:SpinEdit   ID="spineditTilt" class="classSpinEdit" _BLOCKINPUT_="TRUE"/>
+              <SPAN ID="spanTiltPos" class="classPosData">0</SPAN>
+          </TD>
+          <TD>
+              <SPAN STYLE="font-size:150%;font-weight:800">&deg;</SPAN>
+          </TD>
+        </TR>
+        <TR>
+          <TD colspan=4 class="classHeadPosRowSep">
+          </TD>
+        </TR>
+        <TR ID="trRotInput" >
+          <TD ID="tdRot"  colspan=2>
+            <LABEL class="DLGAUTOLABEL" accesskey="R"  FOR="spineditRot">
+              旋转角度(R)：
+            </LABEL>
+          </TD>
+          <TD valign=center class="classSpinEditCell">
+            <CX:SpinEdit   ID="spineditRot" class="classSpinEdit" _BLOCKINPUT_="TRUE" />
+            <SPAN ID="spanRotPos" class="classPosData">0</SPAN>
+          </TD>
+          <TD>
+              <SPAN STYLE="font-size:150%;font-weight:800">&deg;</SPAN>
+          </TD>
+        </TR>
+      </TBODY>
+    </TABLE>
+    <DIV CLASS="classToolButtonDiv">
+        <BUTTON ID="buttonUpdatePos"  CLASS="classButtons" _BLOCKINPUT_="TRUE">
+            <SPAN CLASS="classUpdateSpan">4</SPAN>
+        </BUTTON>
+        <BUTTON ID="buttonHomePos" CLASS="classButtons" _BLOCKINPUT_="TRUE">
+            <SPAN CLASS="classHomeSpan">H</SPAN>
+        </BUTTON>
+        <BUTTON ID="buttonStopPos" CLASS="classStopButton">
+            <IMG ID="imgStopPos" SRC="Stop.gif" CLASS="classStopImage">
+        </BUTTON>
+    </DIV>
+  </DIV>
+
+  <DIV  ID            = "divToolPane"
+        style         = "behavior:url(ToolPane.WSC);Margin-Top:1ex;" 
+        HeaderText    = "工具" 
+        HeaderClass   = "classTableHeader"
+        Minimized     = "0" >
+    <BUTTON ID="buttonVideo"  CLASS="classButtons" style="behavior:url(PushButtons.WSC)" ToggleMode="FALSE">
+      <SPAN ID="spanVideoBtnPane" CLASS="classVideoSpan">&#181;</SPAN>
+    </BUTTON>
+  </DIV>
+
+
+  <DIV class="DLGBUTTONS" kind="12" align="CENTER"  _BLOCKINPUT_="TRUE"></DIV>
+</BODY>
+
+
+<SCRIPT class="DLGSCRIPT" language="vbscript" src="HeadPositioningDlg.vbs" defer>
+</SCRIPT>
+
+</HTML>

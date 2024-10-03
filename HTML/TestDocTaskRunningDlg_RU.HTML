@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html ID="THIS">
+  <head >
+  <title>закончить (Exit) Intact</title>
+    <META NAME="Description" CONTENT="Intact1200 выход & сохранение (RU)">
+    <LINK REL="STYLESHEET" HREF="DlgStyle_RU.css">
+  </head>
+
+<body style="width:28em; height:12em" align="center" Invisible="INIT" lang="ru">
+
+  <div align="center"
+       style="position:absolute;zIndex:-1;zoom:2.5;"
+       style="Filter:progid:DXImageTransform.Microsoft.alpha( opacity=10 )">
+    <img src="AnimHourglass.gif">
+    &nbsp;
+    <img src="AnimHourglass.gif">
+    &nbsp;
+    <img src="AnimHourglass.gif">
+    &nbsp;
+    <img src="AnimHourglass.gif">
+    &#32;
+    <img src="AnimHourglass.gif">
+    &nbsp;
+    <img src="AnimHourglass.gif">
+    &nbsp;
+    <img src="AnimHourglass.gif">
+    &nbsp;
+    <img src="AnimHourglass.gif">
+  </div>
+
+  <div ID="divText" align="left" style="line-height:180%; width:26em;position:relative">
+     выход из (Shutting Down)
+     <span class="classIntact">Intact</span>
+     несколько замедляется, т.к. в настоящее время еще
+     идет процесс&shy;сохранения результатов&shy;проверки.
+     <br>
+     если его
+     <span class="classButton">прервать</span>
+     то можно полностью аннулировать выход из
+<br>
+     Intact is delayed a litte bit due to some test results not stored completely yet.<br>
+     Use Cancel
+     to stop shut down process at all.
+
+  </div>
+
+  <div class="DLGBUTTONS" kind="11" align="CENTER"  ></div>
+
+</body>
+
+<script language="vbscript" >
+
+    Option Explicit
+
+    Sub SetTaskKind( nKind )
+
+        If nKind = 1  Then
+
+            divText.InnerHTML = Replace( divText.InnerHTML, "stored", "printed" )
+
+        End If
+
+    End Sub
+
+</script>
+
+<script class="DLGSCRIPT" language="vbscript" src="TestDocTaskRunningDlg.vbs" defer>
+</script>
+
+</html>

@@ -1,0 +1,51 @@
+.classToolButtonDiv,
+.classToolButtonDivInvisib
+    {
+      position          : relative;
+      Margin            : 0.5em;
+      Text-Align        : Center;
+    }
+
+.classToolButtonDivInvisib
+    {
+      display           : none;
+    }
+
+#buttonRotLeft,
+#buttonRotRight,
+#buttonTransLoad,
+#buttonTransUnload,
+#buttonClamp,
+#buttonRetainer
+    {
+        position    : relative;
+        Font-Family : Arial;
+        Font-Size   : 200%;
+        Font-Weight : 900;
+        Width       : 3ex;
+        Height      : 3ex;
+        Margin      : 1ex;
+    }
+
+#buttonRotLeft,
+#buttonRotRight
+    {
+        Font-Family : Webdings;
+    }
+
+#buttonClamp
+    {
+        Width       : 7ex;
+        Margin-Top  : 0;
+    }
+
+
+.classMirrorSpan
+    {
+        filter      : progid:DXImageTransform.Microsoft.BasicImage(mirror=1);
+        Width       : 100%;
+        Height      : 100%;
+        Background-color : buttonface;
+    }
+
+

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<TroubleShooting>
+<Error Msg="Abgebrochen durch den Bediener" Page="60" />
+<Error Msg="Abbruch durch Bediener" Page="60" />
+<Error Msg="Hardlock" Page="119"  />
+<Error Msg="Servicetür ist nicht verriegelt" Page="123"  />
+<Error Msg="Bitte entfernen Sie das Objekt, das die Luken der Prüfkammer blockiert" Page="123"  />
+<Error Msg="Kein Reifen erkannt" Page="156"  />
+<Error Msg="Beschicker ist nicht bereit, einen Reifen zu übernehmen" Page="157 "  />
+<Error Msg="Entschicker ist belegt" Page="158"  />
+<Error Msg="Der Messkopf konnte nicht in Nullposition gefahrn werden" Page="163"  />
+<Error Msg="Zielposition nicht erreicht" Page="163"  />
+<Error Msg="Die Not-Aus-Schaltung ist aktiviert" Page="165"  />
+<Error Msg="Zeitüberschreitung" Page="166"  />
+<Error Msg="IntactService" Page="167"  />
+<Error Msg="Default" Page="117"  />
+</TroubleShooting>

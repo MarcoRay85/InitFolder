@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--html id="THIS" XMLNS:CX-->
+<html id"THIS">
+
+	<head>   
+		<title>Malfunction (conveying system)</title>
+		<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+		<meta name="description" content="Fehlerdialog Transportssystem (DE)">
+		<link id="linkedstyleDefault" rel="stylesheet" href="DlgStyle_DE.css">		
+	</head>
+
+   <xml id="XMLStringTable">  
+      <StringTable>     
+         <String ID="ModuleType1">single conveyor</String>
+         <String ID="ModuleType2">double conveyor</String>
+         <String ID="ModuleType3">rotary table</String>
+         <String ID="ModuleType4">tilting conveyor</String>
+         
+         <String ID="ModuleLongSeg1">Segment 1</String>
+         <String ID="ModuleLongSeg2">Segment 2</String>
+         <String ID="Module">Module</String>
+         
+         <String ID="ExtConvSysError64">undefined error</String>
+         <String ID="ExtConvSysError65">state not defined</String>
+         <String ID="ExtConvSysError66">InitKommPointer</String>
+         <String ID="ExtConvSysError67">tire unknown</String>
+         <String ID="ExtConvSysError68">tire data not available</String>
+         <String ID="ExtConvSysError69">swiveling timeout</String>
+         <String ID="ExtConvSysError70">rotary table position lost</String>
+         <String ID="ExtConvSysError71">rotary table can't reach 0 degree position</String>
+         <String ID="ExtConvSysError72">rotary table sensors</String>
+         <String ID="ExtConvSysError73">spools not connected</String>
+         <String ID="ExtConvSysError74">target illegal</String>
+         <String ID="ExtConvSysError75">PutGetFiFo is full</String>
+         <String ID="ExtConvSysError76">PutGetFiFo has no data</String>
+         <String ID="ExtConvSysError77">loading module can't reach upper position</String>
+         <String ID="ExtConvSysError78">predecessor hasn't read state</String>
+         <String ID="ExtConvSysError254">segment not available</String>
+         <String ID="ExtConvSysError255">default</String>
+         
+         <!--String ID="ExtConvSysErrorPLC">PLC of extern conveying system is dead</String-->         
+      </StringTable>      
+   </xml>
+
+   <BODY style="width:50%;height:25%;">
+   
+      <TABLE style="width:100%;height:100%;text-align:center;">
+         <TR>
+            <TD>
+               <SPAN ID="ExtConvSysErrorDialog_Output" STYLE="color:black;font-size:100%;"><b></b></SPAN>         
+            </TD>
+         </TR>
+         <TR STYLE="height:16.6%">
+            <TD Colspan="2">
+               <BUTTON ID="btOK" Style="left:10%;width:40%">OK</BUTTON>
+            </TD>
+         </TR>         
+      </TABLE>
+      
+	</BODY>
+
+	<SCRIPT class="DLGSCRIPT" language="vbscript" src="ExtConvSysErrorDialog.vbs" DEFER>
+	</SCRIPT>
+
+</html>

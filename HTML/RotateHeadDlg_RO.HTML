@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html ID="THIS" XMLNS:CX>
+  <head>
+    <META content="text/html; charset=windows-1250" http-equiv="Content-Type">
+    <META NAME="Description" CONTENT="Unghiul de rota&#539;ii a pozi&#539;iei capului de măsurare Intact1200 (RO)">
+    <title>Pozi&#539;ia capului de măsurare</title>
+    <LINK REL="STYLESHEET" HREF="DlgStyle_DE.css">
+    <?IMPORT namespace="CX" implementation="SpinEdit.htc">
+  </head>
+
+<XML ID="xmlResource"><Resources><Res    AddressBy   = "TAG"             MatchValue  = "body"             ApplyTo     = "title"     >Vă rugăm să indica&#539;i aici sectorul anvelopei la care să se deplaseze capul de măsurare</Res>
+
+  </Resources></XML>
+
+<body style = "width:18.5em;height:7em" Invisible="INIT" ResourceXML="xmlResource" lang="ro">
+
+  <br>
+  <p align="center">
+    <label class="DLGAUTOLABEL" FOR="InputRotDegree">
+      Sector:
+    </label>
+    <CX:SpinEdit   ID        ="InputRotDegree"                    style     ="position:relative;width:4em;height:2.5ex;top:0.5ex;border:1px inset" />&nbsp;&deg;
+  </p>
+
+  <div class="DLGBUTTONS" kind="1" align="CENTER"  ></div>
+
+</body>
+
+<script class="DLGSCRIPT" language="vbscript" src="RotateHeadDlg.vbs" defer>
+</script>
+
+</html>

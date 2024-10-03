@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html ID="THIS">
+<head>
+  <title>反転装置リカバリ</title>
+    <META content="text/html; charset=iso-2022-jp" http-equiv="Content-Type">
+    <META NAME="Description" CONTENT="Intact Flipper Recover Dialog (JA)">
+    <LINK REL="STYLESHEET" HREF="DlgStyle_JA.css">
+    <LINK REL="STYLESHEET" HREF="FlipperRecoverDlg.css">
+</head>
+
+<XML ID="xmlResource">
+  <Resources>
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonRetOpen"
+            ApplyTo     = "title"
+    >リテーナはこのボタンが押されている間、開放を維持します</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonRetClose"
+            ApplyTo     = "title"
+    >リテーナはこのボタンが押されている間、閉鎖を維持します</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonRotLeft"
+            ApplyTo     = "title"
+    >回転軸はこのボタンが押されている間、反時計回りに運動し続けます</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonRotRight"
+            ApplyTo     = "title"
+    >回転軸はこのボタンが押されている間、時計回りに運動し続けます</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonConveyLeft"
+            ApplyTo     = "title"
+    >コンベアはこのボタンが押されている間、左への搬入（供給）を続けます</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "buttonConveyRight"
+            ApplyTo     = "title"
+    >コンベアはこのボタンが押されている間、右への搬入（供給）を続けます</Res>
+
+  </Resources>
+</XML>
+
+
+
+<body style = "width:35.5em;height:25.5em" align="center" Invisible="INIT" ResourceXML="xmlResource" lang="ja" >
+
+  <div style="font-size: larger;color:red;padding-top:1em" align="center">
+      反転装置は搬送準備中です！
+  </div>
+  <div style="padding:1em 1em 0 1em" align="left">
+      まず搬送ポジションへの回転が必要です。
+      これはOKボタンによる確認の後、自動で実行されます
+      <span class="classButtonSpan">OK</span>; 
+      <span class="classButtonSpan">Cancel</span> 
+      は、反転装置が作動しないようここで搬送を停止します。
+  </div>
+  <div style="padding:1em 1em 0 1em" align="left">
+      まだ内部にタイヤがある場合、回転中にリテーニングを確認する必要があります。
+      <br>
+      そのためリテーナ、回転軸およびコンベアは手動で調整することが可能です。
+  </div>
+
+
+  <table>
+    <tbody>
+        <tr>
+          <td>
+            <fieldset CLASS="classJogPane">
+              <legend>&nbsp;リテーナ：&nbsp;</legend>
+              <button id="buttonRetOpen" class="classButtonCtrl">+</button>
+              <button id="buttonRetClose" class="classButtonCtrl">&ndash;</button>
+            </fieldset>
+          </td>
+          <td>
+            <fieldset CLASS="classJogPane">
+              <legend>&nbsp;回転軸：&nbsp;</legend>
+              <button id="buttonRotLeft"  ><span class="classMirrorSpan">&#x71;</span></button>
+              <button id="buttonRotRight" >&#x71;</button>
+            </fieldset>
+          </td>
+          <td>
+            <fieldset CLASS="classJogPane">
+              <legend>&nbsp;搬送：&nbsp;</legend>
+              <button id="buttonConveyLeft"  >&larr;</button>
+              <button id="buttonConveyRight" >&rarr;</button>
+            </fieldset>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+  <div class="DLGBUTTONS" kind="1" align="CENTER" size="6em" ></div>
+
+
+</body>
+
+<script class="DLGSCRIPT" language="vbscript" src="FlipperRecoverDlg.vbs" defer>
+</script>
+
+</html>

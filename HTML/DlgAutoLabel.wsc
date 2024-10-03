@@ -1,0 +1,212 @@
+<?xml version="1.0"?>
+<component>
+<?component error="true" debug="true"?>
+
+<comment>
+<![CDATA[
+********************************************************************************
+*                                                                              *
+*                             D E S C R I P T I O N                            *
+*                                                                              *
+*   Author:    VR                                                              *
+*   Date:      24.03.2000                                                      *
+*   Versions:  V1.0          24.03.2000                                        *
+*              V1.1          25.11.2002     IE6 compatible                     *
+*                                                                              *
+*   About:     Component implements label behavior                             *
+*                                                                              *
+********************************************************************************
+
+********************************************************************************
+*                                                                              *
+*                              I N T E R F A C E                               *
+*                                                                              *
+*                                                                              *
+*  Properties: DontUse      (r/w)   String containing access keys not for use  *
+*                                                                              *
+*  Methods:    ---                                                             *
+*                                                                              *
+*  Events:     ---                                                             *
+*                                                                              *
+********************************************************************************
+]]>
+</comment>
+
+<public>
+    <property name = "DontUse" />
+</public>
+
+<implements type="Behavior">
+
+    <attach   event ="ondocumentready" handler="onInitElem"      />
+
+</implements>
+
+
+<comment>
+********************************************************************************
+*                                                                              *
+*                                  M A I N                                     *
+*                                                                              *
+********************************************************************************
+</comment>
+
+<script language="vbscript">
+<![CDATA[
+
+Option Explicit
+'********************************************************************************
+'*                                                                              *
+'*                                  G L O B A L   D A T A                       *
+'*                                                                              *
+'********************************************************************************
+
+'********************************************************************************
+'*                                                                              *
+'*      H A N D L E R   F O R   D O C U M E N T    R E A D Y    E V E N T       *
+'*                                                                              *
+'********************************************************************************
+
+Sub onInitElem()
+
+    If IsEmpty( DontUse ) Then DontUse = " "
+
+    DontUse = UCase( DontUse )
+
+    With Element.Document
+    
+        If Len( Element.htmlfor ) < 1 Then
+
+            Alert "DlgautoLabel.WSC: Undefined label relation"
+            .ParentWindow.Close()
+            Exit Sub
+
+        End If
+
+        Dim objDlg
+        Dim objAssoc
+
+            Set objDlg   = .All( "bodyDialog"    )
+            Set objAssoc = .All( Element.HTMLFor )
+
+        If objAssoc Is Nothing Then
+
+            Alert "DlgautoLabel.WSC: Can't find label relation ID=" & Element.HTMLFor
+            .ParentWindow.Close()
+            Exit Sub
+
+        End If
+
+        Dim strLabelText
+        strLabelText = Element.InnerText
+
+        If Len( Element.AccessKey ) = 0 Then
+
+            If Len( objAssoc.AccessKey ) > 0 Then
+
+                Element.AccessKey = objAssoc.AccessKey
+
+            Else
+
+                Dim i
+                Dim strCurKey
+                Dim obj
+                Dim Elements
+                Set Elements = .All
+
+                For i = 1 To Len( strLabelText )
+
+                    strCurKey = UCase( Mid( strLabelText, i, 1 ))
+
+                    If InStr( DontUse, strCurKey ) = 0  Then
+
+                        If Not objDlg Is Nothing Then                       ' If standard dialog object exist
+                                                                            ' query for access key
+                            If Not objDlg.IsAccessKeyInUse( strCurKey ) Then
+
+                                Element.AccessKey = strCurKey
+                                i = Len( strLabelText ) + 1
+                                Exit For
+
+                            End If
+
+                        Else                                            ' Otherwise scan document for
+                                                                        ' unused access keys
+                            For Each obj In Elements
+
+                                If UCase( GetAccessKey( obj )) <> strCurKey Then
+
+                                    Element.AccessKey = strCurKey
+                                    i = Len( strLabelText ) + 1
+                                    Exit For
+
+                                End If
+
+                            Next
+
+                        End If
+
+                     End If
+
+                Next
+
+            End If
+
+        End If
+
+
+        objAssoc.AccessKey = Element.AccessKey
+
+        Dim Index
+        Index    = InStr( UCase( strLabelText ), UCase( Element.AccessKey ))
+
+        If Index = 0 Then
+
+            Alert "DlgautoLabel.WSC: Label text doesn't contain accesskey " & Element.AccessKey
+            ParentWindow.Close()
+            Exit Sub
+
+        End If
+
+        Element.InnerHTML = Left( strLabelText, Index - 1 ) & "<u>"  & _
+                            Mid(  strLabelText, Index,  1 ) & "</u>" & _
+                            Mid(  strLabelText, Index + 1 )
+
+        If Not objDlg Is Nothing Then
+
+            If objDlg.IsAccessKeyInUse( element.accessKey ) Then
+
+                Alert "DlgautoLabel.WSC: Access key " & Element.AccessKey & _
+                      " of label """ & strLabelText & """ is already in use!"
+
+            End If
+
+            objDlg.UseAccessKey Element.AccessKey
+
+        End If
+
+    End With
+
+End Sub
+
+'********************************************************************************
+
+Function GetAccessKey( objObject )
+
+    GetAccessKey = ""
+
+    On Error Resume Next
+
+        GetAccessKey = objObject.AccessKey
+
+    On Error Goto 0
+
+End Function
+
+'********************************************************************************
+]]>
+</script>
+
+</component>
+
+

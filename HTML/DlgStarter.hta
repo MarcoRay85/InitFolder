@@ -1,0 +1,505 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<head>
+<title>Dialog Starter</title>
+
+<HTA:APPLICATION ID="objThisApp"
+    APPLICATIONNAME="Dialog Starter"
+    BORDER="dialog box"
+    BORDERSTYLE="normal"
+    ICON="Intact850.ico"
+    CAPTION="yes"
+    SHOWINTASKBAR="yes"
+    SINGLEINSTANCE="no"
+    SYSMENU="yes"
+    WINDOWSTATE="normal">
+<STYLE TYPE="text/css" TITLE="StyleDef">
+    BODY      { font-size        : 12pt;
+            font-family      : Arial;
+            line-height      : 1.5em;
+            border           : 0;
+          }
+    TABLE     { font-size        : 12pt;
+            font-family      : Arial;
+            line-height      : 1.5em;
+            border           : 0;
+                width            : 100%;
+          }
+
+    TD
+              { 
+                width            : 33%;
+              }
+
+    .classINPUT     
+              { 
+                width            : 100%;
+                Border           : 1px solid;
+              }
+
+    .classParamButtons
+              { 
+                Width            : 100%;
+                Height           : 80%;
+              }
+
+    #buttonBrowse
+              { 
+                Width            : 10em;
+                Zoom             : 70%;
+              }
+
+    #tableParams
+              { 
+                Border           : 1px inset;
+          }
+
+    #inputFile
+              { 
+                Width            : expression(  this.offsetParent.scrollWidth  -  buttonBrowse.offsetWidth  );
+          }
+</STYLE>
+</head>
+
+
+<body bgcolor    ="buttonface"
+      text       ="buttontext"
+      SCROLL     ="no"
+      ID         ="bodyThis"
+      style      ="width: 450; height:410; overflow:hidden">
+
+<span style="COLOR:       #f0f0f0;
+             TEXT-ALIGN:  center;
+       FILTER:      DropShadow(Color=#808080,OffX=3,OffY=3,Positive=1);
+       width:       100%">
+   <h2>
+        Dialog Starter
+   </h2>
+</span>
+
+<div nowrap align=center >
+    <INPUT TYPE  = "text"
+             ID    = "inputFile">
+    &nbsp;
+    <BUTTON  ID    = "buttonBrowse">
+      Suchen...
+    </BUTTON>
+</div>
+<p align=left>
+    <table  id    = "tableParams"
+            Accesskey = "P">
+      <tr>
+        <td>
+    <u>P</u>arameter:
+        </td>
+        <td>
+        </td>
+        <td>
+          <button   ID="buttonAddParam"
+                    class="classParamButtons"
+                    Accesskey = "H">
+            <u>H</u>inzufügen
+          </button>
+        </td>
+      </tr>
+    </table>
+
+    <br>
+    <div align=center style="position:absolute;width:100%;bottom:0" >
+        <button ID="buttonShow" style="position:relative;width:6em;bottom:1" accesskey="S"><U>S</U>how:</button>
+    </div>
+
+</p>
+
+<SCRIPT language="vbscript" defer>
+'***********************************************************************
+'***********************************************************************
+'****                                                               ****
+'****                         M A I N                               ****
+'****                                                               ****
+'***********************************************************************
+'***********************************************************************
+
+option Explicit
+
+const cNewButtonText = "New..."
+
+const cNewRowHTML    = "<INPUT type=""text"" class=""classINPUT"">"
+
+'***********************************************************************
+'****                                                               ****
+'****       Handler for form initialisation                         ****
+'****                                                               ****
+'***********************************************************************
+
+Sub window_onload()     'Initialisation
+
+    Dim  vTmp
+    Dim  i
+    Dim  nRowCnt
+    Dim  colCells
+
+    window.resizeto  bodyThis.style.pixelWidth  + 15, bodyThis.style.pixelHeight + 5
+
+    window.moveto    ( window.Screen.AvailWidth  - bodyThis.ClientWidth  ) / 2, _
+                     ( window.Screen.AvailHeight - bodyThis.ClientHeight ) / 2 - 10
+
+    Dim objPersistent
+    Set objPersistent = Document.CreateElement( "SPAN" )
+    bodyThis.AppendChild objPersistent
+    objPersistent.AddBehavior( "#default#userData" )
+
+    objPersistent.Load  "DlgStarter"
+    vTmp  =  objPersistent.GetAttribute( "FileName" )
+
+    If  Not IsNull(  vTmp  )  Then
+
+        vTmp  =  Trim(  vTmp  )
+    
+        If  Len(  vTmp  ) > 0  Then
+
+            With  CreateObject(  "Scripting.FileSystemObject"  )
+
+                If  .FileExists(  vTmp  )  Then
+
+                    inputFile.DefaultValue  =  vTmp
+                    inputFile.Value         =  vTmp
+
+                End If
+
+            End With
+
+        End If
+
+    End If
+
+    nRowCnt  =  objPersistent.GetAttribute( "Data_NumOfRows" )
+
+    If  IsNumeric(  nRowCnt  )  Then
+
+        nRowCnt  =  CInt(  nRowCnt  )
+
+        For  i = 1  to  nRowCnt
+
+            Set  colCells  =  AddNewItemLine().Cells
+            vTmp           =  "Data_Row"  &  i
+
+            colCells( 0 ).FirstChild.Value  =  objPersistent.GetAttribute(  vTmp  &  "Name"   )
+            colCells( 1 ).FirstChild.Value  =  objPersistent.GetAttribute(  vTmp  &  "Value"  )
+
+        Next
+
+    End If
+
+    bodyThis.RemoveChild objPersistent
+
+end sub
+
+
+'***********************************************************************
+'****                                                               ****
+'****       Handler for form unloading                              ****
+'****                                                               ****
+'***********************************************************************
+
+Sub window_OnBeforeUnload()
+
+    Dim  i
+    Dim  nRowCnt
+    Dim  strName
+    Dim  colRows
+    Dim  colItems
+    Dim  objItem
+    Dim objPersistent
+    Set objPersistent = Document.CreateElement( "SPAN" )
+
+    objPersistent.AddBehavior( "#default#userData" )
+    bodyThis.AppendChild objPersistent
+
+    objPersistent.RemoveAttribute  "FileName"
+
+    If  Len( inputFile.value ) > 0  Then
+
+        With  CreateObject(  "Scripting.FileSystemObject"  )
+
+            If  .FileExists(  inputFile.value  )  Then
+
+        objPersistent.SetAttribute "FileName", inputFile.value
+
+            End If
+
+        End With
+
+    End If
+
+    nRowCnt  =  objPersistent.GetAttribute( "Data_NumOfRows" )
+
+    If  IsNumeric(  nRowCnt  )  Then
+
+        nRowCnt  =  CInt(  nRowCnt  )
+
+        For  i = 1  to  nRowCnt
+
+            objPersistent.RemoveAttribute  "Data_Row"  &  i  &  "Name"
+            objPersistent.RemoveAttribute  "Data_Row"  &  i  &  "Value"
+
+        Next
+
+    End If
+
+
+    Set  colRows  =  tableParams.Rows
+    nRowCnt       =  0
+    i             =  0
+
+    For Each  objItem  In  colRows
+
+        If  i > 0  Then
+
+            Set  colItems  =  objItem.Cells
+
+            strName  =  colItems( 0 ).FirstChild.Value
+
+            If  Len(  strName  ) > 0  Then
+
+                nRowCnt  =  nRowCnt  +  1
+
+                objPersistent.SetAttribute  "Data_Row"  &  nRowCnt  &  "Name",   strName
+                objPersistent.SetAttribute  "Data_Row"  &  nRowCnt  &  "Value",  colItems( 1 ).FirstChild.Value
+
+            End If
+
+        End If
+
+        i  =  i  +  1
+
+    Next
+
+    objPersistent.SetAttribute  "Data_NumOfRows",  nRowCnt
+
+    objPersistent.Save "DlgStarter"
+    bodyThis.RemoveChild objPersistent
+
+End Sub
+
+
+'***********************************************************************
+'****                                                               ****
+'****       Click-handler for SHOW button                           ****
+'****                                                               ****
+'***********************************************************************
+
+Sub buttonShow_OnClick()
+
+    Dim strKey
+    Dim colItems
+    Dim objItem
+    Dim objDictionary
+
+    With  CreateObject(  "Scripting.FileSystemObject"  )
+
+        If  Not  .FileExists(  inputFile.value  )  Then   
+        
+            inputFile.value  =  Empty
+            Exit Sub
+
+        End If
+
+    End With
+
+
+    Set objDictionary = CreateObject( "Scripting.Dictionary" )
+
+    For Each  objItem  In  tableParams.Rows
+
+        Set  colItems  =  objItem.Cells
+
+        If  Not IsEmpty(  strKey  )  Then
+
+            objDictionary.Item(  colItems( 0 ).FirstChild.Value  )  =  _
+                                 colItems( 1 ).FirstChild.Value
+
+        End If
+
+        strKey  =  1        '*** table header done ***
+
+    Next
+
+
+    Alert "ReturnCode: "  &  window.ShowModalDialog(  inputFile.value,  objDictionary  )
+
+
+    ClearItemList
+
+    For Each  strKey  In  objDictionary.Keys
+
+        Set  colItems  =  AddNewItemLine().Cells
+
+        colItems( 0 ).FirstChild.Value  =  strKey
+        colItems( 1 ).FirstChild.Value  =  objDictionary.Item(  strKey  )
+
+    Next
+
+End Sub
+
+'***********************************************************************
+'****                                                               ****
+'****       Click-handler for browse button                         ****
+'****                                                               ****
+'***********************************************************************
+
+Sub buttonBrowse_OnClick()
+
+    Dim  vTmp
+    Dim  objFileInput
+    Set  objFileInput = Document.CreateElement( "INPUT" )
+
+    objFileInput.Type             = "FILE"
+    objFileInput.Value            = inputFile.Value
+    objFileInput.DefaultValue     = inputFile.Value
+    objFileInput.Style.Display    = "none"
+
+    bodyThis.AppendChild objFileInput
+
+    objFileInput.Click
+
+    With  CreateObject(  "Scripting.FileSystemObject"  )
+
+        vTmp  =  Trim(  objFileInput.Value  )
+
+        If  Len(  vTmp  ) > 0  Then
+
+            If  .FileExists(  vTmp  )  Then
+
+                inputFile.Value  =  vTmp
+
+            End If
+
+        End If
+
+    End With
+
+    bodyThis.RemoveChild  objFileInput
+
+End Sub
+
+'***********************************************************************
+'****                                                               ****
+'****       Click-handler for adding table cell                     ****
+'****                                                               ****
+'***********************************************************************
+
+Sub buttonAddParam_OnClick()
+
+    AddNewItemLine
+
+End Sub
+
+'***********************************************************************
+'****                                                               ****
+'****       Click-handler for removing table cell                   ****
+'****                                                               ****
+'***********************************************************************
+
+Sub onRemoveRow(  nRowIndex  )
+
+    tableParams.DeleteRow  nRowIndex
+
+End Sub
+
+'***********************************************************************
+'****                                                               ****
+'****       Handler for context menu                                ****
+'****                                                               ****
+'***********************************************************************
+'.                                                                     .
+'.              Supresses default context menu                         .
+'.                                                                     .
+'.......................................................................
+
+Sub bodyThis_oncontextmenu
+    window.event.returnvalue = FALSE
+End Sub
+
+'***********************************************************************
+'****                                                               ****
+'****       Handler for selections                                  ****
+'****                                                               ****
+'***********************************************************************
+'.                                                                     .
+'.              Supresses all kinds of selections except those of      .
+'.              named input controls                                   .
+'.                                                                     .
+'.......................................................................
+
+Sub bodyThis_onselectstart
+
+    If UCase( window.event.srcElement.tagname ) <> "INPUT" Then
+        document.selection.empty
+    End If
+
+End Sub
+
+'***********************************************************************
+'****                                                               ****
+'****       Subroutine clears all item lines from table             ****
+'****                                                               ****
+'***********************************************************************
+
+Sub  ClearItemList()
+
+    Dim nI
+
+    nI  =  tableParams.Rows.Length - 1
+
+    Do While  nI > 0
+
+        tableParams.DeleteRow  nI
+
+        nI  =  nI  -  1
+
+    Loop
+
+End Sub
+
+'***********************************************************************
+'****                                                               ****
+'****         Function adds the NEW ITEM line to table              ****
+'****                                                               ****
+'***********************************************************************
+
+ Function  AddNewItemLine()
+
+    Set  AddNewItemLine  =  tableParams.InsertRow
+
+    With  AddNewItemLine.InsertCell
+
+        .InnerHTML  =  cNewRowHTML
+
+    End With
+
+    With  AddNewItemLine.InsertCell
+
+        .InnerHTML  =  cNewRowHTML
+
+    End With
+
+    With  AddNewItemLine.InsertCell
+
+        .InnerHTML  =  "<button class=""classParamButtons"" "   _
+                    &  "onclick=""onRemoveRow(  "               _
+                    &  tableParams.Rows.Length     -  1         _
+                    &  " )"">Entfernen</button>"
+
+    End With
+
+End Function
+
+'***********************************************************************
+'***********************************************************************
+'***********************************************************************
+'***********************************************************************
+
+</SCRIPT>
+</body>
+</html>

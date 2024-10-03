@@ -1,0 +1,234 @@
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML ID="THIS" XMLNS:v XMLNS:CX  XMLNS:t ="urn:schemas-microsoft-com:time">
+<HEAD>
+  <TITLE>Akseleiden tarkistus dialogi</TITLE>
+   <META content="text/html; charset=windows-1252" http-equiv="Content-Type">
+    <META NAME="Description" CONTENT="Intact1200 CheckAchsdialog (FI)">
+    <LINK ID="linkedstyleDefault" REL="STYLESHEET" HREF="DlgStyle_FI.css">
+    <LINK ID="linkedstyleCustom"  REL="STYLESHEET" HREF="HeadPositioningDlg.css">
+    <LINK ID="linkedstyleCustom"  REL="STYLESHEET" HREF="BaseStyles.css">
+    <?IMPORT namespace="CX" implementation="SpinEdit.htc"?>    
+</HEAD>
+
+<!--************************************ DISPLAYED ******************************-->
+
+<BODY ID                = "bodyThis"
+      SCROLL            = "no"          >
+
+
+    <DIV ID="divFrameHostView"
+		style         = "behavior:url(ToolPane.WSC);Margin-Top:1ex;"
+		HeaderText    = "Check All Axes"
+		HeaderClass   = "classTableHeader"
+		Minimized     = "0" >
+
+		<DIV CLASS="classToolButtonDiv">
+			<BUTTON ID="buttonHomePos" CLASS="classButtons" _BLOCKINPUT_="TRUE">
+				<SPAN CLASS="classHomeSpan">H</SPAN>
+			</BUTTON>
+		  <BUTTON ID="buttonRun" CLASS="classButtons">
+				<SPAN CLASS="classHomeSpan">a</SPAN>
+			</BUTTON>
+
+		</DIV>    
+    </DIV>
+
+
+    <DIV ID="divFrameHostViewRot"
+		style         = "behavior:url(ToolPane.WSC);Margin-Top:1ex;"
+		HeaderText    = "Check Rot Axis"
+		HeaderClass   = "classTableHeader"
+		Minimized     = "0" >
+
+		<TABLE ID="tableFrameHostView" cellspacing=2 cellpadding=0  class="classTable">
+			<TBODY>	
+				  <TR ID="trRotInput" >
+					  <TD ID="tdRot"  colspan=2>
+						<LABEL class="DLGAUTOLABEL" FOR="spineditRot">
+						  Pyöritys:
+						</LABEL>
+						  </TD>
+					  <TD valign=center class="classSpinEditCell">
+						<CX:SpinEdit   ID="spineditRot" class="classSpinEdit" _BLOCKINPUT_="TRUE" />
+						<SPAN ID="spanRotPos" class="classPosData">0</SPAN>
+					  </TD>
+					  <TD>
+						  <SPAN STYLE="font-size:150%;font-weight:800">&deg;</SPAN>
+					  </TD>
+				</TR>
+			</TBODY>
+		</TABLE>
+		<DIV CLASS="classToolButtonDiv">
+			<BUTTON ID="buttonUpdatePos_Rot"  CLASS="classButtons" _BLOCKINPUT_="TRUE">
+				<SPAN CLASS="classUpdateSpan">4</SPAN>
+			</BUTTON>
+			<BUTTON ID="buttonHomePos_Rot" CLASS="classButtons" _BLOCKINPUT_="TRUE">
+				<SPAN CLASS="classHomeSpan">H</SPAN>
+			</BUTTON>
+		  <BUTTON ID="buttonRun_Rot" CLASS="classButtons">
+				<SPAN CLASS="classHomeSpan">a</SPAN>
+			</BUTTON>
+
+		</DIV>    
+    </DIV>
+
+    <DIV ID="divFrameHostViewShift"
+		style         = "behavior:url(ToolPane.WSC);Margin-Top:1ex;"
+		HeaderText    = "Check Shift Axis"
+		HeaderClass   = "classTableHeader"
+		Minimized     = "0" >
+
+		<TABLE ID="tableFrameHostView" cellspacing=2 cellpadding=0  class="classTable">
+			<TBODY>	
+				  <TR ID="trShiftInput" >
+					  <TD ID="tdShift"  colspan=2>
+						<LABEL class="DLGAUTOLABEL" FOR="spineditShift">
+						  Halkaisija:
+						</LABEL>
+						  </TD>
+					  <TD valign=center class="classSpinEditCell">
+						<CX:SpinEdit   ID="spineditShift" class="classSpinEdit" _BLOCKINPUT_="TRUE" />
+						<SPAN ID="spanShiftPos" class="classPosData">0</SPAN>
+					  </TD>
+					  <TD>
+						 mm
+					  </TD>
+				</TR>
+			</TBODY>
+		</TABLE>
+		<DIV CLASS="classToolButtonDiv">
+			<BUTTON ID="buttonUpdatePos_shift"  CLASS="classButtons" _BLOCKINPUT_="TRUE">
+				<SPAN CLASS="classUpdateSpan">4</SPAN>
+			</BUTTON>
+			<BUTTON ID="buttonHomePos_shift" CLASS="classButtons" _BLOCKINPUT_="TRUE">
+				<SPAN CLASS="classHomeSpan">H</SPAN>
+			</BUTTON>
+		  <BUTTON ID="buttonRun_shift" CLASS="classButtons">
+				<SPAN CLASS="classHomeSpan">a</SPAN>
+			</BUTTON>
+
+		</DIV>    
+    </DIV>
+
+
+    <DIV ID="divFrameHostViewTilt"
+		style         = "behavior:url(ToolPane.WSC);Margin-Top:1ex;"
+		HeaderText    = "Check Tilt Axis"
+		HeaderClass   = "classTableHeader"
+		Minimized     = "0" >
+
+		<TABLE ID="tableFrameHostView" cellspacing=2 cellpadding=0  class="classTable">
+			<TBODY>	
+				  <TR ID="trTiltInput" >
+					  <TD ID="tdTilt"  colspan=2>
+						<LABEL class="DLGAUTOLABEL" FOR="spineditTilt">
+						  Kallistus:
+						</LABEL>
+						  </TD>
+					  <TD valign=center class="classSpinEditCell">
+						<CX:SpinEdit   ID="spineditTilt" class="classSpinEdit" _BLOCKINPUT_="TRUE" />
+						<SPAN ID="spanTiltPos" class="classPosData">0</SPAN>
+					  </TD>
+					  <TD>
+						  <SPAN STYLE="font-size:150%;font-weight:800">&deg;</SPAN>
+					  </TD>
+				</TR>
+			</TBODY>
+		</TABLE>
+		<DIV CLASS="classToolButtonDiv">
+			<BUTTON ID="buttonUpdatePos_Tilt"  CLASS="classButtons" _BLOCKINPUT_="TRUE">
+				<SPAN CLASS="classUpdateSpan">4</SPAN>
+			</BUTTON>
+			<BUTTON ID="buttonHomePos_Tilt" CLASS="classButtons" _BLOCKINPUT_="TRUE">
+				<SPAN CLASS="classHomeSpan">H</SPAN>
+			</BUTTON>
+		  <BUTTON ID="buttonRun_Tilt" CLASS="classButtons">
+				<SPAN CLASS="classHomeSpan">a</SPAN>
+			</BUTTON>
+
+		</DIV>    
+    </DIV>
+
+
+    <DIV ID="divFrameHostViewLift"
+		style         = "behavior:url(ToolPane.WSC);Margin-Top:1ex;"
+		HeaderText    = "Check Lift Axis"
+		HeaderClass   = "classTableHeader"
+		Minimized     = "0" >
+
+		<TABLE ID="tableFrameHostView" cellspacing=2 cellpadding=0  class="classTable">
+			<TBODY>	
+				  <TR ID="trLiftInput" >
+					  <TD ID="tdLift"  colspan=2>
+						<LABEL class="DLGAUTOLABEL" FOR="spineditLift">
+						  Nosto:
+						</LABEL>
+						  </TD>
+					  <TD valign=center class="classSpinEditCell">
+						<CX:SpinEdit   ID="spineditLift" class="classSpinEdit" _BLOCKINPUT_="TRUE" />
+						<SPAN ID="spanLiftPos" class="classPosData">0</SPAN>
+					  </TD>
+					  <TD>
+						  mm
+					  </TD>
+				</TR>
+			</TBODY>
+		</TABLE>
+		<DIV CLASS="classToolButtonDiv">
+			<BUTTON ID="buttonUpdatePos_Lift"  CLASS="classButtons" _BLOCKINPUT_="TRUE">
+				<SPAN CLASS="classUpdateSpan">4</SPAN>
+			</BUTTON>
+			<BUTTON ID="buttonHomePos_Lift" CLASS="classButtons" _BLOCKINPUT_="TRUE">
+				<SPAN CLASS="classHomeSpan">H</SPAN>
+			</BUTTON>
+		  <BUTTON ID="buttonRun_Lift" CLASS="classButtons">
+				<SPAN CLASS="classHomeSpan">a</SPAN>
+			</BUTTON>
+
+		</DIV>    
+    </DIV>
+
+    <DIV ID="divFrameHostLog" 
+        style         = "behavior:url(ToolPane.WSC);Margin-Top:1ex;"
+        HeaderText    = "Messages"
+        HeaderClass   = "classTableHeader"
+        Minimized     = "0" >
+
+        <IFRAME ID          = "iframeLog"  
+                CLASS       = "classViewFrame" 
+                APPLICATION = "yes" 
+                FRAMEBORDER = "no" >
+        </IFRAME>
+
+
+    </DIV>
+
+   <DIV  ID           = "divToolPane"
+        style         = "behavior:url(ToolPane.WSC);Margin-Top:1ex;"
+        HeaderText    = "Tools"
+        HeaderClass   = "classTableHeader"
+        Minimized     = "0" >
+
+		<BUTTON ID="buttonVideo"  CLASS="classButtons" style="behavior:url(PushButtons.WSC);margin:4px" ToggleMode="FALSE">
+			<SPAN ID="spanVideoBtnPane" CLASS="classVideoSpan">µ
+			</SPAN>
+		</BUTTON>
+
+	    <BUTTON ID="buttonStopPos" CLASS="classStopButton">
+            <IMG ID="imgStopPos" SRC="Stop.gif" CLASS="classStopImage">
+        </BUTTON>
+
+  </DIV>
+  
+     <DIV class="DLGBUTTONS" kind="12" align="CENTER"></DIV>
+     
+</BODY>
+
+<SCRIPT language="VBScript"         src="BaseScripts.VBS"></SCRIPT>
+<script class="DLGSCRIPT" language="vbscript" src="ShowAxisCheckDlg.vbs" defer>
+</script>
+
+</html>

@@ -1,0 +1,69 @@
+v\:* {  behavior : url(#default#VML) }
+
+.classButtonSpan
+    {
+        Font-Family : Arial;
+        Font-Size   :  70%;
+        Border      : 2px outset;
+        Padding     : 0 1ex 0 1ex ;
+        Position    : relative;
+        Bottom      : 0.5ex;
+    }
+
+#buttonRetOpen, 
+#buttonRetClose,
+#buttonRotLeft,
+#buttonRotRight,
+#buttonConveyLeft,
+#buttonConveyRight
+    {
+        Font-Family : Arial;
+        Font-Size   : 200%;
+        Font-Weight : 900;
+        Width       : 3ex;
+        Height      : 3ex;
+        Margin      : 1ex;
+    }
+
+#buttonRotLeft,
+#buttonRotRight
+    {
+        Font-Family : Webdings;
+    }
+
+.classMirrorSpan
+    {
+        filter      : progid:DXImageTransform.Microsoft.BasicImage(mirror=1);
+        Width       : 100%;
+        Height      : 100%;
+        Background-color : buttonface;
+    }
+
+
+.classJogPane
+    {
+        Font-Weight : 300;
+        Text-Align  : Center;
+        Width       : 10em;
+    }
+
+TABLE
+    {
+        font-weight : bold;
+        Padding     : 0;
+        Margin      : 0;
+        Margin-Top  : 1ex;
+    }
+
+TD
+    {
+        font-weight :bold;
+        Padding     : 0 1em 0 1ex;
+    }
+
+LEGEND
+    {
+        Font-Size           : 80%;
+        text-align          : center;
+    }
+

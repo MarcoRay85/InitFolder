@@ -1,0 +1,44 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"> <html ID="THIS">
+  <head >
+  <META content="text/html; charset=windows-1252" http-equiv="Content-Type">
+  <title>Termina Insight</title>
+    <META NAME="Description" CONTENT="Intact1200 Esci &amp; Salva">
+    <LINK REL="STYLESHEET" HREF="DlgStyle_IT.css">
+  </head>
+
+<body style="width:28em; height:12em" align="center" Invisible="INIT" lang="it">
+
+  <div align="center"
+       style="position:absolute;zIndex:-1;zoom:2.5;"
+       style="Filter:progid:DXImageTransform.Microsoft.alpha( opacity=10 )">
+    <img src="AnimHourglass.gif" /> &nbsp; <img src="AnimHourglass.gif" /> &nbsp; <img src="AnimHourglass.gif" /> &nbsp; <img src="AnimHourglass.gif" />   <img src="AnimHourglass.gif" /> &nbsp; <img src="AnimHourglass.gif" /> &nbsp; <img src="AnimHourglass.gif" /> &nbsp; <img src="AnimHourglass.gif" />
+  </div>
+
+  <div ID="divText" align="left" style="line-height:180%; width:26em;position:relative">
+     Lo spegnimento di <span class="classIntact">Insight</span> ritarda di alcuni minuti, poiché è in corso il salvataggio dei risultati di ispezione <br /> Premendo <span class="classButton">Interrompi</span> potete fermare lo spegnimento di <span class="classIntact">Intact</span>
+  </div>
+
+  <div class="DLGBUTTONS" kind="11" align="CENTER"  ></div>
+
+</body>
+
+<script language="vbscript" >
+
+    Option Explicit
+
+    Sub SetTaskKind( nKind )
+
+        If nKind = 1  Then
+
+            divText.InnerHTML = Replace( divText.InnerHTML, "Speicher", "Druck" )
+
+        End If
+
+    End Sub
+
+</script>
+
+<script class="DLGSCRIPT" language="vbscript" src="TestDocTaskRunningDlg.vbs" defer>
+</script>
+
+</html> 

@@ -1,0 +1,832 @@
+<?xml version="1.0"?>
+<component>
+<?component error="true" debug="true"?>
+
+<comment>
+<![CDATA[
+********************************************************************************
+*                                                                              *
+*                             D E S C R I P T I O N                            *
+*                                                                              *
+*   Author:    VR                                                              *
+*   Date:      10.07.2002                                                      *
+*   Versions:  V1.0                                                            *
+*                                                                              *
+*   About:     Component implements buttons                                    *
+*                                                                              *
+********************************************************************************
+
+********************************************************************************
+*                                                                              *
+*                              I N T E R F A C E                               *
+*                                                                              *
+*  Properties: ExplicitInit      (r/w)   If defined, element will not be       * 
+*                                        by document event                     *
+*                                                                              *
+*              CasingColor       (r/w)   Color of button casing                *
+*                                                                              *
+*              FaceColor         (r/w)   Color of button face                  *
+*                                           If EMPTY, no face gets displayed   *
+*                                                                              *
+*              FaceBorderColor   (r/w)   Color of border of button face        *
+*                                           If EMPTY, no border gets displayed *
+*                                                                              *
+*              BlinkColor1       (r/w)   First blink color of button face      *
+*                                                                              *
+*              BlinkColor2       (r/w)   Second blink color of button face     *
+*                                                                              *
+*              BlinkRate         (r/w)   Blinking frequency [s] or 0 to stop   *
+*                                                                              *
+*              Elevation         (r/w)   Amount of button's elevation          *
+*                                                                              *
+*              ArcSize           (r/w)   Ratio of rounded edges (0.0 ... 0.5)  *
+*                                           (HTML attribute only)              *
+*                                                                              *
+*              NoClick           (r/w)   If TRUE, element doesn't respond to   *
+*                                           user actions                       *
+*                                                                              *
+*              NoTransition      (r/w)   If TRUE, element doesn't use          *
+*                                           DXTransitions to change color      *
+*              Face              (r)     VML object displaying face            *
+*                                                                              *
+*  Methods:    Initialize                If EXPLICITINIT is true, element has  *
+*                                        has to be initialized by this method  *
+*                                                                              *
+*              InsertFace                Inserts HTML element into button face *
+*                                          (object or HTML string)             *
+*                                                                              *
+********************************************************************************
+]]>
+</comment>
+
+<public>
+    <property name = "ExplicitInit"     />
+
+    <property name = "CasingColor"       >
+        <get/>
+        <put/>
+    </property>
+
+    <property name = "FaceColor"         >
+        <get/>
+        <put/>
+    </property>
+
+    <property name = "FaceBorderColor"   >
+        <get/>
+        <put/>
+    </property>
+
+    <property name = "Elevation"         >
+        <get/>
+        <put/>
+    </property>
+
+    <property name = "ArcSize"          />
+    <property name = "NoClick"          />
+    <property name = "NoTransition"     />
+
+    <property name = "BlinkColor1"      />
+    <property name = "BlinkColor2"      />
+    <property name = "BlinkRate"         >
+        <get/>
+        <put/>
+    </property>
+    <property name = "Face"              >
+        <get/>
+    </property>
+
+
+    <method   name = "Initialize"       />
+
+    <method   name = "InsertFace"        >
+        <parameter name="vHTMLElem"     />
+    </method>
+
+</public>
+
+<implements type="Behavior">
+
+    <attach   event = "ondocumentready"     handler="onInitElem"        />
+    <attach   event = "ondetach"            handler="onDetachElem"      />
+    <attach   event = "onresize"            handler="onResizeElem"      />
+
+    <layout>
+      <![CDATA[
+        <xml:namespace ns="urn:schemas-microsoft-com:vml" prefix="v">
+           <v:group _INTERNAL_ID_GROUP_="TRUE"
+                    Style="behavior:url(#default#VML);
+                           position:absolute;top:0;left:0;width:100px;height:100px"
+                    coordorigin="0 0" CoordSize="100 100" >
+             <v:roundrect _INTERNAL_ID_BASE_="TRUE"
+                          TabIndex="-1" 
+                          arcsize="0.2" 
+                          Style="behavior:url(#default#VML);position:absolute;left:0;top:0;width:60;height:50;antialias:true;"
+                          stroked="false" 
+                          fillcolor="threedface" >
+               <v:extrusion on="true" 
+                            Style="antialias:true;"
+                            backdepth="0" 
+                            facet="0.01"
+                            Edge="4px"
+                            lightlevel="0.75" 
+                            lightlevel2="0.2"
+                            lightposition="-10000,-10000,10000"
+                            lightposition2="10000,10000,20000" />
+             </v:roundrect>
+             <v:roundrect _INTERNAL_ID_INSET_="TRUE"
+                          TabIndex="-1" 
+                          Style="behavior:url(#default#VML);position:absolute;left:5;top:5;width:50;height:40;antialias:true;"
+                          arcsize="0.2" 
+                          stroked="false" 
+                          fillcolor="threedface" >
+               <v:extrusion on="true" 
+                            Style="antialias:true;"
+                            backdepth="0" 
+                            facet="0.01"
+                            Edge="4px"
+                            lightlevel="0.75" 
+                            lightlevel2="0.2"
+                            lightposition="10000,10000,10000"
+                            lightposition2="-10000,-10000,20000" />
+             </v:roundrect>
+             <v:roundrect _INTERNAL_ID_FACE_="TRUE"
+                          Style="behavior:url(#default#VML);
+                                 position:absolute;left:5;top:5;width:50;height:40;
+                                 antialias:true;
+                                 filter:progid:DXImageTransform.Microsoft.Fade( enabled=false duration=0.125 )"
+                          arcsize="0.2" 
+                          fillcolor="inactivecaption"
+                          strokeweight="1px" 
+                          strokecolor="#404040"/>
+           </v:group>
+        </xml:namespace>
+      ]]>
+    </layout>
+
+
+</implements>
+
+<comment>
+********************************************************************************
+*                                                                              *
+*                                  M A I N                                     *
+*                                                                              *
+********************************************************************************
+</comment>
+
+<script language="vbscript">
+<![CDATA[
+
+Option Explicit
+
+'********************************************************************************
+'*                                                                              *
+'*                                  G L O B A L   D A T A                       *
+'*                                                                              *
+'********************************************************************************
+
+Dim g_objVGroup
+Dim g_objVShapeSocket
+Dim g_objVShapeSocketInset
+Dim g_objVShapeFace
+
+
+Dim g_strCasingColor
+Dim g_strFaceColor
+Dim g_strFaceBorderColor
+Dim g_strCurFaceColor
+
+Dim g_nElevation
+Dim g_nBlinkRate
+
+Dim g_vOrgStrokeWeight
+Dim g_vOrgElevation1Px
+
+
+Set g_objVGroup             = Nothing
+Set g_objVShapeSocket       = Nothing
+Set g_objVShapeSocketInset  = Nothing
+Set g_objVShapeFace         = Nothing
+
+
+g_nBlinkRate                = 0
+
+
+'********************************************************************************
+'*                                                                              *
+'*                                P U B L I C S                                 *
+'*                                                                              *
+'********************************************************************************
+
+'********************************************************************************
+'*   PROPERTY   CASINGCOLOR                                                     *
+'********************************************************************************
+
+Function get_CasingColor()
+
+    If IsEmpty( g_strCasingColor )  Then  g_strCasingColor = "threedface"
+
+    get_CasingColor = g_strCasingColor
+
+End Function
+
+Sub put_CasingColor( strColor )
+
+    g_strCasingColor = strColor
+
+    If Not ( g_objVShapeSocket Is Nothing ) Then g_objVShapeSocket.fillcolor = strColor
+
+End Sub
+
+'********************************************************************************
+'*   PROPERTY   FACECOLOR                                                       *
+'********************************************************************************
+
+Function get_FaceColor()
+
+    If IsEmpty( g_strFaceColor )  Then  g_strFaceColor = "inactivecaption"
+
+    get_FaceColor = g_strFaceColor
+
+End Function
+
+Sub put_FaceColor( strColor )
+
+    If IsNull( strColor )  Then
+
+        g_strFaceColor = NULL
+
+    ElseIf Len( strColor ) < 1 Then
+
+        g_strFaceColor = NULL
+
+    Else
+
+        g_strFaceColor = strColor
+
+    End If
+
+    If Not ( g_objVShapeFace Is Nothing ) Then SetFaceColor( strColor )
+
+End Sub
+
+'********************************************************************************
+'*   PROPERTY   FACEBORDERCOLOR                                                 *
+'********************************************************************************
+
+Function get_FaceBorderColor()
+
+    If IsEmpty( g_strFaceBorderColor )  Then  g_strFaceBorderColor = "#404040"
+
+    get_FaceBorderColor = g_strFaceBorderColor
+
+End Function
+
+Sub put_FaceBorderColor( strColor )
+
+    If IsNull( strColor )  Then
+
+        g_strFaceBorderColor = NULL
+
+    ElseIf Len( strColor ) < 1 Then
+
+        g_strFaceBorderColor = NULL
+
+    Else
+
+        g_strFaceBorderColor = strColor
+
+    End If
+
+    If Not ( g_objVShapeFace Is Nothing ) Then 
+
+        If IsNull( g_strFaceBorderColor )  Then
+
+            g_objVShapeFace.StrokeWeight = 0
+
+        Else
+
+            g_objVShapeFace.StrokeWeight = g_vOrgStrokeWeight
+            g_objVShapeFace.strokecolor  = g_strFaceBorderColor
+
+        End If
+
+    End IF
+
+End Sub
+
+'********************************************************************************
+'*   PROPERTY   ELEVATION                                                       *
+'********************************************************************************
+
+Function get_Elevation()
+
+    If IsEmpty( g_nElevation )  Then  g_nElevation = 4
+    get_Elevation = g_nElevation
+
+End Function
+
+Sub put_Elevation( nAmount )
+
+    g_nElevation = nAmount
+
+    If Not ( g_objVShapeSocket Is Nothing ) Then SizeToContent
+
+End Sub
+
+'********************************************************************************
+'*   PROPERTY   BLINKRATE                                                       *
+'********************************************************************************
+
+Function get_BlinkRate()
+
+    get_BlinkRate = g_nBlinkRate
+
+End Function
+
+Sub put_BlinkRate( nRate )
+
+    If IsNumeric(  nRate ) Then
+
+        g_nBlinkRate = CDbl(  nRate )
+
+        If g_nBlinkRate > 0.0 Then
+
+            If Not ( IsEmpty( BlinkColor1 ) Or IsEmpty( BlinkColor2 )) Then
+
+                With g_objVShapeFace.Filters.Item("DXImageTransform.Microsoft.Fade")
+
+                    .Stop
+                    .Enabled  = TRUE
+                    .Duration = g_nBlinkRate
+                    SetFaceColor( BlinkColor1 )
+
+                End With
+
+                Exit Sub
+
+            End If
+
+        End If
+
+    End If
+
+    g_nBlinkRate = 0
+    
+    With g_objVShapeFace.Filters.Item("DXImageTransform.Microsoft.Fade")
+    
+        .Stop
+        .Enabled  = TRUE
+        .Duration = 0.125
+
+    End With
+
+    g_objVShapeFace.FillColor   = g_strFaceColor
+
+End Sub
+
+'********************************************************************************
+'*   PROPERTY   FACE                                                            *
+'********************************************************************************
+
+Function get_Face()
+
+    Set get_Face = g_objVShapeFace
+
+End Function
+
+'********************************************************************************
+'*   METHOD   INITIALIZE                                                        *
+'********************************************************************************
+
+Sub Initialize()
+
+    ExplicitInit = Empty
+    onInitElem
+
+End Sub
+
+'********************************************************************************
+'*   METHOD   INSERTFACE                                                        *
+'********************************************************************************
+
+Function InsertFace( vHTMLElem )
+
+    Set InsertFace = Nothing
+
+    If g_objVShapeFace Is Nothing Then Exit Function
+
+    If IsObject( vHTMLElem ) Then
+
+        g_objVShapeFace.ParentElement.AppendChild vHTMLElem
+        Set InsertFace   =                        vHTMLElem
+        SizeToContent
+
+    ElseIf VarType( vHTMLElem ) = vbString Then
+
+        g_objVShapeFace.InsertAdjacentHTML  "afterEnd", Trim( vHTMLElem )
+        Set InsertFace   =  g_objVShapeFace.NextSibling
+        SizeToContent
+
+    End If
+
+End Function
+
+'********************************************************************************
+'*                                                                              *
+'*                                L O C A L S                                   *
+'*                                                                              *
+'********************************************************************************
+
+Sub SizeToContent
+
+    With g_objVShapeSocket.Style
+
+        .Position    = "absolute"
+        .PixelLeft   = 0
+        .PixelTop    = 0
+        .PixelWidth  = Element.ClientWidth
+        .PixelHeight = Element.ClientHeight
+        .antialias   = "true"
+
+    End With
+
+    g_objVShapeSocket.Extrusion.Edge      = g_vOrgElevation1Px * g_nElevation
+    g_objVShapeSocketInset.Extrusion.Edge = g_vOrgElevation1Px * g_nElevation
+
+    Dim nOffs
+    Dim objFaceElem
+    Set objFaceElem = g_objVShapeSocket.NextSibling
+
+    nOffs = g_nElevation + 3
+
+    Do Until objFaceElem Is Nothing
+
+        With objFaceElem.Style
+
+            .Position    =  "absolute"
+            .PixelLeft   =  nOffs
+            .PixelTop    =  nOffs
+            .PixelWidth  =  Element.ClientWidth  - 2 * nOffs
+            .PixelHeight =  Element.ClientHeight - 2 * nOffs
+
+        End With
+
+        Set objFaceElem  =  objFaceElem.NextSibling
+        nOffs            = nOffs - 1
+
+    Loop
+
+End Sub
+
+'********************************************************************************
+
+Sub SetFaceColor( strColor )
+
+    If IsNull( strColor )  Then
+
+        g_objVShapeSocketInset.RuntimeStyle.Display = "none"
+        g_objVShapeFace.RuntimeStyle.Display        = "none"
+
+    Else
+
+        g_objVShapeSocketInset.RuntimeStyle.Display = "block"
+        g_objVShapeFace.RuntimeStyle.Display        = "block"
+
+        If g_strCurFaceColor <> strColor Then
+
+            g_strCurFaceColor = strColor
+
+            If Len( NoTransition ) < 1  Then
+
+                With g_objVShapeFace.Filters.item("DXImageTransform.Microsoft.Fade")
+
+                    If .status <> 2 Then
+
+                        .enabled  = TRUE
+                        .apply()
+                        g_objVShapeFace.FillColor = strColor
+                        .play()
+
+                    Else
+
+                        g_objVShapeFace.FillColor = strColor
+
+                    End If
+
+                End With
+
+            Else
+
+                g_objVShapeFace.FillColor = strColor
+
+            End If
+
+        End If
+
+    End If
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      H A N D L E R   F O R   D O C U M E N T    R E A D Y    E V E N T       *
+'*                                                                              *
+'********************************************************************************
+
+Sub onInitElem()
+
+    If Not IsEmpty( ExplicitInit ) Then Exit Sub
+    ExplicitInit = TRUE
+
+    If UCase( Element.TagName ) <> "SPAN" Then 
+
+        MsgBox "IlluButtons.WSC applied to non SPAN element"
+        Exit Sub
+
+    End If
+
+    Dim objChild
+    Dim colMatches
+    Dim objRegExp
+
+    If Not IsEmpty( ArcSize )  Then             ' Due to a bug in VML it is rather difficult to
+                                                ' set the ArcSize attribute
+        Set objRegExp = New RegExp              ' It seems to be possible only by reparsing HTML
+        objRegExp.Global      = TRUE
+        objRegExp.IgnoreCase  =  TRUE
+        objRegExp.Pattern     = "arcsize\s*=\s*""\w*"""
+        Set colMatches = objRegExp.Execute( Element.innerHTML )
+
+        If colMatches.Count > 0  Then
+
+            Element.innerHTML = Replace( Element.innerHTML, colMatches( 0 ).Value, "arcsize=""" & ArcSize & """" )
+
+        End If
+
+
+    End If
+
+
+    For Each objChild In Element.All
+
+        If     Not IsNull( objChild.GetAttribute( "_INTERNAL_ID_GROUP_" )) Then
+
+            Set g_objVGroup = objChild
+
+        ElseIf Not IsNull( objChild.GetAttribute( "_INTERNAL_ID_BASE_"  )) Then
+
+            Set g_objVShapeSocket = objChild
+
+        ElseIf Not IsNull( objChild.GetAttribute( "_INTERNAL_ID_INSET_" )) Then
+
+            Set g_objVShapeSocketInset = objChild
+
+        ElseIf Not IsNull( objChild.GetAttribute( "_INTERNAL_ID_FACE_"  )) Then
+
+            Set g_objVShapeFace = objChild
+
+        End If
+
+    Next
+
+    If      ( g_objVGroup            Is Nothing )   _
+        Or  ( g_objVShapeSocket      Is Nothing )   _
+        Or  ( g_objVShapeSocketInset Is Nothing )   _
+        Or  ( g_objVShapeFace        Is Nothing )   Then 
+
+        MsgBox "IlluButtons.WSC internal error"
+        Exit Sub
+
+    End If
+
+    If Len( NoClick ) < 1  Then
+    
+        Set g_objVGroup.onkeydown           = GetRef( "BtnBase_onKeyDown"       )
+        Set g_objVGroup.onkeyup             = GetRef( "BtnBase_onKeyUp"         )
+        Set g_objVGroup.onmousedown         = GetRef( "BtnFace_onMouseDown"     )
+        Set g_objVGroup.onmouseUp           = GetRef( "BtnFace_onMouseUp"       )
+        Set g_objVGroup.onmouseOut          = GetRef( "BtnFace_onMouseUp"       )
+
+    End If
+
+    Set g_objVShapeFace.onfilterchange  = GetRef( "BtnFace_onfilterchange"  )
+
+
+    g_vOrgStrokeWeight = g_objVShapeFace.StrokeWeight
+    g_vOrgElevation1Px = 1 'g_objVShapeSocket.FirstChild.Edge
+
+    get_Elevation
+
+    SizeToContent
+
+    If Not IsEmpty( g_strFaceColor       )  Then  
+    
+        put_FaceColor     g_strFaceColor
+
+    Else
+
+        g_strFaceColor  = "inactivecaption"
+
+    End If
+
+
+    If Not IsEmpty( g_strFaceBorderColor )  Then  
+    
+        put_FaceBorderColor   g_strFaceBorderColor
+
+    Else
+
+        g_strFaceBorderColor = "#404040"
+
+    End If
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      H A N D L E R   F O R   D E T A C H   E L E M E N T   E V E N T         *
+'*                                                                              *
+'********************************************************************************
+
+Sub onDetachElem()
+
+    If Not ( g_objVShapeFace Is Nothing ) Then g_objVShapeFace.Filters.item("DXImageTransform.Microsoft.Fade").Stop
+
+    Dim objChild
+
+    For Each objChild In Element.All
+
+        objChild.ParentElement.RemoveChild objChild
+
+    Next
+
+    Set g_objVGroup         = Nothing
+    Set g_objVShapeSocket   = Nothing
+    Set g_objVShapeFace     = Nothing
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*     H A N D L E R   F O R   R E S I Z I N G   E L E M E N T   E V E N T      *
+'*                                                                              *
+'********************************************************************************
+
+Sub onResizeElem( objEvt )
+
+    If Not ( g_objVGroup Is Nothing ) Then SizeToContent
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*   H A N D L E R   F O R   F I N I S H E D   B L E N D   T R A N S I T I O N  *
+'*                                                                              *
+'********************************************************************************
+
+Sub BtnFace_onfilterchange
+
+    Element.Document.ParentWindow.Event.CancelBubble = TRUE
+
+    If g_nBlinkRate > 0.0 Then
+
+        If g_strCurFaceColor <> BlinkColor1 Then
+
+            SetFaceColor  BlinkColor1  
+
+        Else
+
+            SetFaceColor  BlinkColor2
+
+        End If
+
+    Else
+
+        If Len( NoTransition ) < 1  Then
+        
+            g_objVShapeFace.Filters.Item("DXImageTransform.Microsoft.Fade" ).enabled  = False
+
+        End If
+
+    End If
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*        H A N D L E R   F O R   S P A C E   K E Y   C L I C K S               *
+'*                                                                              *
+'********************************************************************************
+
+Sub BtnBase_onKeyDown()
+
+    With Element.Document.ParentWindow.Event
+    
+        If  .KeyCode = 32  Then
+
+            BtnFace_onMouseDown
+
+        Else
+
+            Element.FireEvent  "onkeydown", Element.Document.ParentWindow.Event
+
+        End If
+
+        .CancelBubble = TRUE
+        .ReturnValue  = FALSE
+        .KeyCode      = 0
+
+    End With
+
+End Sub
+
+'********************************************************************************
+
+Sub BtnBase_onKeyUp()
+
+    With Element.Document.ParentWindow.Event
+    
+        If  .KeyCode = 32  Then
+
+            BtnFace_onMouseUp
+            Element.Click
+
+        Else
+
+            Element.FireEvent  "onkeyup", Element.Document.ParentWindow.Event
+
+        End If
+
+        .CancelBubble = TRUE
+        .ReturnValue  = FALSE
+        .KeyCode      = 0
+
+    End With
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*            H A N D L E R   F O R   M O U S E   E V E N T S                   *
+'*                                                                              *
+'********************************************************************************
+
+Sub BtnFace_onMouseDown()
+
+    Element.Document.ParentWindow.Event.CancelBubble = TRUE
+
+    Dim objFaceElem
+    Set objFaceElem = g_objVShapeFace
+
+    Do Until objFaceElem Is Nothing
+
+        With objFaceElem.Style
+
+            .PixelLeft   = .PixelLeft   + 1
+            .PixelTop    = .PixelTop    + 1
+            .PixelWidth  = .PixelWidth  - 2
+            .PixelHeight = .PixelHeight - 2
+
+        End With
+
+        Set objFaceElem = objFaceElem.NextSibling
+
+    Loop
+
+
+End Sub
+
+'********************************************************************************
+
+Sub BtnFace_onMouseUp()
+
+    With Element.Document.ParentWindow.Event
+    
+        .CancelBubble = TRUE
+
+        If UCase( .Type ) = "MOUSEOUT" Then
+
+            If Element                                             _
+                .Document                                          _
+                  .ElementFromPoint( .ClientX,                     _
+                                     .ClientY ) Is g_objVShapeFace Then Exit Sub
+
+        End If
+
+    End With
+
+    SizeToContent
+
+End Sub
+
+'********************************************************************************
+'********************************************************************************
+
+
+]]>
+</script>
+
+</component>
+

@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html ID="THIS" XMLNS:CX>
+<head>
+  <title>Transport</title>
+    <META NAME="Description" CONTENT="Intact1200 Transport (DE)">
+    <LINK REL="STYLESHEET" HREF="DlgStyle_DE.css">
+    <?IMPORT namespace="CX" implementation="SpinEdit.htc">
+</head>
+
+<XML ID="xmlResource">
+  <Resources>
+    <Res    AddressBy   = "ID"
+            MatchValue  = "trDistance"
+            ApplyTo     = "title"
+    >Bitte geben Sie hier die Strecke an, über die der Reifen transportiert werden sollen</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "trDirection"
+            ApplyTo     = "title"
+    >Bitte geben Sie hier die Richtung an, in die der Reifen transportiert werden sollen</Res>
+
+    <Res    AddressBy   = "ID"
+            MatchValue  = "trSpeed"
+            ApplyTo     = "title"
+    >Bitte geben Sie hier die Geschwindigkeit an, mit der der Reifen transportiert werden sollen</Res>
+
+  </Resources>
+</XML>
+
+<body style = "width:20.5em;height:12em" Invisible="INIT" ResourceXML="xmlResource" lang="de" >
+
+  <p align=center style="position:relative; top: 0.5em">
+    <table cellspacing="0" cellpadding="3" style="font-weight:bold" >
+      <colgroup>
+      </colgroup>
+      <colgroup align   = "right">
+      </colgroup>
+      <colgroup>
+      </colgroup>
+      <tbody>
+      <tr ID="trDistance" >
+        <td>
+          <label class="DLGAUTOLABEL" FOR="InputDistance" accesskey   = "w">
+            Verfahrweg
+          </label>
+        </td>
+        <td>
+          <CX:SpinEdit   ID        ="InputDistance"
+                         style     ="border:1px inset" />
+        </td>
+        <td>
+          mm
+        </td>
+      </tr>
+      <tr ID="trDirection" >
+        <td valign=top>
+          Richtung
+        </td>
+        <td>
+          <INPUT id   ="inputDirForward"
+                 type ="radio"
+                 name ="DirRadioBtn"
+                 CHECKED
+          >
+          <br>
+          <INPUT id   ="inputDirReverse"
+                 type ="radio"
+                 name ="DirRadioBtn"
+          >
+        </td>
+        <td>
+          <label class="DLGAUTOLABEL" FOR="inputDirForward" >
+            Vorwärts
+          </label>
+          <br>
+          <label class="DLGAUTOLABEL" FOR="inputDirReverse">
+            Rückwärts
+          </label>
+        </td>
+      </tr>
+      <tr ID="trSpeed" >
+        <td valign=top>
+          Geschwindigkeit
+        </td>
+        <td>
+          <INPUT id   ="inputSpeedSlow"
+                 type ="radio"
+                 name ="SpeedRadioBtn"
+                 CHECKED
+          >
+          <br>
+          <INPUT id   ="inputSpeedFast"
+                 type ="radio"
+                 name ="SpeedRadioBtn"
+          >
+        </td>
+        <td>
+          <label class="DLGAUTOLABEL" FOR="inputSpeedSlow" >
+            Langsam
+          </label>
+          <br>
+          <label class="DLGAUTOLABEL" FOR="inputSpeedFast">
+            Schnell
+          </label>
+        </td>
+      </tr>
+    </tbody>
+    </table>
+  </p>
+  <div class="DLGBUTTONS" kind="1" align="CENTER"  ></div>
+</body>
+
+
+
+<script class="DLGSCRIPT" language="vbscript" src="TransportDlg.vbs" defer>
+</script>
+
+</html>

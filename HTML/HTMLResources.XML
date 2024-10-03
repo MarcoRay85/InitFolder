@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<HTMLResources>
+
+    <FloatingMessageDlg>
+        <EN>FloatingMessageDlg_EN.HTML</EN>
+    </FloatingMessageDlg>
+
+    <UserPasswordChangeDlg>
+        <EN>UserPasswordChangeDlg_EN.html</EN>
+        <DE>UserPasswordChangeDlg_DE.html</DE>
+        <RO>UserPasswordChangeDlg_RO.html</RO>
+        <SL>UserPasswordChangeDlg_SL.html</SL>
+    </UserPasswordChangeDlg>
+
+    <UserPasswordDlg>
+        <EN>UserPasswordDlg_EN.html</EN>
+        <DE>UserPasswordDlg_DE.html</DE>
+        <RO>UserPasswordDlg_RO.html</RO>
+        <SL>UserPasswordDlg_SL.html</SL>
+    </UserPasswordDlg>
+
+    <DlgStyleSheet>
+      <EN>DlgStyle_EN.css</EN>
+      <DE>DlgStyle_DE.css</DE>
+      <PL>DlgStyle_PL.css</PL>
+      <FR>DlgStyle_FR.css</FR>
+      <ES>DlgStyle_ES.css</ES>
+      <IT>DlgStyle_IT.css</IT>
+      <ZH>DlgStyle_ZH.css</ZH>
+      <JA>DlgStyle_JA.css</JA>
+      <RU>DlgStyle_RU.css</RU>
+      <PT>DlgStyle_PT.css</PT>
+      <RO>DlgStyle_RO.css</RO>
+      <SL>DlgStyle_SL.css</SL>
+    </DlgStyleSheet>
+
+    <SideBar>
+      <All>SideBar.HTML</All>
+    </SideBar>
+
+    <IlluButtonBehavior>
+      <All>IlluButtons.WSC</All>
+    </IlluButtonBehavior>
+
+    <HeadPositioningDlg>
+      <EN>HeadPositioningDlg_EN.HTML</EN>
+      <DE>HeadPositioningDlg_DE.HTML</DE>
+      <PL>HeadPositioningDlg_PL.HTML</PL>
+      <FR>HeadPositioningDlg_FR.HTML</FR>
+      <ZH>HeadPositioningDlg_ZH.HTML</ZH>
+      <JA>HeadPositioningDlg_JA.HTML</JA>
+      <RU>HeadPositioningDlg_RU.HTML</RU>
+      <PT>HeadPositioningDlg_PT.HTML</PT>
+      <FI>HeadPositioningDlg_FI.HTML</FI>
+      <RO>HeadPositioningDlg_RO.HTML</RO>
+      <SL>HeadPositioningDlg_SL.HTML</SL>
+    </HeadPositioningDlg>
+
+    <MachineInitializeDlg>
+      <EN>MachineInitDlg_EN.HTML</EN>
+      <DE>MachineInitDlg_DE.HTML</DE>
+      <PL>MachineInitDlg_PL.HTML</PL>
+      <FR>MachineInitDlg_FR.HTML</FR>
+      <ES>MachineInitDlg_ES.HTML</ES>
+      <IT>MachineInitDlg_IT.HTML</IT>
+      <ZH>MachineInitDlg_ZH.HTML</ZH>
+      <JA>MachineInitDlg_JA.HTML</JA>
+      <RU>MachineInitDlg_RU.HTML</RU>
+      <PT>MachineInitDlg_PT.HTML</PT>
+      <FI>MachineInitDlg_FI.HTML</FI>
+      <RO>MachineInitDlg_RO.HTML</RO>
+      <SL>MachineInitDlg_SL.HTML</SL>
+    </MachineInitializeDlg>
+
+    <MachineBeforeInitStartDlg>
+      <EN>MachineBeforeInitDlg_EN.HTML</EN>
+      <DE>MachineBeforeInitDlg_DE.HTML</DE>
+      <PL>MachineBeforeInitDlg_PL.HTML</PL>
+      <FR>MachineBeforeInitDlg_FR.HTML</FR>
+      <ES>MachineBeforeInitDlg_ES.HTML</ES>
+      <HU>MachineBeforeInitDlg_IT.HTML</HU>
+      <IT>MachineBeforeInitDlg_IT.HTML</IT>
+      <ZH>MachineBeforeInitDlg_ZH.HTML</ZH>
+      <JA>MachineBeforeInitDlg_JA.HTML</JA>
+      <RU>MachineBeforeInitDlg_RU.HTML</RU>
+      <PT>MachineBeforeInitDlg_PT.HTML</PT>
+      <FI>MachineBeforeInitDlg_FI.HTML</FI>
+      <RO>MachineBeforeInitDlg_RO.HTML</RO>
+      <SL>MachineBeforeInitDlg_SL.HTML</SL>
+    </MachineBeforeInitStartDlg>
+
+    <RotateHeadDlg>
+      <EN>RotateHeadDlg_EN.HTML</EN>
+      <DE>RotateHeadDlg_DE.HTML</DE>
+      <PL>RotateHeadDlg_PL.HTML</PL>
+      <FR>RotateHeadDlg_FR.HTML</FR>
+      <ES>RotateHeadDlg_ES.HTML</ES>
+      <ZH>RotateHeadDlg_ZH.HTML</ZH>
+      <JA>RotateHeadDlg_JA.HTML</JA>
+      <RU>RotateHeadDlg_RU.HTML</RU>
+      <PT>RotateHeadDlg_PT.HTML</PT>
+      <FI>RotateHeadDlg_FI.HTML</FI>
+      <IT>RotateHeadDlg_IT.HTML</IT>
+      <RO>RotateHeadDlg_RO.HTML</RO>
+      <SL>RotateHeadDlg_SL.HTML</SL>
+    </RotateHeadDlg>
+
+    <SelectTestPogramDlg>
+      <EN>SelectTestPogramDlg_EN.HTML</EN>
+      <DE>SelectTestPogramDlg_DE.HTML</DE>
+      <PL>SelectTestPogramDlg_PL.HTML</PL>
+      <FR>SelectTestPogramDlg_FR.HTML</FR>
+      <ES>SelectTestPogramDlg_ES.HTML</ES>
+      <ZH>SelectTestPogramDlg_ZH.HTML</ZH>
+      <JA>SelectTestPogramDlg_JA.HTML</JA>
+      <RU>SelectTestPogramDlg_RU.HTML</RU>
+      <PT>SelectTestPogramDlg_PT.HTML</PT>
+      <FI>SelectTestPogramDlg_FI.HTML</FI>
+      <IT>SelectTestPogramDlg_IT.HTML</IT>
+      <RO>SelectTestPogramDlg_RO.HTML</RO>
+      <SL>SelectTestPogramDlg_SL.HTML</SL>
+    </SelectTestPogramDlg>
+
+    <TestParameterDlg>
+      <EN>SetTestPressureDlg_EN.HTML</EN>
+      <DE>SetTestPressureDlg_DE.HTML</DE>
+      <PL>SetTestPressureDlg_PL.HTML</PL>
+      <FR>SetTestPressureDlg_FR.HTML</FR>
+      <ES>SetTestPressureDlg_ES.HTML</ES>
+      <ZH>SetTestPressureDlg_ZH.HTML</ZH>
+      <JA>SetTestPressureDlg_JA.HTML</JA>
+      <RU>SetTestPressureDlg_RU.HTML</RU>
+      <PT>SetTestPressureDlg_PT.HTML</PT>
+      <FI>SetTestPressureDlg_FI.HTML</FI>
+      <IT>SetTestPressureDlg_IT.HTML</IT>
+      <RO>SetTestPressureDlg_RO.HTML</RO>
+      <SL>SetTestPressureDlg_SL.HTML</SL>
+    </TestParameterDlg>
+
+    <TestParameterTreadBeadDlg>
+      <EN>SetTestPressureTreadBeadDlg_EN.HTML</EN>
+      <DE>SetTestPressureTreadBeadDlg_DE.HTML</DE>
+      <PT>SetTestPressureTreadBeadDlg_PT.HTML</PT>
+      <RU>SetTestPressureTreadBeadDlg_RU.HTML</RU>
+      <FI>SetTestPressureTreadBeadDlg_FI.HTML</FI>
+      <JA>SetTestPressureTreadBeadDlg_JA.HTML</JA>
+      <RO>SetTestPressureTreadBeadDlg_RO.HTML</RO>
+      <SL>SetTestPressureTreadBeadDlg_SL.HTML</SL>
+    </TestParameterTreadBeadDlg>
+
+    <TransportDlg>
+      <EN>TransportDlg_EN.HTML</EN>
+      <DE>TransportDlg_DE.HTML</DE>
+      <PL>TransportDlg_PL.HTML</PL>
+      <FR>TransportDlg_FR.HTML</FR>
+      <ES>TransportDlg_ES.HTML</ES>
+      <ZH>TransportDlg_ZH.HTML</ZH>
+      <JA>TransportDlg_JA.HTML</JA>
+      <RU>TransportDlg_RU.HTML</RU>
+      <PT>TransportDlg_PT.HTML</PT>
+      <FI>TransportDlg_FI.HTML</FI>
+      <RO>TransportDlg_RO.HTML</RO>
+      <SL>TransportDlg_SL.HTML</SL>
+    </TransportDlg>
+
+    <FlipTireDlg>
+      <EN>FlipTireDlg_EN.HTML</EN>
+      <DE>FlipTireDlg_DE.HTML</DE>
+      <PL>FlipTireDlg_PL.HTML</PL>
+      <FR>FlipTireDlg_FR.HTML</FR>
+      <ZH>FlipTireDlg_ZH.HTML</ZH>
+      <JA>FlipTireDlg_JA.HTML</JA>
+      <PT>FlipTireDlg_PT.HTML</PT>
+      <FI>FlipTireDlg_FI.HTML</FI>
+      <RO>FlipTireDlg_RO.HTML</RO>
+      <SL>FlipTireDlg_SL.HTML</SL>
+    </FlipTireDlg>
+
+    <FeederFlipTireDlg>
+      <EN>FeederFlipTireDlg_EN.HTML</EN>
+      <DE>FeederFlipTireDlg_DE.HTML</DE>
+      <PL>FeederFlipTireDlg_PL.HTML</PL>
+      <FR>FeederFlipTireDlg_FR.HTML</FR>
+      <ZH>FeederFlipTireDlg_ZH.HTML</ZH>
+      <JA>FeederFlipTireDlg_JA.HTML</JA>
+      <RU>FeederFlipTireDlg_RU.HTML</RU>
+      <PT>FeederFlipTireDlg_PT.HTML</PT>
+      <FI>FeederFlipTireDlg_FI.HTML</FI>
+      <RO>FeederFlipTireDlg_RO.HTML</RO>
+      <SL>FeederFlipTireDlg_SL.HTML</SL>
+    </FeederFlipTireDlg>
+
+    <LoadNextTireDlg>
+      <EN>LoadNextTireDlg_EN.HTML</EN>
+      <DE>LoadNextTireDlg_DE.HTML</DE>
+      <JA>LoadNextTireDlg_JA.HTML</JA>
+      <PL>LoadNextTireDlg_PL.HTML</PL>
+      <PT>LoadNextTireDlg_PT.HTML</PT>
+      <FI>LoadNextTireDlg_FI.HTML</FI>
+      <IT>LoadNextTireDlg_IT.HTML</IT>
+      <RO>LoadNextTireDlg_RO.HTML</RO>
+      <SL>LoadNextTireDlg_SL.HTML</SL>
+    </LoadNextTireDlg>
+
+    <ShowAxisDistDLG>
+      <EN>ShowAxisDistDlg_EN.HTML</EN>
+      <DE>ShowAxisDistDlg_DE.HTML</DE>  
+      <PL>ShowAxisDistDlg_PL.HTML</PL>  
+      <JA>ShowAxisDistDlg_JA.HTML</JA>
+      <RU>ShowAxisDistDlg_RU.HTML</RU>
+      <FI>ShowAxisDistDlg_FI.HTML</FI>
+      <SL>ShowAxisDistDlg_SL.HTML</SL>
+    </ShowAxisDistDLG>
+
+    <FlipperRecoverDlg>
+      <EN>FlipperRecoverDlg_EN.HTML</EN>
+      <DE>FlipperRecoverDlg_DE.HTML</DE>
+      <PL>FlipperRecoverDlg_PL.HTML</PL>
+      <RU>FlipperRecoverDlg_RU.HTML</RU>
+      <FI>FlipperRecoverDlg_FI.HTML</FI>
+      <JA>FlipperRecoverDlg_JA.HTML</JA>
+      <SL>FlipperRecoverDlg_SL.HTML</SL>
+    </FlipperRecoverDlg>
+
+    <ManualRotateFlipper>
+      <EN>RotateFlipperDlg_EN.HTML</EN>
+      <DE>RotateFlipperDlg_DE.HTML</DE>
+      <PL>RotateFlipperDlg_PL.HTML</PL>
+      <RU>RotateFlipperDlg_RU.HTML</RU>
+      <FI>RotateFlipperDlg_FI.HTML</FI>
+      <JA>RotateFlipperDlg_JA.HTML</JA>
+      <RO>RotateFlipperDlg_RO.HTML</RO>
+      <SL>RotateFlipperDlg_SL.HTML</SL>
+    </ManualRotateFlipper>
+
+    <MachineErrorDlg>
+      <EN>MachineErrorDlg_EN.HTML</EN>
+      <DE>MachineErrorDlg_DE.HTML</DE>
+      <PL>MachineErrorDlg_PL.HTML</PL>
+      <FR>MachineErrorDlg_FR.HTML</FR>
+      <ES>MachineErrorDlg_ES.HTML</ES>
+      <ZH>MachineErrorDlg_ZH.HTML</ZH>
+      <JA>MachineErrorDlg_JA.HTML</JA>
+      <RU>MachineErrorDlg_RU.HTML</RU>
+      <PT>MachineErrorDlg_PT.HTML</PT>
+      <FI>MachineErrorDlg_FI.HTML</FI>
+      <IT>MachineErrorDlg_IT.HTML</IT>
+      <RO>MachineErrorDlg_RO.HTML</RO>
+      <SL>MachineErrorDlg_SL.HTML</SL>
+    </MachineErrorDlg>
+
+    <EmergencyDisplay>
+      <EN>MachineEmergencyDlg_EN.HTML</EN>
+      <DE>MachineEmergencyDlg_DE.HTML</DE>
+      <PL>MachineEmergencyDlg_PL.HTML</PL>
+      <FR>MachineEmergencyDlg_FR.HTML</FR>
+      <ES>MachineEmergencyDlg_ES.HTML</ES>
+      <ZH>MachineEmergencyDlg_ZH.HTML</ZH>
+      <JA>MachineEmergencyDlg_JA.HTML</JA>
+      <RU>MachineEmergencyDlg_RU.HTML</RU>
+      <PT>MachineEmergencyDlg_PT.HTML</PT>
+      <FI>MachineEmergencyDlg_FI.HTML</FI>
+      <HU>MachineEmergencyDlg_HU.HTML</HU>
+      <IT>MachineEmergencyDlg_IT.HTML</IT>
+      <RO>MachineEmergencyDlg_RO.HTML</RO>
+      <SL>MachineEmergencyDlg_SL.HTML</SL>
+    </EmergencyDisplay>
+
+    <TestDocTaskRunningDlg>
+      <EN>TestDocTaskRunningDlg_EN.HTML</EN>
+      <DE>TestDocTaskRunningDlg_DE.HTML</DE>
+      <PL>TestDocTaskRunningDlg_PL.HTML</PL>
+      <FR>TestDocTaskRunningDlg_FR.HTML</FR>
+      <ES>TestDocTaskRunningDlg_ES.HTML</ES>
+      <ZH>TestDocTaskRunningDlg_ZH.HTML</ZH>
+      <JA>TestDocTaskRunningDlg_JA.HTML</JA>
+      <RU>TestDocTaskRunningDlg_RU.HTML</RU>
+      <PT>TestDocTaskRunningDlg_PT.HTML</PT>
+      <FI>TestDocTaskRunningDlg_FI.HTML</FI>
+      <IT>TestDocTaskRunningDlg_IT.HTML</IT>
+      <RO>TestDocTaskRunningDlg_RO.HTML</RO>
+      <SL>TestDocTaskRunningDlg_SL.HTML</SL>
+    </TestDocTaskRunningDlg>
+
+    <TestFeedTireDlg>
+      <EN>TestFeedTireDlg_EN.HTML</EN>
+      <DE>TestFeedTireDlg_DE.HTML</DE>
+      <PL>TestFeedTireDlg_PL.HTML</PL>
+      <FR>TestFeedTireDlg_FR.HTML</FR>
+      <ES>TestFeedTireDlg_ES.HTML</ES>
+      <ZH>TestFeedTireDlg_ZH.HTML</ZH>
+      <JA>TestFeedTireDlg_JA.HTML</JA>
+      <RU>TestFeedTireDlg_RU.HTML</RU>
+      <PT>TestFeedTireDlg_PT.HTML</PT>
+      <FI>TestFeedTireDlg_FI.HTML</FI>
+      <IT>TestFeedTireDlg_IT.HTML</IT>
+      <RO>TestFeedTireDlg_RO.HTML</RO>
+      <SL>TestFeedTireDlg_SL.HTML</SL>
+    </TestFeedTireDlg>
+
+    <TestTransportReadyDlg>
+      <EN>TestTransportReadyDlg_EN.HTML</EN>
+      <DE>TestTransportReadyDlg_DE.HTML</DE>
+	   <PL>TestTransportReadyDlg_PL.HTML</PL>
+      <FR>TestTransportReadyDlg_FR.HTML</FR>
+      <ES>TestTransportReadyDlg_ES.HTML</ES>
+      <ZH>TestTransportReadyDlg_ZH.HTML</ZH>
+      <JA>TestTransportReadyDlg_JA.HTML</JA>
+      <RU>TestTransportReadyDlg_RU.HTML</RU>
+      <PT>TestTransportReadyDlg_PT.HTML</PT>
+      <FI>TestTransportReadyDlg_FI.HTML</FI>
+      <RO>TestTransportReadyDlg_RO.HTML</RO>
+      <SL>TestTransportReadyDlg_SL.HTML</SL>
+    </TestTransportReadyDlg>
+
+    <ShowAxisDistDLG>
+      <EN>ShowAxisDistDlg_EN.HTML</EN>
+      <DE>ShowAxisDistDlg_DE.HTML</DE>  
+      <PL>ShowAxisDistDlg_PL.HTML</PL>  
+      <JA>ShowAxisDistDlg_JA.HTML</JA>  
+      <FI>ShowAxisDistDlg_FI.HTML</FI>  
+      <SL>ShowAxisDistDlg_SL.HTML</SL>  
+    </ShowAxisDistDLG>
+
+    <ShowAxisCheckDLG>
+      <EN>ShowAxisCheckDlg_EN.HTML</EN>
+      <DE>ShowAxisCheckDlg_DE.HTML</DE>
+      <PL>ShowAxisCheckDlg_PL.HTML</PL>
+      <RU>ShowAxisCheckDlg_RU.HTML</RU>
+      <FI>ShowAxisCheckDlg_FI.HTML</FI>
+      <RO>ShowAxisCheckDlg_RO.HTML</RO>
+      <SL>ShowAxisCheckDlg_SL.HTML</SL>
+    </ShowAxisCheckDLG>
+
+    <AxisCautionDLG>
+      <EN>AxisCautionDLG_EN.HTML</EN>
+      <PL>AxisCautionDLG_PL.HTML</PL>
+      <RU>AxisCautionDLG_RU.HTML</RU>
+      <FI>AxisCautionDLG_FI.HTML</FI>
+      <IT>AxisCautionDLG_IT.HTML</IT>
+      <JA>AxisCautionDLG_JA.HTML</JA>
+      <SL>AxisCautionDLG_SL.HTML</SL>
+    </AxisCautionDLG>
+
+    <RunManualSettingDlg>
+      <EN>RunManualSettingDlg_EN.HTML</EN>
+      <DE>RunManualSettingDlg_DE.HTML</DE>
+      <PL>RunManualSettingDlg_PL.HTML</PL>
+      <ZH>RunManualSettingDlg_ZH.HTML</ZH>
+      <RU>RunManualSettingDlg_RU.HTML</RU>
+      <FI>RunManualSettingDlg_FI.HTML</FI>
+      <JA>RunManualSettingDlg_JA.HTML</JA>
+      <SL>RunManualSettingDlg_SL.HTML</SL>
+    </RunManualSettingDlg>
+
+    <RunCombinedSettingDlg>
+      <EN>RunCombinedSettingDlg_EN.HTML</EN>
+      <DE>RunCombinedSettingDlg_DE.HTML</DE>
+      <PL>RunCombinedSettingDlg_PL.HTML</PL>
+      <RU>RunCombinedSettingDlg_RU.HTML</RU>
+      <FI>RunCombinedSettingDlg_FI.HTML</FI>
+      <JA>RunCombinedSettingDlg_JA.HTML</JA>
+      <SL>RunCombinedSettingDlg_SL.HTML</SL>
+    </RunCombinedSettingDlg>
+
+    <CombinedSettingDlg>
+      <EN>CombinedSettingDlg_EN.HTML</EN>
+      <DE>CombinedSettingDlg_DE.HTML</DE>
+      <PL>CombinedSettingDlg_PL.HTML</PL>
+      <FR>CombinedSettingDlg_EN.HTML</FR>
+      <ES>CombinedSettingDlg_EN.HTML</ES>
+      <JA>CombinedSettingDlg_EN.HTML</JA>
+      <RU>CombinedSettingDlg_RU.HTML</RU>
+      <PT>CombinedSettingDlg_PT.HTML</PT>
+      <SL>CombinedSettingDlg_SL.HTML</SL>
+    </CombinedSettingDlg>
+
+    <TroubleShooting>
+      <EN>TroubleShooting_EN.XML</EN>
+      <DE>TroubleShooting_DE.XML</DE>
+      <IT>TroubleShooting_IT.XML</IT>
+    </TroubleShooting>
+
+    <ChooseTestModeDlg>
+        <EN>ChooseTestModeDlg_EN.HTML</EN>
+        <JA>ChooseTestModeDlg_JA.HTML</JA>
+        <FI>ChooseTestModeDlg_FI.HTML</FI>
+        <SL>ChooseTestModeDlg_SL.HTML</SL>
+    </ChooseTestModeDlg>
+
+    <QueueDLG>
+        <EN>QueueDLG_EN.HTML</EN>
+        <DE>QueueDLG_DE.HTML</DE>
+        <PT>QueueDLG_PT.HTML</PT>
+        <RO>QueueDLG_RO.HTML</RO>
+        <SL>QueueDLG_SL.HTML</SL>
+    </QueueDLG>
+
+    <ExtConvSysErrorDialog>
+        <EN>ExtConvSysErrorDialog_EN.HTML</EN>
+        <DE>ExtConvSysErrorDialog_DE.HTML</DE>
+        <SL>ExtConvSysErrorDialog_SL.HTML</SL>
+    </ExtConvSysErrorDialog>
+
+    <TiltLoaderFlipTireDlg>
+      <EN>TiltLoaderFlipTireDlg_EN.HTML</EN>
+      <DE>TiltLoaderFlipTireDlg_DE.HTML</DE>
+    </TiltLoaderFlipTireDlg>
+
+    <TiltLoaderNextTestDlg>
+      <EN>TiltLoaderNextTestDlg_EN.HTML</EN>
+      <DE>TiltLoaderNextTestDlg_DE.HTML</DE>
+    </TiltLoaderNextTestDlg>	 
+
+    <FeederSingleDoorFlipTireDlg>
+      <EN>FeederSingleDoorFlipTireDlg_EN.HTML</EN>
+      <DE>FeederSingleDoorFlipTireDlg_DE.HTML</DE>
+    </FeederSingleDoorFlipTireDlg>
+
+    <FeederSingleDoorNextTestDlg>
+      <EN>FeederSingleDoorNextTestDlg_EN.HTML</EN>
+      <DE>FeederSingleDoorNextTestDlg_DE.HTML</DE>
+    </FeederSingleDoorNextTestDlg>	 
+
+</HTMLResources>
+

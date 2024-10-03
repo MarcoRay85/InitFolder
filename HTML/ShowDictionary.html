@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+    <title>Intact1200 dokumentacja testu</title>
+    <META NAME="Description" CONTENT="Intact1200 test documentation template V1.0">
+    <base href="file:///">
+<STYLE TYPE="text/css" TITLE="StyleDef">
+BODY      { font-size        : 12pt;
+            font-family      : Verdana;
+            line-height      : 1.5em;
+            width            : 100%;
+            height           : 100%;
+            border           : 0
+          }
+.BtnStyle { border-style: outset;
+            border-width: thin;
+            font-weight:  bold;
+          }
+</STYLE>
+
+</STYLE>
+</head>
+
+<body bgcolor="silver">
+<table ID          = "tableDisplay"
+       cellspacing = "5"
+       cellpadding = "4"
+       align       = "center"
+       style       = "overflow:auto">
+  <thead valign=bottom>
+    <th align=left >
+      Nazwa klucza
+    </th>
+    <th align=left >
+      Typ
+    </th>
+    <th align=left >
+      Wartoœæ
+    </th>
+  </thead>
+  <colgroup bgcolor = "gainsboro">
+  </colgroup>
+  <colgroup bgcolor = "gainsboro">
+  </colgroup>
+  <colgroup bgcolor = "gainsboro">
+  </colgroup>
+  <tbody>
+
+  </tbody>
+</table>
+
+<SCRIPT defer language ="vbscript">
+option Explicit
+
+Function window_onload
+
+  Dim objDict
+  Set objDict = window.dialogArguments
+
+    if typename( objDict ) <> "Dictionary" then
+      alert "Dialog argument has to be a IDictionary object!"
+      window.close
+    end if
+
+  Dim i
+  Dim objTRow
+  Dim objTCell
+  Dim colKeys
+
+  colKeys = objDict.Keys
+
+  for each i in colKeys
+
+     Set objTRow  = tableDisplay.InsertRow()
+
+     objTRow.id = "ROW"
+
+     Set objTCell = objTRow.InsertCell()
+     objTCell.InnerText = i
+     objTCell.SetAttribute "__NAME__", i
+
+     Set objTCell = objTRow.InsertCell()
+     objTCell.InnerText = typename( objDict.Item( i ))
+     objTCell.SetAttribute "__NAME__", i
+
+     Set objTCell = objTRow.InsertCell()
+     objTCell.SetAttribute "__NAME__", i
+
+     if IsArray( objDict.Item( i )) then
+
+        objTCell.InnerText = "0 ... " & UBound( objDict.Item( i ))
+
+     else
+
+        objTCell.InnerText = objDict.Item( i )
+
+     end if
+
+  next
+
+End Function
+
+
+Sub tableDisplay_onDblClick
+
+    Dim objDict
+    Set objDict = window.dialogArguments
+
+    Dim strName
+    strName = window.Event.srcElement.GetAttribute( "__NAME__" )
+
+    If Len( strName ) > 0 Then
+
+        If TypeName( objDict.Item( strName )) = "Dictionary" Then
+
+            window.ShowModalDialog document.url, objDict.Item( strName )
+
+        End If
+
+    End If
+
+End Sub
+
+</script>
+</body>
+</html>

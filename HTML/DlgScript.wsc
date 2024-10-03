@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+<component>
+<?component error="true" debug="true"?>
+
+<comment>
+<![CDATA[
+********************************************************************************
+*                                                                              *
+*                             D E S C R I P T I O N                            *
+*                                                                              *
+*   Author:    VR                                                              *
+*   Date:      12.04.2000                                                      *
+*   Versions:  V1.0          12.04.2000                                        *
+*              V2.0          06.12.2002    Updated to IE6                      *
+*                                                                              *
+*   About:     Component implements script behavior to monitor availability    *
+*                                                                              *
+********************************************************************************
+
+********************************************************************************
+*                                                                              *
+*                              I N T E R F A C E                               *
+*                                                                              *
+*                                                                              *
+*  Properties: ---                                                             *
+*                                                                              *
+*  Methods:    ---                                                             *
+*                                                                              *
+*  Events:     ---                                                             *
+*                                                                              *
+********************************************************************************
+]]>
+</comment>
+
+<implements type="Behavior">
+
+    <attach   event ="oncontentready"       handler="onInitElem"        />
+
+</implements>
+
+<comment>
+********************************************************************************
+*                                                                              *
+*                                  M A I N                                     *
+*                                                                              *
+********************************************************************************
+</comment>
+
+<script language="vbscript">
+<![CDATA[
+
+Option Explicit
+'********************************************************************************
+'*                                                                              *
+'*                                  G L O B A L   D A T A                       *
+'*                                                                              *
+'********************************************************************************
+
+Dim g_bHasScript
+Dim g_objDownLoad
+Set g_objDownLoad = Nothing
+
+g_bHasScript = FALSE
+
+'********************************************************************************
+'*                                                                              *
+'*      H A N D L E R   F O R   C O N T E N T    R E A D Y    E V E N T         *
+'*                                                                              *
+'********************************************************************************
+
+Sub onInitElem()
+
+    If UCase( element.TagName ) <> "SCRIPT"  Then
+
+        MsgBox "Behavior 'DlgScript.wsc' may applied to <SCRIPT> only!"
+
+    End If
+
+    If Len( Element.Src ) > 0 Then
+
+        With Element.Document
+
+            .ParentWindow.AttachEvent "onbeforeunload", GetRef( "onBeforeUnload" )
+
+            Set g_objDownLoad = .CreateElement( "SPAN" )
+            .Body.AppendChild   g_objDownLoad
+
+            g_objDownLoad.AddBehavior( "#default#download" )
+
+            Do While g_objDownLoad.readyState <> "complete"
+
+                Element.Document.Recalc             ' Do something
+
+            Loop
+
+            g_objDownLoad.StartDownLoad  Element.Src, GetRef( "onDownloadComplete" )
+
+        End With
+
+    End If
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      H A N D L E R   F O R   C O N T E N T    R E A D Y    E V E N T         *
+'*                                                                              *
+'********************************************************************************
+
+Sub onBeforeUnload( objEvent )
+
+    If Not g_bHasScript Then MsgBox   "HTML page """                _
+                                    & Element.Document.URL          _
+                                    & """"                          _
+                                    & vbNewLine                     _
+                                    & "refers script file """       _
+                                    & Element.Src                   _
+                                    & """;"                         _
+                                    & vbNewLine                     _
+                                    & "Script file doesn't exist!", _
+                                    vbExclamation
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      H A N D L E R   F O R   D O W N L O A D    R E A D Y    E V E N T       *
+'*                                                                              *
+'********************************************************************************
+
+Sub onDownloadComplete( strData )
+
+    g_objDownLoad.ParentElement.RemoveChild  g_objDownLoad
+
+    Set g_objDownLoad = Nothing
+    If Len( strData ) > 0 Then g_bHasScript = TRUE
+
+End Sub
+
+'********************************************************************************
+]]>
+</script>
+
+</component>

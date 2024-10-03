@@ -1,0 +1,152 @@
+v\:*    { behavior: url(#default#VML) }
+
+.classTableHeader
+    {
+      Background-Color  : #A8B8C8;
+      font-family       : Arial;
+      Font-Size         : 11pt;
+    }
+
+.classTireDataTable
+    {
+      font-family       : Arial;
+      font-size         : 70%;
+      Border            : 1ex solid ThreeDFace ;
+    }
+
+.classTireDataTableHead
+    {
+      font-weight       :normal; 
+      font-size         :smaller;
+    }
+
+.classTireDataNameCol
+    {
+      Padding-Right     : 1ex;
+    }
+
+.classTireDataNumCol
+    {
+      Text-Align        : right;
+      Background-Color  : gainsboro;
+      Width             : 5ex;
+      Padding-Right     : 0.5ex;
+    }
+
+.classTireDataNumCell
+    {
+      filter            : progid:DXImageTransform.Microsoft.Shadow(direction=135,color=threedshadow,strength=3); 
+    }
+
+.classTable
+    {
+      font-family       : Arial;
+      font-size         : 10pt;
+      font-weight       : 700; 
+    }
+
+.classHeadPosRowSep
+    {
+      Position          : relative;
+      Height            : 0.5ex;
+    }
+
+.classLiftTypeSpan
+    {
+      Position          : relative;
+      Width             : 2.8ex;
+      Height            : 2.5ex;
+      Line-Height       : 2.5ex;
+      Font-Weight       : 700;
+      Padding           : 0;
+      Margin            : 0;
+      Border            : 1px inset;
+      Text-Align        : center;
+      Color             : #1090E0;
+      Background-Color  : gainsboro;
+      Cursor            : hand;
+    }
+
+.classLiftTypeCell
+    {
+      Text-Align        : right;
+      Position          : relative;
+    }
+
+.classSpinEditCell
+    {
+      Vertical-Align    : center;
+      Position          : relative;
+    }
+
+.classSpinEdit
+    {
+      Position          : relative;
+      Width             : 4em;
+      Height            : 2.8ex;
+      Border            : 1px inset;
+    }
+
+.classPosData
+    {
+      Position          : absolute;
+      Left              : 0;
+      Line-Height       : 1em;
+      Padding           : 4px 4px 2px 4px;
+      Background-Color  : gainsboro;
+      Visibility        : hidden;
+    }
+
+.classToolButtonDiv
+    {
+      position          : relative;
+      Margin-Top        : 0.5em;
+      Margin-Bottom     : 4px;
+    }
+
+.classButtons
+    {
+      Font-Weight       : bold;
+      Font-Size         : 32pt;
+      Position          : relative;
+      Width             : 1em;
+      Height            : 1em;
+      Line-Height       : 1em;
+      margin            : 4px;
+      Overflow          : hidden;
+    }
+
+.classHomeSpan
+    {
+      Font-Family       : WebDings;
+      color             : black;
+      Position          : relative;
+      Top               : -4px;
+    }
+
+.classUpdateSpan
+    {
+      Font-Family       : WebDings;
+      Color             : ButtonText;
+      Vertical-Align    : Text-Top;
+    }
+
+.classVideoSpan
+    {
+      Font-Family       : WebDings;
+      Color             : ButtonText;
+      Vertical-Align    : Text-Top;
+    }
+
+.classStopButton
+    {
+      margin            : 4px;
+      position          : relative;
+    }
+
+.classStopImage
+    {
+      filter            : progid:DXImageTransform.Microsoft.Emboss(enabled=0) 
+                          progid:DXImageTransform.Microsoft.Alpha( style=0,opacity=30,enabled=0);
+    }
+

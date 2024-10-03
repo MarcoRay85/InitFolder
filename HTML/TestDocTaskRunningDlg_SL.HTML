@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html ID="THIS">
+<head >
+  <title>Izhod iz sistema Intact</title>
+    <META NAME="Description" CONTENT="Intact1200 Quit & Storing (SL)">
+    <LINK REL="STYLESHEET" HREF="DlgStyle_SL.css">
+</head>
+
+<body style="width:28em; height:8.5em" align="center" Invisible="INIT" lang="sl">
+
+  <div align="center"
+       style="position:absolute;zIndex:-1;zoom:2.5;"
+       style="Filter:progid:DXImageTransform.Microsoft.alpha( opacity=10 )"><img src="AnimHourglass.gif"> &nbsp; <img src="AnimHourglass.gif"> &nbsp; <img src="AnimHourglass.gif"> &nbsp; <img src="AnimHourglass.gif">   <img src="AnimHourglass.gif"> &nbsp; <img src="AnimHourglass.gif"> &nbsp; <img src="AnimHourglass.gif"> &nbsp; <img src="AnimHourglass.gif"></div>
+
+  <div ID="divText" align="left" style="line-height:180%; width:26em;position:relative">Izklop sistema <span class="classIntact">Intact</span> je nekoliko zadr&#382;an, zato ker nekateri rezultati preizkusa &scaron;e niso povsem shranjeni.<br> Uporabite <span class="classButton">Prekliči</span>, da vseeno zaustavite vse postopke.</div>
+
+  <div class="DLGBUTTONS" kind="11" align="CENTER"  ></div>
+
+</body>
+
+<script language="vbscript" >
+
+    Option Explicit
+
+    Sub SetTaskKind( nKind )
+
+        If nKind = 1  Then
+
+            divText.InnerHTML = Replace( divText.InnerHTML, "stored", "printed" )
+
+        End If
+
+    End Sub
+
+</script>
+
+<script class="DLGSCRIPT" language="vbscript" src="TestDocTaskRunningDlg.vbs" defer>
+</script>
+
+</html>

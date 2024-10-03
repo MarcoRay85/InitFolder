@@ -1,0 +1,728 @@
+<?xml version="1.0"?>
+<component>
+<?component error="true" debug="true"?>
+
+<comment>
+<![CDATA[
+********************************************************************************
+*                                                                              *
+*                             D E S C R I P T I O N                            *
+*                                                                              *
+*   Author:    VR                                                              *
+*   Date:      20.03.2002                                                      *
+*   Versions:  V1.0                                                            *
+*                                                                              *
+*   About:     Component implements functionality for displaying a tab bar     *
+*              above a stacked image set and optionally a slider bar for       *
+*              fading two images                                               *
+*                                                                              *
+********************************************************************************
+
+********************************************************************************
+*                                                                              *
+*                              I N T E R F A C E                               *
+*                                                                              *
+*  Properties: StyleCommonTab    (r/w)   Style common to all tabs              *
+*                                                                              *
+*              StyleActiveTab    (r/w)   Style (font, color background and     *
+*                                           border) of active tab              *
+*                                                                              *
+*              StyleInactiveTab  (r/w)   Style (font, color background and     *
+*                                           border) of inactive tab            *
+*                                                                              *
+*              InactiveReduct    (r/w)   Amount of dropping tab if inactive    *
+*                                                                              *
+*              TabAlign          (r/w)   Align tabs to LEFT or RIGHT (string)  *
+*                                                                              *
+*              ActiveTab         (r/w)   Index of active tab (zero based or    *
+*                                           name string). Should be set after  *
+*                                           tabs are defined completely.       *
+*                                                                              *
+*              Fading            (r/w)   Position of image fader (0..100%)     *
+*              FadingPersist     (r/w)   If set to TRUE, fader position will   *
+*                                        be stored in document attribute       *
+*                                                                              *
+*  Methods:    InitTabBar                Initializes behavior                  *
+*                                           Needs width of useable area.       *
+*                                           Number of tabs may be given or     *
+*                                           set to Empty                       *
+*                                                                              *
+*              AddTabbedImage            Adds an image to the tab register     *
+*                                        Returns NOTHING if failed or a SPAN   *
+*                                        object representing the tab.          *
+*                                                                              *
+*              AddFader                  Displays an image fader               *
+*                                                                              *
+********************************************************************************
+]]>
+</comment>
+
+<public>
+    <property name = "StyleCommonTab"   />
+    <property name = "StyleActiveTab"   />
+    <property name = "StyleInactiveTab" />
+    <property name = "InactiveReduct"   />
+    <property name = "TabAlign"          >
+        <get/>
+        <put/>
+    </property>
+    <property name = "ActiveTab"         >
+        <get/>
+        <put/>
+    </property>
+    <property name = "Fading"            >
+        <get/>
+        <put/>
+    </property>
+    <property name = "FadingPersist"    />
+
+    <method   name = "InitTabBar"        >
+        <parameter name="MaxWidth"      />
+        <parameter name="PresumedCnt"   />
+    </method>
+
+    <method   name = "AddTabbedImage"    >
+        <parameter name="objIMG"        />
+        <parameter name="strName"       />
+        <parameter name="strInfo"       />
+    </method>
+
+    <method   name = "AddFader"          >
+        <parameter name="Index"         />
+    </method>
+
+</public>
+
+<implements type="Behavior">
+
+    <attach   event = "ondetach"        handler="onDetach" />
+
+</implements>
+
+<comment>
+********************************************************************************
+*                                                                              *
+*                                  M A I N                                     *
+*                                                                              *
+********************************************************************************
+</comment>
+
+<script language="vbscript">
+<![CDATA[
+
+Option Explicit
+
+'********************************************************************************
+'*                                                                              *
+'*                                  G L O B A L   D A T A                       *
+'*                                                                              *
+'********************************************************************************
+
+const cAttribIdent = "__IMAGEFADER__"
+const cAttribIndex = "__Index__"
+const cAttribFBar  = "__FadeBar__"
+const cAttribStore = "__FaderPositionStore__"
+
+Dim g_Tabs()
+Dim g_Images()
+Dim g_objFader
+Dim g_nAmount
+Dim g_nActiveTab
+Dim g_nFaderPosAbsOffs
+Dim g_nFaderPosScaler
+Dim g_nFaderPos
+Dim g_nFading
+Dim g_nMaxWidth
+Dim g_strAlignTo
+
+Erase g_Tabs
+Erase g_Images
+
+g_nAmount       = 0
+g_nActiveTab    = NULL
+g_nMaxWidth     = 0
+g_strAlignTo    = "right"
+g_nFaderPos     = -1
+g_nFading       = 0
+
+Set g_objFader  = Nothing
+
+'********************************************************************************
+'*                                                                              *
+'*                                P U B L I C S                                 *
+'*                                                                              *
+'********************************************************************************
+
+'********************************************************************************
+'*   PROPERTY   TABALIGN                                                        *
+'********************************************************************************
+
+Function get_TabAlign()
+
+    get_TabAlign = g_strAlignTo
+
+End Function
+
+Sub put_TabAlign( strAlign )
+
+    If    (     ( UCase( strAlign ) <> "LEFT"  )   _
+            And ( UCase( strAlign ) <> "RIGHT" ))  Then
+
+        MsgBox "ImageFader.WSC: put_TabAlign invoked using illegal parameter values"
+        Exit Sub
+
+    End If
+
+    g_strAlignTo = LCase( strAlign )
+
+End Sub
+
+'********************************************************************************
+'*   PROPERTY   ACTIVETAB                                                       *
+'********************************************************************************
+
+Function get_ActiveTab()
+
+    get_ActiveTab = g_nActiveTab
+
+End Function
+
+Sub put_ActiveTab( vIndex )
+
+    Dim nIndex
+    nIndex = GetIndex( vIndex )
+
+    If IsEmpty( InactiveReduct ) Then InactiveReduct = "0.5ex"
+
+    If IsNull( nIndex ) Then
+
+        g_nActiveTab = 0
+
+    Else
+
+        g_nActiveTab = nIndex
+
+    End If
+
+    Dim i
+    Dim j
+    Dim nInc
+    Dim nPos
+    Dim nActive
+    Dim vTmp
+    Dim strActTab
+    Dim strInactTab
+
+    If g_nAmount < 1 Then Exit Sub
+    If g_nAmount = 1 Then
+
+        g_Tabs( 0 ).RuntimeStyle.CssText = "Top:0px;" & g_strAlignTo & ":0px"
+        Exit Sub
+
+    End If
+
+    nInc  = g_nMaxWidth - g_Tabs( g_nAmount - 1 ).OffsetWidth
+
+    If nInc <= ( g_nAmount - 1 ) Then
+
+        nInc = 1
+
+    Else
+
+        nInc = nInc / ( g_nAmount - 1 )
+
+    End If
+
+    nActive     = g_nActiveTab
+
+    If g_nFaderPos >= 0 Then  nActive  =  g_nFaderPos
+
+    nPos        = 0
+    strActTab   = "position:absolute;Z-Index:10;Bottom:-2px;"   _
+                & StyleCommonTab & ";" & StyleActiveTab
+    strInactTab = "position:absolute;Z-Index:1;Bottom:-"        _
+                & InactiveReduct & ";"                  _
+                & StyleCommonTab & ";" & StyleInactiveTab
+
+    For i = 0 To g_nAmount - 1
+
+        If i = g_nFaderPos Then
+
+            vTmp = g_nMaxWidth - nPos
+
+            For j = i To g_nAmount - 1
+
+                vTmp = vTmp - g_Tabs( j ).OffsetWidth
+
+            Next
+
+            vTmp = vTmp - 2
+
+            If vTmp > 0 Then
+
+                With g_objFader.RuntimeStyle
+
+                    .CssText = g_strAlignTo & ":" & nPos & "px"
+
+                    .PixelWidth   = vTmp
+                    .PixelHeight  = Element.ClientHeight
+
+                End With
+
+                nPos = nPos + vTmp
+
+            End If
+
+        End If
+
+        With g_Tabs( i )
+
+            If i = g_nActiveTab Then
+
+                .RuntimeStyle.CssText = g_strAlignTo & ":" & nPos & "px;" & strActTab
+
+            Else
+
+                .RuntimeStyle.CssText = g_strAlignTo & ":" & nPos & "px;" & strInactTab
+
+            End If
+
+            If .OffsetWidth < nInc Then
+
+                nPos = nPos + .OffsetWidth
+
+            Else
+
+                nPos = nPos + nInc
+
+            End If
+
+        End With
+
+        If i = nActive Then
+
+            g_Images( i ).RuntimeStyle.ZIndex  = 10
+
+        Else
+
+            g_Images( i ).RuntimeStyle.ZIndex  = 1
+
+        End If
+
+    Next
+
+    If g_nActiveTab = g_nFaderPos Then
+
+        put_Fading  0
+
+    Else
+
+        put_Fading  100
+
+    End If
+
+    End Sub
+
+'********************************************************************************
+'*   PROPERTY   FADING                                                          *
+'********************************************************************************
+
+Function get_Fading()
+
+    get_Fading = g_nFading
+
+End Function
+
+Sub put_Fading( nPercent )
+
+    g_nFading = Round( nPercent )
+
+    If g_nFading <   0 Then g_nFading =   0
+    If g_nFading > 100 Then g_nFading = 100
+
+    If g_objFader Is Nothing Then Exit Sub
+
+    Dim nPos
+
+    nPos  = g_objFader.ClientWidth - g_objFader.FirstChild.OffsetWidth
+
+    If nPos < 0 Then Exit Sub
+
+    g_objFader.FirstChild.RuntimeStyle.PixelLeft = Round( nPos * 0.01 * g_nFading )
+
+    nPos = g_nFading
+
+    If UCase( g_strAlignTo ) = "RIGHT" Then nPos = 100 - nPos
+
+    With g_Images( g_nFaderPos ).Filters.Alpha
+
+        .Opacity = nPos
+        .Enabled = TRUE
+
+    End With
+
+    If  FadingPersist  Then  Element.Document.Body.SetAttribute   cAttribStore,  g_nFading
+
+End Sub
+
+'********************************************************************************
+'*   METHOD   INITTABBAR                                                        *
+'********************************************************************************
+
+Sub InitTabBar( nMaxWidth, PresumedCnt )
+
+    If nMaxWidth < 1  Then
+
+        MsgBox "ImageFader.WSC: InitTabBar invoked using illegal parameter values"
+        Exit Sub
+
+    End If
+
+    Erase g_Tabs
+    Erase g_Images
+
+    If IsNumeric( PresumedCnt ) Then
+
+        ReDim g_Tabs(   PresumedCnt )
+        ReDim g_Images( PresumedCnt )
+
+    End If
+
+    g_nAmount       = 0
+    g_nActiveTab    = NULL
+    g_nFaderPos     = -1
+    g_nFading       = 0
+    g_nMaxWidth     = CLng( nMaxWidth )
+    g_strAlignTo    = "right"
+    Set g_objFader  = Nothing
+
+    FadingPersist   = FALSE
+
+    Element.SetAttribute cAttribIdent, TRUE
+
+End Sub
+
+'********************************************************************************
+'*   METHOD   ADDTABBEDIMAGE                                                    *
+'********************************************************************************
+
+Function AddTabbedImage( objIMG, strName, strInfo )
+
+    Set AddTabbedImage = Nothing
+
+    If g_nMaxWidth < 1 Then
+
+        MsgBox "ImageFader.WSC: AddTabbedImage invoked without proper initialisation!"
+        Exit Function
+
+    End If
+
+    If IsEmpty( StyleCommonTab   ) Then StyleCommonTab   = "margin:0;padding:0px 2px;"    _
+                                                         & "text-align:center;font-size:smaller;" _
+                                                         & "border:2px outset;border-bottom:0px;" _
+                                                         & "cursor:hand;"
+
+    If IsEmpty( StyleActiveTab   ) Then StyleActiveTab   = "Color:#F0F0F0;"             _
+                                                         & "Background-Color:#B0B0B0;"  _
+                                                         & "Border-Color:#E0E0E0;"
+
+    If IsEmpty( StyleInactiveTab ) Then StyleInactiveTab = "Color:#C0C0C0;"             _
+                                                         & "Background-Color:#909090;"  _
+                                                         & "Border-Color:#B0B0B0;"
+
+    Dim i
+
+    If ( UBound( g_Tabs ) - LBound( g_Tabs )) < g_nAmount Then
+
+        ReDim Preserve g_Tabs(    g_nAmount + 1 )
+        ReDim Preserve g_Images(  g_nAmount + 1 )
+
+    End If
+
+    Set AddTabbedImage = Element.Document.CreateElement( "SPAN" )
+
+    With AddTabbedImage
+
+        .Style.CssText = "position:absolute;Bottom:-2px;"   _
+                       & g_strAlignTo                       _
+                       & "0;height:"                        _
+                       & Element.ClientHeight               _
+                       & "px;line-height:"                  _
+                       & Element.ClientHeight - 2           _
+                       & "px;"                              _
+                       & StyleCommonTab                     _
+                       & StyleActiveTab
+        .InnerText     = strName
+        .Title         = strInfo
+        .SetAttribute    cAttribIndex, g_nAmount
+        .onClick       = GetRef( "onClickTab"     )
+        .ondblclick    = GetRef( "onDblClickTab"  )
+
+    End With
+
+    Element.AppendChild AddTabbedImage
+
+    Set g_Images( g_nAmount ) = objIMG
+    Set g_Tabs(   g_nAmount ) = AddTabbedImage
+    g_nAmount                 = g_nAmount + 1
+
+End Function
+
+'********************************************************************************
+'*   METHOD   ADDTABBEDIMAGE                                                    *
+'********************************************************************************
+
+Sub AddFader( vIndex )
+
+    If g_nAmount < 2 Then Exit Sub
+
+    g_nFaderPos = GetIndex( vIndex )
+
+    If g_objFader Is Nothing Then
+
+        Set g_objFader = Element.Document.CreateElement( "SPAN" )
+
+        g_objFader.Style.CssText  = " position:absolute;top:0;"      _
+                                  & g_strAlignTo                     _
+                                  & ":0;width:1ex;height:"           _
+                                  & Element.ClientHeight             _
+                                  & "px;background-color:#D8D8D8;"   _
+                                  & "font-size:smaller;"             _
+                                  & ";border:2px ridge #FFFFFF;"     _
+                                  & "text-align:center"
+
+        g_objFader.SetAttribute   cAttribFBar, "TRUE"
+
+        Element.AppendChild       g_objFader
+
+        g_objFader.InnerHTML      = "<SPAN STYLE=""position:absolute; left:1px"       _
+                                  & ";width:"             & g_objFader.ClientHeight   _
+                                  & ";height:"            & g_objFader.ClientHeight   _
+                                  & ";Cursor:hand;Background-Color:buttonface;"       _
+                                  & "Border:1px outset #FFFFFF"" ></SPAN>"
+
+        g_objFader.onmousedown    = GetRef( "onMouseAction" )
+        g_objFader.onmousemove    = GetRef( "onMouseAction" )
+
+        g_Images( g_nFaderPos )   _
+            .RuntimeStyle         _
+                .CssText          = "filter:alpha(enabled=FALSE)"
+
+
+        Dim nIniPos
+        nIniPos = 0
+
+        If  FadingPersist  Then
+
+            nIniPos = Element.Document.Body.GetAttribute( cAttribStore )
+
+            If IsNumeric( nIniPos ) Then
+
+                nIniPos = CInt( nIniPos )
+
+            Else
+
+                nIniPos = 0
+
+            End If
+
+        End If
+
+        put_ActiveTab( g_nFaderPos )
+
+        If nIniPos <> 0 Then  put_Fading  nIniPos
+
+    End If
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*                                L O C A L S                                   *
+'*                                                                              *
+'********************************************************************************
+
+Function GetIndex( vIndex )
+
+    GetIndex = NULL
+
+    Dim i
+    Dim nIndex
+
+    If IsEmpty( vIndex ) Then
+
+        GetIndex = g_nActiveTab
+        Exit Function
+
+    End If
+
+    If IsNumeric( vIndex ) Then
+
+        nIndex = CLng( vIndex )
+
+    Else
+
+        nIndex = CStr( vIndex )
+
+        For i = 0 To g_nAmount - 1
+
+            If StrComp( nIndex, g_Tabs( i ).InnerText, vbTextCompare ) = 0 Then
+
+                nIndex = CLng( i )
+                Exit For
+
+            End If
+
+        Next
+
+    End If
+
+    If VarType( nIndex ) <> vbLong Then Exit Function
+
+    If nIndex < g_nAmount Then GetIndex = nIndex
+
+End Function
+
+'********************************************************************************
+
+Sub onDetach
+
+    Erase g_Tabs
+    Erase g_Images
+    Set g_objFader  = Nothing
+
+    Dim objChild
+
+    For Each Child In Element.Children
+
+        objChild.ParentElement.RemoveChild  objChild
+
+    Next
+
+End Sub
+
+'********************************************************************************
+
+Sub onClickTab
+
+    With Element.Document.ParentWindow.Event
+
+        Dim nIndex
+
+        nIndex = .SrcElement.GetAttribute( cAttribIndex )
+
+        If IsNull( nIndex ) Then Exit Sub
+
+        .CancelBubble = TRUE
+
+        put_ActiveTab  nIndex
+
+    End With
+
+End Sub
+
+'********************************************************************************
+
+Sub onDblClickTab
+
+    With Element.Document.ParentWindow.Event
+
+        Dim nIndex
+
+        nIndex = .SrcElement.GetAttribute( cAttribIndex )
+
+        If IsNull( nIndex ) Then Exit Sub
+
+        .CancelBubble = TRUE
+
+        Dim objCurTab
+
+        For Each objCurTab In Element.Document.All
+
+            If Not IsNull( objCurTab.GetAttribute( cAttribIdent )) Then objCurTab.ActiveTab = nIndex
+
+        Next
+
+    End With
+
+End Sub
+
+'********************************************************************************
+
+Sub onMouseAction
+
+    Dim objActive
+    Dim nPos
+    Dim nWidthSlider2
+    Dim nWidthNetto
+
+    With Element.Document.ParentWindow.Event
+
+        .CancelBubble = TRUE
+
+        If .Button    = 0  Then 
+        
+            g_objFader.ReleaseCapture
+            g_nFaderPosAbsOffs = Empty
+            Exit Sub
+
+        End If
+
+        Set objActive = .SrcElement
+
+        If IsEmpty( g_nFaderPosAbsOffs ) Then
+
+            g_objFader.SetCapture
+
+            nPos = .OffsetX
+
+            Do While IsNull( objActive.GetAttribute( cAttribFBar ))
+
+                nPos          = objActive.OffsetLeft + nPos
+                Set objActive = objActive.ParentElement
+
+                If objActive Is Nothing Then Exit Sub
+
+            Loop
+
+            nWidthSlider2       = g_objFader.FirstChild.OffsetWidth
+            nWidthNetto         = g_objFader.ClientWidth - nWidthSlider2
+            nWidthSlider2       = CInt( nWidthSlider2   * 0.5 )
+            g_nFaderPosAbsOffs  = .ClientX - nPos + nWidthSlider2
+            If nWidthNetto = 0  Then Exit Sub
+            g_nFaderPosScaler   = 1 / CDbl( nWidthNetto )
+
+        End If
+
+        nPos  = .ClientX - g_nFaderPosAbsOffs
+
+        nPos  = Round( 100.0 * CDbl( nPos ) * g_nFaderPosScaler )
+
+        If nPos <= 0 Then 
+        
+            put_ActiveTab  g_nFaderPos
+
+
+        ElseIf nPos >= 100 Then 
+        
+            put_ActiveTab  g_nFaderPos - 1
+
+        Else
+
+            put_Fading  nPos
+
+        End If
+
+    End With
+
+End Sub
+
+'********************************************************************************
+'********************************************************************************
+
+
+]]>
+</script>
+
+</component>
+

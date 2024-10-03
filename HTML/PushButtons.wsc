@@ -1,0 +1,220 @@
+<?xml version="1.0"?>
+<component>
+<?component error="true" debug="true"?>
+
+<comment>
+<![CDATA[
+********************************************************************************
+*                                                                              *
+*                             D E S C R I P T I O N                            *
+*                                                                              *
+*   Author:    VR                                                              *
+*   Date:      10.07.2002                                                      *
+*   Versions:  V1.0                                                            *
+*                                                                              *
+*   About:     Component implements <BUTTON> extension displaying it checked   *
+*                                                                              *
+********************************************************************************
+
+********************************************************************************
+*                                                                              *
+*                              I N T E R F A C E                               *
+*                                                                              *
+*  Properties: Checked           (r/w)   If TRUE, button is displayed in       * 
+*                                        inset mode                            *
+*              ToggleMode        (r/w)   If TRUE, button will toggle check     * 
+*                                        state each time it is clicked         *
+*                                                                              *
+*  Methods:    ---                                                             *
+*                                                                              *
+********************************************************************************
+]]>
+</comment>
+
+<public>
+    <property name = "Checked"      >
+        <get/>
+        <put/>
+    </property>
+    <property name = "ToggleMode"  />
+</public>
+
+<implements type="Behavior">
+
+    <attach   event = "ondocumentready"     handler="onInitElem"        />
+    <attach   event = "ondetach"            handler="onDetachElem"      />
+    <attach   event = "onclick"             handler="onClickElem"       />
+    <attach   event = "onpropertychange"    handler="onPropChangedElem" />
+
+</implements>
+
+<comment>
+********************************************************************************
+*                                                                              *
+*                                  M A I N                                     *
+*                                                                              *
+********************************************************************************
+</comment>
+
+<script language="vbscript">
+<![CDATA[
+
+Option Explicit
+
+'********************************************************************************
+'*                                                                              *
+'*                                  G L O B A L   D A T A                       *
+'*                                                                              *
+'********************************************************************************
+
+Dim g_bIsChecked
+Dim g_strOrgPositioning
+
+Dim g_objFrame
+
+
+g_bIsChecked    = FALSE
+
+'********************************************************************************
+'*                                                                              *
+'*                                P U B L I C S                                 *
+'*                                                                              *
+'********************************************************************************
+
+'********************************************************************************
+'*   PROPERTY   CHECKED                                                         *
+'********************************************************************************
+
+Function get_Checked()
+
+    get_Checked = g_bIsChecked
+
+End Function
+
+Sub put_Checked( bIs )
+
+    Dim nBorder
+
+    g_bIsChecked = CBool( bIs )
+
+    With g_objFrame.RuntimeStyle
+
+        If g_bIsChecked  Then
+
+            nBorder      = ( Element.OffsetWidth - Element.ClientWidth ) \2
+
+            .PixelLeft   = -nBorder
+            .PixelTop    = -nBorder
+            .PixelWidth  = Element.OffsetWidth
+            .PixelHeight = Element.OffsetHeight
+
+            .Visibility  = Element.CurrentStyle.Visibility
+
+        Else
+
+            .Visibility = "hidden"
+
+        End If
+
+    End With
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      H A N D L E R   F O R   D O C U M E N T    R E A D Y    E V E N T       *
+'*                                                                              *
+'********************************************************************************
+
+Sub onInitElem()
+
+    Dim nBorder
+
+    If UCase( Element.TagName ) <> "BUTTON" Then 
+
+        MsgBox "CheckButtons.WSC applied to non BUTTON element"
+        Exit Sub
+
+    End If
+
+    If IsEmpty( ToggleMode )  Then  ToggleMode = TRUE
+    ToggleMode = CBool( ToggleMode )
+
+    g_strOrgPositioning = Element.CurrentStyle.Position
+
+    If  LCase( g_strOrgPositioning ) = "static"  Then  Element.RuntimeStyle.Position = "relative"
+
+    nBorder      = ( Element.OffsetWidth - Element.ClientWidth ) \2
+
+    Set g_objFrame = Element.Document.CreateElement( "SPAN" )
+
+    With g_objFrame.Style
+
+        .Position    = "Absolute"
+        .PixelLeft   = -nBorder
+        .PixelTop    = -nBorder
+        .PixelWidth  = Element.OffsetWidth
+        .PixelHeight = Element.OffsetHeight
+        .LineHeight  = 0
+        .FontSize    = "1px"
+        .Border      = "3px groove"
+        .Visibility  = "hidden"
+
+    End With
+
+    Element.AppendChild  g_objFrame
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      H A N D L E R   F O R   D E T A C H   E L E M E N T   E V E N T         *
+'*                                                                              *
+'********************************************************************************
+
+Sub onDetachElem()
+
+    Element.RuntimeStyle.Position = ""
+    Element.RemoveChild  g_objFrame
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*            H A N D L E R   F O R   M O U S E   E V E N T S                   *
+'*                                                                              *
+'********************************************************************************
+
+Sub onClickElem( objEvt )
+
+    objEvt.CancelBubble = TRUE
+
+    If  IsDisabled  Then  Exit Sub
+
+    If  ToggleMode  Then  put_Checked  Not g_bIsChecked
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*         H A N D L E R   F O R   P R O P E R T Y    C H A N G E S             *
+'*                                                                              *
+'********************************************************************************
+
+Sub onPropChangedElem( objEvt )
+
+    objEvt.CancelBubble = TRUE
+
+    If  g_bIsChecked  Then  put_Checked  g_bIsChecked
+
+End Sub
+
+'********************************************************************************
+'********************************************************************************
+
+
+]]>
+</script>
+
+</component>
+

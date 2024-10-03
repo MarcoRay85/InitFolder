@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html ID="THIS" XMLNS:CX>
+<head>
+  <title>Parametry testu</title>
+    <META NAME="Description" CONTENT="Intact1200 Parametry testu (PL)">
+    <LINK REL="STYLESHEET" HREF="DlgStyle_PL.css">
+    <?IMPORT namespace="CX" implementation="SpinEdit.htc">
+</head>
+
+<XML ID="xmlResource">
+  <Resources>
+    <Res    AddressBy   = "TAG"
+            MatchValue  = "body"
+            ApplyTo     = "title"
+    >Proszê podaæ podciœnienie, z jakim opony maj¹ zostaæ przetestowane.</Res>
+
+  </Resources>
+</XML>
+
+<body style = "width:25em;height:10em" Invisible="INIT" ResourceXML="xmlResource" lang="pl">
+
+  <br>
+  <!-- <p align="center"> -->
+    <!-- <label class="DLGAUTOLABEL" FOR="InputVacuumStart"> -->
+      <!-- Start Vacuum: -->
+    <!-- </label> -->
+    <!-- <CX:SpinEdit   ID        ="InputVacuumStart" -->
+                   <!-- style     ="position:relative;width:4em;height:2.5ex;top:0.5ex;border:1px inset" /> -->
+    <!-- &nbsp;mbar -->
+  <!-- </p> -->
+  
+  <p align="center">
+    <label class="DLGAUTOLABEL" FOR="InputVacuum">
+      Podciœnienie:
+    </label>
+    <CX:SpinEdit   ID        ="InputVacuum"
+                   style     ="position:relative;width:4em;height:2.5ex;top:0.5ex;border:1px inset" />
+    &nbsp;mbar
+  </p>
+
+  <div class="DLGBUTTONS" kind="1" align="CENTER"  ></div>
+
+</body>
+
+<script class="DLGSCRIPT" language="vbscript" src="SetTestPressureDlg.vbs" defer>
+</script>
+
+</html>

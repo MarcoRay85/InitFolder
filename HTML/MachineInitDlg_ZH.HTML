@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html ID="THIS">
+<head >
+  <title>设备测试  (Test of Machine)</title>
+  <META content="text/html; charset=gb2312" http-equiv="Content-Type">
+  <META NAME="Description" CONTENT="Intact1200 Maschinentest (ZH)">
+  <LINK REL="STYLESHEET" HREF="DlgStyle_ZH.css">
+  <LINK REL="STYLESHEET" HREF="MachineInitDlg.css">
+
+  <STYLE>
+      .classTestResultOK
+          {
+              Margin-Top       : 1em;
+              Font-Weight      : 800;
+              Font-Size        : 250%;
+              Line-Height      : 1.2em;
+              Text-Align       : Center;
+              Color            : springgreen;
+          }
+
+      .classTestResultFail
+          {
+              Margin-Top       : 1em;
+              Font-Weight      : 800;
+              Font-Size        : 250%;
+              Line-Height      : 1.2em;
+              Text-Align       : Center;
+              Color            : red;
+          }
+  </STYLE>
+
+</head>
+
+<body style="width:36em; height:40em" Invisible="INIT"  lang="ZH">
+
+  <div id     ="divResults"
+       style  ="width:100%;
+                height:37.5em;
+                background-color:window;
+                border: 1px inset;
+                padding:1ex;
+                overflow:scroll;">
+      设备初始化  (Machine's initialisiation)
+  </div>
+
+  <div class      = "DLGBUTTONS"
+       kind       = "1"
+       Additional = "256|261"
+       Default    = "2"
+       CloseDlg   = "FALSE"
+       align      = "CENTER"  >
+  </div>
+</body>
+
+<script class="DLGSCRIPT" language="vbscript" src="MachineInitDlg.vbs" defer>
+</script>
+</html>

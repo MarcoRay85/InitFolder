@@ -1,0 +1,1523 @@
+<HTML SCROLL="no" xmlns:CX="SpinEdit.htc">
+  <HEAD>
+    <?IMPORT namespace="CX" implementation="SpinEdit.htc">
+    <PUBLIC:COMPONENT   NAME="CombinedSpinEdits" TAGNAME="CombinedSpinEdits" >
+    <?PUBLIC:COMPONENT error="true" debug="true"?>
+
+<!--********************************************************************************-->
+<!--*                                                                              *-->
+<!--*                             D E S C R I P T I O N                            *-->
+<!--*                                                                              *-->
+<!--*   Author:    VR                                                              *-->
+<!--*   Date:      23.10.2008                                                      *-->
+<!--*   Versions:  V1.0          23.10.2008                                        *-->
+<!--*                                                                              *-->
+<!--*   About:     Component implements an array of spin edit controls that can    *-->
+<!--*              be switched to a single master spin edit control                *-->
+<!--*                                                                              *-->
+<!--********************************************************************************-->
+
+        <PUBLIC:DEFAULTS    canHaveHTML     = "false"
+                            tabStop         = "true"
+                            viewInheritStyle  = "true"
+                            viewLinkContent = "true"  />
+
+<!--********************************************************************************-->
+<!--*                                                                              *-->
+<!--*                              I N T E R F A C E                               *-->
+<!--*                                                                              *-->
+<!--*                                                                              *-->
+<!--*  Properties: Value         (r/w)  Array of current values, first element is  *-->
+<!--*                                   for master control                         *-->
+<!--*              DefaultValue  (r/w)  Initial value; value is used also if       *-->
+<!--*                                   illegal value is entered                   *-->
+<!--*              Values        (r/w)  Optional array of values to be used in     *-->
+<!--*                                   up/down sequence. If defined, Min, Max     *-->
+<!--*                                   Precision and Increment values will be     *-->
+<!--*                                   ignored.                                   *-->
+<!--*              Min           (r/w)  Lower bound of editable value range        *-->
+<!--*              Max           (r/w)  Upper bound of editable value range        *-->
+<!--*              Precision     (r/w)  Number of decimal places to the right      *-->
+<!--*              Increment     (r/w)  Added/subtraced, if up/down button pressed *-->
+<!--*              ReadOnly      (r/w)  If TRUE, values can't be entered           *-->
+<!--*              HasChanged    (r)    Returns TRUE, if value displayed in edit   *-->
+<!--*                                   pane is different to value returned        *-->
+<!--*                                   by last 'Value' access                     *-->
+<!--*              IsValid       (r)    Returns TRUE, if entered value is valid    *-->
+<!--*              GaugeColor    (r/w)  Color of drag bar                          *-->
+<!--*              FocusColored  (r/w)  Color of edit pane while focused           *-->
+<!--*              NoFocusColor  (r/w)  Color of edit pane while not focused       *-->
+<!--*              DragBarWidth  (r/w)  Width  of drag bar                         *-->
+<!--*              DragBarHeight (r/w)  Height of drag bar                         *-->
+<!--*              IncDecDelay   (r/w)  Delay [ms] till inc/dec repeat starts      *-->
+<!--*              IncDecAccel   (r/w)  Factor (0..1) for inc/dec rep. acceleration*-->
+<!--*              FontStyle     (r/w)  Font style used for edit pane              *-->
+<!--*              SelfSized     (r/w)  If set to TRUE, spin edit is positioned    *-->
+<!--*                                   and sized to baseline automatically.       *-->
+<!--*                                   Elements positioning style will be set     *-->
+<!--*                                   to 'relative'; other layout styles         *-->
+<!--*                                   will be set accordingly                    *-->
+<!--*                                                                              *-->
+<!--*              ControlCount  (r/w)  Number of SpinEdits to be hosted (not to   *-->
+<!--*                                   be changed after initialisation)           *-->
+<!--*              Orientation   (r/w)  'H' or 'V' to get an horizontal or         *-->
+<!--*                                   vertical (default) line of SpinEdits       *-->
+<!--*              COMMON_xxxxx  (w)    (HTML-)Attribute 'xxxxx' is applied to all *-->
+<!--*                                   hosted SpinEdits except master.            *-->
+<!--*                                   If Attribute is 'CLASS', the corresponding *-->
+<!--*                                   style is imported                          *-->
+<!--*              MASTER_xxxxx  (w)    (HTML-)Attribute 'xxxxx' is applied to     *-->
+<!--*                                   master SpinEdits. If Attribute is 'CLASS', *-->
+<!--*                                   the corresponding style is imported        *-->
+<!--*              BUTTON_xxxxx  (w)    (HTML-)Attribute 'xxxxx' is applied to     *-->
+<!--*                                   toggle button. If Attribute is 'CLASS',    *-->
+<!--*                                   the corresponding style is imported        *-->
+<!--*              Controls      (r)    Array of hosted SpinEdits (w/o master).    *-->
+<!--*                                   Index is from 0 to 'ControlCount' -1       *-->
+<!--*              MasterSpinEdit (r)   Hosted SpinEdit master                     *-->
+<!--*              MasterMode    (r/w)  TRUE, if master SpinEdit is active         *-->
+<!--*                                                                              *-->
+<!--*  Methods:    Initialize           If HTML property 'ControlCount' is not     *-->
+<!--*                                   given, initialisation needs to be done     *-->
+<!--*                                   programmatically by this function.         *-->
+<!--*                                   Is to be invoked once either by            *-->
+<!--*                                   document-ready-event or programmatically.  *-->
+<!--*              UpdateProps          Force parameter recalculation based on     *-->
+<!--*                                   current Min Max Precision and Increment    *-->
+<!--*              UpdateLook           Force displaying change of visible state   *-->
+<!--*                                   like STYLE.VISIBILITY or STYLE.DISPLAY     *-->
+<!--*              Validate             Calls 'IsValid'; if result is FALSE,       *-->
+<!--*                                   edit pane is animated and default value    *-->
+<!--*                                   is set to edit pane. Returns value         *-->
+<!--*                                   returned by 'IsValid' invokation.          *-->
+<!--*                                                                              *-->
+<!--*  Events:     onChanged     Fired after edited value has changed              *-->
+<!--*              onIllegal     Fired if an illegal character is entered          *-->
+<!--*              onExceed      Fired if range is exceeded                        *-->
+<!--*                                                                              *-->
+<!--********************************************************************************-->
+
+<!--    ******** P R O P E R T I E S **************************************-->
+
+        <PUBLIC:PROPERTY NAME = "Value"             GET="get_Value"
+                                                    PUT="put_Value"
+                                                    ID ="propValue"         />
+        <PUBLIC:PROPERTY NAME = "DefaultValue"      GET="get_DefaultValue"
+                                                    PUT="put_DefaultValue"
+                                                    ID ="propDefaultValue"  />
+        <PUBLIC:PROPERTY NAME = "Values"            GET="get_Values"
+                                                    PUT="put_Values"
+                                                    ID ="propValues"        />
+        <PUBLIC:PROPERTY NAME = "Min"               GET="get_Min"
+                                                    PUT="put_Min"
+                                                    ID ="propMin"           />
+        <PUBLIC:PROPERTY NAME = "Max"               GET="get_Max"
+                                                    PUT="put_Max"
+                                                    ID ="propMax"           />
+        <PUBLIC:PROPERTY NAME = "Precision"         GET="get_Precision"
+                                                    PUT="put_Precision"
+                                                    ID ="propPrecision"     />
+        <PUBLIC:PROPERTY NAME = "Increment"         GET="get_Increment"
+                                                    PUT="put_Increment"
+                                                    ID ="propIncrement"     />
+        <PUBLIC:PROPERTY NAME = "ReadOnly"          GET="get_ReadOnly"
+                                                    PUT="put_ReadOnly"
+                                                    ID ="propReadOnly"      />
+        <PUBLIC:PROPERTY NAME = "HasChanged"        GET="get_HasChanged"    />
+        <PUBLIC:PROPERTY NAME = "IsValid"           GET="get_IsValid"       />
+        <PUBLIC:PROPERTY NAME = "GaugeColor"        GET="get_GaugeColor"
+                                                    PUT="put_GaugeColor"
+                                                    ID ="propGaugeColor"    />
+        <PUBLIC:PROPERTY NAME = "FocusedColor"      GET="get_FocusedColor"
+                                                    PUT="put_FocusedColor"
+                                                    ID ="propFocusedColor"  />
+        <PUBLIC:PROPERTY NAME = "NoFocusColor"      GET="get_NoFocusColor"
+                                                    PUT="put_NoFocusColor"
+                                                    ID ="propNoFocusColor"  />
+        <PUBLIC:PROPERTY NAME = "DragBarWidth"      VALUE="1em"             />
+        <PUBLIC:PROPERTY NAME = "DragBarHeight"     VALUE="5em"             />
+        <PUBLIC:PROPERTY NAME = "IncDecDelay"       GET="get_IncDecDelay"
+                                                    PUT="put_IncDecDelay"
+                                                    ID ="propIncDecDelay"   />
+        <PUBLIC:PROPERTY NAME = "IncDecAccel"       GET="get_IncDecAccel"
+                                                    PUT="put_IncDecAccel"
+                                                    ID ="propIncDecAccel"   />
+        <PUBLIC:PROPERTY NAME = "FontStyle"         GET="get_FontStyle"
+                                                    PUT="put_FontStyle"
+                                                    ID ="propFontStyle"     />
+        <PUBLIC:PROPERTY NAME = "SelfSized"                                 />
+        <PUBLIC:PROPERTY NAME = "Disabled"          GET="get_Disabled"
+                                                    PUT="put_Disabled"
+                                                    ID ="propDisabled"      />  <!-- Overloaded -->
+
+        <PUBLIC:PROPERTY NAME = "ControlCount"      GET="get_ControlCount"  />
+        <PUBLIC:PROPERTY NAME = "Orientation"       GET="get_Orientation"   />
+        <PUBLIC:PROPERTY NAME = "Controls"          GET="get_Controls"      />
+        <PUBLIC:PROPERTY NAME = "MasterSpinEdit"    GET="get_MasterSpinEdit"/>
+        <PUBLIC:PROPERTY NAME = "MasterMode"        GET="get_MasterMode"
+                                                    PUT="put_MasterMode"    />
+
+
+<!--    ******** M E T H O D S ********************************************-->
+
+        <PUBLIC:METHOD   NAME = "Initialize"   />
+        <PUBLIC:METHOD   NAME = "UpdateProps"  />
+        <PUBLIC:METHOD   NAME = "UpdateLook"   />
+        <PUBLIC:METHOD   NAME = "Validate"     />
+
+<!--    ******** N O T I F I C A T I O N S ********************************-->
+
+        <PUBLIC:ATTACH   EVENT = "ondocumentready"     ONEVENT="onDocReady"            />
+
+        <PUBLIC:ATTACH   EVENT = "onbeforeactivate"    ONEVENT="onBeforeActivateElem"  />
+        <PUBLIC:ATTACH   EVENT = "onfocus"             ONEVENT="onFocusElem"           />
+        <PUBLIC:ATTACH   EVENT = "onpropertychange"    ONEVENT="onPropChangedElem"     />
+
+<!--    ******** E V E N T S **********************************************-->
+
+        <PUBLIC:EVENT    NAME  = "onChanged"    ID="eventOnChanged"     />
+        <PUBLIC:EVENT    NAME  = "onIllegal"    ID="eventOnIllegal"     />
+        <PUBLIC:EVENT    NAME  = "onExceed"     ID="eventOnExceed"      />
+
+    </PUBLIC:COMPONENT>
+
+<!--********************************************************************************-->
+<!--*                                                                              *-->
+<!--*                                  H T M L                                     *-->
+<!--*                                                                              *-->
+<!--********************************************************************************-->
+
+
+    <STYLE ID="__COMBINED_SPINEDITS_STYLE__">
+
+        #tableMain,  #spanMain
+            {
+                Height              : 100%;
+                Width               : 100%;
+                Position            : relative;
+                Overflow            : hidden;
+                PixelLeft           : 0;
+                PixelTop            : 0;
+                Border              : 0;
+                Margin              : 0;
+                Padding             : 0;
+            }
+
+        #spanMain
+            {
+                Text-Align          : left;
+                Visibility          : hidden;
+            }
+
+        TD
+            {
+                Height              : 100%;
+                text-align          : center;
+                vertical-align      : middle;
+                overflow            : hidden;
+            }
+
+        BUTTON
+            {
+                Font-Weight         : bold;
+                Position            : relative;
+                Top                 : -0.5ex;
+                Width               : 1em;
+                Height              : 1em;
+                Line-Height         : 1em;
+                Overflow            : hidden;
+            }
+
+        .classHost
+            {
+                Width               : 100%;
+                Overflow            : hidden;
+            }
+
+        #tdToggleButton
+            {
+                Width               : 1em;
+                Overflow            : hidden;
+            }
+
+        #spanToggle
+            {
+                Font-Family         : Arial Unicode MS;
+                Color               : ButtonText;
+                margin              : -4px;
+                Width               : 1em;
+                Height              : 1em;
+                Line-Height         : 1em;
+                Cursor              : hand;
+            }
+
+    </STYLE>
+    <STYLE ID="styleMASTER">
+    </STYLE>
+    <STYLE ID="styleCOMMON">
+    </STYLE>
+    <STYLE ID="styleBUTTON">
+    </STYLE>
+
+
+  </HEAD>
+
+  <BODY SCROLL        = "no"
+        onselectstart = "return( false );"  >
+
+
+    <SPAN     ID  = "spanMain">
+      <TABLE  ID  = "tableMain" cellpadding=0 cellspacing=0 >
+        <TR   ID  = "trMain"    >
+          <TD  ID="tdToggleButton" >
+            <BUTTON ID="buttonToggle">
+                <SPAN  ID="spanToggle">=</SPAN>
+            </BUTTON>
+          </TD>
+          <TD>
+            <SPAN  ID="spanMasterHost" class="classHost">
+            </SPAN>
+            <SPAN  ID="spanControlsHost" class="classHost">
+            </SPAN>
+          </TD>
+        </TR>
+      </TABLE>
+    </SPAN>
+  </BODY>
+
+<!--********************************************************************************-->
+<!--*                                                                              *-->
+<!--*                                  S C R I P T                                 *-->
+<!--*                                                                              *-->
+<!--********************************************************************************-->
+
+  <SCRIPT language="vbscript" defer >
+
+
+Option Explicit
+'********************************************************************************
+'*                                                                              *
+'*                                  G L O B A L   D A T A                       *
+'*                                                                              *
+'********************************************************************************
+
+Dim  g_nPropLockCnt
+
+
+Dim  g_vControls
+
+Dim  g_objFocusFrom
+Dim  g_objMasterControl
+
+g_vControls              =  Array()
+
+Set  g_objFocusFrom      =  Nothing
+Set  g_objMasterControl  =  Nothing
+
+
+'********************************************************************************
+'********************************************************************************
+'**                                                                            **
+'**             E X P O S E D    F U N C T I O N A L I T Y                     **
+'**                                                                            **
+'********************************************************************************
+'********************************************************************************
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y     V A L U E                                           *
+'*                                                                              *
+'********************************************************************************
+
+Function get_Value()
+
+    Dim  nI
+    Dim  nVal
+    Dim  objSE
+    Dim  vCurValue()
+
+    If  g_objMasterControl Is Nothing  Then  Exit Function
+
+    ReDim  vCurValue(  get_ControlCount  )
+
+    If  get_MasterMode  Then    '*** Same value for all
+
+        nVal  =  g_objMasterControl.Value
+
+        For  nI = LBound( vCurValue )  To  UBound( vCurValue )
+
+            vCurValue(  nI  )  =  nVal
+
+        Next
+
+    Else
+
+        vCurValue(  LBound( vCurValue ))  =  g_objMasterControl.Value
+
+        For  nI = LBound( vCurValue ) + 1  To  UBound( vCurValue )
+
+            vCurValue(  nI  )  =  g_vControls(  nI - 1  ).value
+
+        Next
+
+    End If
+
+    get_Value  =  vCurValue
+
+End Function
+
+Sub put_Value( ByVal nNewValue )
+
+    Dim  nI
+    Dim  objSE
+
+    If  g_objMasterControl Is Nothing  Then  Exit Sub
+
+    If  IsArray( nNewValue )  Then
+
+        If  get_MasterMode  Then    '*** Propagate first value to all controls
+
+            nI         =  nNewValue( LBound(  nNewValue  ))
+            nNewValue  =  nI
+
+        Else
+
+            nI  =  LBound(  nNewValue  )
+
+            g_objMasterControl.Value  =  nNewValue(  nI  )
+
+            For Each  objSE  In  g_vControls
+
+                nI  =  nI  +  1
+
+                If  nI > UBound( nNewValue )  Then  Exit For
+
+                objSE.Value  =  nNewValue( nI )
+
+            Next
+
+            Exit Sub
+
+        End If
+
+    End If
+
+    PropagateToAll  "Value",  nNewValue
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y     D E F A U L T V A L U E                             *
+'*                                                                              *
+'********************************************************************************
+
+Function get_DefaultValue()
+
+    If  g_objMasterControl Is Nothing  Then
+
+        get_DefaultValue = NULL
+
+    Else
+
+        get_DefaultValue = g_objMasterControl.DefaultValue
+
+    End If
+
+End Function
+
+Sub put_DefaultValue( nNewValue )
+
+    PropagateToAll  "DefaultValue",  nNewValue
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y     V A L U E S                                         *
+'*                                                                              *
+'********************************************************************************
+
+Function get_Values()
+
+    If  g_objMasterControl Is Nothing  Then
+
+        get_Values = NULL
+
+    Else
+
+        get_Values = g_objMasterControl.Values
+
+    End If
+
+End Function
+
+Sub put_Values( nNewValues )
+
+    PropagateToAll  "Values",  nNewValues
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y     M I N                                               *
+'*                                                                              *
+'********************************************************************************
+
+Function get_Min()
+
+    If  g_objMasterControl Is Nothing  Then
+
+        get_Min = NULL
+
+    Else
+
+        get_Min = g_objMasterControl.Min
+
+    End If
+
+End Function
+
+Sub put_Min( nMin )
+
+    PropagateToAll  "Min",  nMin
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y     M A X                                               *
+'*                                                                              *
+'********************************************************************************
+
+Function get_Max()
+
+    If  g_objMasterControl Is Nothing  Then
+
+        get_Max = NULL
+
+    Else
+
+        get_Max = g_objMasterControl.Max
+
+    End If
+
+End Function
+
+Sub put_Max( nMax )
+
+    PropagateToAll  "Max",  nMax
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y     P R E C I S I O N                                   *
+'*                                                                              *
+'********************************************************************************
+
+Function get_Precision()
+
+    If  g_objMasterControl Is Nothing  Then
+
+        get_Precision = NULL
+
+    Else
+
+        get_Precision = g_objMasterControl.Precision
+
+    End If
+
+End Function
+
+Sub put_Precision( nPrecision )
+
+    PropagateToAll  "Precision",  nPrecision
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y     I N C R E M E N T                                   *
+'*                                                                              *
+'********************************************************************************
+
+Function get_Increment()
+
+    If  g_objMasterControl Is Nothing  Then
+
+        get_Increment = NULL
+
+    Else
+
+        get_Increment = g_objMasterControl.Increment
+
+    End If
+
+End Function
+
+Sub put_Increment( nIncrement )
+
+    PropagateToAll  "Increment",  nIncrement
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y     R E A D O N L Y                                     *
+'*                                                                              *
+'********************************************************************************
+
+Function get_ReadOnly()
+
+    If  g_objMasterControl Is Nothing  Then
+
+        get_ReadOnly = NULL
+
+    Else
+
+        get_ReadOnly = g_objMasterControl.ReadOnly
+
+    End If
+
+End Function
+
+Sub put_ReadOnly( bIs )
+
+    PropagateToAll  "ReadOnly",  bIs
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y     H A S C H A N G E D                                 *
+'*                                                                              *
+'********************************************************************************
+
+Function get_HasChanged()
+
+    If  g_objMasterControl Is Nothing  Then
+
+        get_HasChanged = FALSE
+
+    Else
+
+        get_HasChanged = g_objMasterControl.HasChanged
+
+    End If
+
+End Function
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y     I S V A L I D                                       *
+'*                                                                              *
+'********************************************************************************
+
+Function get_IsValid()
+
+    If  g_objMasterControl Is Nothing  Then
+
+        get_IsValid = FALSE
+
+    Else
+
+        get_IsValid = g_objMasterControl.IsValid
+
+    End If
+
+End Function
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y     G A U G E C O L O R                                 *
+'*                                                                              *
+'********************************************************************************
+
+Function get_GaugeColor()
+
+    If  g_objMasterControl Is Nothing  Then
+
+        get_GaugeColor = NULL
+
+    Else
+
+        get_GaugeColor = g_objMasterControl.GaugeColor
+
+    End If
+
+End Function
+
+Sub put_GaugeColor( vColor )
+
+    PropagateToAll  "GaugeColor",  vColor
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y     F O C U S E D C O L O R                             *
+'*                                                                              *
+'********************************************************************************
+
+Function get_FocusedColor()
+
+    If  g_objMasterControl Is Nothing  Then
+
+        get_FocusedColor = NULL
+
+    Else
+
+        get_FocusedColor = g_objMasterControl.FocusedColor
+
+    End If
+
+End Function
+
+Sub put_FocusedColor( vColor )
+
+    PropagateToAll  "FocusedColor",  vColor
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y     N O F O C U S C O L O R                             *
+'*                                                                              *
+'********************************************************************************
+
+Function get_NoFocusColor()
+
+    If  g_objMasterControl Is Nothing  Then
+
+        get_NoFocusColor = NULL
+
+    Else
+
+        get_NoFocusColor = g_objMasterControl.NoFocusColor
+
+    End If
+
+End Function
+
+Sub put_NoFocusColor( vColor )
+
+    PropagateToAll  "NoFocusColor",  vColor
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y     I N C D E C D E L A Y                               *
+'*                                                                              *
+'********************************************************************************
+
+Function get_IncDecDelay()
+
+    If  g_objMasterControl Is Nothing  Then
+
+        get_IncDecDelay = NULL
+
+    Else
+
+        get_IncDecDelay = g_objMasterControl.IncDecDelay
+
+    End If
+
+End Function
+
+Sub put_IncDecDelay( nIncDecDelay )
+
+    PropagateToAll  "IncDecDelay",  nIncDecDelay
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y     I N C D E C A C C E L                               *
+'*                                                                              *
+'********************************************************************************
+
+Function get_IncDecAccel()
+
+    If  g_objMasterControl Is Nothing  Then
+
+        get_IncDecAccel = NULL
+
+    Else
+
+        get_IncDecAccel = g_objMasterControl.IncDecAccel
+
+    End If
+
+End Function
+
+Sub put_IncDecAccel( nIncDecAccel )
+
+    PropagateToAll  "IncDecAccel",  nIncDecAccel
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y     F O N T S T Y L E                                   *
+'*                                                                              *
+'********************************************************************************
+
+Function get_FontStyle()
+
+    If  g_objMasterControl Is Nothing  Then
+
+        get_FontStyle = NULL
+
+    Else
+
+        get_FontStyle = g_objMasterControl.FontStyle
+
+    End If
+
+End Function
+
+Sub put_FontStyle( strNewStyle )
+
+    PropagateToAll  "FontStyle",  strNewStyle
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y     D I S A B L E D                                     *
+'*                                                                              *
+'********************************************************************************
+
+Function get_Disabled()
+
+    get_Disabled = buttonToggle.Disabled
+
+End Function
+
+Sub put_Disabled( bIs )
+
+    buttonToggle.Disabled  =  bIs
+
+    PropagateToAll  "Disabled",  bIs
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y     C O N T R O L C O U N T                             *
+'*                                                                              *
+'********************************************************************************
+
+Function get_ControlCount()
+
+    get_ControlCount  =  UBound(  g_vControls  )    _
+                      -  LBound(  g_vControls  )    _
+                      +  1
+
+End Function
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y     O R I E N T A T I O N                               *
+'*                                                                              *
+'********************************************************************************
+
+Function get_Orientation()
+
+    get_Orientation  =  GetAttribVal( "Orientation" )
+
+    If  IsNull( get_Orientation )  Then
+
+        get_Orientation  =  "V"
+
+    Else
+
+        get_Orientation  =  UCase(  get_Orientation  )
+
+        If       ( get_Orientation <> "H" )     _
+            And  ( get_Orientation <> "V" )     Then
+
+            get_Orientation  =  "V"
+
+        End If
+
+    End If
+
+End Function
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y     C O N T R O L S                                     *
+'*                                                                              *
+'********************************************************************************
+
+Function get_Controls()
+
+    get_Controls  =  g_vControls
+
+End Function
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y     M A S T E R S P I N E D I T                         *
+'*                                                                              *
+'********************************************************************************
+
+Function get_MasterSpinEdit()
+
+    Set get_MasterSpinEdit  =  g_objMasterControl
+
+End Function
+
+'********************************************************************************
+'*                                                                              *
+'*      P R O P E R T Y     M A S T E R M O D E                                 *
+'*                                                                              *
+'********************************************************************************
+
+Function get_MasterMode()
+
+    get_MasterMode  =  LCase(  spanMasterHost.CurrentStyle.Display  ) = "inline"
+
+End Function
+
+Sub put_MasterMode( bIs )
+
+    Dim  objSE
+
+    If  bIs  Then
+
+        spanControlsHost.RuntimeStyle.Display  =  "none"
+        spanMasterHost.RuntimeStyle.Display    =  "inline"
+
+        spanToggle.InnerText                   =  "="
+
+    Else
+
+        If  Not ( g_objMasterControl Is Nothing )  Then
+
+            If  get_MasterMode  Then
+
+                For Each  objSE  In  g_vControls
+
+                    objSE.Value  =  g_objMasterControl.Value
+
+                Next
+
+            End If
+
+        End If
+
+        spanControlsHost.RuntimeStyle.Display  =  "inline"
+        spanMasterHost.RuntimeStyle.Display    =  "none"
+
+        spanToggle.InnerHTML                   =  "&ne;"
+
+    End If
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      M E T H O D   I N I T I A L I Z E                                       *
+'*                                                                              *
+'********************************************************************************
+
+Sub  Initialize(  nControlCount,  strOrientation,  bIsMasterMode  )
+
+    Dim  vTmp
+    Dim  strTmp
+    Dim  vControls()
+    Dim  nI
+
+    If  Not ( g_objMasterControl Is Nothing )  Then  Exit Sub
+
+    buttonToggle.HideFocus  = TRUE
+    spanMain.HideFocus      = TRUE
+
+    If  Not IsNumeric( nControlCount )  Then
+
+        Err.Raise vbObjectError, "CombinedSpinEdits.HTC", "No 'ControlCount' attribute given or value is invalid"
+
+        Exit Sub
+
+    End If
+
+
+    spanMasterHost.InsertAdjacentHTML  "afterBegin",  "<CX:SpinEdit   ID=""spineditMaster"" />"
+
+    AttachEventHandlers  spineditMaster
+
+    ReDim  vControls(  nControlCount - 1 )
+
+    strTmp  =  get_Orientation
+
+    If  strTmp <>  GetAttribVal( "Orientation" )  Then      '*** Set orientation to legal size'
+
+        Set  vTmp  =  Document.createAttribute( "Orientation" )
+
+        vTmp.Value = strTmp
+
+        With  Element.Attributes
+
+            .RemoveNamedItem   "Orientation"
+            .SetNamedItem      vTmp
+
+        End With
+
+    End If
+
+    If  strTmp =  "V"  Then
+
+        strTmp =  "<BR>"
+
+    Else
+
+        strTmp =  ""
+
+    End If
+
+
+
+    vTmp  =  Empty
+
+    For  nI = 0 To nControlCount - 1
+
+        vTmp  =  vTmp  &  "<CX:SpinEdit   ID=""spineditCtrl"  &  nI  &  """ />"
+
+        If  nI < ( nControlCount - 1 )  Then  vTmp  =  vTmp  &  strTmp
+
+    Next
+
+    spanControlsHost.InsertAdjacentHTML  "afterBegin",  vTmp
+
+    For  nI = 0 To nControlCount - 1
+
+        Set vControls(  nI  )  =  spanControlsHost.All(  "spineditCtrl"  &  nI  )
+
+        AttachEventHandlers  vControls(  nI  )
+
+    Next
+
+    spanMain.Style.Visibility = "Visible"
+
+
+    vTmp = GetAttribVal( "Values" )
+    If Not IsNull( vTmp ) Then
+
+        If InStr( vTmp, ";" ) > 0 Then  put_Values  Split( vTmp, ";" )
+
+    End If
+
+    g_vControls             =  vControls
+    Set g_objMasterControl  =  spineditMaster
+
+    For Each  vTmp  In  Element.Attributes
+
+        PropagateAttribute   vTmp.NodeName,  vTmp.NodeValue
+
+    Next
+
+    g_nPropLockCnt = g_nPropLockCnt + 1
+
+    SetHTMLAttribs  "Value",            "put_Value"
+    SetHTMLAttribs  "DefaultValue",     "put_DefaultValue"
+    SetHTMLAttribs  "Min",              "put_Min"
+    SetHTMLAttribs  "Max",              "put_Max"
+    SetHTMLAttribs  "Increment",        "put_Increment"
+    SetHTMLAttribs  "Precision",        "put_Precision"
+    SetHTMLAttribs  "ReadOnly",         "put_ReadOnly"
+    SetHTMLAttribs  "GaugeColor",       "put_GaugeColor"
+    SetHTMLAttribs  "FocusedColor",     "put_FocusedColor"
+    SetHTMLAttribs  "NoFocusColor",     "put_NoFocusColor"
+    SetHTMLAttribs  "DragBarWidth",     "DragBarWidth  = "
+    SetHTMLAttribs  "DragBarHeight",    "DragBarHeight = "
+    SetHTMLAttribs  "IncDecDelay",      "put_IncDecDelay"
+    SetHTMLAttribs  "IncDecAccel",      "put_IncDecAccel"
+    SetHTMLAttribs  "FontStyle",        "put_FontStyle"
+    SetHTMLAttribs  "SelfSized",        "SelfSized = "
+
+    g_nPropLockCnt = g_nPropLockCnt - 1
+
+    UpdateLook
+
+    put_MasterMode  get_MasterMode
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      M E T H O D   U P D A T E P R O P S                                     *
+'*                                                                              *
+'********************************************************************************
+
+Function UpdateProps()
+
+    PropagateToAll  "UpdateProps",  Array()
+
+End Function
+
+'********************************************************************************
+'*                                                                              *
+'*      M E T H O D   U P D A T E L O O K                                       *
+'*                                                                              *
+'********************************************************************************
+
+Sub UpdateLook()
+
+    PropagateToAll  "UpdateLook",  Array()
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*      M E T H O D   V A L I D A T E                                           *
+'*                                                                              *
+'********************************************************************************
+
+Function Validate()
+
+    PropagateToAll  "Validate",  Array()
+
+End Function
+
+'********************************************************************************
+'********************************************************************************
+'**                                                                            **
+'**                     E V E N T     H A N D L E R S    ( A T T A C H E D )   **
+'**                                                                            **
+'********************************************************************************
+'********************************************************************************
+
+'********************************************************************************
+'*                                                                              *
+'*      H A N D L E R   F O R   D O C U M E N T    R E A D Y    E V E N T       *
+'*                                                                              *
+'********************************************************************************
+
+Sub onDocReady
+
+    Dim  nCtrlCount
+    Dim  bIsMasterMode
+
+    bIsMasterMode = GetAttribVal( "MasterMode" )
+
+    If  IsNumeric(  bIsMasterMode  )  Then
+
+        bIsMasterMode  =  CBool(  bIsMasterMode  )
+
+    Else
+
+        bIsMasterMode  =  TRUE
+
+    End If
+
+
+    nCtrlCount = GetAttribVal( "ControlCount" )
+
+    If  IsNumeric( nCtrlCount )  Then
+
+        nCtrlCount  =  CLng( nCtrlCount )
+
+        If  ( nCtrlCount < 2 )  Or  ( nCtrlCount > 20 )  Then  Exit Sub
+
+
+        Initialize  nCtrlCount,  get_Orientation,  bIsMasterMode
+
+    End If
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*            H A N D L E R     F O R    G A I N I N G    F O C U S             *
+'*                                                                              *
+'********************************************************************************
+
+Sub onBeforeActivateElem
+
+    With  Window.Event
+
+        Set  g_objFocusFrom  =  .FromElement
+        .CancelBubble        =  TRUE
+
+    End With
+
+End Sub
+
+Sub onFocusElem
+
+    With  Window.Event
+
+        If      Not   get_Disabled                     _
+           And  Not ( g_objMasterControl Is Nothing )  Then
+
+            If  get_MasterMode  Then
+
+                g_objMasterControl.Focus
+
+            Else
+
+                Do      '*** Try to guess which element should be activated ***'
+
+                    If       (  .OffsetX >= 0  ) And (  .OffsetX <= Element.OffsetWidth   )  _
+                        And  (  .OffsetY >= 0  ) And (  .OffsetY <= Element.OffsetHeight  )  Then
+
+                        Set  g_objFocusFrom  =  Document.ElementFromPoint( .OffsetX,  .OffsetY )
+
+                        If  Not( g_objFocusFrom Is Nothing )  Then
+
+                            If  LCase(  g_objFocusFrom.TagName  )  =  "spinedit"  Then
+
+                                g_objFocusFrom.Focus
+                                Exit Do
+
+                            End If
+
+                        End If
+
+                    End If
+
+
+                    If  Not ( g_objFocusFrom Is Nothing )  Then
+
+                        If      g_objFocusFrom.SourceIndex  >  Element.SourceIndex  Then
+
+                            g_vControls( UBound( g_vControls )).Focus
+
+                        Else
+
+                            g_vControls( LBound( g_vControls )).Focus
+
+                        End If
+
+                        Exit Do
+
+                    End If
+
+                    g_vControls( LBound( g_vControls )).Focus   '***  Default action ****'
+
+                Loop While  FALSE
+
+            End If
+
+        End If
+
+    End With
+
+    Set  g_objFocusFrom  =  Nothing
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*            H A N D L E R     F O R    C H A N G E D    P R O P E R T I E S   *
+'*                                                                              *
+'********************************************************************************
+
+Sub onPropChangedElem
+
+    If g_nPropLockCnt > 0  Then  Exit Sub
+
+    Dim strPropName
+
+    strPropName = UCase( Window.Event.PropertyName )
+
+    If InStr( strPropName, "STYLE" )  Then
+
+        UpdateLook
+
+    Else
+
+        Select Case strPropName
+
+            Case "SELFSIZED"  UpdateLook
+
+            Case "TITLE"      spanMain.Title = Element.Title
+
+        End Select
+
+    End If
+
+End Sub
+
+'********************************************************************************
+'********************************************************************************
+'**                                                                            **
+'**                 P R I V A T E    F U N C T I O N A L I T Y                 **
+'**                                                                            **
+'********************************************************************************
+'********************************************************************************
+
+Sub PropagateToAll(  strAttribName,  vAttribVal  )
+
+    Dim  strExec
+    Dim  objSE
+
+    If  g_objMasterControl Is Nothing  Then  Exit Sub
+
+    If  IsArray(  vAttribVal  )  Then
+
+        For Each  objSE  In  vAttribVal
+
+            strExec  =  strExec  &  ","  &  objSE
+
+        Next
+
+        strExec  =  strAttribName  &  "  "  &  Mid(  strExec, 2  )
+
+    Else
+
+        strExec  =  strAttribName & " = " & vAttribVal
+
+    End If
+
+    Execute "g_objMasterControl." & strExec
+
+    strExec  =  "objSE." & strExec
+
+    For Each  objSE  In  g_vControls
+
+        Execute  strExec
+
+    Next
+
+End Sub
+
+'********************************************************************************
+
+Sub PropagateAttribute(  strAttribName,  ByVal nNewValue  )
+
+
+    Dim  vTmp
+    Dim  strExec
+    Dim  strPrefix
+    Dim  vDestObjects
+    Dim  objSE
+    Dim  objStyle
+    Dim  objRefStyle
+
+    If  g_objMasterControl Is Nothing  Then  Exit Sub
+
+    strPrefix  =  UCase( Left( strAttribName, 7 ))
+
+    Select Case  strPrefix
+
+        Case  "COMMON_"  vDestObjects  =  g_vControls
+        Case  "MASTER_"  vDestObjects  =  Array( g_objMasterControl )
+        Case  "BUTTON_"  vDestObjects  =  Array( buttonToggle       )
+        Case  Else       Exit Sub
+
+    End Select
+
+    strExec   =  Mid( strAttribName, 8 )
+
+    If  UCase( strExec ) =  "CLASS"  Then
+
+        strExec     =  "className"
+        strPrefix   =  Left( strPrefix,  6 )
+
+        Set  objStyle  =  Document.All( "style"  &  strPrefix  ).StyleSheet
+
+        objStyle.CssText  =  ""
+
+        For Each  vTmp  In  Split(  nNewValue,  " " )
+
+            For Each  objRefStyle  In  Element.Document.StyleSheets
+
+                AddStyleClass  objStyle,  objRefStyle,  Trim(  vTmp  ),  strPrefix
+
+            Next
+
+        Next
+
+        nNewValue  =  nNewValue & strPrefix
+
+    End If
+
+    strExec   =  "objSE."  &  strExec  &  "="""  &  nNewValue  &  """"
+
+    For Each  objSE  In  vDestObjects
+
+        Execute  strExec
+
+    Next
+
+End Sub
+
+'********************************************************************************
+
+Sub AddStyleClass(  objStyle,  objStyleSheet,  strClassName,  Prefix  )
+
+    Dim  objRule
+    Dim  nI
+    Dim  nPos
+    Dim  vTmp
+
+    If  objStyleSheet Is Nothing  Then  Exit Sub
+
+    For  nI = 0  To  objStyleSheet.Rules.Length - 1
+
+        Set  objRule  =  objStyleSheet.Rules(  nI  )
+
+        nPos  =  InStr(  1,  objRule.SelectorText,  strClassName, vbTextCompare  )
+
+        If  nPos > 1  Then
+
+            If      Mid( objRule.SelectorText,  nPos - 1,  1 )  =  "."  Then
+
+                vTmp  =  Mid( objRule.SelectorText,  nPos  )
+
+                If  Len( vTmp ) <> Len( strClassName )  Then    '*** List of selectors found?
+
+                    If  Asc(  Mid(  objRule.SelectorText,  nPos + Len( strClassName ),  1 ))  >  47  Then
+
+                        Exit Sub    '*** Selector has to be of same size as 'strClassname''
+
+                    End If
+
+                End If
+
+                objStyle.AddRule  "."  &  strClassName  &  Prefix,  objRule.Style.CssText
+
+            End If
+
+        End If
+
+    Next
+
+    If  Not ( objStyleSheet.ParentStyleSheet Is Nothing )  Then
+
+        AddStyleClass  objStyle,  objStyleSheet.ParentStyleSheet,  strClassName,  Prefix
+
+    End If
+
+    For Each  vTmp  In  objStyleSheet.Imports
+
+        AddStyleClass  objStyle,  vTmp,  strClassName,  Prefix
+
+    Next
+
+
+End Sub
+
+'********************************************************************************
+
+Function GetAttribVal( strAttribName )
+
+    GetAttribVal = Null
+
+    Dim objAttrib
+    Set objAttrib = Nothing
+
+    On Error Resume Next
+
+        Set objAttrib = Element.Attributes.GetNamedItem( strAttribName )
+
+    On Error Goto 0
+
+    If Not ( objAttrib Is Nothing ) Then GetAttribVal = objAttrib.NodeValue
+
+End Function
+
+'********************************************************************************
+
+Sub SetHTMLAttribs( strAttribName, strPutFctName )
+
+    Dim vAttribVal
+    vAttribVal      = GetAttribVal( strAttribName )
+
+    If Not IsNull( vAttribVal ) Then
+
+        Execute strPutFctName & " " & vAttribVal
+
+    End If
+
+End Sub
+
+'********************************************************************************
+
+Sub  AttachEventHandlers(  objSource  )
+
+    objSource.AttachEvent   "onChanged",  GetRef(  "spinEdits_onChanged"   )
+    objSource.AttachEvent   "onIllegal",  GetRef(  "spinEdits_onIllegal"   )
+    objSource.AttachEvent   "onExceed",   GetRef(  "spinEdits_onExceed"    )
+
+End Sub
+
+'********************************************************************************
+'********************************************************************************
+'**                                                                            **
+'**                     E V E N T     H A N D L E R S    ( P R I V A T E )     **
+'**                                                                            **
+'********************************************************************************
+'********************************************************************************
+
+'********************************************************************************
+'*                                                                              *
+'*     H A N D L E R     F O R     T O G G L E   B U T T O N   C L I C K S      *
+'*                                                                              *
+'********************************************************************************
+
+Sub  buttonToggle_onClick
+
+    put_MasterMode  Not get_MasterMode
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*     H A N D L E R     F O R     S P I N E D I T     A C T I O N S            *
+'*                                                                              *
+'********************************************************************************
+
+Sub  spinEdits_onChanged
+
+    Dim  objSE
+
+    With  Window.Event.SrcElement
+
+        If  .ID = "spineditMaster"  Then
+
+            For Each  objSE  In  g_vControls
+
+                objSE.Value  =  g_objMasterControl.Value
+
+            Next
+
+        Else
+
+            g_objMasterControl.Value  =  .Value
+
+        End If
+
+    End With
+
+    eventOnChanged.Fire
+
+End Sub
+
+'********************************************************************************
+
+Sub  spinEdits_onIllegal
+
+    eventOnIllegal.Fire
+
+End Sub
+
+'********************************************************************************
+
+Sub  spinEdits_onExceed
+
+    eventOnExceed.Fire
+
+End Sub
+
+
+'********************************************************************************
+'********************************************************************************
+
+  </SCRIPT>
+</HTML>

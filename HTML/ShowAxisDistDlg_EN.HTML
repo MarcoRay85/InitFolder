@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html ID="THIS">
+<head>
+  <title>Values of all Axes</title>
+    <META NAME="Description" CONTENT="Intact1200 Messkopfdurchmesser (DE)">
+    <LINK REL="STYLESHEET" HREF="DlgStyle_DE.css">
+</head>
+
+<body style="width:29em;height:21em" lang="en">
+
+  <span class       = "DLGRESOURCE"
+        Attribute   = "_RESNAME"
+        MatchValue  = "RESAxisDist"
+        ApplyTo     = "title"
+  >
+    Results of Initialisation of System Axis
+  </span>
+	<div id="idDataTable" >
+    <table  cellspacing="5" cellpadding="0">
+      <thead valign=bottom>
+        <th align=left _RESNAME="RESAxisDist" style="width:4cm">
+          Distances of Axes:
+        </th>
+        <th style="font-weight:normal; font-size:smaller" align= "right" >
+          MIN [mm]
+        </th>
+        <th style="font-weight:normal; font-size:smaller" align= "right" >
+          MAX [mm]
+        </th>
+        <th style="font-weight:normal; font-size:smaller" align= "right" >
+          MIN [inch]
+        </th>
+        <th style="font-weight:normal; font-size:smaller" align= "right" >
+          MAX [inch]
+        </th>
+        <th>
+         &nbsp;
+        </th>
+      </thead>
+
+      <colgroup style="text-indent:2em">
+      </colgroup>
+      <colgroup span    = 4
+                align   = "right"
+                bgcolor = "gainsboro"
+                style   = "width:15mm; padding-right:0.5ex"
+      >
+      </colgroup>
+      <tbody>
+
+        <tr _RESNAME="RESAxisDist">
+          <td>
+            Lift-Axis
+          </td>
+          <td ID="tdLiftMinMM" >
+          </td>
+          <td ID="tdLiftMaxMM" >
+          </td>
+          <td ID="tdLiftMinINCH" >
+          </td>
+          <td ID="tdLiftMaxINCH" >
+          </td>
+        </tr>
+        <tr _RESNAME="RESAxisDist">
+          <td>
+            HeadDiameter
+          </td>
+          <td ID="tdShiftMinMM" >
+          </td>
+          <td ID="tdShiftMaxMM" >
+          </td>
+          <td ID="tdShiftMinINCH" >
+          </td>
+          <td ID="tdShiftMaxINCH" >
+          </td>
+        </tr>
+        <tr _RESNAME="RESAxisDist" id="IdTrRot"  style="visibility:visible" >
+          <td>
+            Rotation-Axis
+          </td>
+          <td ID="tdRotMinMM" >
+          </td>
+          <td ID="tdRotMaxMM" >
+          </td>
+          <td ID="tdRotMinINCH" >
+          </td>
+          <td ID="tdRotMaxINCH" >
+          </td>
+        </tr>
+        <tr _RESNAME="RESAxisDist" id="IdTrPneuRot" style="visibility:hidden"  >
+			  <td>
+				Discret RotPos
+			  </td>
+			  <td ID="tdPneuRot" colspan=4  align="center">
+          	  </td>
+        </tr>
+        <tr _RESNAME="RESAxisDist" id="IdTrTilt">
+          <td>
+            Tilt-Axis
+          </td>
+          <td ID="tdTiltMinMM" >
+          </td>
+          <td ID="tdTiltMaxMM" >
+          </td>
+          <td ID="tdTiltMinINCH" >
+          </td>
+          <td ID="tdTiltMaxINCH" >
+          </td>
+        </tr>
+      </tbody>
+    </table>
+	</div>
+
+  <div class      = "DLGBUTTONS"
+       kind       = "0"
+       Additional = "256"
+       Default    = "1"
+       CloseDlg   = "FALSE"
+       align      = "CENTER"  >
+
+  </div>
+</body>
+
+<script language="vbscript">
+	const cTemplate = "\TemplateRB.html"
+</script>
+
+<script class="DLGSCRIPT" language="vbscript" src="ShowAxisDistDlg.vbs" defer>
+</script>
+
+</html>

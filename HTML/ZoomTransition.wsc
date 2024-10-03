@@ -1,0 +1,273 @@
+<?xml version="1.0"?>
+<component>
+<?component error="true" debug="true"?>
+
+<comment>
+<![CDATA[
+********************************************************************************
+*                                                                              *
+*                             D E S C R I P T I O N                            *
+*                                                                              *
+*   Author:    VR                                                              *
+*   Date:      09.02.2004                                                      *
+*   Versions:  V1.0                                                            *
+*                                                                              *
+*   About:     Component implements a zoom transition effect                   *
+*                                                                              *
+********************************************************************************
+
+********************************************************************************
+*                                                                              *
+*                              I N T E R F A C E                               *
+*                                                                              *
+*  Properties: SmallestRatio     (r/w)   Smallest size of element (zoom out    * 
+*                                           will stop then, zoom in will       *
+*                                           start from                         *
+*                                                                              *
+*              ZoomRatio         (r/w)   Factor the element is sized by each   *
+*                                           zoom step (0.0 ... 1.0)            *
+*                                                                              *
+*              ZoomInterval      (r/w)   Time interval [ms] between certain    *
+*                                           zoom steps                         *
+*                                                                              *
+*              onZoomed          (r/w)   An handler set to this property will  *
+*                                           be invoked after transition        *
+*                                           is done                            *
+*                                                                              *
+*  Methods:    ZoomIn                    Starts a transition from an invisible *
+*                                           element to a visible full sized    *
+*                                           element                            *
+*                                                                              *
+*              ZoomOut                   Starts a transition making element    *
+*                                           invisible by reducing size at      *
+*                                           given ratio                        *
+*                                                                              *
+********************************************************************************
+]]>
+</comment>
+
+<public>
+
+    <property name = "SmallestRatio"    />
+    <property name = "ZoomRatio"        />
+    <property name = "ZoomInterval"     />
+    <property name = "onZoomed"         />
+
+    <method   name = "ZoomIn"           />
+    <method   name = "ZoomOut"          />
+
+</public>
+
+<implements type="Behavior">
+</implements>
+
+<comment>
+********************************************************************************
+*                                                                              *
+*                                  M A I N                                     *
+*                                                                              *
+********************************************************************************
+</comment>
+
+<script language="vbscript">
+<![CDATA[
+
+Option Explicit
+
+'********************************************************************************
+'*                                                                              *
+'*                                  G L O B A L   D A T A                       *
+'*                                                                              *
+'********************************************************************************
+
+Const C_strFilter = "DXImageTransform.Microsoft.Matrix"
+
+Dim g_nAnimSize
+Dim g_nMinSize
+Dim g_nOrgSizeX
+Dim g_nOrgSizeY
+Dim g_nAnimSizeFct
+Dim g_nTimerCookie
+Dim g_objFilter
+
+g_nTimerCookie = 0
+
+'********************************************************************************
+'*                                                                              *
+'*                                P U B L I C S                                 *
+'*                                                                              *
+'********************************************************************************
+
+'********************************************************************************
+'*   METHOD   ZOOMIN                                                            *
+'********************************************************************************
+
+Sub ZoomIn
+
+    Element.RuntimeStyle.Visibility = "hidden"
+
+    Setup
+
+    g_nAnimSize     =        g_nMinSize
+    
+    On Error Resume Next  ' Gard against div by zero
+        g_nAnimSizeFct  =  1.0 / g_nAnimSizeFct
+    On Error Goto 0
+   
+    Animation_Ticker
+ '   g_objFilter.Enabled = TRUE
+
+    Element.RuntimeStyle.Visibility = "Visible"
+
+End Sub
+
+'********************************************************************************
+'*   METHOD   ZOOMOUT                                                            *
+'********************************************************************************
+
+Sub ZoomOut
+
+    Element.RuntimeStyle.Visibility = "Visible"
+
+    Setup
+
+    g_nAnimSize = 1.0
+
+   
+    Animation_Ticker
+'    g_objFilter.Enabled = TRUE
+
+    Element.RuntimeStyle.Visibility = "Visible"
+
+End Sub
+
+'********************************************************************************
+'*                                                                              *
+'*                                L O C A L S                                   *
+'*                                                                              *
+'********************************************************************************
+
+Sub Setup
+
+    Dim nInterval
+
+    g_nOrgSizeX     = Element.OffsetWidth 
+    g_nOrgSizeY     = Element.OffsetHeight
+    g_nMinSize      = SetupParam(  SmallestRatio,  0.01, 0.0001, 1.0      )
+    g_nAnimSizeFct  = SetupParam(  ZoomRatio,      0.75, 0.0001, 0.9999   )
+    nInterval       = SetupParam(  ZoomInterval,   20,   1,      9999     )
+
+    If g_nTimerCookie <> 0  Then Element.Document.ParentWindow.ClearInterval  g_nTimerCookie
+
+    Set g_objFilter = Nothing
+
+    On Error Resume Next
+
+ '       Set g_objFilter = Element.Filters.Item( C_strFilter )
+
+    On Error Goto 0
+
+    If  g_objFilter Is Nothing  Then
+
+        With Element.Style
+
+ '           .Filter = .Filter & " progid:" & C_strFilter & "(enabled=false)"
+
+        End With
+
+'        Set g_objFilter = Element.Filters.Item( C_strFilter )
+
+    End If
+
+    g_nTimerCookie = Element.Document.ParentWindow.SetInterval(  GetRef( "Animation_Ticker" ), nInterval, "VBScript" )
+
+End Sub
+
+'********************************************************************************
+
+Function SetupParam( nParam, nDefault, nMin, nMax )
+
+    SetupParam = NULL
+
+    If  IsEmpty( nParam )  Or  Not IsNumeric( nParam )  Then  
+    
+        SetupParam = nDefault
+
+    Else
+
+        Select Case VarType( nDefault )
+
+            Case vbSingle   SetupParam = CSng( nParam )
+            Case vbDouble   SetupParam = CDbl( nParam )
+            Case vbInteger  SetupParam = CInt( nParam )
+            Case vbLong     SetupParam = CLng( nParam )
+            Case Else       SetupParam =       nParam  
+
+
+        End Select
+
+        If      SetupParam < nMin   Then
+
+                SetupParam = nMin
+
+        ElseIf  SetupParam > nMax   Then
+
+                SetupParam = nMax
+
+        End If
+
+    End If
+
+End Function
+
+'********************************************************************************
+
+Sub Animation_Ticker
+
+    On Error Resume Next  ' Gard against possible overflow
+
+        g_nAnimSize = g_nAnimSize * g_nAnimSizeFct
+
+    On Error Goto 0
+    
+    If     ( g_nAnimSize < g_nMinSize )  Then 
+
+        Element.RuntimeStyle.Visibility = "Hidden"
+
+    ElseIf ( g_nAnimSize > 1.0        )  Then 
+
+        Element.RuntimeStyle.Visibility  = "Visible"
+
+    Else
+
+'        g_objFilter.Dx  = g_nOrgSizeX * 0.5 * ( 1.0 - g_nAnimSize )
+'        g_objFilter.Dy  = g_nOrgSizeY * 0.5 * ( 1.0 - g_nAnimSize ) 
+'        g_objFilter.M11 = g_nAnimSize
+'        g_objFilter.M22 = g_nAnimSize
+
+        Exit Sub
+
+    End If
+
+'    g_objFilter.Enabled = FALSE
+    Set g_objFilter     = Nothing
+    ClearInterval  g_nTimerCookie
+    g_nTimerCookie      = 0
+
+    If  IsObject( onZoomed )  Then
+        
+        If Not ( onZoomed Is Nothing )  Then  onZoomed  Element
+
+    End If
+    
+End Sub
+
+'********************************************************************************
+'********************************************************************************
+
+
+]]>
+</script>
+
+</component>
+
