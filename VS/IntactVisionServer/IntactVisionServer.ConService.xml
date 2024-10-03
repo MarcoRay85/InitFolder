@@ -1,0 +1,240 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>IntactVisionServer.ConService</name>
+    </assembly>
+    <members>
+        <member name="T:IntactVisionServer.ConService.IntactVisionServer">
+            <summary>
+            Vision server implementation
+            </summary>
+            <seealso cref="T:IntactVisionServer.Contracts.IIntactVisionServer" />
+        </member>
+        <member name="M:IntactVisionServer.ConService.IntactVisionServer.AddImageProcessorToGroup(System.Int32,System.Int32)">
+            <summary>
+            Adds a image processor to a group.
+            </summary>
+            <param name="imageProcessorId">the handle/id of the image processor.</param>
+            <param name="groupId">the handle/id of the group.</param>
+        </member>
+        <member name="M:IntactVisionServer.ConService.IntactVisionServer.CloseGroup(System.Int32)">
+            <summary>
+            Closes a group.
+            </summary>
+            <param name="groupId">the handle/id of the group.</param>
+        </member>
+        <member name="M:IntactVisionServer.ConService.IntactVisionServer.CloseImageProcessor(System.Int32)">
+            <summary>
+            Closes an image processor.
+            </summary>
+            <param name="imageProcessorId">the handle/id of the image processor.</param>
+        </member>
+        <member name="M:IntactVisionServer.ConService.IntactVisionServer.CreateGroup">
+            <summary>
+            Creates a group for controlling more than one image-processor simultanously.
+            </summary>
+            <returns>
+            the handle/id of the group for later use.
+            </returns>
+        </member>
+        <member name="M:IntactVisionServer.ConService.IntactVisionServer.CreateImageProcessorForCamera(System.String,System.Int32)">
+            <summary>
+            Creates an image processor (for processing the image stream of a camera)
+            and connects it with a camera.
+            The camera is available to this image processor only.
+            </summary>
+            <param name="cameraName">Name of the camera as configured in the server.</param>
+            <param name="stateConfigIndex">Selector for a camera-state-config, as configured in the server.</param>
+            <returns>
+            the handle/id of the image-processor for later use.
+            </returns>
+        </member>
+        <member name="M:IntactVisionServer.ConService.IntactVisionServer.CreateSymmetricLoadProcessorForCamera(System.String,System.Int32)">
+            <summary>
+            Called when [create symmetric load processor for camera].
+            </summary>
+            <param name="cameraName">Name of the camera.</param>
+            <param name="stateConfigIndex">Index of the state configuration.</param>
+            <returns>
+            the handle/id of the image-processor for later use.
+            </returns>
+        </member>
+        <member name="M:IntactVisionServer.ConService.IntactVisionServer.StartImageProcessing(System.Int32)">
+            <summary>
+            Starts the image processing.
+            Images will be acquired and processed.
+            </summary>
+            <param name="groupId">The handle/id of a group.</param>
+        </member>
+        <member name="M:IntactVisionServer.ConService.IntactVisionServer.StopImageProcessing(System.Int32)">
+            <summary>
+            Query a stop.
+            No more images will be acquired.
+            The corresponding camera gets free.
+            The image processing finishes, as soon as the
+            computation of the results has finished.
+            After that, a notification will be sent through the callback
+            interface.
+            </summary>
+            <param name="groupId">The handle/id of a group.</param>
+        </member>
+        <member name="M:IntactVisionServer.ConService.IntactVisionServer.CancelImageProcessing(System.Int32)">
+            <summary>
+            Cancels the image processing.
+            </summary>
+            <param name="groupId">The group identifier.</param>
+        </member>
+        <member name="M:IntactVisionServer.ConService.IntactVisionServer.IsCameraFree(System.String)">
+            <summary>
+            Tells if a specific camera is free
+            </summary>
+            <param name="cameraName">Name of the camera as configured in the server.</param>
+            <returns>
+            true or false
+            </returns>
+        </member>
+        <member name="M:IntactVisionServer.ConService.IntactVisionServer.StartWebcamModeForCameras(System.String[],System.Int32)">
+            <summary>
+            Starts the webcam mode for cameras.
+            </summary>
+            <param name="cameraNames">The camera names.</param>
+            <param name="stateConfigIndex">Index of the state configuration.</param>
+        </member>
+        <member name="M:IntactVisionServer.ConService.IntactVisionServer.StopWebcamMode">
+            <summary>
+            Stops the webcam mode.
+            </summary>
+        </member>
+        <member name="M:IntactVisionServer.ConService.IntactVisionServer.GetResult(System.Int32)">
+            <summary>
+            Obtains the result for a specific result-id.
+            </summary>
+            <param name="resultId">The identifier of the result.</param>
+            <returns>
+            Transfer object containing results.
+            </returns>
+        </member>
+        <member name="M:IntactVisionServer.ConService.IntactVisionServer.DeleteOldResults(System.DateTime)">
+            <summary>
+            Deletes the old results.
+            </summary>
+            <param name="timeStamp">The time stamp.</param>
+            <returns>
+            number of results deleted
+            </returns>
+        </member>
+        <member name="M:IntactVisionServer.ConService.IntactVisionServer.GetWebcamBuffer(System.String,System.DateTime)">
+            <summary>
+            Gets the webcam buffer.
+            </summary>
+            <param name="cameraName">Name of the camera.</param>
+            <param name="timeStamp">The time stamp.</param>
+            <returns>
+            Result image
+            </returns>
+        </member>
+        <member name="M:IntactVisionServer.ConService.IntactVisionServer.SignIn(IntactVisionServer.Common.SignInParameters)">
+            <summary>
+            Signs the in.
+            </summary>
+            <param name="signInParameters">The sign in parameters.</param>
+        </member>
+        <member name="M:IntactVisionServer.ConService.IntactVisionServer.SignOut(System.String)">
+            <summary>
+            Represents an event that is raised when the sign-out operation is complete.
+            </summary>
+            <param name="endpoint">The endpoint.</param>
+        </member>
+        <member name="M:IntactVisionServer.ConService.IntactVisionServer.SuspendImageProcessing(System.Int32)">
+            <summary>
+            Suspends the image processing.
+            </summary>
+            <param name="groupId">The group identifier.</param>
+        </member>
+        <member name="M:IntactVisionServer.ConService.IntactVisionServer.ResumeImageProcessing(System.Int32)">
+            <summary>
+            Resumes the image processing.
+            </summary>
+            <param name="groupId">The group identifier.</param>
+        </member>
+        <member name="M:IntactVisionServer.ConService.IntactVisionServer.OnNotifyCameraFree(System.String)">
+            <summary>
+            Called when [notify camera free].
+            </summary>
+            <param name="cameraName">Name of the camera.</param>
+        </member>
+        <member name="M:IntactVisionServer.ConService.IntactVisionServer.OnNotifyNewResult(System.Int32,System.Int32)">
+            <summary>
+            Called when [notify new result].
+            </summary>
+            <param name="resultId">The result identifier.</param>
+            <param name="imageProcessorId">The image processor identifier.</param>
+        </member>
+        <member name="M:IntactVisionServer.ConService.IntactVisionServer.OnNotifyImageProcessingSuspended(System.Int32)">
+            <summary>
+            Called when [notify image processing suspended].
+            </summary>
+            <param name="groupId">The group identifier.</param>
+        </member>
+        <member name="M:IntactVisionServer.ConService.IntactVisionServer.OnNotifyImageProcessingResumed(System.Int32)">
+            <summary>
+            Called when [notify image processing resumed].
+            </summary>
+            <param name="groupId">The group identifier.</param>
+        </member>
+        <member name="T:IntactVisionServer.ConService.IntactVisionServerCallbackProxy">
+            <summary>
+            Proxy for callback service
+            </summary>
+            <seealso cref="T:System.ServiceModel.ClientBase`1" />
+            <seealso cref="T:IntactVisionServer.Contracts.IIntactVisionServerCallback" />
+        </member>
+        <member name="M:IntactVisionServer.ConService.IntactVisionServerCallbackProxy.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:IntactVisionServer.ConService.IntactVisionServerCallbackProxy"/> class.
+            </summary>
+        </member>
+        <member name="M:IntactVisionServer.ConService.IntactVisionServerCallbackProxy.#ctor(System.ServiceModel.Channels.Binding,System.ServiceModel.EndpointAddress)">
+            <summary>
+            Initializes a new instance of the <see cref="T:IntactVisionServer.ConService.IntactVisionServerCallbackProxy"/> class.
+            </summary>
+            <param name="binding">The binding with which to make calls to the service.</param>
+            <param name="remoteAddress">The address of the service endpoint.</param>
+        </member>
+        <member name="M:IntactVisionServer.ConService.IntactVisionServerCallbackProxy.NotifyCameraFree(System.String)">
+            <summary>
+            Notifies when a camera goes free.
+            </summary>
+            <param name="cameraName">the name of the camera.</param>
+        </member>
+        <member name="M:IntactVisionServer.ConService.IntactVisionServerCallbackProxy.NotifyImageProcessingResumed(System.Int32)">
+            <summary>
+            Notifies the group resumed.
+            </summary>
+            <param name="groupId">The group identifier.</param>
+        </member>
+        <member name="M:IntactVisionServer.ConService.IntactVisionServerCallbackProxy.NotifyImageProcessingSuspended(System.Int32)">
+            <summary>
+            Notifies the group suspended.
+            </summary>
+            <param name="groupId">The group identifier.</param>
+        </member>
+        <member name="M:IntactVisionServer.ConService.IntactVisionServerCallbackProxy.NotifyNewResult(System.Int32,System.Int32)">
+            <summary>
+            Notifies when a new result is available.
+            </summary>
+            <param name="resultId">the identifier of the result.</param>
+            <param name="imageProcessorId">the handle/id of the image processor, that produced it.</param>
+        </member>
+        <member name="T:IntactVisionServer.ConService.IntactVisionConService">
+            <summary>
+            Console-App, that hosts Intact Vision server
+            </summary>
+        </member>
+        <member name="M:IntactVisionServer.ConService.IntactVisionConService.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:IntactVisionServer.ConService.IntactVisionConService"/> class.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,30 @@
+﻿Installing assembly 'D:\Tools\IntactVisionServer\IntactVisionServer.WinService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   unattended = 
+   assemblypath = D:\Tools\IntactVisionServer\IntactVisionServer.WinService.exe
+   logfile = D:\Tools\IntactVisionServer\IntactVisionServer.WinService.InstallLog
+Installing service IntactVisionService...
+Service IntactVisionService has been successfully installed.
+Creating EventLog source IntactVisionService in log Application...
+Committing assembly 'D:\Tools\IntactVisionServer\IntactVisionServer.WinService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   unattended = 
+   assemblypath = D:\Tools\IntactVisionServer\IntactVisionServer.WinService.exe
+   logfile = D:\Tools\IntactVisionServer\IntactVisionServer.WinService.InstallLog
+Installing assembly 'D:\Tools\IntactVisionServer\IntactVisionServer.WinService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   unattended = 
+   assemblypath = D:\Tools\IntactVisionServer\IntactVisionServer.WinService.exe
+   logfile = D:\Tools\IntactVisionServer\IntactVisionServer.WinService.InstallLog
+Installing service IntactVisionService...
+Service IntactVisionService has been successfully installed.
+Creating EventLog source IntactVisionService in log Application...
+Committing assembly 'D:\Tools\IntactVisionServer\IntactVisionServer.WinService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   unattended = 
+   assemblypath = D:\Tools\IntactVisionServer\IntactVisionServer.WinService.exe
+   logfile = D:\Tools\IntactVisionServer\IntactVisionServer.WinService.InstallLog

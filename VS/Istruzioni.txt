@@ -1,0 +1,31 @@
+Derzeit soll der Visionserver aus der 1360 verwendet werden, bis der aus dem 6.1 branch getestet wurde.
+Er ist noch nicht im Installer enthalten und muss derzeit noch von Hand installiert werden.
+
+Installation:
+
+0. D:\IntactVisionServer Verzeichnis sollte gelosecht werden.
+1. Dateien aus diesen Verzeichnis nach D:\Tools kopieren.
+   D.h. es gibt danach die Verzeichnisse D:\Tools\IntactVisionServer und D:\Tools\IntactVisionServer.Scripting
+2. Als Admin Install_VisionServer_WinService.bat ausführen
+3. Als Admin C:\windows\Microsoft.Net\Framework\v4.0.30319\regasm D:\Tools\IntactVisionServer.Scripting\IntactVisionServer.Scripting.dll /codebase 
+   ausfuehren.
+4. Services aufrufen und schauen, ob IntactVisionServer laeuft.
+5. Neustart
+6. Test mit Intact.exe
+
+
+
+The vision server from the 1360 is currently to be used until the one from the 6.1 branch has been tested.
+It is not yet included in the installer and still has to be installed manually.
+
+Installation:
+
+0. D:\IntactVisionServer directory should be deleted.
+1. copy files from this directory to D:\Tools.
+   I.e. there are then the directories D:\Tools\IntactVisionServer and D:\Tools\IntactVisionServer.Scripting
+2. run Install_VisionServer_WinService.bat as admin
+3. as admin C:\windows\Microsoft.Net\Framework\v4.0.30319\regasm D:\Tools\IntactVisionServer.Scripting\IntactVisionServer.Scripting.dll /codebase 
+   Execute it.
+4. call up services and check whether IntactVisionServer is running.
+5. restart
+6. test with Intact.exe

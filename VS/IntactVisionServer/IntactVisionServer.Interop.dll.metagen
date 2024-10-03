@@ -1,0 +1,62 @@
+ImageRuntimeVersion: v4.0.30319
+Assembly IntactVisionServer.Interop, Version=1.0.*, Culture=Invariant Language (Invariant Country): 
+	hash=SHA1, flags=PublicKey
+Assembly mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Class IntactVisionServerInterop.NotifyCameraFreeDelegate: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(String): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(String, AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+Class IntactVisionServerInterop.NotifyNewResultDelegate: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(Int32, Int32): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(Int32, Int32, AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+Class IntactVisionServerInterop.NotifyImageProcessingSuspendedDelegate: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(Int32): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(Int32, AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+Class IntactVisionServerInterop.NotifyImageProcessingResumedDelegate: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(Int32): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(Int32, AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+Class IntactVisionServerInterop.IntactVisionServer: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    Initialize(String): PrivateScope, Public, Static, HideBySig
+    Release(): PrivateScope, Public, Static, HideBySig
+    RegisterCallbackHandlers(NotifyCameraFreeDelegate, NotifyNewResultDelegate, NotifyImageProcessingSuspendedDelegate, NotifyImageProcessingResumedDelegate): PrivateScope, Public, Static, HideBySig
+    GetResult(Int32, Byte[]&(Out), Byte[]&(Out), Double[]&(Out), DateTime&(Out)): PrivateScope, Public, Static, HideBySig
+    DeleteOldResults(DateTime): PrivateScope, Public, Static, HideBySig
+    GetWebcamBuffer(String, DateTime, Byte[]&(Out), DateTime&(Out)): PrivateScope, Public, Static, HideBySig
+    IsCameraFree(String): PrivateScope, Public, Static, HideBySig
+    CreateImageProcessorForCamera(String, Int32): PrivateScope, Public, Static, HideBySig
+    CloseImageProcessor(Int32): PrivateScope, Public, Static, HideBySig
+    CreateGroup(): PrivateScope, Public, Static, HideBySig
+    CloseGroup(Int32): PrivateScope, Public, Static, HideBySig
+    AddImageProcessorToGroup(Int32, Int32): PrivateScope, Public, Static, HideBySig
+    StartImageProcessing(Int32): PrivateScope, Public, Static, HideBySig
+    StopImageProcessing(Int32): PrivateScope, Public, Static, HideBySig
+    CancelImageProcessing(Int32): PrivateScope, Public, Static, HideBySig
+    StartWebcamModeForCameras(String[], Int32): PrivateScope, Public, Static, HideBySig
+    StopWebcamMode(): PrivateScope, Public, Static, HideBySig
+    CreateSymmetricLoadProcessorForCamera(String, Int32): PrivateScope, Public, Static, HideBySig
+    SuspendImageProcessing(Int32): PrivateScope, Public, Static, HideBySig
+    ResumeImageProcessing(Int32): PrivateScope, Public, Static, HideBySig

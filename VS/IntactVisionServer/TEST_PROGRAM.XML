@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<nit:neointacttest
+   xmlns="https://www.w3schools.com"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:nit="http://imt.zeiss.de/neointacttest"
+   xsi:schemaLocation="http://imt.zeiss.de/neointacttest NITPROGRAM.xsd">
+	<nit:header>
+		<nit:name>Parser test program</nit:name>
+		<nit:created_at>2020-01-23T10:00:00</nit:created_at>
+		<nit:changed_at>2020-01-23T10:00:00</nit:changed_at>
+	</nit:header>	
+	<nit:parameters>
+		<nit:validation>
+			<nit:tire>
+				<nit:innerdiameter check="true">600</nit:innerdiameter>
+				<nit:outerdiameter check="true">1080</nit:outerdiameter>
+				<nit:width check="false">270</nit:width>
+				<nit:tolerance>50</nit:tolerance>
+			</nit:tire>
+		</nit:validation>
+		<nit:evacmode>symmetric</nit:evacmode>
+    <nit:simulate_pressure>false</nit:simulate_pressure>
+		<nit:pressure>25</nit:pressure>
+    <nit:press_sim_duration>00:00:03</nit:press_sim_duration>
+		<nit:flip>true</nit:flip>
+		<nit:delay_after_flip>00:00:05</nit:delay_after_flip>
+		<nit:transport_back>true</nit:transport_back>
+		<nit:delay_after_transport_back>00:00:10</nit:delay_after_transport_back>
+    <nit:delay_before_acquisition>00:00:02</nit:delay_before_acquisition>
+	</nit:parameters>
+	<nit:job>
+		<nit:cycles>
+			<nit:cycle index="1">
+				<nit:type>eStartPrep4Measure</nit:type>
+				<nit:axes_groups>
+					<nit:axes_group index="1">
+						<nit:destination>NaN</nit:destination>
+					</nit:axes_group>
+					<nit:axes_group index="2">
+						<nit:destination>NaN</nit:destination>
+					</nit:axes_group>
+					<nit:axes_group index="3">
+						<nit:destination>NaN</nit:destination>
+					</nit:axes_group>
+					<nit:axes_group index="4">
+						<nit:destination>NaN</nit:destination>
+					</nit:axes_group>
+				</nit:axes_groups>
+			</nit:cycle>
+			<nit:cycle index="2">
+				<nit:type>eMove</nit:type>
+				<nit:axes_groups>
+					<nit:axes_group index="1">
+						<nit:destination>590.0</nit:destination>
+					</nit:axes_group>
+					<nit:axes_group index="2">
+						<nit:destination>235</nit:destination>
+					</nit:axes_group>
+					<nit:axes_group index="3">
+						<nit:destination>510.0</nit:destination>
+					</nit:axes_group>
+					<nit:axes_group index="4">
+						<nit:destination>212.0</nit:destination>
+					</nit:axes_group>
+				</nit:axes_groups>
+			</nit:cycle>
+			<nit:cycle index="3">
+				<nit:type>eMeasure</nit:type>
+				<nit:axes_groups>
+					<nit:axes_group index="1">
+						<nit:destination>NaN</nit:destination>
+					</nit:axes_group>
+					<nit:axes_group index="2">
+						<nit:destination>NaN</nit:destination>
+					</nit:axes_group>
+					<nit:axes_group index="3">
+						<nit:destination>NaN</nit:destination>
+					</nit:axes_group>
+					<nit:axes_group index="4">
+						<nit:destination>NaN</nit:destination>
+					</nit:axes_group>
+				</nit:axes_groups>
+			</nit:cycle>
+			<nit:cycle index="4">
+				<nit:type>eStartPrep4Transport</nit:type>
+				<nit:axes_groups>
+					<nit:axes_group index="1">
+						<nit:destination>NaN</nit:destination>
+					</nit:axes_group>
+					<nit:axes_group index="2">
+						<nit:destination>NaN</nit:destination>
+					</nit:axes_group>
+					<nit:axes_group index="3">
+						<nit:destination>NaN</nit:destination>
+					</nit:axes_group>
+					<nit:axes_group index="4">
+						<nit:destination>NaN</nit:destination>
+					</nit:axes_group>
+				</nit:axes_groups>
+			</nit:cycle>
+			<nit:cycle index="5">
+            <nit:type>eMove</nit:type>
+				<nit:axes_groups>
+					<nit:axes_group index="1">
+						<nit:destination>798.0</nit:destination>
+					</nit:axes_group>
+					<nit:axes_group index="2">
+						<nit:destination>747.0</nit:destination>
+					</nit:axes_group>
+					<nit:axes_group index="3">
+						<nit:destination>520.5</nit:destination>
+					</nit:axes_group>
+					<nit:axes_group index="4">
+						<nit:destination>86.5</nit:destination>
+					</nit:axes_group>
+				</nit:axes_groups>
+			</nit:cycle>
+		</nit:cycles>
+	</nit:job>
+</nit:neointacttest>

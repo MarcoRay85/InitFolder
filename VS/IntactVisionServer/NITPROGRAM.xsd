@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema  attributeFormDefault="unqualified"
+            elementFormDefault="qualified"
+            xmlns:xs="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://imt.zeiss.de/neointacttest"
+            xmlns:nit="http://imt.zeiss.de/neointacttest">
+  <xs:simpleType name="EvacMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="symmetric"/>
+      <xs:enumeration value="unsymmetric"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="CycleType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="eNone"/>
+      <xs:enumeration value="eStartPrep4Transport"/>
+      <xs:enumeration value="eStartPrep4Measure"/>
+      <xs:enumeration value="eMove"/>
+      <xs:enumeration value="eMeasure"/>
+      <xs:enumeration value="eDelay500ms"/>
+      <xs:enumeration value="eDelay1s"/>
+      <xs:enumeration value="eDelay2s"/>
+      <xs:enumeration value="eDelay4s"/>
+      <xs:enumeration value="eDelay8s"/>
+      <xs:enumeration value="eDelay16s"/>
+      <xs:enumeration value="eOpenDoors"/>
+      <xs:enumeration value="eCloseDoors"/>
+      <xs:enumeration value="eStartPump"/>
+      <xs:enumeration value="eStopPump"/>
+      <xs:enumeration value="eOnLasers"/>
+      <xs:enumeration value="eOffLasers"/>
+      <xs:enumeration value="eRemeasureTire"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="neointacttest">  
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="header">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="name" type="xs:string" />
+              <xs:element name="created_at" type="xs:dateTime" />
+              <xs:element name="changed_at" type="xs:dateTime" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="parameters">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="validation">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="tire">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="innerdiameter">
+                            <xs:complexType>
+                              <xs:simpleContent>
+                                <xs:extension base="xs:float">
+                                  <xs:attribute name="check" type="xs:boolean" use="required" />
+                                </xs:extension>
+                              </xs:simpleContent>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="outerdiameter">
+                            <xs:complexType>
+                              <xs:simpleContent>
+                                <xs:extension base="xs:float">
+                                  <xs:attribute name="check" type="xs:boolean" use="required" />
+                                </xs:extension>
+                              </xs:simpleContent>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="width">
+                            <xs:complexType>
+                              <xs:simpleContent>
+                                <xs:extension base="xs:float">
+                                  <xs:attribute name="check" type="xs:boolean" use="required" />
+                                </xs:extension>
+                              </xs:simpleContent>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="tolerance" type="xs:float" />
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="evacmode" type="nit:EvacMode" />
+              <xs:element name="simulate_pressure" type="xs:boolean" />
+              <xs:element name="pressure" type="xs:short" />
+              <xs:element name="press_sim_duration" type="xs:time" />
+              <xs:element name="flip" type="xs:boolean" />
+              <xs:element name="delay_after_flip" type="xs:time" />
+              <xs:element name="transport_back" type="xs:boolean" />
+              <xs:element name="delay_after_transport_back" type="xs:time" />
+              <xs:element name="delay_before_acquisition" type="xs:time" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="job">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="cycles">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="cycle">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="type" type="nit:CycleType"/>
+                          <xs:element name="axes_groups">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element maxOccurs="unbounded" name="axes_group">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="destination" type="xs:float" />
+                                    </xs:sequence>
+                                    <xs:attribute name="index" type="xs:unsignedByte" use="required" />
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="index" type="xs:unsignedByte" use="required" />
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
